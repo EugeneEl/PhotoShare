@@ -7,6 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E11883D194AE2FF00D562A1 /* PSProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E11883C194AE2FF00D562A1 /* PSProfileViewController.m */; };
+		3E118841194AE9B300D562A1 /* PSSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E118840194AE9B300D562A1 /* PSSettingsViewController.m */; };
+		3E118844194AFF2D00D562A1 /* CustomUnwindSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E118843194AFF2D00D562A1 /* CustomUnwindSegue.m */; };
+		3E118850194B2E9D00D562A1 /* UserDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E11884E194B2E9D00D562A1 /* UserDataModel.xcdatamodeld */; };
+		3E16A52E194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E16A52D194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m */; };
+		3E16A531194F385C006E8B88 /* PSCollectionCellForPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E16A530194F385C006E8B88 /* PSCollectionCellForPhoto.m */; };
+		3E16A534194F40F9006E8B88 /* dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E16A533194F40F9006E8B88 /* dislike.png */; };
+		3E16A536194F4107006E8B88 /* heart-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E16A535194F4107006E8B88 /* heart-icon.png */; };
+		3E328887194986BB00B0DD90 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E328886194986BB00B0DD90 /* MBProgressHUD.m */; };
+		3E3F8C121949A1F5009916BD /* PSStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C111949A1F5009916BD /* PSStreamViewController.m */; };
+		3E3F8C161949A57C009916BD /* PSPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C151949A57C009916BD /* PSPhotoController.m */; };
+		3E3F8C1D1949C4F1009916BD /* NSString+PSValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C1C1949C4F1009916BD /* NSString+PSValidation.m */; };
+		3E3F8C211949CCE3009916BD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C201949CCE3009916BD /* User.m */; };
+		3E3F8C341949E136009916BD /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C241949E136009916BD /* AFNetworkActivityIndicatorManager.m */; };
+		3E3F8C351949E136009916BD /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C261949E136009916BD /* UIActivityIndicatorView+AFNetworking.m */; };
+		3E3F8C361949E136009916BD /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C281949E136009916BD /* UIAlertView+AFNetworking.m */; };
+		3E3F8C371949E136009916BD /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C2A1949E136009916BD /* UIButton+AFNetworking.m */; };
+		3E3F8C381949E136009916BD /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C2C1949E136009916BD /* UIImageView+AFNetworking.m */; };
+		3E3F8C391949E136009916BD /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C2F1949E136009916BD /* UIProgressView+AFNetworking.m */; };
+		3E3F8C3A1949E136009916BD /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C311949E136009916BD /* UIRefreshControl+AFNetworking.m */; };
+		3E3F8C3B1949E136009916BD /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C331949E136009916BD /* UIWebView+AFNetworking.m */; };
+		3E3F8C3F1949EE83009916BD /* CustomSegueForStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C3E1949EE83009916BD /* CustomSegueForStart.m */; };
+		3E3F8C471949F6FF009916BD /* PhotosteamIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F8C461949F6FF009916BD /* PhotosteamIcon.png */; };
+		3E3F8C4D1949F9E3009916BD /* userIconBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F8C4C1949F9E3009916BD /* userIconBar.png */; };
+		3E3F8C4F1949FDAB009916BD /* near.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F8C4E1949FDAB009916BD /* near.png */; };
+		3E3F8C511949FF2F009916BD /* friendsIconBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F8C501949FF2F009916BD /* friendsIconBar.png */; };
+		3E3F8C53194A0060009916BD /* photoBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F8C52194A0060009916BD /* photoBarIcon.png */; };
+		3E48C24D1948906E00AC842D /* PSSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E48C24C1948906E00AC842D /* PSSignUpViewController.m */; };
+		3E48C2511948996100AC842D /* PSUserStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E48C2501948996100AC842D /* PSUserStore.m */; };
+		3E4A701A19506942003EFD21 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A701919506941003EFD21 /* Post.m */; };
+		3E4A701D19506942003EFD21 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A701C19506942003EFD21 /* Comment.m */; };
+		3E4A701F19506EEF003EFD21 /* response1.json in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A701E19506EEF003EFD21 /* response1.json */; };
+		3E9267331950303800A55AC8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9267321950303800A55AC8 /* MapKit.framework */; };
+		3E9267391950322400A55AC8 /* PSNearLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9267381950322400A55AC8 /* PSNearLocationViewController.m */; };
+		3E92673C19503C0000A55AC8 /* PSMapAnnonation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E92673B19503C0000A55AC8 /* PSMapAnnonation.m */; };
 		3EAF843F19471843003D1987 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAF843E19471843003D1987 /* Foundation.framework */; };
 		3EAF844119471843003D1987 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAF844019471843003D1987 /* CoreGraphics.framework */; };
 		3EAF844319471843003D1987 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAF844219471843003D1987 /* UIKit.framework */; };
@@ -55,6 +90,12 @@
 		3EAF84E219471AAF003D1987 /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF84C319471AAF003D1987 /* MagicalRecord+ShorthandSupport.m */; };
 		3EAF84E319471AAF003D1987 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF84C519471AAF003D1987 /* MagicalRecord.m */; };
 		3EAF84E519471AF1003D1987 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAF84E419471AF1003D1987 /* CoreData.framework */; };
+		3EAF850A19472CAD003D1987 /* Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EAF850919472CAC003D1987 /* Iphone.storyboard */; };
+		3EAF850D19472E75003D1987 /* PSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF850C19472E75003D1987 /* PSLoginViewController.m */; };
+		3EAF85101947351A003D1987 /* PSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF850F1947351A003D1987 /* PSSplashViewController.m */; };
+		3EAF8514194735AC003D1987 /* camera_cute2_png.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EAF8513194735AC003D1987 /* camera_cute2_png.png */; };
+		3EAF851E19473D66003D1987 /* PSNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF851D19473D66003D1987 /* PSNetworkManager.m */; };
+		3EAF853019476C95003D1987 /* PSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF852F19476C95003D1987 /* PSUserModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +109,67 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E11883B194AE2FF00D562A1 /* PSProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSProfileViewController.h; sourceTree = "<group>"; };
+		3E11883C194AE2FF00D562A1 /* PSProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSProfileViewController.m; sourceTree = "<group>"; };
+		3E11883F194AE9B300D562A1 /* PSSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSSettingsViewController.h; sourceTree = "<group>"; };
+		3E118840194AE9B300D562A1 /* PSSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSSettingsViewController.m; sourceTree = "<group>"; };
+		3E118842194AFF2D00D562A1 /* CustomUnwindSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomUnwindSegue.h; sourceTree = "<group>"; };
+		3E118843194AFF2D00D562A1 /* CustomUnwindSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomUnwindSegue.m; sourceTree = "<group>"; };
+		3E11884F194B2E9D00D562A1 /* UserDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserDataModel.xcdatamodel; sourceTree = "<group>"; };
+		3E16A52C194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSPhotoFromStreamTableViewCell.h; sourceTree = "<group>"; };
+		3E16A52D194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPhotoFromStreamTableViewCell.m; sourceTree = "<group>"; };
+		3E16A52F194F385C006E8B88 /* PSCollectionCellForPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCollectionCellForPhoto.h; sourceTree = "<group>"; };
+		3E16A530194F385C006E8B88 /* PSCollectionCellForPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCollectionCellForPhoto.m; sourceTree = "<group>"; };
+		3E16A533194F40F9006E8B88 /* dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike.png; sourceTree = "<group>"; };
+		3E16A535194F4107006E8B88 /* heart-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-icon.png"; sourceTree = "<group>"; };
+		3E328885194986BB00B0DD90 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		3E328886194986BB00B0DD90 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		3E3F8C101949A1F5009916BD /* PSStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStreamViewController.h; sourceTree = "<group>"; };
+		3E3F8C111949A1F5009916BD /* PSStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSStreamViewController.m; sourceTree = "<group>"; };
+		3E3F8C141949A57C009916BD /* PSPhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSPhotoController.h; sourceTree = "<group>"; };
+		3E3F8C151949A57C009916BD /* PSPhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPhotoController.m; sourceTree = "<group>"; };
+		3E3F8C1B1949C4F1009916BD /* NSString+PSValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PSValidation.h"; sourceTree = "<group>"; };
+		3E3F8C1C1949C4F1009916BD /* NSString+PSValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PSValidation.m"; sourceTree = "<group>"; };
+		3E3F8C1F1949CCE3009916BD /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		3E3F8C201949CCE3009916BD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		3E3F8C231949E136009916BD /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		3E3F8C241949E136009916BD /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		3E3F8C251949E136009916BD /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
+		3E3F8C261949E136009916BD /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
+		3E3F8C271949E136009916BD /* UIAlertView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+AFNetworking.h"; sourceTree = "<group>"; };
+		3E3F8C281949E136009916BD /* UIAlertView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+AFNetworking.m"; sourceTree = "<group>"; };
+		3E3F8C291949E136009916BD /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
+		3E3F8C2A1949E136009916BD /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
+		3E3F8C2B1949E136009916BD /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		3E3F8C2C1949E136009916BD /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		3E3F8C2D1949E136009916BD /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+AFNetworking.h"; sourceTree = "<group>"; };
+		3E3F8C2E1949E136009916BD /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
+		3E3F8C2F1949E136009916BD /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
+		3E3F8C301949E136009916BD /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
+		3E3F8C311949E136009916BD /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
+		3E3F8C321949E136009916BD /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
+		3E3F8C331949E136009916BD /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		3E3F8C3D1949EE83009916BD /* CustomSegueForStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegueForStart.h; sourceTree = "<group>"; };
+		3E3F8C3E1949EE83009916BD /* CustomSegueForStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegueForStart.m; sourceTree = "<group>"; };
+		3E3F8C461949F6FF009916BD /* PhotosteamIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotosteamIcon.png; sourceTree = "<group>"; };
+		3E3F8C4C1949F9E3009916BD /* userIconBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userIconBar.png; sourceTree = "<group>"; };
+		3E3F8C4E1949FDAB009916BD /* near.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = near.png; sourceTree = "<group>"; };
+		3E3F8C501949FF2F009916BD /* friendsIconBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friendsIconBar.png; sourceTree = "<group>"; };
+		3E3F8C52194A0060009916BD /* photoBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoBarIcon.png; sourceTree = "<group>"; };
+		3E48C24B1948906E00AC842D /* PSSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSSignUpViewController.h; path = PhotoShare/Controllers/SignUpController/PSSignUpViewController.h; sourceTree = SOURCE_ROOT; };
+		3E48C24C1948906E00AC842D /* PSSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSSignUpViewController.m; path = PhotoShare/Controllers/SignUpController/PSSignUpViewController.m; sourceTree = SOURCE_ROOT; };
+		3E48C24F1948996100AC842D /* PSUserStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSUserStore.h; sourceTree = "<group>"; };
+		3E48C2501948996100AC842D /* PSUserStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSUserStore.m; sourceTree = "<group>"; };
+		3E4A701819506941003EFD21 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Post.h; path = ../../Post.h; sourceTree = "<group>"; };
+		3E4A701919506941003EFD21 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Post.m; path = ../../Post.m; sourceTree = "<group>"; };
+		3E4A701B19506942003EFD21 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comment.h; path = ../../Comment.h; sourceTree = "<group>"; };
+		3E4A701C19506942003EFD21 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = ../../Comment.m; sourceTree = "<group>"; };
+		3E4A701E19506EEF003EFD21 /* response1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response1.json; sourceTree = "<group>"; };
+		3E9267321950303800A55AC8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3E9267371950322400A55AC8 /* PSNearLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSNearLocationViewController.h; path = PhotoShare/Controllers/TabBarControllers/NearController/PSNearLocationViewController.h; sourceTree = SOURCE_ROOT; };
+		3E9267381950322400A55AC8 /* PSNearLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSNearLocationViewController.m; path = PhotoShare/Controllers/TabBarControllers/NearController/PSNearLocationViewController.m; sourceTree = SOURCE_ROOT; };
+		3E92673A19503C0000A55AC8 /* PSMapAnnonation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSMapAnnonation.h; path = PhotoShare/Controllers/TabBarControllers/NearController/PSMapAnnonation.h; sourceTree = SOURCE_ROOT; };
+		3E92673B19503C0000A55AC8 /* PSMapAnnonation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSMapAnnonation.m; path = PhotoShare/Controllers/TabBarControllers/NearController/PSMapAnnonation.m; sourceTree = SOURCE_ROOT; };
 		3EAF843B19471843003D1987 /* PhotoShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EAF843E19471843003D1987 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3EAF844019471843003D1987 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -160,6 +262,16 @@
 		3EAF84C819471AAF003D1987 /* MagicalRecordShorthand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthand.h; sourceTree = "<group>"; };
 		3EAF84C919471AAF003D1987 /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
 		3EAF84E419471AF1003D1987 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3EAF850919472CAC003D1987 /* Iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Iphone.storyboard; sourceTree = "<group>"; };
+		3EAF850B19472E75003D1987 /* PSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSLoginViewController.h; path = ../../../../PSLoginViewController.h; sourceTree = "<group>"; };
+		3EAF850C19472E75003D1987 /* PSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSLoginViewController.m; path = ../../../../PSLoginViewController.m; sourceTree = "<group>"; };
+		3EAF850E1947351A003D1987 /* PSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSSplashViewController.h; path = ../../../PSSplashViewController.h; sourceTree = "<group>"; };
+		3EAF850F1947351A003D1987 /* PSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSSplashViewController.m; path = ../../../PSSplashViewController.m; sourceTree = "<group>"; };
+		3EAF8513194735AC003D1987 /* camera_cute2_png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_cute2_png.png; path = ../../camera_cute2_png.png; sourceTree = "<group>"; };
+		3EAF851C19473D66003D1987 /* PSNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSNetworkManager.h; sourceTree = "<group>"; };
+		3EAF851D19473D66003D1987 /* PSNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSNetworkManager.m; sourceTree = "<group>"; };
+		3EAF852E19476C95003D1987 /* PSUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSUserModel.h; sourceTree = "<group>"; };
+		3EAF852F19476C95003D1987 /* PSUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSUserModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +279,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E9267331950303800A55AC8 /* MapKit.framework in Frameworks */,
 				3EAF84E519471AF1003D1987 /* CoreData.framework in Frameworks */,
 				3EAF844119471843003D1987 /* CoreGraphics.framework in Frameworks */,
 				3EAF844319471843003D1987 /* UIKit.framework in Frameworks */,
@@ -187,10 +300,216 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E11883A194AE2CC00D562A1 /* ProfileController */ = {
+			isa = PBXGroup;
+			children = (
+				3E11883B194AE2FF00D562A1 /* PSProfileViewController.h */,
+				3E11883C194AE2FF00D562A1 /* PSProfileViewController.m */,
+				3E11883E194AE97900D562A1 /* SettingsController */,
+			);
+			path = ProfileController;
+			sourceTree = "<group>";
+		};
+		3E11883E194AE97900D562A1 /* SettingsController */ = {
+			isa = PBXGroup;
+			children = (
+				3E11883F194AE9B300D562A1 /* PSSettingsViewController.h */,
+				3E118840194AE9B300D562A1 /* PSSettingsViewController.m */,
+			);
+			path = SettingsController;
+			sourceTree = "<group>";
+		};
+		3E118845194B2B3400D562A1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			path = PhotoShare/Resources;
+			sourceTree = "<group>";
+		};
+		3E16A52B194EFA37006E8B88 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				3E16A52C194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.h */,
+				3E16A52D194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m */,
+				3E16A52F194F385C006E8B88 /* PSCollectionCellForPhoto.h */,
+				3E16A530194F385C006E8B88 /* PSCollectionCellForPhoto.m */,
+			);
+			name = CustomCell;
+			path = PhotoShare/CustomCell;
+			sourceTree = "<group>";
+		};
+		3E16A532194F40E0006E8B88 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				3E16A535194F4107006E8B88 /* heart-icon.png */,
+				3E16A533194F40F9006E8B88 /* dislike.png */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		3E328884194986A200B0DD90 /* MBProgressHud */ = {
+			isa = PBXGroup;
+			children = (
+				3E328885194986BB00B0DD90 /* MBProgressHUD.h */,
+				3E328886194986BB00B0DD90 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHud;
+			path = AFNetworking/MBProgressHud;
+			sourceTree = "<group>";
+		};
+		3E3288881949A17900B0DD90 /* TabBarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3E9266EE19502F8800A55AC8 /* NearController */,
+				3E11883A194AE2CC00D562A1 /* ProfileController */,
+				3E3F8C131949A55C009916BD /* PhotoController */,
+				3E3288891949A17900B0DD90 /* StreamController */,
+			);
+			path = TabBarControllers;
+			sourceTree = "<group>";
+		};
+		3E3288891949A17900B0DD90 /* StreamController */ = {
+			isa = PBXGroup;
+			children = (
+				3E3F8C101949A1F5009916BD /* PSStreamViewController.h */,
+				3E3F8C111949A1F5009916BD /* PSStreamViewController.m */,
+			);
+			path = StreamController;
+			sourceTree = "<group>";
+		};
+		3E3F8C131949A55C009916BD /* PhotoController */ = {
+			isa = PBXGroup;
+			children = (
+				3E3F8C141949A57C009916BD /* PSPhotoController.h */,
+				3E3F8C151949A57C009916BD /* PSPhotoController.m */,
+			);
+			path = PhotoController;
+			sourceTree = "<group>";
+		};
+		3E3F8C1A1949C4C1009916BD /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				3E3F8C1B1949C4F1009916BD /* NSString+PSValidation.h */,
+				3E3F8C1C1949C4F1009916BD /* NSString+PSValidation.m */,
+			);
+			name = Categories;
+			path = PhotoShare/Categories;
+			sourceTree = "<group>";
+		};
+		3E3F8C1E1949C752009916BD /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3E3F8C401949F373009916BD /* IconsForBars */,
+				3E3F8C411949F373009916BD /* Start */,
+			);
+			name = Images;
+			path = PhotoShare/Images;
+			sourceTree = "<group>";
+		};
+		3E3F8C221949E136009916BD /* UIKit+AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				3E3F8C231949E136009916BD /* AFNetworkActivityIndicatorManager.h */,
+				3E3F8C241949E136009916BD /* AFNetworkActivityIndicatorManager.m */,
+				3E3F8C251949E136009916BD /* UIActivityIndicatorView+AFNetworking.h */,
+				3E3F8C261949E136009916BD /* UIActivityIndicatorView+AFNetworking.m */,
+				3E3F8C271949E136009916BD /* UIAlertView+AFNetworking.h */,
+				3E3F8C281949E136009916BD /* UIAlertView+AFNetworking.m */,
+				3E3F8C291949E136009916BD /* UIButton+AFNetworking.h */,
+				3E3F8C2A1949E136009916BD /* UIButton+AFNetworking.m */,
+				3E3F8C2B1949E136009916BD /* UIImageView+AFNetworking.h */,
+				3E3F8C2C1949E136009916BD /* UIImageView+AFNetworking.m */,
+				3E3F8C2D1949E136009916BD /* UIKit+AFNetworking.h */,
+				3E3F8C2E1949E136009916BD /* UIProgressView+AFNetworking.h */,
+				3E3F8C2F1949E136009916BD /* UIProgressView+AFNetworking.m */,
+				3E3F8C301949E136009916BD /* UIRefreshControl+AFNetworking.h */,
+				3E3F8C311949E136009916BD /* UIRefreshControl+AFNetworking.m */,
+				3E3F8C321949E136009916BD /* UIWebView+AFNetworking.h */,
+				3E3F8C331949E136009916BD /* UIWebView+AFNetworking.m */,
+			);
+			name = "UIKit+AFNetworking";
+			path = "MagicalRecord/UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		3E3F8C3C1949EDC9009916BD /* CustomSegueClass */ = {
+			isa = PBXGroup;
+			children = (
+				3E118842194AFF2D00D562A1 /* CustomUnwindSegue.h */,
+				3E118843194AFF2D00D562A1 /* CustomUnwindSegue.m */,
+				3E3F8C3D1949EE83009916BD /* CustomSegueForStart.h */,
+				3E3F8C3E1949EE83009916BD /* CustomSegueForStart.m */,
+			);
+			name = CustomSegueClass;
+			path = PhotoShare/CustomSegueClass;
+			sourceTree = "<group>";
+		};
+		3E3F8C401949F373009916BD /* IconsForBars */ = {
+			isa = PBXGroup;
+			children = (
+				3E3F8C52194A0060009916BD /* photoBarIcon.png */,
+				3E3F8C501949FF2F009916BD /* friendsIconBar.png */,
+				3E3F8C4E1949FDAB009916BD /* near.png */,
+				3E3F8C4C1949F9E3009916BD /* userIconBar.png */,
+				3E3F8C461949F6FF009916BD /* PhotosteamIcon.png */,
+			);
+			path = IconsForBars;
+			sourceTree = "<group>";
+		};
+		3E3F8C411949F373009916BD /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				3EAF8513194735AC003D1987 /* camera_cute2_png.png */,
+				3E16A532194F40E0006E8B88 /* Buttons */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		3E48C2411948680100AC842D /* SignUpController */ = {
+			isa = PBXGroup;
+			children = (
+				3E48C24B1948906E00AC842D /* PSSignUpViewController.h */,
+				3E48C24C1948906E00AC842D /* PSSignUpViewController.m */,
+			);
+			path = SignUpController;
+			sourceTree = "<group>";
+		};
+		3E48C24E194898F100AC842D /* UserStore */ = {
+			isa = PBXGroup;
+			children = (
+				3E48C24F1948996100AC842D /* PSUserStore.h */,
+				3E48C2501948996100AC842D /* PSUserStore.m */,
+			);
+			name = UserStore;
+			path = PhotoShare/UserStore;
+			sourceTree = "<group>";
+		};
+		3E9266EE19502F8800A55AC8 /* NearController */ = {
+			isa = PBXGroup;
+			children = (
+				3E9267371950322400A55AC8 /* PSNearLocationViewController.h */,
+				3E9267381950322400A55AC8 /* PSNearLocationViewController.m */,
+				3E92673A19503C0000A55AC8 /* PSMapAnnonation.h */,
+				3E92673B19503C0000A55AC8 /* PSMapAnnonation.m */,
+			);
+			path = NearController;
+			sourceTree = "<group>";
+		};
 		3EAF843219471843003D1987 = {
 			isa = PBXGroup;
 			children = (
+				3E4A701E19506EEF003EFD21 /* response1.json */,
 				3EAF844419471843003D1987 /* PhotoShare */,
+				3E16A52B194EFA37006E8B88 /* CustomCell */,
+				3E118845194B2B3400D562A1 /* Resources */,
+				3E3F8C3C1949EDC9009916BD /* CustomSegueClass */,
+				3E3F8C1E1949C752009916BD /* Images */,
+				3E3F8C1A1949C4C1009916BD /* Categories */,
+				3E48C24E194898F100AC842D /* UserStore */,
+				3EAF851B19473D26003D1987 /* PSNetworkManager */,
+				3EAF85321947709E003D1987 /* Controllers */,
+				3EAF84E719471D33003D1987 /* Model */,
+				3EAF846E19471A54003D1987 /* Libs */,
 				3EAF845D19471843003D1987 /* PhotoShareTests */,
 				3EAF843D19471843003D1987 /* Frameworks */,
 				3EAF843C19471843003D1987 /* Products */,
@@ -209,6 +528,7 @@
 		3EAF843D19471843003D1987 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3E9267321950303800A55AC8 /* MapKit.framework */,
 				3EAF84E419471AF1003D1987 /* CoreData.framework */,
 				3EAF843E19471843003D1987 /* Foundation.framework */,
 				3EAF844019471843003D1987 /* CoreGraphics.framework */,
@@ -221,8 +541,8 @@
 		3EAF844419471843003D1987 /* PhotoShare */ = {
 			isa = PBXGroup;
 			children = (
-				3EAF846E19471A54003D1987 /* Libs */,
 				3EAF844D19471843003D1987 /* PHAppDelegate.h */,
+				3EAF850919472CAC003D1987 /* Iphone.storyboard */,
 				3EAF844E19471843003D1987 /* PHAppDelegate.m */,
 				3EAF845019471843003D1987 /* Images.xcassets */,
 				3EAF844519471843003D1987 /* Supporting Files */,
@@ -262,10 +582,13 @@
 		3EAF846E19471A54003D1987 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				3EAF848C19471AAF003D1987 /* MagicalRecord */,
 				3EAF846F19471A86003D1987 /* AFNetworking */,
+				3E3F8C221949E136009916BD /* UIKit+AFNetworking */,
+				3E328884194986A200B0DD90 /* MBProgressHud */,
+				3EAF848C19471AAF003D1987 /* MagicalRecord */,
 			);
-			path = Libs;
+			name = Libs;
+			path = PhotoShare/Libs;
 			sourceTree = "<group>";
 		};
 		3EAF846F19471A86003D1987 /* AFNetworking */ = {
@@ -397,6 +720,63 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		3EAF84E719471D33003D1987 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3E11884E194B2E9D00D562A1 /* UserDataModel.xcdatamodeld */,
+				3E4A701B19506942003EFD21 /* Comment.h */,
+				3E4A701C19506942003EFD21 /* Comment.m */,
+				3E4A701819506941003EFD21 /* Post.h */,
+				3E4A701919506941003EFD21 /* Post.m */,
+				3E3F8C1F1949CCE3009916BD /* User.h */,
+				3E3F8C201949CCE3009916BD /* User.m */,
+				3EAF852E19476C95003D1987 /* PSUserModel.h */,
+				3EAF852F19476C95003D1987 /* PSUserModel.m */,
+			);
+			name = Model;
+			path = PhotoShare/Model;
+			sourceTree = "<group>";
+		};
+		3EAF851B19473D26003D1987 /* PSNetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				3EAF851C19473D66003D1987 /* PSNetworkManager.h */,
+				3EAF851D19473D66003D1987 /* PSNetworkManager.m */,
+			);
+			name = PSNetworkManager;
+			path = PhotoShare/PSNetworkManager;
+			sourceTree = "<group>";
+		};
+		3EAF85321947709E003D1987 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3E3288881949A17900B0DD90 /* TabBarControllers */,
+				3E48C2411948680100AC842D /* SignUpController */,
+				3EAF85331947709E003D1987 /* LoginController */,
+				3EAF85351947709E003D1987 /* SplashController */,
+			);
+			name = Controllers;
+			path = PhotoShare/PSNetworkManager/Controllers;
+			sourceTree = "<group>";
+		};
+		3EAF85331947709E003D1987 /* LoginController */ = {
+			isa = PBXGroup;
+			children = (
+				3EAF850B19472E75003D1987 /* PSLoginViewController.h */,
+				3EAF850C19472E75003D1987 /* PSLoginViewController.m */,
+			);
+			path = LoginController;
+			sourceTree = "<group>";
+		};
+		3EAF85351947709E003D1987 /* SplashController */ = {
+			isa = PBXGroup;
+			children = (
+				3EAF850E1947351A003D1987 /* PSSplashViewController.h */,
+				3EAF850F1947351A003D1987 /* PSSplashViewController.m */,
+			);
+			path = SplashController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -474,7 +854,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EAF844919471843003D1987 /* InfoPlist.strings in Resources */,
+				3E3F8C4F1949FDAB009916BD /* near.png in Resources */,
 				3EAF845119471843003D1987 /* Images.xcassets in Resources */,
+				3E3F8C471949F6FF009916BD /* PhotosteamIcon.png in Resources */,
+				3EAF8514194735AC003D1987 /* camera_cute2_png.png in Resources */,
+				3EAF850A19472CAD003D1987 /* Iphone.storyboard in Resources */,
+				3E16A536194F4107006E8B88 /* heart-icon.png in Resources */,
+				3E3F8C511949FF2F009916BD /* friendsIconBar.png in Resources */,
+				3E3F8C53194A0060009916BD /* photoBarIcon.png in Resources */,
+				3E16A534194F40F9006E8B88 /* dislike.png in Resources */,
+				3E4A701F19506EEF003EFD21 /* response1.json in Resources */,
+				3E3F8C4D1949F9E3009916BD /* userIconBar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +885,8 @@
 			files = (
 				3EAF848919471A86003D1987 /* AFURLRequestSerialization.m in Sources */,
 				3EAF84DF19471AAF003D1987 /* MagicalRecord+iCloud.m in Sources */,
+				3EAF850D19472E75003D1987 /* PSLoginViewController.m in Sources */,
+				3E11883D194AE2FF00D562A1 /* PSProfileViewController.m in Sources */,
 				3EAF84E019471AAF003D1987 /* MagicalRecord+Options.m in Sources */,
 				3EAF848819471A86003D1987 /* AFURLConnectionOperation.m in Sources */,
 				3EAF84CD19471AAF003D1987 /* NSNumber+MagicalDataImport.m in Sources */,
@@ -502,32 +894,60 @@
 				3EAF84DC19471AAF003D1987 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				3EAF848719471A86003D1987 /* AFSecurityPolicy.m in Sources */,
 				3EAF84D419471AAF003D1987 /* NSManagedObject+MagicalRecord.m in Sources */,
+				3E3F8C371949E136009916BD /* UIButton+AFNetworking.m in Sources */,
+				3E3F8C121949A1F5009916BD /* PSStreamViewController.m in Sources */,
 				3EAF84D019471AAF003D1987 /* NSString+MagicalDataImport.m in Sources */,
+				3E3F8C351949E136009916BD /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				3EAF848319471A86003D1987 /* AFHTTPRequestOperation.m in Sources */,
 				3EAF84D919471AAF003D1987 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
+				3E16A531194F385C006E8B88 /* PSCollectionCellForPhoto.m in Sources */,
+				3E3F8C1D1949C4F1009916BD /* NSString+PSValidation.m in Sources */,
+				3E4A701A19506942003EFD21 /* Post.m in Sources */,
 				3EAF84DA19471AAF003D1987 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
+				3E4A701D19506942003EFD21 /* Comment.m in Sources */,
 				3EAF84CF19471AAF003D1987 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				3E118844194AFF2D00D562A1 /* CustomUnwindSegue.m in Sources */,
+				3E118841194AE9B300D562A1 /* PSSettingsViewController.m in Sources */,
+				3EAF853019476C95003D1987 /* PSUserModel.m in Sources */,
 				3EAF84E319471AAF003D1987 /* MagicalRecord.m in Sources */,
+				3E9267391950322400A55AC8 /* PSNearLocationViewController.m in Sources */,
 				3EAF84E119471AAF003D1987 /* MagicalRecord+Setup.m in Sources */,
 				3EAF848B19471A86003D1987 /* AFURLSessionManager.m in Sources */,
+				3E48C2511948996100AC842D /* PSUserStore.m in Sources */,
+				3E3F8C391949E136009916BD /* UIProgressView+AFNetworking.m in Sources */,
 				3EAF84CA19471AAF003D1987 /* MagicalImportFunctions.m in Sources */,
+				3EAF85101947351A003D1987 /* PSSplashViewController.m in Sources */,
+				3E3F8C341949E136009916BD /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3EAF848A19471A86003D1987 /* AFURLResponseSerialization.m in Sources */,
 				3EAF844F19471843003D1987 /* PHAppDelegate.m in Sources */,
+				3E3F8C361949E136009916BD /* UIAlertView+AFNetworking.m in Sources */,
+				3E328887194986BB00B0DD90 /* MBProgressHUD.m in Sources */,
 				3EAF84D719471AAF003D1987 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
+				3E16A52E194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m in Sources */,
 				3EAF84DD19471AAF003D1987 /* MagicalRecord+Actions.m in Sources */,
 				3EAF84CB19471AAF003D1987 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
+				3E118850194B2E9D00D562A1 /* UserDataModel.xcdatamodeld in Sources */,
 				3EAF84D619471AAF003D1987 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
+				3E3F8C161949A57C009916BD /* PSPhotoController.m in Sources */,
+				3EAF851E19473D66003D1987 /* PSNetworkManager.m in Sources */,
 				3EAF84D319471AAF003D1987 /* NSManagedObject+MagicalFinders.m in Sources */,
 				3EAF84D519471AAF003D1987 /* NSManagedObject+MagicalRequests.m in Sources */,
 				3EAF84D219471AAF003D1987 /* NSManagedObject+MagicalDataImport.m in Sources */,
+				3E3F8C211949CCE3009916BD /* User.m in Sources */,
+				3E48C24D1948906E00AC842D /* PSSignUpViewController.m in Sources */,
 				3EAF84E219471AAF003D1987 /* MagicalRecord+ShorthandSupport.m in Sources */,
+				3E3F8C381949E136009916BD /* UIImageView+AFNetworking.m in Sources */,
 				3EAF848519471A86003D1987 /* AFHTTPSessionManager.m in Sources */,
 				3EAF84DB19471AAF003D1987 /* NSPersistentStore+MagicalRecord.m in Sources */,
+				3E3F8C3F1949EE83009916BD /* CustomSegueForStart.m in Sources */,
 				3EAF848419471A86003D1987 /* AFHTTPRequestOperationManager.m in Sources */,
 				3EAF84D819471AAF003D1987 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
+				3E3F8C3A1949E136009916BD /* UIRefreshControl+AFNetworking.m in Sources */,
 				3EAF84CE19471AAF003D1987 /* NSObject+MagicalDataImport.m in Sources */,
 				3EAF848619471A86003D1987 /* AFNetworkReachabilityManager.m in Sources */,
+				3E3F8C3B1949E136009916BD /* UIWebView+AFNetworking.m in Sources */,
 				3EAF84D119471AAF003D1987 /* NSManagedObject+MagicalAggregation.m in Sources */,
+				3E92673C19503C0000A55AC8 /* PSMapAnnonation.m in Sources */,
 				3EAF844B19471843003D1987 /* main.m in Sources */,
 				3EAF84DE19471AAF003D1987 /* MagicalRecord+ErrorHandling.m in Sources */,
 			);
@@ -726,6 +1146,7 @@
 				3EAF846919471843003D1987 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3EAF846A19471843003D1987 /* Build configuration list for PBXNativeTarget "PhotoShareTests" */ = {
 			isa = XCConfigurationList;
@@ -734,8 +1155,22 @@
 				3EAF846C19471843003D1987 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3E11884E194B2E9D00D562A1 /* UserDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3E11884F194B2E9D00D562A1 /* UserDataModel.xcdatamodel */,
+			);
+			currentVersion = 3E11884F194B2E9D00D562A1 /* UserDataModel.xcdatamodel */;
+			path = UserDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3EAF843319471843003D1987 /* Project object */;
 }

@@ -7,15 +7,47 @@
 //
 
 #import "PHAppDelegate.h"
+#import "PSLoginViewController.h"
+#import "PSSplashViewController.h"
+#import "User.h"
+#import "Post.h"
+
+
+
+const int numberOfUsersForTest=5;
 
 @implementation PHAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    [MagicalRecord setupCoreDataStack];
+    
+    
+    
+    /*
+    NSArray *allUsers=[Users MR_findAll];
+    
+    
+    
+    if (![allUsers count]) {
+        for (int i=0; i<numberOfUsersForTest; i++) {
+            Users *user=[Users MR_createEntity];
+            user.email=[NSString stringWithFormat:@"usermail%i@yandex.ua",i];
+            user.password=[NSString stringWithFormat:@"userpassword%i,",i];
+            user.facebookID=[NSNumber numberWithInt:i];
+            NSLog(@"user:%i was added",i);
+     
+     //[Users MR_truncateAll];
+     
+     
+     
+        }
+    }
+    */
+    
+    //[User MR_truncateAll];
+   //[Post MR_truncateAll];
+  //  int a;
     return YES;
 }
 
@@ -44,6 +76,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [MagicalRecord cleanUp];
 }
 
 @end
