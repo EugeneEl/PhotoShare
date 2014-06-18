@@ -14,7 +14,8 @@
 
 // Center latitude and longitude of the annotion view.
 // The implementation of this property must be KVO compliant.
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic, assign,readwrite) CLLocationCoordinate2D coordinate;
+@property (nonatomic,strong) NSURL *imageURL;
 
 
 

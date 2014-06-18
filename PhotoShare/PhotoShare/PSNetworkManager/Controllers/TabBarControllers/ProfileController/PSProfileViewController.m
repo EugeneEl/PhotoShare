@@ -45,7 +45,6 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
         NSLog(@"added to an array photoURL:%@",photoURLString);
     }
     
-    int a;
     
 }
 
