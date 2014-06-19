@@ -23,31 +23,9 @@ const int numberOfUsersForTest=5;
     [MagicalRecord setupCoreDataStack];
     
     
-    
-    /*
-    NSArray *allUsers=[Users MR_findAll];
-    
-    
-    
-    if (![allUsers count]) {
-        for (int i=0; i<numberOfUsersForTest; i++) {
-            Users *user=[Users MR_createEntity];
-            user.email=[NSString stringWithFormat:@"usermail%i@yandex.ua",i];
-            user.password=[NSString stringWithFormat:@"userpassword%i,",i];
-            user.facebookID=[NSNumber numberWithInt:i];
-            NSLog(@"user:%i was added",i);
-     
-     //[Users MR_truncateAll];
-     
-     
-     
-        }
-    }
-    */
-    
-    //[User MR_truncateAll];
+   //[User MR_truncateAll];
    //[Post MR_truncateAll];
-  //  int a;
+    
     return YES;
 }
 

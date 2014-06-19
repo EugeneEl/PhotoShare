@@ -14,7 +14,7 @@
 #import "UIView+PSMKAnnotationView.h"
 #import "UIKit+AFNetworking.h"
 #import "AFNetworking.h"
-#import "PSMKAnnotationView.h"
+#import "PSMKPinAnnotationView.h"
 
 @interface PSNearLocationViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -167,7 +167,9 @@
 
 -(MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
-    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+    
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+    {
         return nil;
     }
     
@@ -175,16 +177,20 @@
     
     MKPinAnnotationView *pin=(MKPinAnnotationView*) [ self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     
-   PSMapAnnonation *customAnnotation=(PSMapAnnonation*)annotation;
+    PSMapAnnonation *customAnnotation=(PSMapAnnonation*)annotation;
+    
     if (!pin)
     {
-        pin=[[PSMKAnnotationView alloc]initWithAnnotation:customAnnotation reuseIdentifier:identifier];
+        pin=[[PSMKPinAnnotationView alloc]initWithAnnotation:customAnnotation reuseIdentifier:identifier];
         pin.pinColor=MKPinAnnotationColorRed;
         pin.animatesDrop=NO;
         pin.draggable=NO;
+        [pin setFrame:CGRectMake(pin.frame.origin.x, pin.frame.origin.y, 100.f, 100.f)];
+        
     }
     
-    else {
+    else
+    {
         pin.annotation=customAnnotation;
     }
     
@@ -192,73 +198,39 @@
 }
 
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
     NSLog (@"Callout accessory control tapped");
 }
 
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(PSMKAnnotationView *)view {
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(PSMKPinAnnotationView *)view
+{
     if ([view.annotation isKindOfClass:[MKUserLocation class ]]) return;
     
     view.detailViewHidden=NO;
 }
 
--(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
-    
-    
-    /*
-    PSMKAnnotationView *customAnnotationView=(PSMKAnnotationView*)view;
-    if (!customAnnotationView.hidden) {
-        [customAnnotationView removeFromSuperview];
-    }
-    */
-    
-    PSMKAnnotationView *customAnnotationView=(PSMKAnnotationView*)view;
-    [customAnnotationView setDetailViewHidden:YES];
-    
-    PSMapAnnonation    *customAnnotation=(PSMapAnnonation*)customAnnotationView.annotation;
-    
-    
-    
-}
-
-/*
--(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
-    
-    if (newState==MKAnnotationViewDragStateEnding) {
-        CLLocationCoordinate2D location=view.annotation.coordinate;
-        
-        MKMapPoint mapPoint=MKMapPointForCoordinate(location);
-        NSLog(@"location: {%f, %f}\npoint=%@",location.latitude,location.longitude, MKStringFromMapPoint(mapPoint));
-        
-        
-        
-    }
-    
-}
- 
- */
-
-#pragma mark - actiondescription
--(void)actionDescription:(UIButton*) sender
+-(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
     
-  //  MKAnnotationView *annotationView=[sender  superAnnotationView];
+if (![view isKindOfClass:[PSMKPinAnnotationView class]]) {
+    return;
+   }
     
+    PSMKPinAnnotationView *customAnnotationView=(PSMKPinAnnotationView*)view;
+    [customAnnotationView setDetailViewHidden:YES];
     
-    
-    
-    
-    
-    NSLog(@"actionDescription");
 }
+
+
              
-- (IBAction)searchByRadius:(id)sender {
+- (IBAction)searchByRadius:(id)sender
+{
     
     UISlider *slider=(UISlider*)sender;
     
     NSInteger changedValue=lround(slider.value);
     self.radiusLabel.text=[NSString stringWithFormat:@"%li", changedValue];
-    
     
     MKCoordinateSpan spanForRect;
     spanForRect.latitudeDelta=(CLLocationDegrees)changedValue/112.20f;
@@ -276,8 +248,6 @@
     
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:TRUE];
     
-    //[self show];
-    
 
 }
 
@@ -286,7 +256,8 @@
 
 
 
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
     
 
     
@@ -296,7 +267,7 @@
     [self.locationManager stopUpdatingLocation];
    
     
-    /*
+    
     CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
     [geocoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error)
      {
@@ -329,11 +300,14 @@
           placemark.subLocality);
           placemark.location);
           ------*/
-    // }];
+     }];
  
 }
 
--(void)show {
+
+/*
+-(void)show
+{
     
     MKMapRect zoomRect=MKMapRectNull;
     
@@ -357,8 +331,30 @@
     
     [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(20, 20, 20, 20) animated:YES];
 }
+*/
 
 
 
+#pragma mark - Touches
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    NSLog(@"touch");
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint touchLocation = [touch locationInView:self.mapView];
+    
+    for (UIView *view in self.mapView.subviews)
+    {
+//        if ([view isKindOfClass:[PSMKPinAnnotationView class]] &&
+//            CGRectContainsPoint(view.frame, touchLocation))
+//        {
+//            NSLog(@"%@",[view class]);
+//        }
+        
+        
+        NSLog(@"%@",[view class]);
+    }
+}
 
-             @end
+
+
+@end

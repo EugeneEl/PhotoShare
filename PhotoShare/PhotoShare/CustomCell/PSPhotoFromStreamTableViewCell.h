@@ -15,10 +15,10 @@
 
 @required
 
--(void)photoStreamCellLikeButtonPressed:(PSPhotoFromStreamTableViewCell  *)tableCell;
--(void)photoStreamCellCommentButtonPressed:(PSPhotoFromStreamTableViewCell *)
+- (void)photoStreamCellLikeButtonPressed:(PSPhotoFromStreamTableViewCell  *)tableCell;
+- (void)photoStreamCellCommentButtonPressed:(PSPhotoFromStreamTableViewCell *)
 tableCell;
--(void)photoStreamCellShareButtonPressed:(PSPhotoFromStreamTableViewCell  *)
+- (void)photoStreamCellShareButtonPressed:(PSPhotoFromStreamTableViewCell  *)
 tableCell;
 
 @end

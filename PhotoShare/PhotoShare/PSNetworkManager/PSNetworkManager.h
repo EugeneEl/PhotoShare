@@ -21,9 +21,6 @@ typedef void (^errorBlock)(NSError* error);
                             success:(successBlock)success
                             error:(errorBlock)error;
 
-//- (void)someMethodThatTakesABlock:(returnType (^)(parameterTypes))blockName;
-
-
 - (void)someMethodThatTakesABlock:(void (^)(NSError*))blockName;
 
 - (AFHTTPRequestOperation *)checkIfLoginedWith:(PSUserModel *)model

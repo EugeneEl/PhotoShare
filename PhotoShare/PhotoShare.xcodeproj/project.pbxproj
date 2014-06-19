@@ -15,6 +15,7 @@
 		3E16A531194F385C006E8B88 /* PSCollectionCellForPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E16A530194F385C006E8B88 /* PSCollectionCellForPhoto.m */; };
 		3E16A534194F40F9006E8B88 /* dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E16A533194F40F9006E8B88 /* dislike.png */; };
 		3E16A536194F4107006E8B88 /* heart-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E16A535194F4107006E8B88 /* heart-icon.png */; };
+		3E1CC6441951B62F00032216 /* PSMKPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1CC6431951B62F00032216 /* PSMKPinAnnotationView.m */; };
 		3E328887194986BB00B0DD90 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E328886194986BB00B0DD90 /* MBProgressHUD.m */; };
 		3E3F8C121949A1F5009916BD /* PSStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C111949A1F5009916BD /* PSStreamViewController.m */; };
 		3E3F8C161949A57C009916BD /* PSPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C151949A57C009916BD /* PSPhotoController.m */; };
@@ -39,6 +40,8 @@
 		3E4A701A19506942003EFD21 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A701919506941003EFD21 /* Post.m */; };
 		3E4A701D19506942003EFD21 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A701C19506942003EFD21 /* Comment.m */; };
 		3E4A701F19506EEF003EFD21 /* response1.json in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A701E19506EEF003EFD21 /* response1.json */; };
+		3E4A702119508428003EFD21 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4A702019508428003EFD21 /* CoreLocation.framework */; };
+		3E4A702419509BEE003EFD21 /* UIView+PSMKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A702319509BEE003EFD21 /* UIView+PSMKAnnotationView.m */; };
 		3E9267331950303800A55AC8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9267321950303800A55AC8 /* MapKit.framework */; };
 		3E9267391950322400A55AC8 /* PSNearLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9267381950322400A55AC8 /* PSNearLocationViewController.m */; };
 		3E92673C19503C0000A55AC8 /* PSMapAnnonation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E92673B19503C0000A55AC8 /* PSMapAnnonation.m */; };
@@ -122,6 +125,8 @@
 		3E16A530194F385C006E8B88 /* PSCollectionCellForPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCollectionCellForPhoto.m; sourceTree = "<group>"; };
 		3E16A533194F40F9006E8B88 /* dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike.png; sourceTree = "<group>"; };
 		3E16A535194F4107006E8B88 /* heart-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-icon.png"; sourceTree = "<group>"; };
+		3E1CC6421951B62F00032216 /* PSMKPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSMKPinAnnotationView.h; path = PhotoShare/Controllers/TabBarControllers/NearController/PSMKPinAnnotationView.h; sourceTree = SOURCE_ROOT; };
+		3E1CC6431951B62F00032216 /* PSMKPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSMKPinAnnotationView.m; path = PhotoShare/Controllers/TabBarControllers/NearController/PSMKPinAnnotationView.m; sourceTree = SOURCE_ROOT; };
 		3E328885194986BB00B0DD90 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		3E328886194986BB00B0DD90 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3E3F8C101949A1F5009916BD /* PSStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStreamViewController.h; sourceTree = "<group>"; };
@@ -165,6 +170,9 @@
 		3E4A701B19506942003EFD21 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comment.h; path = ../../Comment.h; sourceTree = "<group>"; };
 		3E4A701C19506942003EFD21 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = ../../Comment.m; sourceTree = "<group>"; };
 		3E4A701E19506EEF003EFD21 /* response1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response1.json; sourceTree = "<group>"; };
+		3E4A702019508428003EFD21 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3E4A702219509BEE003EFD21 /* UIView+PSMKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PSMKAnnotationView.h"; sourceTree = "<group>"; };
+		3E4A702319509BEE003EFD21 /* UIView+PSMKAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PSMKAnnotationView.m"; sourceTree = "<group>"; };
 		3E9267321950303800A55AC8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3E9267371950322400A55AC8 /* PSNearLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSNearLocationViewController.h; path = PhotoShare/Controllers/TabBarControllers/NearController/PSNearLocationViewController.h; sourceTree = SOURCE_ROOT; };
 		3E9267381950322400A55AC8 /* PSNearLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSNearLocationViewController.m; path = PhotoShare/Controllers/TabBarControllers/NearController/PSNearLocationViewController.m; sourceTree = SOURCE_ROOT; };
@@ -279,6 +287,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E4A702119508428003EFD21 /* CoreLocation.framework in Frameworks */,
 				3E9267331950303800A55AC8 /* MapKit.framework in Frameworks */,
 				3EAF84E519471AF1003D1987 /* CoreData.framework in Frameworks */,
 				3EAF844119471843003D1987 /* CoreGraphics.framework in Frameworks */,
@@ -392,6 +401,8 @@
 			children = (
 				3E3F8C1B1949C4F1009916BD /* NSString+PSValidation.h */,
 				3E3F8C1C1949C4F1009916BD /* NSString+PSValidation.m */,
+				3E4A702219509BEE003EFD21 /* UIView+PSMKAnnotationView.h */,
+				3E4A702319509BEE003EFD21 /* UIView+PSMKAnnotationView.m */,
 			);
 			name = Categories;
 			path = PhotoShare/Categories;
@@ -491,6 +502,8 @@
 				3E9267381950322400A55AC8 /* PSNearLocationViewController.m */,
 				3E92673A19503C0000A55AC8 /* PSMapAnnonation.h */,
 				3E92673B19503C0000A55AC8 /* PSMapAnnonation.m */,
+				3E1CC6421951B62F00032216 /* PSMKPinAnnotationView.h */,
+				3E1CC6431951B62F00032216 /* PSMKPinAnnotationView.m */,
 			);
 			path = NearController;
 			sourceTree = "<group>";
@@ -528,6 +541,7 @@
 		3EAF843D19471843003D1987 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3E4A702019508428003EFD21 /* CoreLocation.framework */,
 				3E9267321950303800A55AC8 /* MapKit.framework */,
 				3EAF84E419471AF1003D1987 /* CoreData.framework */,
 				3EAF843E19471843003D1987 /* Foundation.framework */,
@@ -940,12 +954,14 @@
 				3EAF848519471A86003D1987 /* AFHTTPSessionManager.m in Sources */,
 				3EAF84DB19471AAF003D1987 /* NSPersistentStore+MagicalRecord.m in Sources */,
 				3E3F8C3F1949EE83009916BD /* CustomSegueForStart.m in Sources */,
+				3E1CC6441951B62F00032216 /* PSMKPinAnnotationView.m in Sources */,
 				3EAF848419471A86003D1987 /* AFHTTPRequestOperationManager.m in Sources */,
 				3EAF84D819471AAF003D1987 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				3E3F8C3A1949E136009916BD /* UIRefreshControl+AFNetworking.m in Sources */,
 				3EAF84CE19471AAF003D1987 /* NSObject+MagicalDataImport.m in Sources */,
 				3EAF848619471A86003D1987 /* AFNetworkReachabilityManager.m in Sources */,
 				3E3F8C3B1949E136009916BD /* UIWebView+AFNetworking.m in Sources */,
+				3E4A702419509BEE003EFD21 /* UIView+PSMKAnnotationView.m in Sources */,
 				3EAF84D119471AAF003D1987 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				3E92673C19503C0000A55AC8 /* PSMapAnnonation.m in Sources */,
 				3EAF844B19471843003D1987 /* main.m in Sources */,
@@ -1007,6 +1023,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1023,8 +1040,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "76240328-0738-4D4C-89BE-CCEB2C093A4E";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1055,7 +1073,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PROVISIONING_PROFILE = "76240328-0738-4D4C-89BE-CCEB2C093A4E";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1066,10 +1085,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoShare/PhotoShare-Prefix.pch";
 				INFOPLIST_FILE = "PhotoShare/PhotoShare-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "76240328-0738-4D4C-89BE-CCEB2C093A4E";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1082,7 +1105,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoShare/PhotoShare-Prefix.pch";
 				INFOPLIST_FILE = "PhotoShare/PhotoShare-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "76240328-0738-4D4C-89BE-CCEB2C093A4E";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

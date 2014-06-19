@@ -38,7 +38,6 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
 }
 
-
 + (PSNetworkManager *)sharedManager {
     
     static PSNetworkManager *sharedManager = nil;
@@ -50,7 +49,8 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     return sharedManager;
 }
 
-- (AFHTTPRequestOperation *)checkIfLoginedWith:(PSUserModel *)model success:(successBlock)success error:(errorBlock)errorBlock {
+- (AFHTTPRequestOperation *)checkIfLoginedWith:(PSUserModel *)model success:(successBlock)success error:(errorBlock)errorBlock
+{
     return [_requestManager GET:@"users"
                      parameters:@{}
                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -116,7 +116,8 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 }
 
 
-- (void)someMethodThatTakesABlock:(void (^)(NSError* error))blockName {
+- (void)someMethodThatTakesABlock:(void (^)(NSError* error))blockName
+{
     NSLog(@"someMethodThatTakesABlock has been called");
     
     [_requestManager
@@ -138,51 +139,10 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
 }
 
-
-
-/*
--(void) signInSuccess:(void(^) (PSUserModel* userModel)success failure:(void(^)(void))failure {
-    
-    //static NSString *login = @"admin";
-    //static NSString *password = @"12345";
-    
-    
-    
-    NSDictionary *dictionaryForRequest=@{@"name": @"Valeriy",
-                                         @"fb_id":@"234234234234234231",
-                                         @"email": @"skivbard@gmail.com"};
- 
-    
-    if (_userModel) {
-        NSDictionary *dictionaryForRequest=@{
-            @"login":_userModel.login,
-            @"passwrod":[NSString ]};
-    }
-    
-    
-    
-    
-    
-    [_requestManager POST:@"events"
-        parameters:dictionaryForRequest
-        success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        NSLog(@"success");
-        success(dictionaryForRequest);
-        
-    }
-        failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-        failure();
-        NSLog(@"error:%@",[error localizedDescription]);
-    }];
-    
-*/
-
-
 - (AFHTTPRequestOperation *) fetchUserStream:(PSUserModel*)model
                                      success:(successBlock)success
-                                       error:(errorBlock)error {
+                                       error:(errorBlock)error
+{
     
     
     NSDictionary *dictionaryForRequest=@{ @"email":model.email,

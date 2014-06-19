@@ -8,10 +8,10 @@
 
 #import <MapKit/MapKit.h>
 
-@interface PSMKAnnotationView : MKPinAnnotationView
+@interface PSMKPinAnnotationView : MKPinAnnotationView
 
 @property (nonatomic, getter = isDetailViewHidden) BOOL detailViewHidden;
 
-- (BOOL)validAnnotation;
+
 
 @end

@@ -12,7 +12,8 @@
 @implementation PSUserStore
 
 
-+ (PSUserStore*) userStoreManager {
++ (PSUserStore*) userStoreManager
+{
     static PSUserStore *userStoreManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -25,7 +26,6 @@
 
 -(User*)activeUser {
     
-    //Reading from NSUserDefaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString  *activeUserName = [defaults stringForKey:@"activeUserEmail"];
     
@@ -35,13 +35,15 @@
     }
     
     
-    else {
+    else
+    {
         return[User MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"email == %@", activeUserName]];
     }
     
 }
 
-- (void) setActiveUser:(User*)activeUser {
+- (void) setActiveUser:(User*)activeUser
+{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:activeUser.email forKey:@"activeUserEmail"];
     [defaults synchronize];

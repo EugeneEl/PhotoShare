@@ -41,23 +41,25 @@
     else
         
     {
-         [PSUserStore userStoreManager].activeUser=userWithEmptyEmail;
+        [PSUserStore userStoreManager].activeUser=userWithEmptyEmail;
         NSLog(@"logout. user with email:%@",[PSUserStore userStoreManager].activeUser.email);
     }
     
     
     
  
-        [self performSegueWithIdentifier:@"afterLoggedOutToSplash" sender:nil];
+    [self performSegueWithIdentifier:@"afterLoggedOutToSplash" sender:nil];
     
 
 }
 
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     
-    if([segue isKindOfClass:[CustomUnwindSegue class]]) {
+    if([segue isKindOfClass:[CustomUnwindSegue class]])
+    {
         // Set the start point for the animation to center of the button for the animation
         ((CustomUnwindSegue *)segue).targetPoint = self.view.center;
     }

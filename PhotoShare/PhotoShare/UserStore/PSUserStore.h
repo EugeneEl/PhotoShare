@@ -10,11 +10,7 @@
 #import "User.h"
 @class PSUserModel;
 
-
-
-
 @interface PSUserStore : NSObject
-
 
 @property (nonatomic,strong) User *activeUser;
 

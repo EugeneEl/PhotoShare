@@ -197,7 +197,8 @@
         //check if the parsed post exists in CoreData
         Post *existingPost=[[Post MR_findByAttribute:@"postID" withValue:self.post_idParsed]firstObject];
         
-        if (!existingPost) {
+        if (!existingPost)
+        {
             existingPost=[Post MR_createEntity];
             
             existingPost.postID=self.post_idParsed;
@@ -212,7 +213,8 @@
 
             
             //parse and check comments
-            for (NSDictionary *dictOfComments in commentsArray) {
+            for (NSDictionary *dictOfComments in commentsArray)
+            {
                 
                 self.commentIDParsed=[dictOfComments objectForKey:@"comment_id"];
                 
@@ -278,38 +280,7 @@
     
     [self.image setImageWithURL:urlForImage];
     
-    
-    /*
-    [self.imageFromPost setImageWithURLRequest:requestURLForImage placeholderImage:nil
-                                       success: ^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                           NSLog(@"image has been posted");
-                                       }
-                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                           NSLog(@"failed to load image");
-                                       }];
-    
-    
-    
-    
-     
-     cell.textLabel.text = [daysWeather weatherDescription];
-     
-     NSURL *url = [NSURL URLWithString:daysWeather.weatherIconURL];
-     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-     UIImage *placeholderImage = [UIImage imageNamed:@"placeholder"];
-     
-     __weak UITableViewCell *weakCell = cell;
-     
-     [cell.imageView setImageWithURLRequest:request
-     placeholderImage:placeholderImage
-     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-     
-     weakCell.imageView.image = image;
-     [weakCell setNeedsLayout];
-     
-     } failure:nil];
-     
-     */
+   
     
     self.streamTableView.dataSource=self;
     self.streamTableView.delegate=self;
@@ -318,7 +289,8 @@
 }
 #pragma mark UITableViewDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     
     return [Post MR_countOfEntities];
 }
@@ -330,26 +302,7 @@
    PSPhotoFromStreamTableViewCell *cell=[self.streamTableView dequeueReusableCellWithIdentifier:@"photoCell"];
     
     [self configureCell:cell atIndexPath:indexPath];
-  //  NSLog(@"cell:%@",cell);
-  
-    /*
-    
-    Post  *postTest=[self.fetchedResultsController objectAtIndexPath:indexPath];
 
-    cell.photoNameLabel.text=postTest.photoName;
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
-    NSString *stringFromDate = [dateFormatter stringFromDate:postTest.photoDate];
-    cell.photoDateLabel.text=stringFromDate;
-    
-    
-    [cell.imageForPost setImageWithURL: [NSURL URLWithString:postTest.photoURL]];
-    
-    
-    
-    cell.likesNumberLabel.text=[NSString stringWithFormat:@"%@",postTest.likes];
-*/
     
     return cell;
     

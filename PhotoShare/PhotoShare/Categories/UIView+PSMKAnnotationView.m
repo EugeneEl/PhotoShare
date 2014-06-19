@@ -11,7 +11,7 @@
 
 @implementation UIView (PSMKAnnotationView)
 
--(MKAnnotationView*)superAnnotationView {
+- (MKAnnotationView*)superAnnotationView {
     if ([self isKindOfClass:[MKAnnotationView class]]) {
         return (MKAnnotationView*)self;
     }
