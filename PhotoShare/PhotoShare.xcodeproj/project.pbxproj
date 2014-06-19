@@ -94,11 +94,11 @@
 		3EAF84E319471AAF003D1987 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF84C519471AAF003D1987 /* MagicalRecord.m */; };
 		3EAF84E519471AF1003D1987 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAF84E419471AF1003D1987 /* CoreData.framework */; };
 		3EAF850A19472CAD003D1987 /* Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EAF850919472CAC003D1987 /* Iphone.storyboard */; };
-		3EAF850D19472E75003D1987 /* PSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF850C19472E75003D1987 /* PSLoginViewController.m */; };
-		3EAF85101947351A003D1987 /* PSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF850F1947351A003D1987 /* PSSplashViewController.m */; };
 		3EAF8514194735AC003D1987 /* camera_cute2_png.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EAF8513194735AC003D1987 /* camera_cute2_png.png */; };
 		3EAF851E19473D66003D1987 /* PSNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF851D19473D66003D1987 /* PSNetworkManager.m */; };
 		3EAF853019476C95003D1987 /* PSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF852F19476C95003D1987 /* PSUserModel.m */; };
+		82A7044E1952F7DB002EB459 /* PSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A7044D1952F7DB002EB459 /* PSLoginViewController.m */; };
+		82A704511952F973002EB459 /* PSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A704501952F973002EB459 /* PSSplashViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,15 +271,15 @@
 		3EAF84C919471AAF003D1987 /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
 		3EAF84E419471AF1003D1987 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3EAF850919472CAC003D1987 /* Iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Iphone.storyboard; sourceTree = "<group>"; };
-		3EAF850B19472E75003D1987 /* PSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSLoginViewController.h; path = ../../../../PSLoginViewController.h; sourceTree = "<group>"; };
-		3EAF850C19472E75003D1987 /* PSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSLoginViewController.m; path = ../../../../PSLoginViewController.m; sourceTree = "<group>"; };
-		3EAF850E1947351A003D1987 /* PSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSSplashViewController.h; path = ../../../PSSplashViewController.h; sourceTree = "<group>"; };
-		3EAF850F1947351A003D1987 /* PSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSSplashViewController.m; path = ../../../PSSplashViewController.m; sourceTree = "<group>"; };
 		3EAF8513194735AC003D1987 /* camera_cute2_png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_cute2_png.png; path = ../../camera_cute2_png.png; sourceTree = "<group>"; };
 		3EAF851C19473D66003D1987 /* PSNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSNetworkManager.h; sourceTree = "<group>"; };
 		3EAF851D19473D66003D1987 /* PSNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSNetworkManager.m; sourceTree = "<group>"; };
 		3EAF852E19476C95003D1987 /* PSUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSUserModel.h; sourceTree = "<group>"; };
 		3EAF852F19476C95003D1987 /* PSUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSUserModel.m; sourceTree = "<group>"; };
+		82A7044C1952F7DB002EB459 /* PSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLoginViewController.h; sourceTree = SOURCE_ROOT; };
+		82A7044D1952F7DB002EB459 /* PSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSLoginViewController.m; sourceTree = SOURCE_ROOT; };
+		82A7044F1952F973002EB459 /* PSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSSplashViewController.h; path = PhotoShare/PSSplashViewController.h; sourceTree = SOURCE_ROOT; };
+		82A704501952F973002EB459 /* PSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSSplashViewController.m; path = PhotoShare/PSSplashViewController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -776,8 +776,8 @@
 		3EAF85331947709E003D1987 /* LoginController */ = {
 			isa = PBXGroup;
 			children = (
-				3EAF850B19472E75003D1987 /* PSLoginViewController.h */,
-				3EAF850C19472E75003D1987 /* PSLoginViewController.m */,
+				82A7044C1952F7DB002EB459 /* PSLoginViewController.h */,
+				82A7044D1952F7DB002EB459 /* PSLoginViewController.m */,
 			);
 			path = LoginController;
 			sourceTree = "<group>";
@@ -785,8 +785,8 @@
 		3EAF85351947709E003D1987 /* SplashController */ = {
 			isa = PBXGroup;
 			children = (
-				3EAF850E1947351A003D1987 /* PSSplashViewController.h */,
-				3EAF850F1947351A003D1987 /* PSSplashViewController.m */,
+				82A7044F1952F973002EB459 /* PSSplashViewController.h */,
+				82A704501952F973002EB459 /* PSSplashViewController.m */,
 			);
 			path = SplashController;
 			sourceTree = "<group>";
@@ -899,10 +899,10 @@
 			files = (
 				3EAF848919471A86003D1987 /* AFURLRequestSerialization.m in Sources */,
 				3EAF84DF19471AAF003D1987 /* MagicalRecord+iCloud.m in Sources */,
-				3EAF850D19472E75003D1987 /* PSLoginViewController.m in Sources */,
 				3E11883D194AE2FF00D562A1 /* PSProfileViewController.m in Sources */,
 				3EAF84E019471AAF003D1987 /* MagicalRecord+Options.m in Sources */,
 				3EAF848819471A86003D1987 /* AFURLConnectionOperation.m in Sources */,
+				82A7044E1952F7DB002EB459 /* PSLoginViewController.m in Sources */,
 				3EAF84CD19471AAF003D1987 /* NSNumber+MagicalDataImport.m in Sources */,
 				3EAF84CC19471AAF003D1987 /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				3EAF84DC19471AAF003D1987 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
@@ -925,12 +925,12 @@
 				3EAF853019476C95003D1987 /* PSUserModel.m in Sources */,
 				3EAF84E319471AAF003D1987 /* MagicalRecord.m in Sources */,
 				3E9267391950322400A55AC8 /* PSNearLocationViewController.m in Sources */,
+				82A704511952F973002EB459 /* PSSplashViewController.m in Sources */,
 				3EAF84E119471AAF003D1987 /* MagicalRecord+Setup.m in Sources */,
 				3EAF848B19471A86003D1987 /* AFURLSessionManager.m in Sources */,
 				3E48C2511948996100AC842D /* PSUserStore.m in Sources */,
 				3E3F8C391949E136009916BD /* UIProgressView+AFNetworking.m in Sources */,
 				3EAF84CA19471AAF003D1987 /* MagicalImportFunctions.m in Sources */,
-				3EAF85101947351A003D1987 /* PSSplashViewController.m in Sources */,
 				3E3F8C341949E136009916BD /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3EAF848A19471A86003D1987 /* AFURLResponseSerialization.m in Sources */,
 				3EAF844F19471843003D1987 /* PHAppDelegate.m in Sources */,
