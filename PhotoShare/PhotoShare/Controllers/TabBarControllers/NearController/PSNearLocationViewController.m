@@ -166,34 +166,21 @@
 #pragma mark- MKMapViewDelegate
 
 -(MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    
-    
-    if ([annotation isKindOfClass:[MKUserLocation class]])
-    {
-        return nil;
-    }
-    
+    if ([annotation isKindOfClass:[MKUserLocation class]]) return nil;
+
     static NSString *identifier=@"identifier";
     
-    MKPinAnnotationView *pin=(MKPinAnnotationView*) [ self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    MKAnnotationView *pin=(MKPinAnnotationView*) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     
     PSMapAnnonation *customAnnotation=(PSMapAnnonation*)annotation;
     
-    if (!pin)
-    {
-        pin=[[PSMKPinAnnotationView alloc]initWithAnnotation:customAnnotation reuseIdentifier:identifier];
-        pin.pinColor=MKPinAnnotationColorRed;
-        pin.animatesDrop=NO;
-        pin.draggable=NO;
-        [pin setFrame:CGRectMake(pin.frame.origin.x, pin.frame.origin.y, 100.f, 100.f)];
-        
+    if (!pin) {
+        pin = [[PSMKPinAnnotationView alloc]initWithAnnotation:customAnnotation reuseIdentifier:identifier];
+        [pin setFrame:CGRectMake(0.f, 0.f, 50.f, 50.f)];
     }
-    
-    else
-    {
-        pin.annotation=customAnnotation;
-    }
-    
+
+    pin.annotation=customAnnotation;
+
     return pin;
 }
 
@@ -335,25 +322,25 @@ if (![view isKindOfClass:[PSMKPinAnnotationView class]]) {
 
 
 
-#pragma mark - Touches
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    NSLog(@"touch");
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint touchLocation = [touch locationInView:self.mapView];
-    
-    for (UIView *view in self.mapView.subviews)
-    {
-//        if ([view isKindOfClass:[PSMKPinAnnotationView class]] &&
-//            CGRectContainsPoint(view.frame, touchLocation))
-//        {
-//            NSLog(@"%@",[view class]);
-//        }
-        
-        
-        NSLog(@"%@",[view class]);
-    }
-}
+//#pragma mark - Touches
+//- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//
+//    NSLog(@"touch");
+//    UITouch *touch = [[event allTouches] anyObject];
+//    CGPoint touchLocation = [touch locationInView:self.mapView];
+//
+//    for (UIView *view in self.mapView.subviews)
+//    {
+////        if ([view isKindOfClass:[PSMKPinAnnotationView class]] &&
+////            CGRectContainsPoint(view.frame, touchLocation))
+////        {
+////            NSLog(@"%@",[view class]);
+////        }
+//
+//
+//        NSLog(@"%@",[view class]);
+//    }
+//}
 
 
 
