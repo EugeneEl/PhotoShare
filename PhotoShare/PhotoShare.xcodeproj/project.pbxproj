@@ -13,9 +13,7 @@
 		3E118850194B2E9D00D562A1 /* UserDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E11884E194B2E9D00D562A1 /* UserDataModel.xcdatamodeld */; };
 		3E16A52E194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E16A52D194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m */; };
 		3E16A531194F385C006E8B88 /* PSCollectionCellForPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E16A530194F385C006E8B88 /* PSCollectionCellForPhoto.m */; };
-		3E16A534194F40F9006E8B88 /* dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E16A533194F40F9006E8B88 /* dislike.png */; };
-		3E16A536194F4107006E8B88 /* heart-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E16A535194F4107006E8B88 /* heart-icon.png */; };
-		3E1CC6441951B62F00032216 /* PSMKPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1CC6431951B62F00032216 /* PSMKPinAnnotationView.m */; };
+		3E1CC6441951B62F00032216 /* PSMKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1CC6431951B62F00032216 /* PSMKAnnotationView.m */; };
 		3E328887194986BB00B0DD90 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E328886194986BB00B0DD90 /* MBProgressHUD.m */; };
 		3E3F8C121949A1F5009916BD /* PSStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C111949A1F5009916BD /* PSStreamViewController.m */; };
 		3E3F8C161949A57C009916BD /* PSPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C151949A57C009916BD /* PSPhotoController.m */; };
@@ -30,11 +28,6 @@
 		3E3F8C3A1949E136009916BD /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C311949E136009916BD /* UIRefreshControl+AFNetworking.m */; };
 		3E3F8C3B1949E136009916BD /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C331949E136009916BD /* UIWebView+AFNetworking.m */; };
 		3E3F8C3F1949EE83009916BD /* CustomSegueForStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C3E1949EE83009916BD /* CustomSegueForStart.m */; };
-		3E3F8C471949F6FF009916BD /* PhotosteamIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F8C461949F6FF009916BD /* PhotosteamIcon.png */; };
-		3E3F8C4D1949F9E3009916BD /* userIconBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F8C4C1949F9E3009916BD /* userIconBar.png */; };
-		3E3F8C4F1949FDAB009916BD /* near.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F8C4E1949FDAB009916BD /* near.png */; };
-		3E3F8C511949FF2F009916BD /* friendsIconBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F8C501949FF2F009916BD /* friendsIconBar.png */; };
-		3E3F8C53194A0060009916BD /* photoBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F8C52194A0060009916BD /* photoBarIcon.png */; };
 		3E48C24D1948906E00AC842D /* PSSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E48C24C1948906E00AC842D /* PSSignUpViewController.m */; };
 		3E48C2511948996100AC842D /* PSUserStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E48C2501948996100AC842D /* PSUserStore.m */; };
 		3E4A701A19506942003EFD21 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A701919506941003EFD21 /* Post.m */; };
@@ -94,11 +87,18 @@
 		3EAF84E319471AAF003D1987 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF84C519471AAF003D1987 /* MagicalRecord.m */; };
 		3EAF84E519471AF1003D1987 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAF84E419471AF1003D1987 /* CoreData.framework */; };
 		3EAF850A19472CAD003D1987 /* Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EAF850919472CAC003D1987 /* Iphone.storyboard */; };
-		3EAF8514194735AC003D1987 /* camera_cute2_png.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EAF8513194735AC003D1987 /* camera_cute2_png.png */; };
 		3EAF851E19473D66003D1987 /* PSNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF851D19473D66003D1987 /* PSNetworkManager.m */; };
 		3EAF853019476C95003D1987 /* PSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF852F19476C95003D1987 /* PSUserModel.m */; };
 		82A7044E1952F7DB002EB459 /* PSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A7044D1952F7DB002EB459 /* PSLoginViewController.m */; };
 		82A704511952F973002EB459 /* PSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A704501952F973002EB459 /* PSSplashViewController.m */; };
+		938B50E906BEC7EF35DA3FC9 /* PhotosteamIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 938B570A2EC19C77E23C1B08 /* PhotosteamIcon.png */; };
+		938B529F33E337409D00DD36 /* userIconBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 938B5208F7BE63231B1768CF /* userIconBar.png */; };
+		938B5507FB436C1B73F0F816 /* heart-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 938B59B0BDE26B187E28716B /* heart-icon.png */; };
+		938B56D0B92AFC70D5CCB443 /* photoBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 938B5B6FDFE9B3645F39E963 /* photoBarIcon.png */; };
+		938B5828EE33E400AEEE3776 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 938B56ECDFFF2F5939D1B1C1 /* pin.png */; };
+		938B58336451301B359FD33B /* friendsIconBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 938B5DD302FDD2D4AFE07053 /* friendsIconBar.png */; };
+		938B5D808CF059F488CB4A14 /* near.png in Resources */ = {isa = PBXBuildFile; fileRef = 938B5AE4142455FB808D91FE /* near.png */; };
+		938B5FC42806EDFB95CF0C7D /* dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = 938B5480C36E21FFD25F39C2 /* dislike.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,10 +123,8 @@
 		3E16A52D194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPhotoFromStreamTableViewCell.m; sourceTree = "<group>"; };
 		3E16A52F194F385C006E8B88 /* PSCollectionCellForPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCollectionCellForPhoto.h; sourceTree = "<group>"; };
 		3E16A530194F385C006E8B88 /* PSCollectionCellForPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCollectionCellForPhoto.m; sourceTree = "<group>"; };
-		3E16A533194F40F9006E8B88 /* dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike.png; sourceTree = "<group>"; };
-		3E16A535194F4107006E8B88 /* heart-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-icon.png"; sourceTree = "<group>"; };
-		3E1CC6421951B62F00032216 /* PSMKPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSMKPinAnnotationView.h; path = PhotoShare/Controllers/TabBarControllers/NearController/PSMKPinAnnotationView.h; sourceTree = SOURCE_ROOT; };
-		3E1CC6431951B62F00032216 /* PSMKPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSMKPinAnnotationView.m; path = PhotoShare/Controllers/TabBarControllers/NearController/PSMKPinAnnotationView.m; sourceTree = SOURCE_ROOT; };
+		3E1CC6421951B62F00032216 /* PSMKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSMKAnnotationView.h; path = PhotoShare/Controllers/TabBarControllers/NearController/PSMKAnnotationView.h; sourceTree = SOURCE_ROOT; };
+		3E1CC6431951B62F00032216 /* PSMKAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSMKAnnotationView.m; path = PhotoShare/Controllers/TabBarControllers/NearController/PSMKAnnotationView.m; sourceTree = SOURCE_ROOT; };
 		3E328885194986BB00B0DD90 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		3E328886194986BB00B0DD90 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3E3F8C101949A1F5009916BD /* PSStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStreamViewController.h; sourceTree = "<group>"; };
@@ -156,11 +154,6 @@
 		3E3F8C331949E136009916BD /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		3E3F8C3D1949EE83009916BD /* CustomSegueForStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegueForStart.h; sourceTree = "<group>"; };
 		3E3F8C3E1949EE83009916BD /* CustomSegueForStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegueForStart.m; sourceTree = "<group>"; };
-		3E3F8C461949F6FF009916BD /* PhotosteamIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotosteamIcon.png; sourceTree = "<group>"; };
-		3E3F8C4C1949F9E3009916BD /* userIconBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userIconBar.png; sourceTree = "<group>"; };
-		3E3F8C4E1949FDAB009916BD /* near.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = near.png; sourceTree = "<group>"; };
-		3E3F8C501949FF2F009916BD /* friendsIconBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friendsIconBar.png; sourceTree = "<group>"; };
-		3E3F8C52194A0060009916BD /* photoBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoBarIcon.png; sourceTree = "<group>"; };
 		3E48C24B1948906E00AC842D /* PSSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSSignUpViewController.h; path = PhotoShare/Controllers/SignUpController/PSSignUpViewController.h; sourceTree = SOURCE_ROOT; };
 		3E48C24C1948906E00AC842D /* PSSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSSignUpViewController.m; path = PhotoShare/Controllers/SignUpController/PSSignUpViewController.m; sourceTree = SOURCE_ROOT; };
 		3E48C24F1948996100AC842D /* PSUserStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSUserStore.h; sourceTree = "<group>"; };
@@ -271,7 +264,6 @@
 		3EAF84C919471AAF003D1987 /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
 		3EAF84E419471AF1003D1987 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3EAF850919472CAC003D1987 /* Iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Iphone.storyboard; sourceTree = "<group>"; };
-		3EAF8513194735AC003D1987 /* camera_cute2_png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_cute2_png.png; path = ../../camera_cute2_png.png; sourceTree = "<group>"; };
 		3EAF851C19473D66003D1987 /* PSNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSNetworkManager.h; sourceTree = "<group>"; };
 		3EAF851D19473D66003D1987 /* PSNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSNetworkManager.m; sourceTree = "<group>"; };
 		3EAF852E19476C95003D1987 /* PSUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSUserModel.h; sourceTree = "<group>"; };
@@ -280,6 +272,14 @@
 		82A7044D1952F7DB002EB459 /* PSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSLoginViewController.m; sourceTree = SOURCE_ROOT; };
 		82A7044F1952F973002EB459 /* PSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSSplashViewController.h; path = PhotoShare/PSSplashViewController.h; sourceTree = SOURCE_ROOT; };
 		82A704501952F973002EB459 /* PSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSSplashViewController.m; path = PhotoShare/PSSplashViewController.m; sourceTree = SOURCE_ROOT; };
+		938B5208F7BE63231B1768CF /* userIconBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userIconBar.png; sourceTree = "<group>"; };
+		938B5480C36E21FFD25F39C2 /* dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislike.png; sourceTree = "<group>"; };
+		938B56ECDFFF2F5939D1B1C1 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
+		938B570A2EC19C77E23C1B08 /* PhotosteamIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotosteamIcon.png; sourceTree = "<group>"; };
+		938B59B0BDE26B187E28716B /* heart-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-icon.png"; sourceTree = "<group>"; };
+		938B5AE4142455FB808D91FE /* near.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = near.png; sourceTree = "<group>"; };
+		938B5B6FDFE9B3645F39E963 /* photoBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoBarIcon.png; sourceTree = "<group>"; };
+		938B5DD302FDD2D4AFE07053 /* friendsIconBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friendsIconBar.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,14 +328,6 @@
 			path = SettingsController;
 			sourceTree = "<group>";
 		};
-		3E118845194B2B3400D562A1 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			path = PhotoShare/Resources;
-			sourceTree = "<group>";
-		};
 		3E16A52B194EFA37006E8B88 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,15 +338,6 @@
 			);
 			name = CustomCell;
 			path = PhotoShare/CustomCell;
-			sourceTree = "<group>";
-		};
-		3E16A532194F40E0006E8B88 /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-				3E16A535194F4107006E8B88 /* heart-icon.png */,
-				3E16A533194F40F9006E8B88 /* dislike.png */,
-			);
-			path = Buttons;
 			sourceTree = "<group>";
 		};
 		3E328884194986A200B0DD90 /* MBProgressHud */ = {
@@ -408,16 +391,6 @@
 			path = PhotoShare/Categories;
 			sourceTree = "<group>";
 		};
-		3E3F8C1E1949C752009916BD /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				3E3F8C401949F373009916BD /* IconsForBars */,
-				3E3F8C411949F373009916BD /* Start */,
-			);
-			name = Images;
-			path = PhotoShare/Images;
-			sourceTree = "<group>";
-		};
 		3E3F8C221949E136009916BD /* UIKit+AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,27 +428,6 @@
 			path = PhotoShare/CustomSegueClass;
 			sourceTree = "<group>";
 		};
-		3E3F8C401949F373009916BD /* IconsForBars */ = {
-			isa = PBXGroup;
-			children = (
-				3E3F8C52194A0060009916BD /* photoBarIcon.png */,
-				3E3F8C501949FF2F009916BD /* friendsIconBar.png */,
-				3E3F8C4E1949FDAB009916BD /* near.png */,
-				3E3F8C4C1949F9E3009916BD /* userIconBar.png */,
-				3E3F8C461949F6FF009916BD /* PhotosteamIcon.png */,
-			);
-			path = IconsForBars;
-			sourceTree = "<group>";
-		};
-		3E3F8C411949F373009916BD /* Start */ = {
-			isa = PBXGroup;
-			children = (
-				3EAF8513194735AC003D1987 /* camera_cute2_png.png */,
-				3E16A532194F40E0006E8B88 /* Buttons */,
-			);
-			path = Start;
-			sourceTree = "<group>";
-		};
 		3E48C2411948680100AC842D /* SignUpController */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,8 +454,8 @@
 				3E9267381950322400A55AC8 /* PSNearLocationViewController.m */,
 				3E92673A19503C0000A55AC8 /* PSMapAnnonation.h */,
 				3E92673B19503C0000A55AC8 /* PSMapAnnonation.m */,
-				3E1CC6421951B62F00032216 /* PSMKPinAnnotationView.h */,
-				3E1CC6431951B62F00032216 /* PSMKPinAnnotationView.m */,
+				3E1CC6421951B62F00032216 /* PSMKAnnotationView.h */,
+				3E1CC6431951B62F00032216 /* PSMKAnnotationView.m */,
 			);
 			path = NearController;
 			sourceTree = "<group>";
@@ -514,9 +466,7 @@
 				3E4A701E19506EEF003EFD21 /* response1.json */,
 				3EAF844419471843003D1987 /* PhotoShare */,
 				3E16A52B194EFA37006E8B88 /* CustomCell */,
-				3E118845194B2B3400D562A1 /* Resources */,
 				3E3F8C3C1949EDC9009916BD /* CustomSegueClass */,
-				3E3F8C1E1949C752009916BD /* Images */,
 				3E3F8C1A1949C4C1009916BD /* Categories */,
 				3E48C24E194898F100AC842D /* UserStore */,
 				3EAF851B19473D26003D1987 /* PSNetworkManager */,
@@ -526,6 +476,7 @@
 				3EAF845D19471843003D1987 /* PhotoShareTests */,
 				3EAF843D19471843003D1987 /* Frameworks */,
 				3EAF843C19471843003D1987 /* Products */,
+				938B55F1C808AB02D6B47B03 /* Resourses */,
 			);
 			sourceTree = "<group>";
 		};
@@ -791,6 +742,61 @@
 			path = SplashController;
 			sourceTree = "<group>";
 		};
+		938B50498E527D4FCB80445B /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				938B5480C36E21FFD25F39C2 /* dislike.png */,
+				938B59B0BDE26B187E28716B /* heart-icon.png */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		938B55F1C808AB02D6B47B03 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				938B580AA1E26BB5805E9EB5 /* Images */,
+			);
+			path = Resourses;
+			sourceTree = "<group>";
+		};
+		938B580AA1E26BB5805E9EB5 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				938B5E28DAB0A292315A6351 /* Start */,
+				938B5C556D83238FA8E5A02A /* IconsForBars */,
+				938B5B10251F69AA31D12E38 /* Map */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		938B5B10251F69AA31D12E38 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				938B56ECDFFF2F5939D1B1C1 /* pin.png */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		938B5C556D83238FA8E5A02A /* IconsForBars */ = {
+			isa = PBXGroup;
+			children = (
+				938B5AE4142455FB808D91FE /* near.png */,
+				938B5208F7BE63231B1768CF /* userIconBar.png */,
+				938B5B6FDFE9B3645F39E963 /* photoBarIcon.png */,
+				938B5DD302FDD2D4AFE07053 /* friendsIconBar.png */,
+				938B570A2EC19C77E23C1B08 /* PhotosteamIcon.png */,
+			);
+			path = IconsForBars;
+			sourceTree = "<group>";
+		};
+		938B5E28DAB0A292315A6351 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				938B50498E527D4FCB80445B /* Buttons */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -868,17 +874,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EAF844919471843003D1987 /* InfoPlist.strings in Resources */,
-				3E3F8C4F1949FDAB009916BD /* near.png in Resources */,
 				3EAF845119471843003D1987 /* Images.xcassets in Resources */,
-				3E3F8C471949F6FF009916BD /* PhotosteamIcon.png in Resources */,
-				3EAF8514194735AC003D1987 /* camera_cute2_png.png in Resources */,
 				3EAF850A19472CAD003D1987 /* Iphone.storyboard in Resources */,
-				3E16A536194F4107006E8B88 /* heart-icon.png in Resources */,
-				3E3F8C511949FF2F009916BD /* friendsIconBar.png in Resources */,
-				3E3F8C53194A0060009916BD /* photoBarIcon.png in Resources */,
-				3E16A534194F40F9006E8B88 /* dislike.png in Resources */,
 				3E4A701F19506EEF003EFD21 /* response1.json in Resources */,
-				3E3F8C4D1949F9E3009916BD /* userIconBar.png in Resources */,
+				938B5FC42806EDFB95CF0C7D /* dislike.png in Resources */,
+				938B5507FB436C1B73F0F816 /* heart-icon.png in Resources */,
+				938B5D808CF059F488CB4A14 /* near.png in Resources */,
+				938B529F33E337409D00DD36 /* userIconBar.png in Resources */,
+				938B56D0B92AFC70D5CCB443 /* photoBarIcon.png in Resources */,
+				938B58336451301B359FD33B /* friendsIconBar.png in Resources */,
+				938B50E906BEC7EF35DA3FC9 /* PhotosteamIcon.png in Resources */,
+				938B5828EE33E400AEEE3776 /* pin.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -954,7 +960,7 @@
 				3EAF848519471A86003D1987 /* AFHTTPSessionManager.m in Sources */,
 				3EAF84DB19471AAF003D1987 /* NSPersistentStore+MagicalRecord.m in Sources */,
 				3E3F8C3F1949EE83009916BD /* CustomSegueForStart.m in Sources */,
-				3E1CC6441951B62F00032216 /* PSMKPinAnnotationView.m in Sources */,
+				3E1CC6441951B62F00032216 /* PSMKAnnotationView.m in Sources */,
 				3EAF848419471A86003D1987 /* AFHTTPRequestOperationManager.m in Sources */,
 				3EAF84D819471AAF003D1987 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				3E3F8C3A1949E136009916BD /* UIRefreshControl+AFNetworking.m in Sources */,

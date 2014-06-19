@@ -8,15 +8,11 @@
 
 #import "PSNearLocationViewController.h"
 #import <MapKit/MapKit.h>
-#import <CoreLocation/CoreLocation.h>
 #import "PSMapAnnonation.h"
 #import "Post.h"
-#import "UIView+PSMKAnnotationView.h"
-#import "UIKit+AFNetworking.h"
-#import "AFNetworking.h"
-#import "PSMKPinAnnotationView.h"
+#import "PSMKAnnotationView.h"
 
-@interface PSNearLocationViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface PSNearLocationViewController () <MKMapViewDelegate, CLLocationManagerDelegate, PSMKAnnotationViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @property (nonatomic, assign) double latitudeFromPost;
@@ -170,13 +166,14 @@
 
     static NSString *identifier=@"identifier";
     
-    MKAnnotationView *pin=(MKPinAnnotationView*) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    PSMKAnnotationView *pin = (PSMKAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     
     PSMapAnnonation *customAnnotation=(PSMapAnnonation*)annotation;
-    
+
     if (!pin) {
-        pin = [[PSMKPinAnnotationView alloc]initWithAnnotation:customAnnotation reuseIdentifier:identifier];
-        [pin setFrame:CGRectMake(0.f, 0.f, 50.f, 50.f)];
+        pin = [[PSMKAnnotationView alloc]initWithAnnotation:customAnnotation reuseIdentifier:identifier];
+        [pin setFrame:CGRectMake(0.f, 0.f, 100.f, 100.f)];
+        [pin setDelegate:self];
     }
 
     pin.annotation=customAnnotation;
@@ -190,7 +187,7 @@
     NSLog (@"Callout accessory control tapped");
 }
 
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(PSMKPinAnnotationView *)view
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(PSMKAnnotationView *)view
 {
     if ([view.annotation isKindOfClass:[MKUserLocation class ]]) return;
     
@@ -200,11 +197,11 @@
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
     
-if (![view isKindOfClass:[PSMKPinAnnotationView class]]) {
+if (![view isKindOfClass:[PSMKAnnotationView class]]) {
     return;
    }
     
-    PSMKPinAnnotationView *customAnnotationView=(PSMKPinAnnotationView*)view;
+    PSMKAnnotationView *customAnnotationView=(PSMKAnnotationView *)view;
     [customAnnotationView setDetailViewHidden:YES];
     
 }
@@ -291,6 +288,13 @@ if (![view isKindOfClass:[PSMKPinAnnotationView class]]) {
  
 }
 
+#pragma mark - PSMKAnnotationViewDelegate
+
+- (void)annotationView:(PSMKAnnotationView *)view didSelectAnnotation:(PSMapAnnonation *)annotation {
+    NSLog(@"%@", annotation.title);
+}
+
+
 
 /*
 -(void)show
@@ -331,7 +335,7 @@ if (![view isKindOfClass:[PSMKPinAnnotationView class]]) {
 //
 //    for (UIView *view in self.mapView.subviews)
 //    {
-////        if ([view isKindOfClass:[PSMKPinAnnotationView class]] &&
+////        if ([view isKindOfClass:[PSMKAnnotationView class]] &&
 ////            CGRectContainsPoint(view.frame, touchLocation))
 ////        {
 ////            NSLog(@"%@",[view class]);
