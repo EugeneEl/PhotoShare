@@ -1,0 +1,55 @@
+/* 
+  Localizable.strings
+  PhotoShare
+
+  Created by Евгений on 25.06.14.
+  Copyright (c) 2014 Eugene. All rights reserved.
+*/
+
+
+//NearViewController
+"DistanceMeasurementKey"="км";
+
+
+
+
+//DetailViewController
+
+
+"actionSheetTitleNameKey"="Поделиться";
+"actionSheetButtonSaveNameKey"="Сохранить";
+"actionSheetButtonEmailNameKey"="Отправить по почте";
+"actionSheetButtonTwitterNameKey"="Отправить в Твиттер";
+"actionSheetButtonFacebookNameKey"="Отправить в Фейсбук";
+"actionSheetButtonCancelNameKey"="Отменить";
+
+ "subjectForMailTitleKey"="Ловите фотографию от Вашего друга от PhotoShare!";
+
+
+"ErrorStringKey"=" Ошибка";
+ "alertViewOkKey"="Ok";
+ "alertViewSuccessKey"="Операция завершена успешно";
+
+
+"alertViewOnTwitterOrFacebookNoAcountKey"="Достуаный аккаунт не найден";
+
+"alertViewOnTwitterErrorNoPhotoKey"="Фото недоступно";
+"alertViewOnTwitterConfigerAccountKey"="Настройне Ваш Твиттер аккаунт";
+
+
+"alertViewOnFacebookErrorNoPhotoKey"="Фото недоступно";
+"alertViewOnFacebookConfigerAccountKey"="Настройте Ваш Фейсбук аккаунт";
+
+"alertViewOnMailErrorMessageKey"="Не удалось отправить фото по почте";
+"alertViewOnMailConfigerAccountKey"="Настройте Ваш почтовый ящик";
+
+"alertViewOnSaveErrorKey"="Не удалось созхранить фото";
+"alertViewOnSaveSuccessKey"="Фото успешно сохранено в альбом PhotoShare";
+
+
+"alertViewOnSendigMailErrorKey"="Во время отправки фотографии по почте произошла ошибка";
+
+
+
+//  PSPhotoController.m
+"alertViewErrorNoCameraKey"="В Вашем устройстве нет камеры";

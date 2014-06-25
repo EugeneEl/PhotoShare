@@ -14,7 +14,6 @@
 
 @property (nonatomic,strong) User *activeUser;
 
-
 + (PSUserStore*)userStoreManager;
 
 - (void)addActiveUserToCoreDataWithModel:(PSUserModel*) model;

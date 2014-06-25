@@ -1,0 +1,189 @@
+
+/* Class = "IBUITabBarItem"; title = "Near"; ObjectID = "07x-5x-TWl"; */
+"07x-5x-TWl.title" = "Рядом";
+
+/* Class = "IBUILabel"; text = "Followers"; ObjectID = "0CO-ah-nK9"; */
+"0CO-ah-nK9.text" = "Подписчики";
+
+/* Class = "IBUILabel"; text = "Waiting..."; ObjectID = "1MG-Ny-kpS"; */
+"1MG-Ny-kpS.text" = "Ожидаем..";
+
+/* Class = "IBUILabel"; text = "Username"; ObjectID = "1Z0-xG-2oG"; */
+"1Z0-xG-2oG.text" = "Имя пользователя";
+
+/* Class = "IBUIButton"; normalTitle = "Sing up"; ObjectID = "1Z2-tc-NDg"; */
+"1Z2-tc-NDg.normalTitle" = "Регистрация";
+
+/* Class = "IBUILabel"; text = "Username"; ObjectID = "3Fv-Ci-vIB"; */
+"3Fv-Ci-vIB.text" = "Имя пользователя";
+
+/* Class = "IBUINavigationItem"; title = "Sign up"; ObjectID = "4wg-tP-JDH"; */
+"4wg-tP-JDH.title" = "Регистрация";
+
+/* Class = "IBUILabel"; text = "Following"; ObjectID = "5z6-yo-E3h"; */
+"5z6-yo-E3h.text" = "Мой лист";
+
+/* Class = "IBUIBarButtonItem"; title = "Item"; ObjectID = "7IX-uX-Qtb"; */
+"7IX-uX-Qtb.title" = "Item";
+
+/* Class = "IBUITabBarController"; title = "userTabBar"; ObjectID = "8yR-A9-5KD"; */
+"8yR-A9-5KD.title" = "userTabBar";
+
+/* Class = "IBUITextField"; text = "Password"; ObjectID = "9NU-cR-9TA"; */
+"9NU-cR-9TA.text" = "Пароль";
+
+/* Class = "IBUIBarButtonItem"; title = "Item"; ObjectID = "DFt-ml-TMS"; */
+"DFt-ml-TMS.title" = "Item";
+
+/* Class = "IBUILabel"; text = "Likes"; ObjectID = "Dgj-Lu-KvN"; */
+"Dgj-Lu-KvN.text" = "Лайки";
+
+/* Class = "IBUILabel"; text = "Time"; ObjectID = "Dqd-JJ-MgK"; */
+"Dqd-JJ-MgK.text" = "Время";
+
+/* Class = "IBUILabel"; text = "Password"; ObjectID = "E3n-xV-1I2"; */
+"E3n-xV-1I2.text" = "Пароль";
+
+/* Class = "IBUITabBarItem"; title = "Friends"; ObjectID = "EDI-ij-s2w"; */
+"EDI-ij-s2w.title" = "Друзья";
+
+/* Class = "IBUITabBarItem"; title = "Profile"; ObjectID = "Gjt-4A-dfk"; */
+"Gjt-4A-dfk.title" = "Профиль";
+
+/* Class = "IBUIButton"; normalTitle = "Change photo"; ObjectID = "HGE-H1-A7J"; */
+"HGE-H1-A7J.normalTitle" = "Изменить аватару";
+
+/* Class = "IBUINavigationItem"; title = "Me"; ObjectID = "HYe-sC-Maj"; */
+"HYe-sC-Maj.title" = "Я";
+
+/* Class = "IBUINavigationItem"; title = "vvv"; ObjectID = "JT8-xq-L1o"; */
+"JT8-xq-L1o.title" = "vvv";
+
+/* Class = "IBUILabel"; text = "..."; ObjectID = "JyZ-lG-RgZ"; */
+"JyZ-lG-RgZ.text" = "...";
+
+/* Class = "IBUILabel"; text = "Time"; ObjectID = "Lw6-L7-Ess"; */
+"Lw6-L7-Ess.text" = "Time";
+
+/* Class = "IBUILabel"; text = "Email:"; ObjectID = "MV6-5k-pBC"; */
+"MV6-5k-pBC.text" = "Адрес почты:";
+
+/* Class = "IBUILabel"; text = "username"; ObjectID = "NkZ-Xg-FcR"; */
+"NkZ-Xg-FcR.text" = "Имя пользователя";
+
+/* Class = "IBUILabel"; text = "Password:"; ObjectID = "O5d-Ug-vux"; */
+"O5d-Ug-vux.text" = "Пароль:";
+
+/* Class = "IBUILabel"; text = "Name "; ObjectID = "Ojj-JI-CHn"; */
+"Ojj-JI-CHn.text" = "Имя";
+
+/* Class = "IBUILabel"; text = "Login:"; ObjectID = "PD3-xq-8rn"; */
+"PD3-xq-8rn.text" = "Логин:";
+
+/* Class = "IBUILabel"; text = "photoName"; ObjectID = "Q0S-w5-fI4"; */
+"Q0S-w5-fI4.text" = "имя фото";
+
+/* Class = "IBUIButton"; normalTitle = "Login"; ObjectID = "QCA-I9-1dV"; */
+"QCA-I9-1dV.normalTitle" = "Вход в систему";
+
+/* Class = "IBUITabBarItem"; title = "Photostream"; ObjectID = "QqV-gH-NZg"; */
+"QqV-gH-NZg.title" = "Фотолента";
+
+/* Class = "IBUILabel"; text = "10"; ObjectID = "RBS-vu-lu3"; */
+"RBS-vu-lu3.text" = "10";
+
+/* Class = "IBUIViewController"; title = "Photostream"; ObjectID = "RaF-h3-fGc"; */
+"RaF-h3-fGc.title" = "Фотолента";
+
+/* Class = "IBUILabel"; text = "Password:"; ObjectID = "Rs6-cw-Nn2"; */
+"Rs6-cw-Nn2.text" = "Пароль:";
+
+/* Class = "IBUIButton"; normalTitle = "comment"; ObjectID = "SCh-5X-ZCw"; */
+"SCh-5X-ZCw.normalTitle" = "comment";
+
+/* Class = "IBUILabel"; text = "Comms"; ObjectID = "ULJ-mM-C30"; */
+"ULJ-mM-C30.text" = "Comms";
+
+/* Class = "IBUISegmentedControl"; Vlf-p3-YX4.segmentTitles[0] = "New"; ObjectID = "Vlf-p3-YX4"; */
+"Vlf-p3-YX4.segmentTitles[0]" = "Новые";
+
+/* Class = "IBUISegmentedControl"; Vlf-p3-YX4.segmentTitles[1] = "Favourite"; ObjectID = "Vlf-p3-YX4"; */
+"Vlf-p3-YX4.segmentTitles[1]" = "Избранные";
+
+/* Class = "IBUITextField"; text = "Email@email.com"; ObjectID = "Wfi-jg-hcn"; */
+"Wfi-jg-hcn.text" = "email@email.com";
+
+/* Class = "IBUILabel"; text = "comment"; ObjectID = "Yea-ZH-TR3"; */
+"Yea-ZH-TR3.text" = "comment";
+
+/* Class = "IBUIButton"; normalTitle = "show all"; ObjectID = "ZzD-U7-NPa"; */
+"ZzD-U7-NPa.normalTitle" = " Все фото";
+
+/* Class = "IBUILabel"; text = "Photo description"; ObjectID = "bFU-FV-qD4"; */
+"bFU-FV-qD4.text" = "Описание фото";
+
+/* Class = "IBUIBarButtonItem"; title = "Back"; ObjectID = "c1L-39-UNe"; */
+"c1L-39-UNe.title" = "Назад";
+
+/* Class = "IBUILabel"; text = "10"; ObjectID = "dpx-M8-C56"; */
+"dpx-M8-C56.text" = "10";
+
+/* Class = "IBUIButton"; normalTitle = "Like"; ObjectID = "dwx-st-tKm"; */
+"dwx-st-tKm.normalTitle" = "Лайкнуть";
+
+/* Class = "IBUIBarButtonItem"; title = "Settings"; ObjectID = "g81-Tr-N7o"; */
+"g81-Tr-N7o.title" = "Настройки";
+
+/* Class = "IBUIButton"; normalTitle = "share"; ObjectID = "hYZ-FI-Vg5"; */
+"hYZ-FI-Vg5.normalTitle" = "Поделиться";
+
+/* Class = "IBUILabel"; text = "Photos"; ObjectID = "hl3-6E-fke"; */
+"hl3-6E-fke.text" = "Фото";
+
+/* Class = "IBUILabel"; text = "Date"; ObjectID = "jHu-58-4H9"; */
+"jHu-58-4H9.text" = "Дата";
+
+/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "kfN-rc-Sjh"; */
+"kfN-rc-Sjh.title" = "Настройки";
+
+/* Class = "IBUIButton"; normalTitle = "comment"; ObjectID = "mW7-eO-ub3"; */
+"mW7-eO-ub3.normalTitle" = "comment";
+
+/* Class = "IBUITabBarItem"; title = "Photo"; ObjectID = "nRy-8y-w5Q"; */
+"nRy-8y-w5Q.title" = "Фото";
+
+/* Class = "IBUIBarButtonItem"; title = "Back"; ObjectID = "ocN-yt-qoP"; */
+"ocN-yt-qoP.title" = "Назад";
+
+/* Class = "IBUILabel"; text = "10"; ObjectID = "p7p-Wg-aIX"; */
+"p7p-Wg-aIX.text" = "10";
+
+/* Class = "IBUILabel"; text = "0 km"; ObjectID = "pzn-wI-ocp"; */
+"pzn-wI-ocp.text" = "0 км";
+
+/* Class = "IBUIBarButtonItem"; title = "Back"; ObjectID = "qtP-GD-12N"; */
+"qtP-GD-12N.title" = "Назад";
+
+/* Class = "IBUILabel"; text = "likes"; ObjectID = "rvV-XC-bgk"; */
+"rvV-XC-bgk.text" = "Лайки";
+
+/* Class = "IBUIViewController"; title = "Settings"; ObjectID = "sdy-UA-vG0"; */
+"sdy-UA-vG0.title" = "Настройки";
+
+/* Class = "IBUIButton"; normalTitle = "Logout"; ObjectID = "t8k-XB-Ooi"; */
+"t8k-XB-Ooi.normalTitle" = "Выйти из системы";
+
+/* Class = "IBUINavigationItem"; title = "Login"; ObjectID = "vR5-NP-ifL"; */
+"vR5-NP-ifL.title" = "Вход в систему";
+
+/* Class = "IBUIButton"; normalTitle = "Share"; ObjectID = "wRG-VZ-8wj"; */
+"wRG-VZ-8wj.normalTitle" = "Поделиться";
+
+/* Class = "IBUIBarButtonItem"; title = "Back"; ObjectID = "wyC-qU-rVW"; */
+"wyC-qU-rVW.title" = "Назад";
+
+/* Class = "IBUILabel"; text = "Name:"; ObjectID = "yC9-Bv-ppV"; */
+"yC9-Bv-ppV.text" = "Имя:";
+
+/* Class = "IBUIBarButtonItem"; title = "Done"; ObjectID = "yMy-Bd-GtH"; */
+"yMy-Bd-GtH.title" = "Готово";

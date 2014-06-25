@@ -20,7 +20,6 @@ const int numberOfUsersForTest=5;
 {
     [MagicalRecord setupCoreDataStack];
     
-    
    //[User MR_truncateAll];
    //[Post MR_truncateAll];
     

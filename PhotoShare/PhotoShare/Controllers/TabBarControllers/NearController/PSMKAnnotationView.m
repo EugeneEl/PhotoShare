@@ -24,7 +24,7 @@
 -(id)initWithFrame:(CGRect)frame {
     if (self=[super initWithFrame:frame]) {
         _tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-        _imageViewForAnnotation = [[UIImageView alloc] initWithFrame:CGRectMake(20.f, 0.f, 70.f, 70.f)];
+        _imageViewForAnnotation = [[UIImageView alloc] initWithFrame:CGRectMake(6.f, 0.f, 32.f, 32.f)];
         [self addSubview:_imageViewForAnnotation];
         [_imageViewForAnnotation addGestureRecognizer:_tapRecognizer];
         [_imageViewForAnnotation setUserInteractionEnabled:YES];
@@ -32,7 +32,8 @@
 
         _pinImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pin.png"]];
         [self addSubview:_pinImageView];
-        [_pinImageView setFrame:CGRectMake(-16.f, 34.f, 32.f, 32.f)];
+        [_pinImageView setFrame:CGRectMake(-8.f, 8.f, 16.f, 16.f)];
+        //[self setBackgroundColor:[UIColor yellowColor]];
     }
     
     return self;
@@ -53,9 +54,13 @@
         self.annotation = self.annotation;
         [_imageViewForAnnotation setHidden:NO];
         [_imageViewForAnnotation setImageWithURL:[(PSMapAnnonation *) self.annotation imageURL]];
+        [self setBounds:CGRectMake(0.f,0.f,32.f,32.f)];
+    
     } else {
         [_imageViewForAnnotation setHidden:YES];
+        [self setBounds:CGRectMake(0.f,0.f,16.f, 16.f)];
     }
+    
 }
 
 @end

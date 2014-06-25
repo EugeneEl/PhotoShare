@@ -1,0 +1,54 @@
+/* 
+  Localizable.strings
+  PhotoShare
+
+  Created by Евгений on 25.06.14.
+  Copyright (c) 2014 Eugene. All rights reserved.
+*/
+
+
+//NearViewController
+"DistanceMeasurementKey"="km";
+
+//DetailViewController
+
+ //actionSheetButtons
+ "actionSheetTitleNameKey"="Share";
+ "actionSheetButtonSaveNameKey"="Save";
+ "actionSheetButtonEmailNameKey"="Send by mail";
+ "actionSheetButtonTwitterNameKey"="Share on Twitter";
+ "actionSheetButtonFacebookNameKey"="Post to Facebook";
+
+ "actionSheetButtonCancelNameKey"="Cancel";
+ "alertViewSuccessKey"="Success";
+ "alertViewOkKey"="Ok";
+ "ErrorStringKey"="Error";
+
+
+
+
+
+
+ "alertViewOnTwitterOrFacebookNoAcountKey"="No account was found";
+
+ "alertViewOnTwitterErrorNoPhotoKey"="No available photo to share";
+ "alertViewOnTwitterConfigerAccountKey"="Configer your twitter account";
+
+
+ "alertViewOnFacebookErrorNoPhotoKey"="No available photo to share";
+ "alertViewOnFacebookConfigerAccountKey"="Configer your facebook account";
+
+ "alertViewOnMailErrorMessageKey"="Failed to send photo by mail";
+ "alertViewOnMailConfigerAccountKey"="Mail service is not configured";
+ "alertViewOnSendigMailErrorKey"="Failed to send photo by mail";
+ "subjectForMailTitleKey"="Catch photo from your friend with PhotoShare";
+
+ "alertViewOnSaveErrorKey"="Failed to save photo";
+ "alertViewOnSaveSuccessKey"="Photo was saved in PhotoShare album";
+
+
+//  PSPhotoController.m
+  "alertViewErrorNoCameraKey"="Device has no camera";
+
+
+

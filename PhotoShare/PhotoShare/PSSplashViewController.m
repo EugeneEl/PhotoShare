@@ -16,6 +16,7 @@
 #import "PSUserStore.h"
 #import "PSStreamViewController.h"
 #import "CustomSegueForStart.h"
+#import "AutoLocalize.h"
 
 @interface PSSplashViewController ()
 
@@ -28,6 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self icnh_autoLocalize];
     self.startImage.image=[UIImage imageNamed:@"camera_cute2_png.png"];
 }
 
@@ -37,7 +39,7 @@
     [PSUserStore userStoreManager];
     
     if (!([PSUserStore userStoreManager].activeUser)) {
-        [self performSegueWithIdentifier:@"login" sender:nil];
+        [self.navigationController performSegueWithIdentifier:@"login" sender:nil];
         NSLog(@"no active user");
         
     }
@@ -53,6 +55,7 @@
     if ([[segue identifier] isEqualToString:@"login"])
     {
         PSLoginViewController *vc = (PSLoginViewController*)segue.destinationViewController;
+        //vc.navigationController.delegate=vc;
     }
     if([segue isKindOfClass:[CustomSegueForStart class]]) {
         // Set the start point for the animation to center of the button for the animation

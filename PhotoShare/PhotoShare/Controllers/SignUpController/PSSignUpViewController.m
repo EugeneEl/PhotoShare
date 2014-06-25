@@ -12,21 +12,22 @@
 #import "MBProgressHUD.h"
 #import "PSUserModel.h"
 
-@interface PSSignUpViewController () <UITextFieldDelegate>
+@interface PSSignUpViewController () <UITextFieldDelegate, UIScrollViewDelegate>
 
+@property (strong,nonatomic) PSUserModel *userModel;
+@property (weak, nonatomic) UITextField *activeTextField;
+@property (nonatomic, assign) BOOL  keyboardIsShown;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *guidingConstraint;
 @property (weak, nonatomic) IBOutlet UITextField *nameForSignUpTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailForSignUpTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordForSignUpTextField;
-@property (weak, nonatomic) IBOutlet UITextField *facebookIDTextField;
-
-@property (strong,nonatomic) PSUserModel *userModel;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)nameFieldDidChanged:(id)sender;
 - (IBAction)emailFieldDidChanged:(id)sender;
 - (IBAction)passwordFieldDidChanged:(id)sender;
-- (IBAction)facebookIDFieldDidChanged:(id)sender;
 - (IBAction)dismissAllKeyboards:(id)sender;
-- (IBAction)doneSignUp:(id)sender;
 
 - (BOOL) validateUserModel:(PSUserModel*) userModel;
 
@@ -34,27 +35,37 @@
 
 @implementation PSSignUpViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-    numberToolbar.items = [NSArray arrayWithObjects:
-    [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
-        [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                           [[UIBarButtonItem alloc]initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)],
-                           nil];
-    [numberToolbar sizeToFit];
-    self.facebookIDTextField.inputAccessoryView = numberToolbar;
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
-    [self.nameForSignUpTextField becomeFirstResponder];
+   
+    //[numberToolbar sizeToFit];
+  
     
+   // [self.nameForSignUpTextField becomeFirstResponder];
+    self.scrollView.delegate=self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+    self.scrollView.scrollEnabled=YES;
+    _keyboardIsShown = NO;
+    [self.scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
+    [_scrollView setContentOffset:CGPointZero];
+    NSLog(@"scrollView.Size:%@",NSStringFromCGRect(self.scrollView.bounds));
 }
 
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -65,7 +76,7 @@
         _userModel.name=self.nameForSignUpTextField.text;
         _userModel.email=self.emailForSignUpTextField.text;
         _userModel.password=self.passwordForSignUpTextField.text;
-        _userModel.facebookId=self.facebookIDTextField.text;
+
     }
     return _userModel;
     
@@ -85,9 +96,6 @@
     _userModel.password=self.passwordForSignUpTextField.text;
 }
 
-- (IBAction)facebookIDFieldDidChanged:(id)sender {
-    _userModel.facebookId=_facebookIDTextField.text;
-}
 
 
 #pragma mark - dismissKeyboards
@@ -96,6 +104,8 @@
 }
 
 #pragma mark - signUp
+
+
 - (IBAction)doneSignUp:(id)sender
 {
     
@@ -137,16 +147,58 @@
      }];
 }
 
-#pragma mark - MethodsForTextFieldKeyboard
--(void)cancelNumberPad{
-    [self.facebookIDTextField resignFirstResponder];
+
+- (void)keyboardWasShown:(NSNotification*)aNotification {
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGFloat keyboardHeight = kbSize.height;
+    
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        
+        self.guidingConstraint.constant = keyboardHeight + 20.f;
+        [self.view layoutIfNeeded];
+        
+        
+        [_scrollView setContentSize:CGSizeMake(320.f, 186.f)];
+        [_scrollView setContentOffset:CGPointZero animated:YES];
+    
+        [self.view layoutIfNeeded];
+    }];
+
+    
+    }
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    [UIView animateWithDuration:0.3 animations:^{
+        _guidingConstraint.constant = 0.f;
+        [self.view layoutIfNeeded];
+    }];
 }
 
--(void)doneWithNumberPad{
-    NSString *numberFromTheKeyboard = self.facebookIDTextField.text;
-    [self.facebookIDTextField resignFirstResponder];
-    
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
+
+
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.activeTextField = textField;
+    NSLog(@"(void)textFieldDidBeginEditing:(UITextField *)textField");
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.activeTextField = nil;
+    NSLog(@"(void)textFieldDidEndEditing:(UITextField *)textField");
+
+}
+
+#pragma mark - UIScrollViewDelegate
 
 
 #pragma mark - UITextFieldDelegate
@@ -158,9 +210,6 @@
     }
     else if ([textField isEqual:self.emailForSignUpTextField]) {
         [self.passwordForSignUpTextField becomeFirstResponder];
-    }
-    else if ([textField isEqual:self.passwordForSignUpTextField]) {
-        [self.facebookIDTextField becomeFirstResponder];
     }
     else {
         [textField resignFirstResponder];

@@ -25,21 +25,16 @@ tableCell;
 
 @interface PSPhotoFromStreamTableViewCell : UITableViewCell
 
-
-
 @property(weak,nonatomic) id <PhotoFromStreamTableViewCell> delegate;
-
 @property (weak, nonatomic) IBOutlet UIImageView *imageForPost;
 @property (weak, nonatomic) IBOutlet UILabel *photoNameLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *photoDateLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *likesNumberLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *commentsNumberLabel;
 
 
 - (IBAction)likeAction:(id)sender;
 - (IBAction)commentAction:(id)sender;
 - (IBAction)shareAction:(id)sender;
+
 @end

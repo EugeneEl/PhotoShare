@@ -6,12 +6,6 @@
 //  Copyright (c) 2014 Eugene. All rights reserved.
 //
 
-
-//This class descibes a viewcontroller which will appear if user is not logged in.
-//It displays textViewFields for entering neccessary data.
-//If connection is failed an alert containing error description will appear
-
-
 #import "PSLoginViewController.h"
 #import "PSNetworkManager.h"
 #import "PSSignUpViewController.h"
@@ -19,31 +13,34 @@
 #import "MBProgressHUD.h"
 #import "PSUserModel.h"
 #import "User.h"
+#import "PSSplashViewController.h"
+#import "CustomSegueForStart.h"
+#import "PSCustomSegueLayerControllers.h"
+#import "AutoLocalize.h"
+#import "NSString+PSValidation.h"
 
 //typedef void (^sumBlock)(NSInteger a,NSInteger b);
 
 @class PSUserModel;
 
-@interface PSLoginViewController () <UITextFieldDelegate>
+@interface PSLoginViewController () <UITextFieldDelegate, UIScrollViewDelegate>
+
+@property (nonatomic, assign) BOOL  keyboardIsShown;
+@property(nonatomic,assign) BOOL isRegistered;
+@property (nonatomic,strong) PSUserModel* userModel;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UITextField *loginTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UITextField *facebookIdTextField;
-
-@property(nonatomic,assign) BOOL isRegistered;
-
-@property (nonatomic,strong) PSUserModel* userModel;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *guidingLoginConstraint;
 
 - (IBAction)loginDidChanged:(id)sender;
 - (IBAction)passwordDidChanged:(id)sender;
-- (IBAction)getInfo;
 - (IBAction)signUp:(id)sender;
-- (IBAction)facebookIdDidChanged:(id)sender;
 - (IBAction)login:(id)sender;
-
 - (IBAction)dismissKeyboards:(id)sender;
-
 
 @end
 
@@ -54,89 +51,30 @@
     [super viewDidLoad];
     self.loginTextField.delegate=self;
     self.passwordTextField.delegate=self;
-    self.facebookIdTextField.delegate=self;
+    self.scrollView.delegate=self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
     
     
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    self.scrollView.scrollEnabled=YES;
+    _keyboardIsShown = NO;
+    [self.scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
+    [_scrollView setContentOffset:CGPointZero];
     
-    //^ return type (arguments list) {expression}
-    
-    /*
-     void (^sumBlock1)(NSInteger, NSInteger)=^void(NSInteger a,NSInteger b)
-     {
-     NSInteger c=a+b;
-     NSLog(@"c:%i",c);
-     };
-     
-     sumBlock1(5,5);
-     
-     
-     NSPredicate *pr = [NSPredicate predicateWithFormat:@"commentatorName == %@", @"Eric"];
-     [User MR_findAllWithPredicate:pr];
-     
-     
-     [[PSNetworkManager sharedManager] checkIfLoginedWith:self.userModel success:NULL error:NULL];
+    [self icnh_autoLocalize];
+}
 
-     
-     //2nd
-     NSInteger (^sumBlock2)(NSInteger, NSInteger)=^NSInteger(NSInteger a,NSInteger b)
-     {
-     return a+b;
-     };
-     
-     NSInteger aa=sumBlock2(10,10);
-     NSLog(@"aa:%i",aa);
-     
-     
-     //3d
-     void (^sumBlock3)(NSInteger, NSInteger)=^void(NSInteger a,NSInteger b)
-     {
-     NSInteger c=a+b;
-     NSString *resultString =[NSString stringWithFormat:@"%i",c];
-     UIAlertView* alert=[[UIAlertView alloc]
-     initWithTitle:@"sumBlock3"
-     message:resultString
-     delegate:self
-     cancelButtonTitle:@"Ok"
-     otherButtonTitles:nil, nil];
-     [alert show];
-     };
-     
-     sumBlock3(15,15);
-     */
-    
-    /*
-     void (^sumBlock4)(NSError*)=^void(NSError* error) {
-     UIAlertView *alertOnError=[[UIAlertView alloc]
-     initWithTitle:@"Error on get request"
-     message:
-     
-     [
-     
-     NSString  stringWithFormat:@"%i",[error code]]
-     delegate:self
-     cancelButtonTitle:@"Ok"
-     otherButtonTitles:nil];
-     [alertOnError show];
-     
-     };
-     
-     */
-    
-    //    [[PSNetworkManager sharedManager] someMethodThatTakesABlock:sumBlock4];
-    
-    
-    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-    numberToolbar.items = [NSArray arrayWithObjects:
-                           [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
-                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                           [[UIBarButtonItem alloc]initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)],
-                           nil];
-    [numberToolbar sizeToFit];
-    self.facebookIdTextField.inputAccessoryView = numberToolbar;
-    
-    
-    
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -146,70 +84,78 @@
         _userModel=[PSUserModel new];
         _userModel.email=self.loginTextField.text;
         _userModel.password=self.passwordTextField.text;
-        _userModel.facebookId=self.facebookIdTextField.text;
     }
     return _userModel;
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setHidden:NO];
+}
+
+
+
+
+
+- (void)keyboardWasShown:(NSNotification*)aNotification {
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGFloat keyboardHeight = kbSize.height;
+    
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        
+        self.guidingLoginConstraint.constant = keyboardHeight + 20.f;
+        [self.view layoutIfNeeded];
+        
+        
+        [_scrollView setContentSize:CGSizeMake(320.f, 186.f)];
+        [_scrollView setContentOffset:CGPointZero animated:YES];
+        
+        [self.view layoutIfNeeded];
+    }];
+    
+    
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    [UIView animateWithDuration:0.3 animations:^{
+        _guidingLoginConstraint.constant = 0.f;
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
+
+
+
 
 #pragma mark - LoginAndSignUpMethods
 
-- (IBAction)getInfo {
-    
-    
-    
-    
-    [[PSNetworkManager sharedManager] signUpModel:self.userModel success:^{
-        NSLog(@"success");
-        self.resultLabel.text=@"Successed";
-    } error:^(NSError *error) {
-        NSString *errorDescription=[error description];
-        NSLog(@"error:%@",errorDescription);
-        
-        UIAlertView *alertOnError=[[UIAlertView alloc]
-                                   initWithTitle:@"Error!"
-                                   message:errorDescription
-                                   delegate:self
-                                   cancelButtonTitle:@"Ok"
-                                   otherButtonTitles:nil];
-        [alertOnError show];
-    }];
-    /*
-     [[PSNetworkManager sharedManager] signInModel:(_userModel)
-     
-     success:^{
-     NSLog(@"success");
-     self.getResultLabel.text=@"Successed";
-     }
-     
-     error:^{
-     } (NSError)];
-     
-     /*
-     
-     [[PSNetworkManager sharedManager] signInSuccess:^(PSUserModel* userData) {
-     NSLog(@"success");
-     self.getResultLabel.text=@"Successed";
-     
-     } failure:^{
-     self.getResultLabel.text=@"Success";
-     
-     
-     NSLog(@"login:%@, password:%@",self.userModel.login,self.userModel.password);
-     
-     }];
-     
-     
-     */
-}
 
 - (IBAction)signUp:(id)sender {
     
 }
 
-
 - (IBAction)login:(id)sender {
+    
+    if (![self.userModel isLoginValid]) {
+        UIAlertView *alert=[[UIAlertView alloc]
+                            initWithTitle:@"Error"
+                            message:@"Fields must not be empty"
+                            delegate:nil
+                            cancelButtonTitle:@"Ok"
+                            otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
@@ -219,10 +165,7 @@
      {
          NSLog(@"success");
          weakSelf.resultLabel.text=@"Logged in";
-         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-         
-         
-         
+      
          
          User *existingUserForLogin=[[User MR_findByAttribute:@"email" withValue:self.userModel.email] firstObject];
          
@@ -237,6 +180,9 @@
          
          [PSUserStore userStoreManager].activeUser=existingUserForLogin;
          NSLog(@"active user logged in:%@",[PSUserStore userStoreManager].activeUser.email);
+         
+         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+         [self performSegueWithIdentifier:@"goToUserBarFromLog" sender:nil];
          
          
      }
@@ -261,11 +207,6 @@
 
 #pragma mark - fieldsDidChanged
 
-- (IBAction)facebookIdDidChanged:(id)sender {
-    _userModel.facebookId=self.passwordTextField.text;
-}
-
-
 - (IBAction)loginDidChanged:(id)sender {
     self.userModel.email=self.loginTextField.text;
     NSLog(@"login:%@",self.userModel.email);
@@ -277,31 +218,28 @@
 }
 
 
+- (IBAction)dismissKeyboards:(id)sender
+{
+    [self.view endEditing:YES];
+}
 
 #pragma mark - PrepareForSegueTranstion
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"signUp"])
     {
-        PSSignUpViewController *signUpViewController=(PSSignUpViewController*)segue.destinationViewController;
+     //   if ([segue isKindOfClass:[PSCustomSegueLayerControllers class]])
+     //   {
+            
+            PSSignUpViewController *signUpViewController=(PSSignUpViewController*)segue.destinationViewController;
+     //   }
+        
     }
-}
-
-
-#pragma mark - MethodsForTextFieldKeyboard
--(void)cancelNumberPad{
-    [self.facebookIdTextField resignFirstResponder];
-    //self.facebookIdTextField.text = @"";
-}
-
--(void)doneWithNumberPad{
-    NSString *numberFromTheKeyboard = self.facebookIdTextField.text;
-    [self.facebookIdTextField resignFirstResponder];
-    
-}
-
-- (IBAction)dismissKeyboards:(id)sender
-{
-    [self.view endEditing:YES];
+    if ([[segue identifier] isEqualToString:@"goToUserBarFromLog"]) {
+        PSSplashViewController *splvc=(PSSplashViewController*)segue.destinationViewController;
+    }if([segue isKindOfClass:[CustomSegueForStart class]]) {
+        // Set the start point for the animation to center of the button for the animation
+        ((CustomSegueForStart *)segue).originatingPoint = self.view.center;
+    }
 }
 
 
@@ -312,17 +250,12 @@
     if ([textField isEqual:self.loginTextField]) {
         [self.passwordTextField becomeFirstResponder];
     }
-    else if ([textField isEqual:self.passwordTextField]) {
-        [self.facebookIdTextField becomeFirstResponder];
-    }
+   
     else {
         [textField resignFirstResponder];
     }
     return YES;
   
 }
-
-
-
 
 @end

@@ -10,5 +10,5 @@
 @class MKAnnotationView;
 
 @interface UIView (PSMKAnnotationView)
--(MKAnnotationView*)superAnnotationView;
+- (MKAnnotationView*)superAnnotationView;
 @end

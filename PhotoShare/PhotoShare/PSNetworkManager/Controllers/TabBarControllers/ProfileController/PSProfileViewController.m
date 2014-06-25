@@ -11,11 +11,16 @@
 #import "Comment.h"
 #import "PSCollectionCellForPhoto.h"
 #import "UIImageView+AFNetworking.h"
+#import "PSCollectionHeaderView.h"
 
 @interface
 PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, weak)   IBOutlet UICollectionView *photoCollectionView;
+
+
+
+
 @property (nonatomic, strong) NSMutableArray *arrayOfURLPhotos;
 @property (nonatomic, strong) NSMutableArray *arrayOfPosts;
 
@@ -57,6 +62,14 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    PSCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([PSCollectionHeaderView class]) forIndexPath:indexPath];
+    
+    //configure
+    
+    return headerView;
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -64,12 +77,12 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
     
     PSCollectionCellForPhoto *cell=[self.photoCollectionView dequeueReusableCellWithReuseIdentifier:viewCellIdentifier forIndexPath:indexPath];
 
-    
+    [cell setBounds:CGRectMake(0.f, 0.f, 200.f, 200.f)];
     [cell.layer setBorderWidth:2.0f];
     [cell.layer setBackgroundColor:[UIColor whiteColor].CGColor];
-    [cell.layer setCornerRadius:50.0f];
-
+    [cell.layer setCornerRadius:100.0f];
     [cell.imageForPhoto setImageWithURL:[NSURL URLWithString:[self.arrayOfURLPhotos objectAtIndex:indexPath.row]]];
+    
 
     return cell;
 }

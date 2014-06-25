@@ -9,16 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@interface PSMapAnnonation : NSObject <MKAnnotation>
+@interface PSMapAnnonation :NSObject <MKAnnotation>
 
-
-// Center latitude and longitude of the annotion view.
-// The implementation of this property must be KVO compliant.
 @property (nonatomic, assign,readwrite) CLLocationCoordinate2D coordinate;
 @property (nonatomic,strong) NSURL *imageURL;
+@property (nonatomic, strong) NSNumber * postIdForAnnotation;
 
-
-// Title and subtitle for use by selection UI.
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
 

@@ -19,4 +19,13 @@
   
 }
 
+
+- (BOOL)isLoginValid
+{
+    
+    return  ([self.email ps_isEmailValid]) && ([self.password ps_isPasswordValid]) ;
+    
+}
+
+
 @end

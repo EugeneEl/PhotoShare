@@ -12,6 +12,21 @@
 #import "Comment.h"
 #import "PSPhotoFromStreamTableViewCell.h"
 
+static NSString *keyForPostID                                 =@"post_id";
+static NSString *keyForPhotoDate                              =@"photo_date";
+static NSString *keyForLikes                                  =@"likes";
+static NSString *keyForAuthorMail                             =@"authoremail";
+static NSString *keyForPhotoName                              =@"photoName";
+static NSString *keyForPhotoURL                               =@"photoURL";
+static NSString *keyForLocationDictionary                     =@"location";
+static NSString *keyPathForLatitude                           =@"location.latitude";
+static NSString *keyPathForLongtitude                         =@"location.longtitude";
+static NSString *keyForCommentsArray                          =@"comments";
+static NSString *keyForCommentIDInComments                    =@"comment_id";
+static NSString *keyForCommentatorNameInComments              =@"commentatorName";
+static NSString *keyForCommentTextInComments                  =@"text";
+static NSString *keyForCommentDateInComments                  =@"comment_date";
+
 
 @interface PSStreamViewController() <UITableViewDelegate ,UITableViewDataSource, NSFetchedResultsControllerDelegate>
 //@property (weak, nonatomic) IBOutlet UIImageView *imageFromPost;
@@ -33,9 +48,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UITableView *streamTableView;
-
 @property (weak, nonatomic) IBOutlet UIImageView *image;
-
 @property (strong,nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 /*
@@ -143,7 +156,7 @@
     [parsedData sortUsingComparator:
      ^NSComparisonResult(NSDictionary *a, NSDictionary *b)
      {
-         return [a[@"photo_date"] compare:b[@"photo_date" ]];
+         return [a[keyForPhotoDate] compare:b[keyForPhotoDate]];
      }];
     
     
@@ -155,44 +168,38 @@
     {
         
         //Reading data from JSON
-        self.post_idParsed=[dict objectForKey:@"post_id"];
+        self.post_idParsed=[dict objectForKey:keyForPostID];
         NSLog(@"post_id:%@",self.post_idParsed);
-        self.likesParsed=[dict objectForKey:@"likes"];
+        self.likesParsed=[dict objectForKey:keyForLikes];
         NSLog(@"likes:%@",self.likesParsed);
-        self.authorMailParsed=[dict objectForKey:@"authoremail"];
+        self.authorMailParsed=[dict objectForKey:keyForAuthorMail];
         NSLog(@"authorMail:%@",self.authorMailParsed);
-        self.photoNameParsed=[dict objectForKey:@"photoName"];
+        self.photoNameParsed=[dict objectForKey:keyForPhotoName];
         NSLog(@"photoName:%@",self.photoNameParsed);
-        self.photoURLParsed=[dict objectForKey:@"photoURL"];
+        self.photoURLParsed=[dict objectForKey:keyForPhotoURL];
         NSLog(@"photoURL:%@",self.photoURLParsed);
         
         
         //coordinates in degrees @"key1.@specialKey.
-        self.photoLatitudeParsed=[[dict valueForKeyPath:@"location.latitude"]doubleValue ];
-        self.photoLongtitudeParsed=[[dict valueForKeyPath:@"location.longitude"] doubleValue];
+        self.photoLatitudeParsed=[[dict valueForKeyPath:keyPathForLatitude]doubleValue ];
+        self.photoLongtitudeParsed=[[dict valueForKeyPath:keyPathForLongtitude] doubleValue];
         
         NSLog(@"latitudeParsed:%f",self.photoLatitudeParsed);
         NSLog(@"longtitudeParsed:%f",self.photoLongtitudeParsed);
         
         
         
-        NSMutableArray *commentsArray=[dict objectForKey:@"comments"];
-        
-        
+        NSMutableArray *commentsArray=[dict objectForKey:keyForCommentsArray];
         NSLog(@"commentsArray:%@",commentsArray);
 
+
+        NSLog(@"date:%@",[dict objectForKey:keyForPhotoDate]);
         
-        
-        
-        NSLog(@"date:%@",[dict objectForKey:@"photo_date"]);
-        
-        self.photo_dateParsed=[dateFormatter dateFromString:[dict objectForKey:@"photo_date"]];
+        self.photo_dateParsed=[dateFormatter dateFromString:[dict objectForKey:keyForPhotoDate]];
         
         NSLog(@"photo_date:%@",self.photo_dateParsed);
         
-        
-        
-        
+
         
         //check if the parsed post exists in CoreData
         Post *existingPost=[[Post MR_findByAttribute:@"postID" withValue:self.post_idParsed]firstObject];
@@ -216,7 +223,7 @@
             for (NSDictionary *dictOfComments in commentsArray)
             {
                 
-                self.commentIDParsed=[dictOfComments objectForKey:@"comment_id"];
+                self.commentIDParsed=[dictOfComments objectForKey:keyForCommentIDInComments];
                 
                 if ([[existingPost.comments filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"commentID == %@",self.commentIDParsed]] anyObject])
                 {
@@ -227,9 +234,9 @@
                 else
                 {
                     //parsed date,text,name of comment
-                    self.commentatorNameParsed=[dictOfComments objectForKey:@"commentatorName"];
-                    self.commentTextParsed=[dictOfComments objectForKey:@"text"];
-                    self.commentDateParsed=[dateFormatter dateFromString:[dictOfComments objectForKey:@"comment_date"]];
+                    self.commentatorNameParsed=[dictOfComments objectForKey:keyForCommentatorNameInComments];
+                    self.commentTextParsed=[dictOfComments objectForKey:keyForCommentTextInComments];
+                    self.commentDateParsed=[dateFormatter dateFromString:[dictOfComments objectForKey:keyForCommentDateInComments]];
                                             
                      NSLog(@"photo_date:%@",self.commentDateParsed);
                     
@@ -255,7 +262,6 @@
             
         }
         
-        
     
         else if (existingPost) {
             NSLog(@"Post with id:%@ already exists in database",existingPost.postID);
@@ -270,7 +276,7 @@
     
     NSLog(@"firstPost:%@",searchedPost);
     
-    NSURL *urlForImage = [NSURL URLWithString:[searchedPost objectForKey:@"photoURL"]];
+    NSURL *urlForImage = [NSURL URLWithString:[searchedPost objectForKey:keyForPhotoURL]];
    
     
     //NSURLRequest *requestURLForImage=[NSURLRequest requestWithURL:urlForImage];
@@ -316,14 +322,8 @@
         return _fetchedResultsController;
     }
     
-    
-    
-    
     NSFetchRequest* fetchRequest=[[NSFetchRequest alloc]initWithEntityName:@"Post"];
-    
-    
     NSSortDescriptor *descriptor=[NSSortDescriptor sortDescriptorWithKey:@"postID" ascending:YES ];
-    
     [fetchRequest setSortDescriptors:@[descriptor]];
 
     // Edit the section name key path and cache name if appropriate.
@@ -339,9 +339,8 @@
     self.fetchedResultsController = aFetchedResultsController;
 
 	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+	if (![self.fetchedResultsController performFetch:&error])
+    {
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}

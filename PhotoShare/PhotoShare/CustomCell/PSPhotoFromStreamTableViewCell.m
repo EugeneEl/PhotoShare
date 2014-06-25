@@ -8,7 +8,6 @@
 
 #import "PSPhotoFromStreamTableViewCell.h"
 
-
 @interface PSPhotoFromStreamTableViewCell ()
 
 @end
