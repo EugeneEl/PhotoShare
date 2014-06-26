@@ -70,5 +70,147 @@
 
     "location": {"latitude":52.186723,"longitude":-0.3976},
     "photo_date":"2014-06-11 06:35:40 GMT" 
-}
+},
+
+{ 
+  	"post_id"    : 5,
+	"likes"      : 0,
+	
+	"authoremail": "trymail22@yandex.ua",
+	
+	"comments"   : [
+	{"commentatorName":"Erick", "text":"red..","comment_date":"2015-01-01 17:35:40 GMT","comment_id":1}, 
+	{"commentatorName":"Jammie", "text":"tasty","comment_date":"2015-01-01 07:35:40 GMT","comment_id":2} 
+	],
+     
+    "photoURL":"http://img0.liveinternet.ru/images/attach/c/4/78/776/78776850_2005448_lime_2.jpg",
+
+    "photoName":"lime",
+
+    "location": {"latitude":51.596723,"longitude":-0.33976},
+    "photo_date":"2014-06-15 06:35:40 GMT"
+
+ },
+ 
+ { 
+  	"post_id"    : 6,
+	"likes"      : 0,
+	
+	"authoremail": "trymail22@yandex.ua",
+	
+	"comments"   : [],
+     
+    "photoURL":"http://i.telegraph.co.uk/multimedia/archive/02544/USS-Freedom_2544812b.jpg",
+
+    "photoName":"warship",
+
+    "location": {"latitude":51.096723,"longitude":-0.32976},
+    "photo_date":"2014-06-16 06:35:40 GMT"
+
+ },
+
+ { 
+  	"post_id"    : 7,
+	"likes"      : 0,
+	
+	"authoremail": "trymail22@yandex.ua",
+	
+	"comments"   : [],
+     
+    "photoURL":"http://upload.wikimedia.org/wikipedia/commons/a/af/WhiteHouseSouthFacade.JPG",
+
+    "photoName":"whitehouse",
+
+    "location": {"latitude":51.196723,"longitude":-0.32976},
+    "photo_date":"2014-06-17 06:35:40 GMT"
+
+ },
+
+
+ { 
+  	"post_id"    : 8,
+	"likes"      : 0,
+	
+	"authoremail": "trymail22@yandex.ua",
+	
+	"comments"   : [],
+     
+    "photoURL":"http://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Black_Converse_sneakers.JPG/1600px-Black_Converse_sneakers.JPG",
+
+    "photoName":"sneakers1",
+
+    "location": {"latitude":51.396723,"longitude":-0.32976},
+    "photo_date":"2014-06-17 06:39:40 GMT"
+
+ },
+
+  { 
+  	"post_id"    : 9,
+	"likes"      : 0,
+	
+	"authoremail": "trymail22@yandex.ua",
+	
+	"comments"   : [],
+     
+    "photoURL":"http://www.hdwallpapers.in/thumbs/enchanted_forest-t1.jpg",
+
+    "photoName":"forest",
+
+    "location": {"latitude":51.196723,"longitude":-0.32979},
+    "photo_date":"2014-06-17 07:39:40 GMT"
+
+ },
+ 
+ { 
+  	"post_id"    : 10,
+	"likes"      : 14,
+	
+	"authoremail": "trymail22@yandex.ua",
+	
+	"comments"   : [],
+     
+    "photoURL":"http://mobhappy.com/blog1/wp-content/uploads/2007/06/iphone.jpg",
+
+    "photoName":"iphone",
+
+    "location": {"latitude":53.339673,"longitude":-0.42979},
+    "photo_date":"2014-06-17 09:39:40 GMT"
+
+ },
+ 
+ { 
+  	"post_id"    : 11,
+	"likes"      : 1,
+	
+	"authoremail": "trymail22@yandex.ua",
+	
+	"comments"   : [],
+     
+    "photoURL":"http://dps.alaska.gov/PIO/releases/resources/logos/VPSO%20Badge.jpg",
+
+    "photoName":"badge",
+
+    "location": {"latitude":48.470311,"longitude":35.047674},
+    "photo_date":"2014-06-17 09:39:40 GMT"
+
+ },
+
+ { 
+  	"post_id"    : 12,
+	"likes"      : 12,
+	
+	"authoremail": "trymail22@yandex.ua",
+	
+	"comments"   : [],
+     
+    "photoURL":"http://www.thegef.org/gef/sites/thegef.org/files/gallery/Brick%20making%20DYK.jpg",
+
+    "photoName":"brick",
+
+    "location": {"latitude":48.480311,"longitude":35.147674},
+    "photo_date":"2014-06-17 09:39:40 GMT"
+
+ }
+
+
 ]
