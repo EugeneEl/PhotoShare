@@ -8,6 +8,28 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController (UIViewController_PSSharingDataComposer)
+
+
+@interface UIViewController (PSSharingDataComposer)
+
+
+- (void)shareToTwitterWithData:(NSData*)photoData
+                     photoName:(NSString*)photoTitle
+                       success:(void(^)(void))success
+                       failure:(void(^)(NSError *error))failure;
+- (void)shareToFacebookWithData:(NSData*)photoData
+                      photoName:(NSString*)photoTitle
+                        success:(void(^)(void))success
+                        failure:(void(^)(NSError *error))failure;
+
+- (void)SaveToAlbumWithData:(NSData*)photoData
+                    success:(void(^)(void))success
+                    failure:(void(^)(NSError *error))failure;
+
+
+- (void)shareByEmail:(NSData *)photoData
+           photoName:(NSString*)photoTitle
+             success:(void(^)(void))success
+             failure:(void(^)(NSError *error))failure;
 
 @end

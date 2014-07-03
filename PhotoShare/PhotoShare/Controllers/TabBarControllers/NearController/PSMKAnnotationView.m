@@ -8,7 +8,7 @@
 
 #import <MapKit/MapKit.h>
 #import "PSMKAnnotationView.h"
-#import "PSMapAnnonation.h"
+#import "PSMapAnnotation.h"
 #import "UIImageView+AFNetworking.h"
 
 @interface PSMKAnnotationView ()
@@ -40,11 +40,11 @@
 }
 
 -(void)tap:(UITapGestureRecognizer*)recognizer {
-    [_delegate annotationView:self didSelectAnnotation:(PSMapAnnonation *)self.annotation];
+    [_delegate annotationView:self didSelectAnnotation:(PSMapAnnotation *)self.annotation];
 }
 
 - (BOOL)validAnnotation {
-    return  [self.annotation isKindOfClass:[PSMapAnnonation class]];
+    return  [self.annotation isKindOfClass:[PSMapAnnotation class]];
 }
 
 - (void)setDetailViewHidden:(BOOL)detailViewHidden {
@@ -53,7 +53,7 @@
     if (!detailViewHidden) {
         self.annotation = self.annotation;
         [_imageViewForAnnotation setHidden:NO];
-        [_imageViewForAnnotation setImageWithURL:[(PSMapAnnonation *) self.annotation imageURL]];
+        [_imageViewForAnnotation setImageWithURL:[(PSMapAnnotation *) self.annotation imageURL]];
         [self setBounds:CGRectMake(0.f,0.f,32.f,32.f)];
     
     } else {

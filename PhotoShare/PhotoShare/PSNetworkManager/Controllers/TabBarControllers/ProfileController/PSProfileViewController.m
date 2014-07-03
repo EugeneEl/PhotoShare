@@ -11,18 +11,20 @@
 #import "Comment.h"
 #import "PSCollectionCellForPhoto.h"
 #import "UIImageView+AFNetworking.h"
-#import "PSCollectionHeaderView.h"
+#import "UIImageView+ps_setRoundImage.h"
+
+static NSString *viewCellIdentifier=@"collectionCellForPhoto";
+
 
 @interface
 PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, weak)   IBOutlet UICollectionView *photoCollectionView;
 
-
-
-
 @property (nonatomic, strong) NSMutableArray *arrayOfURLPhotos;
-@property (nonatomic, strong) NSMutableArray *arrayOfPosts;
+
+
+@property (nonatomic, copy) NSMutableArray *arrayOfPosts;
 
 @end
 
@@ -62,30 +64,43 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    PSCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([PSCollectionHeaderView class]) forIndexPath:indexPath];
-    
-    //configure
-    
-    return headerView;
-}
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *viewCellIdentifier=@"collectionCellForPhoto";
     
     PSCollectionCellForPhoto *cell=[self.photoCollectionView dequeueReusableCellWithReuseIdentifier:viewCellIdentifier forIndexPath:indexPath];
 
-    [cell setBounds:CGRectMake(0.f, 0.f, 200.f, 200.f)];
-    [cell.layer setBorderWidth:2.0f];
-    [cell.layer setBackgroundColor:[UIColor whiteColor].CGColor];
-    [cell.layer setCornerRadius:100.0f];
+    
+    /*
+    __weak typeof(cell) weakCell = cell;
+    
+    
+    NSURLRequest *urlRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:[self.arrayOfURLPhotos objectAtIndex:indexPath.row]]
+];
+    
+    
+    [cell.imageForPhoto setImageWithURLRequest:urlRequest                     placeholderImage:nil
+    success:^
+    (NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+    {
+        [weakCell.imageForPhoto ps_setRoundImage:image animated:YES];
+    }
+    failure:(nil)
+     ];
+     
+    */
+    
+    
     [cell.imageForPhoto setImageWithURL:[NSURL URLWithString:[self.arrayOfURLPhotos objectAtIndex:indexPath.row]]];
     
-
+    
     return cell;
+     
 }
+
+
 
 
 @end

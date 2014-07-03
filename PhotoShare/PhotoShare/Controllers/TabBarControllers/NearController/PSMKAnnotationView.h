@@ -8,11 +8,11 @@
 
 
 @class PSMKAnnotationView;
-@class PSMapAnnonation;
+@class PSMapAnnotation;
 
 @protocol PSMKAnnotationViewDelegate
 
-- (void)annotationView:(PSMKAnnotationView *)view didSelectAnnotation:(PSMapAnnonation *)annotation;
+- (void)annotationView:(PSMKAnnotationView *)view didSelectAnnotation:(PSMapAnnotation *)annotation;
 
 @end
 

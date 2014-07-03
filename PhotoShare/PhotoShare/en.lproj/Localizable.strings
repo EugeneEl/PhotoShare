@@ -10,6 +10,28 @@
 //NearViewController
 "DistanceMeasurementKey"="km";
 
+
+//PSStreamController
+"yearsAgoKey"="years ago";
+"monthsAgoKey"="monthes ago";
+"weeksAgoKey"="weeks ago";
+"daysAgoKey"="days ago";
+"hoursAgoKey"="hours ago";
+"minutesAgoKey"="minutes ago";
+"secondsAgoKey"="seconds ago";
+
+"yearAgoKey"="year ago";
+"monthAgoKey"="month ago";
+"weekAgoKey"="week ago";
+"dayAgoKey"="day ago";
+"hourAgoKey"="hour ago";
+"minuteAgoKey"="minute ago";
+"secondAgoKey"="second ago";
+
+
+
+
+
 //DetailViewController
 
  //actionSheetButtons
@@ -44,8 +66,14 @@
  "subjectForMailTitleKey"="Catch photo from your friend with PhotoShare";
 
  "alertViewOnSaveErrorKey"="Failed to save photo";
+
+
  "alertViewOnSaveSuccessKey"="Photo was saved in PhotoShare album";
 
+
+ "alertViewOnFacebookSuccesstKey"="Photo was successfully posted to Facebook";
+ "alertViewOnTwitterSuccesstKey"="Photo was successfully twitted";
+ "alertViewOnMailSuccesstKey"="Photo was successfully sent via mail";
 
 //  PSPhotoController.m
   "alertViewErrorNoCameraKey"="Device has no camera";

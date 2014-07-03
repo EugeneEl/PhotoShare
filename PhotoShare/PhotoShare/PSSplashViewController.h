@@ -9,9 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PSSplashViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIImageView *startImage;
-
-
-@property (weak, nonatomic) IBOutlet UILabel *statusLoginLabel;
 
 @end

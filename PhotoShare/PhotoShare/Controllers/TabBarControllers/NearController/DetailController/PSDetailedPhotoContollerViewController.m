@@ -12,7 +12,9 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Social/Social.h>
 #import "UIImageView+AFNetworking.h"
+#import "UIViewController+UIViewController_PSSharingDataComposer.h"
 #import "Post.h"
+#import "PSMailComposerDelegate.h"
 
 @interface PSDetailedPhotoContollerViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
@@ -29,11 +31,13 @@
 
 
 
+@property (nonatomic, strong) NSData *photoData;
 @property (nonatomic,strong) NSArray*  arrayOfImages;
 @property (strong, atomic)   ALAssetsLibrary* library;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) SLComposeViewController *slsCompositeViewController;
 @property (nonatomic, strong) NSData *imageDataToShare;
+@property (nonatomic, strong) PSMailComposerDelegate *mailComposerDelegate;
 
 
 - (IBAction)actionCommentPhoto:(id)sender;
@@ -50,6 +54,7 @@
 - (instancetype)initWithPost:(Post *)post {
     if (self = [super init]) {
         _post = post;
+        _mailComposerDelegate = [PSMailComposerDelegate new];
     }
     
     return self;
@@ -70,9 +75,8 @@
     
     
     [self.usernameLabel setText:_post.authorMail];
-    
-    //"2015-01-01 06:35:40:622 GMT"
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+ 
+     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
     
     [self.timeOfPhotoLabel setText:[dateFormatter stringFromDate:_post.photoDate]];
@@ -89,12 +93,11 @@
     
     NSData *data=[NSData new];
     data=[NSData dataWithContentsOfURL:urlForImage];
+    self.photoData=[NSData dataWithContentsOfURL:urlForImage];
     self.image=[UIImage imageWithData:data];
     [self.photoImageView setImage:self.image];
     self.imageDataToShare=UIImageJPEGRepresentation(self.image, 1.0);
-    //  self.imageToShare=
     [self.photoImageView setContentMode:UIViewContentModeScaleAspectFit];
-    //[self.photoImageView setImageWithURL:urlForImage];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -131,7 +134,7 @@
 
 
 #pragma mark - MethodsForSharing
-
+/*
 - (void)sharePhotoToTwitter:(NSData *)photoData
 {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
@@ -255,6 +258,7 @@
     NSLog(@"image:%@",imageTemp);
     
 }
+ */
 
 #pragma mark - UIActionSheetDelegate 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -267,58 +271,379 @@
     //Save     4
 
     
-    switch (buttonIndex) {
-        case 1: //Email photo
+//    MFMailComposeViewController *controller = [MFMailComposeViewController new];
+//    [controller setDelegate:_mailComposerDelegate];
+//    [self presentViewController:controller animated:YES completion:nil];
+    
+    
+    
+       switch (buttonIndex) {
+       {case 1: //Email photo
+    
+        [self shareByEmail:_imageDataToShare photoName:_post.photoName
+        success:^
+        {
             
-            [self shareByEmail:self.imageDataToShare];
-            break;
-            
-        case 2:
-            [self sharePhotoToTwitter:self.imageDataToShare];
-            break;
-            
-        case 3:
-            [self sharePhotoToFaceBook];
-            break;
-            
-        case 4:
-            [self savePhotoFromPost:_post];
-            break;
-            
-        default:
-            break;
-    }
-}
-
-#pragma mark Mail Compose Delegate Methods
-- (void)mailComposeController:(MFMailComposeViewController *)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError *)error {
-    NSLog(@"in didFinishWithResult:");
-    switch (result) {
-        case MFMailComposeResultCancelled:
-            NSLog(@"cancelled");
-            break;
-        case MFMailComposeResultSaved:
-            NSLog(@"saved");
-            break;
-        case MFMailComposeResultSent:
-            NSLog(@"sent");
-            break;
-        case MFMailComposeResultFailed: {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                        cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
-                                                  otherButtonTitles:nil];
+            //NSLog(@"Photo was posted to facebook successfully");
+            UIAlertView *alert=[[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"alertViewSuccessKey", "")
+                                message:NSLocalizedString(@"alertViewOnMailSuccesstKey","")
+                                delegate:nil
+                                cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+                                otherButtonTitles:nil, nil];
             [alert show];
-         
+        }
+             
+       
+        failure:^(NSError *error)
+        {
+            if (error.code==100)
+            {
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Error" message:NSLocalizedString(@"alertViewOnTwitterErrorNoPhotoKey", "") delegate:self cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")  otherButtonTitles:nil, nil];
+                [alert show];
+
+            }
+            
+            else if (error.code==103)
+            {
+                UIAlertView *alert=[[UIAlertView alloc]
+                                 initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+                                 message:NSLocalizedString(@"alertViewOnMailConfigerAccountKey","")
+                                 delegate:nil
+                                 cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")
+                                 otherButtonTitles:nil, nil];
+                [alert show];
+            }
+                
+        }];
+            
+   
+            break;}
+            
+        {
+        case 2:
+            [self shareToTwitterWithData:_imageDataToShare
+            photoName:_post.photoName
+            success:^
+            {
+             NSLog(@"Photo was tweeted successfully");
+                UIAlertView *alert=[[UIAlertView alloc]
+                                    initWithTitle:NSLocalizedString(@"alertViewSuccessKey", "")
+                                    message:NSLocalizedString(@   "alertViewOnTwitterSuccesstKey","")
+                                    delegate:nil
+                                    cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+                                    otherButtonTitles:nil, nil];
+                [alert show];
+   
+            }
+            
+            failure:^(NSError *error)
+            {
+                
+                if (error.code==100)
+                {
+                    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Error" message:NSLocalizedString(@"alertViewOnTwitterErrorNoPhotoKey", "") delegate:self cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")  otherButtonTitles:nil, nil];
+                    [alert show];
+                    
+                }
+                
+                else if (error.code==101)
+                {
+                    UIAlertView *alert=[[UIAlertView alloc]
+                                        initWithTitle:NSLocalizedString(@"alertViewOnTwitterConfigerAccountKey", "")
+                                        message:NSLocalizedString(@"alertViewOnMailConfigerAccountKey","")
+                                        delegate:nil
+                                        cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")
+                                        otherButtonTitles:nil, nil];
+                    [alert show];
+                }
+            }
+            ];
+            
+            
+            break;}
+            
+        {case 3:
+            
+           [self shareToFacebookWithData:_imageDataToShare photoName:_post.photoName
+           success:^
+            {
+                NSLog(@"Photo was successfully posted to facebook");
+                UIAlertView *alert=[[UIAlertView alloc]
+                                    initWithTitle:NSLocalizedString(@"alertViewSuccessKey", "")
+                                    message:NSLocalizedString(@ "alertViewOnFacebookSuccesstKey","")
+                                    delegate:nil
+                                    cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+                                    otherButtonTitles:nil, nil];
+                [alert show];
+            }
+            failure:^(NSError *error) {
+                
+                if (error.code==100)
+                {
+                    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Error" message:NSLocalizedString(@"alertViewOnTwitterErrorNoPhotoKey", "") delegate:self cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")  otherButtonTitles:nil, nil];
+                    [alert show];
+                    
+                }
+                
+                else if (error.code==102)
+                {
+                    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+                                                                  message:NSLocalizedString(@"alertViewOnFacebookConfigerAccountKey", "")
+                                                                 delegate:self cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "") otherButtonTitles:nil, nil];
+                    [alert show];
+
+                }
+
+            }];
+            
+            
+       
+            break;
+        }
+            
+        {case 4:
+            [self SaveToAlbumWithData:_imageDataToShare
+         success:^{
+             UIAlertView *alert=[[UIAlertView alloc]
+                                 initWithTitle:NSLocalizedString(@"alertViewSuccessKey", "")
+                                 message:NSLocalizedString(@ "alertViewOnSaveSuccessKey", "")
+                                 delegate:nil
+                                 cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+                                 otherButtonTitles:nil, nil];
+             [alert show];
+         }
+         failure:^(NSError *error) {
+             
+             UIAlertView *alert=[[UIAlertView alloc]
+                                 initWithTitle:NSLocalizedString(@"alertViewSuccessKey", "")
+                                 message:NSLocalizedString(@ "alertViewOnSaveSuccessKey", "")
+                                 delegate:nil
+                                 cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+                                 otherButtonTitles:nil, nil];
+             [alert show];
+
+         }];
+      
             break;
         }
         default:
             break;
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+//#pragma mark Mail Compose Delegate Methods
+//- (void)mailComposeController:(MFMailComposeViewController *)controller
+//          didFinishWithResult:(MFMailComposeResult)result
+//                        error:(NSError *)error {
+//    NSLog(@"in didFinishWithResult:");
+//    switch (result) {
+//        case MFMailComposeResultCancelled:
+//            NSLog(@"cancelled");
+//            break;
+//        case MFMailComposeResultSaved:
+//            NSLog(@"saved");
+//            break;
+//        case MFMailComposeResultSent:
+//            NSLog(@"sent");
+//            break;
+//        case MFMailComposeResultFailed: {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+//                                                            message:[error localizedDescription]
+//                                                           delegate:nil
+//                                        cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+//                                                  otherButtonTitles:nil];
+//            [alert show];
+//         
+//            break;
+//        }
+//        default:
+//            break;
+//    }
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
+
+
+
+/*
+ 
+ 
+ #import "UIViewController+UIViewController_PSSharingDataComposer.h"
+ #import <Social/Social.h>
+ #import "ALAssetsLibrary+CustomPhotoAlbum.h"
+ #import <MessageUI/MessageUI.h>
+ #import "Post.h"
+ 
+ @interface UIVideoEditorController ()
+ 
+ @end
+ 
+ @implementation UIViewController (PSSharingDataComposer)
+ static NSString *PSSharingErrorDomain = @"PSSharingErrorDomain";
+ static NSInteger PSTwitterSharingErrorCode  = 101;
+ static NSInteger PSFacebookSharingErrorCode = 102;
+ static NSInteger PSMailBookSharingErrorCode=103;
+ 
+ 
+ static NSInteger PSSharingErrorNoPhotoData = 100;
+ 
+ - (void)shareToTwitterWithData:(NSData*)photoData
+ photoName:(NSString*)photoTitle
+ success:(void(^)(void))success
+ failure:(void(^)(NSError *error))failure
+ {
+ if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+ failure([[NSError alloc] initWithDomain:PSSharingErrorDomain code:PSTwitterSharingErrorCode userInfo:nil] );
+ return;
+ }
+ 
+ if (!photoData) {
+ failure([[NSError alloc] initWithDomain:PSSharingErrorDomain code:PSSharingErrorNoPhotoData userInfo:nil] );
+ return;
+ }
+ 
+ SLComposeViewController* slsCompositeViewController=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+ [slsCompositeViewController setInitialText:photoTitle];
+ [slsCompositeViewController addImage:[UIImage imageWithData:photoData]];
+ [self presentViewController:slsCompositeViewController animated:YES completion:nil];
+ 
+ success();
+ 
+ }
+ 
+ 
+ - (void)shareToFacebookWithData:(NSData*)photoData
+ photoName:(NSString*)photoTitle
+ success:(void(^)(void))success
+ failure:(void(^)(NSError *error))failure
+ {
+ if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+ {
+ failure([[NSError alloc] initWithDomain:PSSharingErrorDomain code:PSFacebookSharingErrorCode userInfo:nil] );
+ return;
+ }
+ 
+ if (!photoData) {
+ failure([[NSError alloc] initWithDomain:PSSharingErrorDomain code:PSSharingErrorNoPhotoData userInfo:nil] );
+ return;
+ }
+ 
+ SLComposeViewController* slsCompositeViewController=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+ [slsCompositeViewController setInitialText:photoTitle];
+ [slsCompositeViewController addImage:[UIImage imageWithData:photoData]];
+ [self presentViewController:slsCompositeViewController animated:YES completion:nil];
+ 
+ 
+ success();
+ 
+ }
+ 
+ 
+ - (void)SaveToAlbumWithData:(NSData*)photoData
+ success:(void(^)(void))success
+ failure:(void(^)(NSError *error))failure
+ {
+ if (!photoData) {
+ failure([[NSError alloc] initWithDomain:PSSharingErrorDomain code:PSSharingErrorNoPhotoData userInfo:nil] );
+ return;
+ }
+ 
+ UIImage *imageTemp=[UIImage imageWithData:photoData];
+ ALAssetsLibrary  *library=[ALAssetsLibrary new];
+ 
+ [library saveImage:imageTemp toAlbum:@"PhotoShare" withCompletionBlock:^(NSError *error)
+ {
+ if (error!=nil)
+ {
+ failure(error);
+ return;
+ }
+ else
+ success();
+ 
+ }];
+ 
+ }
+ 
+ 
+ 
+ 
+ - (void)shareByEmail:(NSData *)photoData
+ photoName:(NSString*)photoTitle
+ success:(void(^)(void))success
+ failure:(void(^)(NSError *error))failure
+ {
+ 
+ MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
+ [composer setMailComposeDelegate:self];
+ 
+ 
+ if (![MFMailComposeViewController canSendMail])
+ {
+ failure([[NSError alloc] initWithDomain:PSSharingErrorDomain code:PSMailBookSharingErrorCode userInfo:nil] );
+ return;
+ }
+ 
+ else
+ {
+ [composer setSubject:NSLocalizedString(@"subjectForMailTitleKey", "")  ];
+ [composer setMessageBody:photoTitle isHTML:NO];
+ [composer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+ 
+ 
+ [composer addAttachmentData:photoData  mimeType:@"image/jpeg" fileName:@"Photograph.jpg"];
+ 
+ [self presentViewController:composer animated:YES completion:NULL];
+ 
+ success();
+ 
+ }
+ 
+ }
+ 
+ 
+ #pragma mark Mail Compose Delegate Methods
+ - (void)mailComposeController:(MFMailComposeViewController *)controller
+ didFinishWithResult:(MFMailComposeResult)result
+ error:(NSError *)error {
+ NSLog(@"in didFinishWithResult:");
+ switch (result) {
+ case MFMailComposeResultCancelled:
+ NSLog(@"cancelled");
+ break;
+ case MFMailComposeResultSaved:
+ NSLog(@"saved");
+ break;
+ case MFMailComposeResultSent:
+ NSLog(@"sent");
+ break;
+ case MFMailComposeResultFailed: {
+ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+ message:[error localizedDescription]
+ delegate:nil
+ cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+ otherButtonTitles:nil];
+ [alert show];
+ 
+ break;
+ }
+ default:
+ break;
+ }
+ [self dismissViewControllerAnimated:YES completion:nil];
+ }
+ 
+ 
+ 
+ 
+
+ */
+
+
+
+
+
+
 
 @end

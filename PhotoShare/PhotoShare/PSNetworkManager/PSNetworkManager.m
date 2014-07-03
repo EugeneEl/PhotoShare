@@ -65,8 +65,8 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
                                   error:(errorBlock)error
 {
     NSDictionary *dictionaryForRequest=@{ @"email":model.email,
-                                          @"password":model.password,
-                                          @"fb_id":model.facebookId};
+                                          @"password":model.password
+                                        };
     
     return [_requestManager POST:@"users"
      
@@ -145,9 +145,9 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
     
     NSDictionary *dictionaryForRequest=@{ @"email":model.email,
-                                          @"password":model.password,
-                                          @"fb_id":model.facebookId};
-   
+                                          @"password":model.password
+                                          };
+    
     return [_requestManager GET:@"users"
             
                      parameters:dictionaryForRequest
@@ -167,6 +167,8 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
             }];
     
 }
+
+//Get posts
 
 
 

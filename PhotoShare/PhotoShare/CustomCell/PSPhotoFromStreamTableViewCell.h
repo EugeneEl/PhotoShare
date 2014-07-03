@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
+
 @class PSPhotoFromStreamTableViewCell;
 
 @protocol PhotoFromStreamTableViewCell;
 
 @protocol  PhotoFromStreamTableViewCell<NSObject>
 
-@required
+@optional
 
 - (void)photoStreamCellLikeButtonPressed:(PSPhotoFromStreamTableViewCell  *)tableCell;
 - (void)photoStreamCellCommentButtonPressed:(PSPhotoFromStreamTableViewCell *)
@@ -31,7 +33,9 @@ tableCell;
 @property (weak, nonatomic) IBOutlet UILabel *photoDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likesNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentsNumberLabel;
+@property (strong, nonatomic) Post *postForCell;
 
+@property (weak, nonatomic) IBOutlet UILabel *timeintervalLabel;
 
 - (IBAction)likeAction:(id)sender;
 - (IBAction)commentAction:(id)sender;

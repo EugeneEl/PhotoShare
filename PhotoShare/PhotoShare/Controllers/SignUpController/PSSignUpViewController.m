@@ -29,43 +29,46 @@
 - (IBAction)passwordFieldDidChanged:(id)sender;
 - (IBAction)dismissAllKeyboards:(id)sender;
 
-- (BOOL) validateUserModel:(PSUserModel*) userModel;
-
 @end
 
 @implementation PSSignUpViewController
 
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWasShown:)
+                                                     name:UIKeyboardDidShowNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillBeHidden:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+        
+    }
+    return self;
+}
+
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    
-   
-    //[numberToolbar sizeToFit];
-  
-    
-   // [self.nameForSignUpTextField becomeFirstResponder];
     self.scrollView.delegate=self;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    
     self.scrollView.scrollEnabled=YES;
     _keyboardIsShown = NO;
     [self.scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
     [_scrollView setContentOffset:CGPointZero];
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
     NSLog(@"scrollView.Size:%@",NSStringFromCGRect(self.scrollView.bounds));
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -120,27 +123,31 @@
         return;
     }
     
+     __weak typeof(self) weakSelf = self;
+    
     [[PSNetworkManager sharedManager]signUpModel:self.userModel
      
-     
-    success:^{
-    NSLog(@"success");
-    __weak typeof(self) weakSelf = self;
-    [[PSUserStore userStoreManager] addActiveUserToCoreDataWithModel:weakSelf.userModel];
-                                                 
-   [MBProgressHUD hideHUDForView:self.view animated:YES];
+    success:^
+    {
+        
+        NSLog(@"success");
+       [ [PSUserStore userStoreManager] addActiveUserToCoreDataWithModel:weakSelf.userModel];
+                                             
+       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        
     }
      
     error:^(NSError *error)
      {
          NSString *errorDescription=[error description];
          NSLog(@"error:%@",errorDescription);
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         //review: self в блоке
+         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
          
          UIAlertView *alertOnError=[[UIAlertView alloc]
                                     initWithTitle:@"Error!"
                                     message:errorDescription
-                                    delegate:self
+                                    delegate:weakSelf
                                     cancelButtonTitle:@"Ok"
                                     otherButtonTitles:nil];
          [alertOnError show];
@@ -172,18 +179,16 @@
 
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
-    [UIView animateWithDuration:0.3 animations:^{
-        _guidingConstraint.constant = 0.f;
-        [self.view layoutIfNeeded];
-    }];
+    [UIView animateWithDuration:0.3 animations:
+     ^{
+         _guidingConstraint.constant = 0.f;
+         [self.view layoutIfNeeded];
+     }];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
-
-
-
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -197,8 +202,6 @@
     NSLog(@"(void)textFieldDidEndEditing:(UITextField *)textField");
 
 }
-
-#pragma mark - UIScrollViewDelegate
 
 
 #pragma mark - UITextFieldDelegate

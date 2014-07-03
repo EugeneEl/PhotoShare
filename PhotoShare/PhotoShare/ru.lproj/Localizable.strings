@@ -6,16 +6,36 @@
   Copyright (c) 2014 Eugene. All rights reserved.
 */
 
-
 //NearViewController
 "DistanceMeasurementKey"="км";
+
+//PSStreamController
+"yearsAgoKey"="лет назад";
+"monthsAgoKey"="месяцев назад";
+"weeksAgoKey"="недель назад";
+"daysAgoKey"="дней назад";
+"hoursAgoKey"="часов назад";
+"minutesAgoKey"="минут назад";
+"secondsAgoKey"="секунд назад";
+
+
+
+"yearAgoKey"="один год назад";
+"monthAgoKey"="один месяц назад";
+"weekAgoKey"="одну неделю назад";
+"dayAgoKey"="один день назад";
+"hourAgoKey"="один час назад";
+"minuteAgoKey"="одну минуту     назад";
+
+"secondAgoKey"="одну секунду назад";
+
+
+
 
 
 
 
 //DetailViewController
-
-
 "actionSheetTitleNameKey"="Поделиться";
 "actionSheetButtonSaveNameKey"="Сохранить";
 "actionSheetButtonEmailNameKey"="Отправить по почте";
@@ -49,7 +69,9 @@
 
 "alertViewOnSendigMailErrorKey"="Во время отправки фотографии по почте произошла ошибка";
 
-
+"alertViewOnFacebookSuccesstKey"="Фото успешно отправлено в Facebook";
+"alertViewOnTwitterSuccesstKey"="Фото успешно отправлено в   Twitter";
+"alertViewOnMailSuccesstKey"="Фото успешно отправлено по почте";
 
 //  PSPhotoController.m
 "alertViewErrorNoCameraKey"="В Вашем устройстве нет камеры";

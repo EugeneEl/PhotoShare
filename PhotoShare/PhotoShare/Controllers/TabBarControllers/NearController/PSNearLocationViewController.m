@@ -8,22 +8,22 @@
 
 #import "PSNearLocationViewController.h"
 #import <MapKit/MapKit.h>
-#import "PSMapAnnonation.h"
+#import "PSMapAnnotation.h"
 #import "Post.h"
 #import "PSMKAnnotationView.h"
 #import "PSDetailedPhotoContollerViewController.h"
-#import "MKMapView+MKMapView_PSZoomLevel.h"
-
-
 
 @interface PSNearLocationViewController () <MKMapViewDelegate, CLLocationManagerDelegate, PSMKAnnotationViewDelegate,UIScrollViewDelegate>
 
 
 @property (nonatomic, assign) double latitudeFromPost;
 @property (nonatomic, assign) double longtitudeFromPost;
-@property (nonatomic, strong) NSMutableArray *arrayOfPosts;
+@property (nonatomic, copy) NSMutableArray *arrayOfPosts;
+
+//copy is illegal here because we need to add objects to arrayOfAnnotations,
+//while copy returns an immutable Array
 @property (nonatomic, strong) NSMutableArray *arrayOfAnnotations;
-@property (nonatomic, strong) NSMutableArray *arrayOfImagesURL;
+
 @property (nonatomic, strong) UIImageView *imageViewForAnnotaion;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
@@ -41,60 +41,92 @@
 @implementation PSNearLocationViewController
 
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        self.arrayOfAnnotations=[NSMutableArray new];
+        
+        
+        NSArray* tempArray=[Post MR_findAll];
+        self.arrayOfPosts=[tempArray mutableCopy];
+        
+        
+        for (Post *post in self.arrayOfPosts)
+        {
+            
+            PSMapAnnotation *annonation=[[PSMapAnnotation alloc]init];
+            annonation.title=post.photoName;
+            
+            
+            self.latitudeFromPost=[post.photoLocationLatitude doubleValue];
+            
+            self.longtitudeFromPost=[post.photoLocationLongtitude doubleValue];
+            
+            CLLocationCoordinate2D coordinate;
+            
+            coordinate.latitude=(CLLocationDegrees)self.latitudeFromPost;
+            coordinate.longitude=(CLLocationDegrees)self.longtitudeFromPost;
+            
+            /*
+             coordinate.latitude=(CLLocationDegrees)[post.photoLocationLatitude    doubleValue];
+             coordinate.longitude=(CLLocationDegrees)[post.photoLocationLongtitude doubleValue];
+             */
+            [annonation setCoordinate:coordinate];
+            
+            NSLog
+            (@"latitude:%f", annonation.coordinate.latitude);
+            
+            NSLog(@"longtitude:%f", annonation.coordinate.longitude);
+            [annonation setPostIdForAnnotation:post.postID];
+            
+            [self.arrayOfAnnotations addObject:annonation];
+            
+            NSString* stringForURL=post.photoURL;
+            annonation.imageURL=[NSURL URLWithString:stringForURL];
+            
+        }
+        
+        NSLog(@"%@",NSStringFromCGRect(self.mapView.bounds));
+
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     
     
-    self.arrayOfImagesURL=[NSMutableArray new];
-    self.arrayOfAnnotations=[NSMutableArray new];
     
-    self.locationManager=[[CLLocationManager alloc]init];
-    self.locationManager.delegate = self;
-    self.locationManager.distanceFilter = kCLDistanceFilterNone;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-    [self.locationManager startUpdatingLocation];
-    
-    NSArray* tempArray=[Post MR_findAll];
-    self.arrayOfPosts=[tempArray mutableCopy];
-    
-    
-     for (Post *post in self.arrayOfPosts) {
-        
-        PSMapAnnonation *annonation=[[PSMapAnnonation alloc]init];
-        annonation.title=post.photoName;
-
-        
-        self.latitudeFromPost=[post.photoLocationLatitude doubleValue];
-        
-        CLLocationCoordinate2D coordinate;
-        coordinate.latitude=(CLLocationDegrees)[post.photoLocationLatitude    doubleValue];
-        coordinate.longitude=(CLLocationDegrees)[post.photoLocationLongtitude doubleValue];
-        
-        [annonation setCoordinate:coordinate];
-        [annonation setPostIdForAnnotation:post.postID];
-        
-        [self.arrayOfAnnotations addObject:annonation];
-        
-        NSString* stringForURL=post.photoURL;
-        annonation.imageURL=[NSURL URLWithString:stringForURL];
- 
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [self.locationManager startUpdatingLocation];
     }
-    NSLog(@"%@",NSStringFromCGRect(self.mapView.bounds));
+    else
+    {
+        NSLog(@"Location is not enabled");
+    }
+
+   // [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+   // [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    
     [self.mapView addAnnotations:self.arrayOfAnnotations];
 
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setHidden:YES];
 
-}
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.navigationController.navigationBar setHidden:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setHidden:YES];
 }
 
 - (IBAction)showAll:(id)sender {
@@ -124,8 +156,6 @@
     
 }
 
-
-
 #pragma mark- MKMapViewDelegate
 
 -(MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
@@ -136,7 +166,7 @@
     
     PSMKAnnotationView *pin = (PSMKAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     
-    PSMapAnnonation *customAnnotation=(PSMapAnnonation*)annotation;
+    PSMapAnnotation *customAnnotation=(PSMapAnnotation*)annotation;
 
     if (!pin) {
         pin = [[PSMKAnnotationView alloc]initWithAnnotation:customAnnotation reuseIdentifier:identifier];
@@ -177,10 +207,10 @@ if (![view isKindOfClass:[PSMKAnnotationView class]]) {
     UISlider *slider=(UISlider*)sender;
     
     NSInteger changedValue=lround(slider.value);
-    self.radiusLabel.text=[[NSString stringWithFormat:@"%li ", changedValue] stringByAppendingString:NSLocalizedString(@"DistanceMeasurementKey", @"")];
+    self.radiusLabel.text=[[NSString stringWithFormat:@"%li ", (long)changedValue] stringByAppendingString:NSLocalizedString(@"DistanceMeasurementKey", @"")];
     NSLog(@"%f",changedValue/112.20f);
     [self.locationManager startUpdatingLocation];
-    NSLog(@"currentPosition:latitude%d   longtitude:%d",(double)self.currentLocation.coordinate.latitude, (double)self.currentLocation.coordinate.longitude);
+    NSLog(@"currentPosition:latitude%f   longtitude:%f",(double)self.currentLocation.coordinate.latitude, (double)self.currentLocation.coordinate.longitude);
     
     if (self.circle) {
         [self.mapView removeOverlay:self.circle];
@@ -218,10 +248,11 @@ if (![view isKindOfClass:[PSMKAnnotationView class]]) {
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     self.currentLocation = [locations objectAtIndex:0];
-    NSLog(@"currentPosition:latitude%d   longtitude:%d",(double)self.currentLocation.coordinate.latitude, (double)self.currentLocation.coordinate.longitude);
+    NSLog(@"currentPosition:latitude%f   longtitude:%f",(double)self.currentLocation.coordinate.latitude, (double)self.currentLocation.coordinate.longitude);
 
     [self.locationManager stopUpdatingLocation];
    
+    /*
 
     CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
     [geocoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error)
@@ -245,23 +276,25 @@ if (![view isKindOfClass:[PSMKAnnotationView class]]) {
              //return;
              //CountryArea = NULL;
          }
-         /*---- For more results
+         --- For more results
           placemark.region);
           placemark.country);
           placemark.locality);
           placemark.name);
           placemark.ocean);
-          placemark.postalCode);
+     placemark.postalCode); 25 июн. в 22:41
+     Eugene Markov <euegnemarkov@yandex.ru>
           placemark.subLocality);
           placemark.location);
-          ------*/
+          ------
      }];
+     */
  
 }
 
 #pragma mark - PSMKAnnotationViewDelegate
 
-- (void)annotationView:(PSMKAnnotationView *)view didSelectAnnotation:(PSMapAnnonation *)annotation
+- (void)annotationView:(PSMKAnnotationView *)view didSelectAnnotation:(PSMapAnnotation *)annotation
 {
 
    NSLog(@"%@", annotation);
@@ -272,7 +305,7 @@ if (![view isKindOfClass:[PSMKAnnotationView class]]) {
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"goToDetail"]) {
-        PSMapAnnonation *annotation=sender;
+        PSMapAnnotation *annotation=sender;
         PSDetailedPhotoContollerViewController *destinationController=segue.destinationViewController;
         Post *postToPass=[[Post MR_findByAttribute:@"postID" withValue:annotation.postIdForAnnotation]firstObject];
         

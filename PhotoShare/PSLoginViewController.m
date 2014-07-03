@@ -15,9 +15,8 @@
 #import "User.h"
 #import "PSSplashViewController.h"
 #import "CustomSegueForStart.h"
-#import "PSCustomSegueLayerControllers.h"
-#import "AutoLocalize.h"
 #import "NSString+PSValidation.h"
+#import "User+PSMapWithModel.h"
 
 //typedef void (^sumBlock)(NSInteger a,NSInteger b);
 
@@ -36,8 +35,8 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *guidingLoginConstraint;
 
-- (IBAction)loginDidChanged:(id)sender;
-- (IBAction)passwordDidChanged:(id)sender;
+- (IBAction)loginDidChange:(id)sender;
+- (IBAction)passwordDidChange:(id)sender;
 - (IBAction)signUp:(id)sender;
 - (IBAction)login:(id)sender;
 - (IBAction)dismissKeyboards:(id)sender;
@@ -46,38 +45,48 @@
 
 @implementation PSLoginViewController
 
-
--(void)viewDidLoad {
-    [super viewDidLoad];
-    self.loginTextField.delegate=self;
-    self.passwordTextField.delegate=self;
-    self.scrollView.delegate=self;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    
-    
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    self.scrollView.scrollEnabled=YES;
-    _keyboardIsShown = NO;
-    [self.scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
-    [_scrollView setContentOffset:CGPointZero];
-    
-    [self icnh_autoLocalize];
-}
-
+#pragma mark - dealloc
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
+#pragma mark - init
+-(instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWasShown:)
+                                                     name:UIKeyboardDidShowNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillBeHidden:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+ 
+    }
+    return self;
+}
+
+#pragma mark - viewDidLoad
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    self.loginTextField.delegate=self;
+    self.passwordTextField.delegate=self;
+    self.scrollView.delegate=self;
+    self.scrollView.scrollEnabled=YES;
+    _keyboardIsShown = NO;
+    [self.scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
+    [_scrollView setContentOffset:CGPointZero];
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    [ self.navigationController.navigationBar setHidden:NO];
+
+}
+
+
+#pragma mark - userModel
 -(PSUserModel*)userModel {
     if (!_userModel)
     {
@@ -89,38 +98,70 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setHidden:NO];
+/*
+{
+ 
+ - (void)keyboardWasShown:(NSNotification*)aNotification {
+ NSDictionary* info = [aNotification userInfo];
+ CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+ CGFloat keyboardHeight = kbSize.height;
+ 
+ 
+ [UIView animateWithDuration:0.3 animations:^{
+ 
+ 
+ self.guidingLoginConstraint.constant = keyboardHeight + 20.f;
+ [self.view layoutIfNeeded];
+ 
+ 
+ [_scrollView setContentSize:CGSizeMake(320.f, 186.f)];
+ [_scrollView setContentOffset:CGPointZero animated:YES];
+ 
+ [self.view layoutIfNeeded];
+ }];
+ 
+ 
+ }
+ 
+ // Called when the UIKeyboardWillHideNotification is sent
+ - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+ [UIView animateWithDuration:0.3 animations:^{
+ _guidingLoginConstraint.constant = 0.f;
+ [self.view layoutIfNeeded];
+ }];
+ }
+ 
+ - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+ [self.view endEditing:YES];
+ }
+ 
+
 }
-
-
-
-
-
+*/
+#pragma mark - keyboardNotification
 - (void)keyboardWasShown:(NSNotification*)aNotification {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGFloat keyboardHeight = kbSize.height;
     
     
-    [UIView animateWithDuration:0.3 animations:^{
-        
-        
-        self.guidingLoginConstraint.constant = keyboardHeight + 20.f;
+    [UIView animateWithDuration:0.3 animations:^
+     
+    {
+        self.guidingLoginConstraint.constant = keyboardHeight + 25.f;
         [self.view layoutIfNeeded];
         
-        
-        [_scrollView setContentSize:CGSizeMake(320.f, 186.f)];
+        [_scrollView setContentSize:CGSizeMake(320.f, 186.f)]; //186
         [_scrollView setContentOffset:CGPointZero animated:YES];
         
         [self.view layoutIfNeeded];
-    }];
+    }
+     
+    ];
     
     
 }
 
-// Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
     [UIView animateWithDuration:0.3 animations:^{
         _guidingLoginConstraint.constant = 0.f;
@@ -131,9 +172,6 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
-
-
-
 
 
 #pragma mark - LoginAndSignUpMethods
@@ -161,21 +199,17 @@
     
     __weak typeof(self) weakSelf = self;
     [[PSNetworkManager sharedManager]loginWithModel:self.userModel
-                                            success:^
+    success:^
      {
          NSLog(@"success");
          weakSelf.resultLabel.text=@"Logged in";
       
          
-         User *existingUserForLogin=[[User MR_findByAttribute:@"email" withValue:self.userModel.email] firstObject];
+         User *existingUserForLogin=[[User MR_findByAttribute:@"email" withValue:weakSelf.userModel.email] firstObject];
          
          if (!existingUserForLogin) {
-             existingUserForLogin=[User MR_createEntity];
-             existingUserForLogin.email=self.userModel.email;
-             existingUserForLogin.password=self.userModel.password;
-             existingUserForLogin.name=self.userModel.name;
-             existingUserForLogin.facebookID=self.userModel.facebookId;
-            [existingUserForLogin.managedObjectContext MR_saveToPersistentStoreAndWait];
+            existingUserForLogin=[User MR_createEntity];
+            existingUserForLogin=[existingUserForLogin mapWithModel:weakSelf.userModel];
          }
          
          [PSUserStore userStoreManager].activeUser=existingUserForLogin;
@@ -183,11 +217,9 @@
          
          [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
          [self performSegueWithIdentifier:@"goToUserBarFromLog" sender:nil];
-         
-         
      }
      
-                                              error:^(NSError *error)
+     error:^(NSError *error)
      {
          NSString *errorDescription=[error description];
          NSLog(@"error:%@",errorDescription);
@@ -207,12 +239,12 @@
 
 #pragma mark - fieldsDidChanged
 
-- (IBAction)loginDidChanged:(id)sender {
+- (IBAction)loginDidChange:(id)sender {
     self.userModel.email=self.loginTextField.text;
     NSLog(@"login:%@",self.userModel.email);
 }
 
-- (IBAction)passwordDidChanged:(id)sender {
+- (IBAction)passwordDidChange:(id)sender {
     self.userModel.password=self.passwordTextField.text;
     NSLog(@"password:%@",self.userModel.password);
 }
@@ -224,24 +256,13 @@
 }
 
 #pragma mark - PrepareForSegueTranstion
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([[segue identifier] isEqualToString:@"signUp"])
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue isKindOfClass:[CustomSegueForStart class]])
     {
-     //   if ([segue isKindOfClass:[PSCustomSegueLayerControllers class]])
-     //   {
-            
-            PSSignUpViewController *signUpViewController=(PSSignUpViewController*)segue.destinationViewController;
-     //   }
-        
-    }
-    if ([[segue identifier] isEqualToString:@"goToUserBarFromLog"]) {
-        PSSplashViewController *splvc=(PSSplashViewController*)segue.destinationViewController;
-    }if([segue isKindOfClass:[CustomSegueForStart class]]) {
-        // Set the start point for the animation to center of the button for the animation
         ((CustomSegueForStart *)segue).originatingPoint = self.view.center;
     }
 }
-
 
 
 #pragma mark - UITextFieldDelegate

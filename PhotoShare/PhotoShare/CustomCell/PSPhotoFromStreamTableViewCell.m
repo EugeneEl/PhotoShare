@@ -33,4 +33,8 @@
      
 }
 
+-(void)prepareForReuse {
+    self.imageForPost.image=nil;
+}
+
 @end
