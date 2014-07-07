@@ -17,6 +17,7 @@
 
 @property (nonatomic,copy) NSArray*  arrayOfImages;
 @property (strong, atomic) ALAssetsLibrary* library;
+@property (weak, nonatomic) IBOutlet UIButton *postButton;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageForPhoto;
 
@@ -31,6 +32,7 @@
 {
     [super viewDidLoad];
     self.library = [[ALAssetsLibrary alloc] init];
+    [_postButton setHidden:YES];
 }
 
 
@@ -130,6 +132,7 @@
                                     delegate:nil
                                     cancelButtonTitle:NSLocalizedString(@"alertViewOkKey","") otherButtonTitles:nil, nil];
                 [alert show];
+                [_postButton setHidden:NO];
             }
         }];
         
@@ -336,6 +339,8 @@
         self.imageForPhoto.image = chosenImage;
         self.imageForPhoto.contentMode = UIViewContentModeScaleAspectFill;
         NSLog(@"%@",chosenImage);
+        
+        [_postButton setHidden:NO];
         [picker dismissViewControllerAnimated:YES completion:NULL];
     };
 }

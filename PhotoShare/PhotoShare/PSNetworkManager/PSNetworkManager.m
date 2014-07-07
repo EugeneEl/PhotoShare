@@ -427,6 +427,39 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
 }
 
+//http://nsscreencast.com/episodes/31-posting-multi-part-forms-with-afnetworking
+- (AFHTTPRequestOperation *) sendImage:(UIImage *)image withLatitude:(double)lat andLongtitude:(double)lng withText:(NSString *)text  fromUserID:(NSInteger)userID
+                               success:(successBlockWithId)successWithId
+                                 error:(errorBlock)errorWithCode
+
+{
+    
+    
+    return  [_requestManager POST:@"posts/" parameters:nil
+        constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+        {
+         if (image)
+         {
+                [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 1.0)
+                                        name:@"primary_photo"
+                                    fileName:@"image.jpg"
+                                    mimeType:@"image/jpeg"
+                 ];
+         }
+        }
+        success:^(AFHTTPRequestOperation *operation, id responseObject)
+        {
+            successWithId(responseObject);
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error)
+        {
+            errorWithCode(error);
+        }];
+    
+    
+    
+    
+}
 
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E014A37196AE21D00F25AA7 /* PSUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E014A36196AE21D00F25AA7 /* PSUploadViewController.m */; };
 		3E11883D194AE2FF00D562A1 /* PSProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E11883C194AE2FF00D562A1 /* PSProfileViewController.m */; };
 		3E118841194AE9B300D562A1 /* PSSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E118840194AE9B300D562A1 /* PSSettingsViewController.m */; };
 		3E118844194AFF2D00D562A1 /* CustomUnwindSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E118843194AFF2D00D562A1 /* CustomUnwindSegue.m */; };
@@ -138,6 +139,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E014A35196AE21D00F25AA7 /* PSUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSUploadViewController.h; sourceTree = "<group>"; };
+		3E014A36196AE21D00F25AA7 /* PSUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSUploadViewController.m; sourceTree = "<group>"; };
 		3E11883B194AE2FF00D562A1 /* PSProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSProfileViewController.h; sourceTree = "<group>"; };
 		3E11883C194AE2FF00D562A1 /* PSProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSProfileViewController.m; sourceTree = "<group>"; };
 		3E11883F194AE9B300D562A1 /* PSSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSSettingsViewController.h; sourceTree = "<group>"; };
@@ -391,6 +394,8 @@
 		3E014A34196AE16900F25AA7 /* UploadController */ = {
 			isa = PBXGroup;
 			children = (
+				3E014A35196AE21D00F25AA7 /* PSUploadViewController.h */,
+				3E014A36196AE21D00F25AA7 /* PSUploadViewController.m */,
 			);
 			path = UploadController;
 			sourceTree = "<group>";
@@ -1064,6 +1069,7 @@
 			files = (
 				3EAF848919471A86003D1987 /* AFURLRequestSerialization.m in Sources */,
 				3E51B5521962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m in Sources */,
+				3E014A37196AE21D00F25AA7 /* PSUploadViewController.m in Sources */,
 				3EF1A82E1966E66C001D0D69 /* PSLikesParser.m in Sources */,
 				3EAF84DF19471AAF003D1987 /* MagicalRecord+iCloud.m in Sources */,
 				3E11883D194AE2FF00D562A1 /* PSProfileViewController.m in Sources */,
