@@ -12,7 +12,7 @@
 #import "User.h"
 #import "Post.h"
 
-const int numberOfUsersForTest=5;
+const int numberOfUsersForTest = 5;
 
 @implementation PHAppDelegate
 
