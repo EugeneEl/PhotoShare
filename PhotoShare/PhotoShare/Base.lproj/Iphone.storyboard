@@ -817,8 +817,18 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bTL-yF-zrj">
-                                <rect key="frame" x="20" y="32" width="280" height="391"/>
+                                <rect key="frame" x="20" y="32" width="280" height="284"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGF-La-3dp">
+                                <rect key="frame" x="120" y="329" width="81" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="x9e-nH-s9O" kind="push" id="IAX-3R-u9C"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -847,6 +857,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6rA-ch-oSf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="831" y="1772"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="UqM-Zh-MJA">
+            <objects>
+                <viewController id="x9e-nH-s9O" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UYE-hb-1wp"/>
+                        <viewControllerLayoutGuide type="bottom" id="yan-10-BUV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fdj-9w-FmY">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="98L-fP-FuS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lQv-w7-nWx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="831" y="2452"/>
         </scene>
         <!--Splash View Controller-->
         <scene sceneID="uio-bc-gAu">

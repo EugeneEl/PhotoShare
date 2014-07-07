@@ -388,6 +388,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E014A34196AE16900F25AA7 /* UploadController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UploadController;
+			sourceTree = "<group>";
+		};
 		3E11883A194AE2CC00D562A1 /* ProfileController */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,9 +489,10 @@
 		3E3F8C131949A55C009916BD /* PhotoController */ = {
 			isa = PBXGroup;
 			children = (
-				3E48C2411948680100AC842D /* SignUpController */,
 				3E3F8C141949A57C009916BD /* PSPhotoController.h */,
 				3E3F8C151949A57C009916BD /* PSPhotoController.m */,
+				3E014A34196AE16900F25AA7 /* UploadController */,
+				3E48C2411948680100AC842D /* SignUpController */,
 			);
 			path = PhotoController;
 			sourceTree = "<group>";

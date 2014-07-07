@@ -282,7 +282,8 @@
          UIImagePickerControllerOriginalImage = "<UIImage: 0x16786ea0>";
          }
          */
-        
+        NSDictionary *dictionary=[info valueForKey:UIImagePickerControllerMediaMetadata];
+        NSLog(@"metaData:%@",dictionary);
         
         self.imageForPhoto.image = chosenImage;
         [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -291,6 +292,9 @@
     else
     {
         UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+        
+        
+        
         
         /*
         NSURL *url = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
