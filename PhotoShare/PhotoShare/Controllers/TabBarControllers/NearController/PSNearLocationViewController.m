@@ -41,62 +41,108 @@
 @implementation PSNearLocationViewController
 
 
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        self.arrayOfAnnotations=[NSMutableArray new];
-        
-        
-        NSArray* tempArray=[Post MR_findAll];
-        self.arrayOfPosts=[tempArray mutableCopy];
-        
-        
-        for (Post *post in self.arrayOfPosts)
-        {
-            
-            PSMapAnnotation *annonation=[[PSMapAnnotation alloc]init];
-            annonation.title=post.photoName;
-            
-            
-            self.latitudeFromPost=[post.photoLocationLatitude doubleValue];
-            
-            self.longtitudeFromPost=[post.photoLocationLongtitude doubleValue];
-            
-            CLLocationCoordinate2D coordinate;
-            
-            coordinate.latitude=(CLLocationDegrees)self.latitudeFromPost;
-            coordinate.longitude=(CLLocationDegrees)self.longtitudeFromPost;
-            
-            /*
-             coordinate.latitude=(CLLocationDegrees)[post.photoLocationLatitude    doubleValue];
-             coordinate.longitude=(CLLocationDegrees)[post.photoLocationLongtitude doubleValue];
-             */
-            [annonation setCoordinate:coordinate];
-            
-            NSLog
-            (@"latitude:%f", annonation.coordinate.latitude);
-            
-            NSLog(@"longtitude:%f", annonation.coordinate.longitude);
-            [annonation setPostIdForAnnotation:post.postID];
-            
-            [self.arrayOfAnnotations addObject:annonation];
-            
-            NSString* stringForURL=post.photoURL;
-            annonation.imageURL=[NSURL URLWithString:stringForURL];
-            
-        }
-        
-        NSLog(@"%@",NSStringFromCGRect(self.mapView.bounds));
-
-    }
-    return self;
-}
+//- (instancetype)initWithCoder:(NSCoder *)coder
+//{
+//    NSLog(@"initWithCoder");
+//    self = [super initWithCoder:coder];
+//    if (self) {
+//        self.arrayOfAnnotations=[NSMutableArray new];
+//        
+//        
+//        NSArray* tempArray=[Post MR_findAll];
+//        self.arrayOfPosts=[tempArray mutableCopy];
+//        
+//        
+//        for (Post *post in self.arrayOfPosts)
+//        {
+//            
+//            PSMapAnnotation *annonation=[[PSMapAnnotation alloc]init];
+//            annonation.title=post.photoName;
+//            
+//            
+//            self.latitudeFromPost=[post.photoLocationLatitude doubleValue];
+//            
+//            self.longtitudeFromPost=[post.photoLocationLongtitude doubleValue];
+//            NSLog(@"%f",_latitudeFromPost);
+//            NSLog(@"%f",_longtitudeFromPost);
+//            
+//            CLLocationCoordinate2D coordinate;
+//            
+//            coordinate.latitude=(CLLocationDegrees)self.latitudeFromPost;
+//            coordinate.longitude=(CLLocationDegrees)self.longtitudeFromPost;
+//            
+//            /*
+//             coordinate.latitude=(CLLocationDegrees)[post.photoLocationLatitude    doubleValue];
+//             coordinate.longitude=(CLLocationDegrees)[post.photoLocationLongtitude doubleValue];
+//             */
+//            [annonation setCoordinate:coordinate];
+//            
+//            NSLog
+//            (@"latitude:%f", annonation.coordinate.latitude);
+//            
+//            NSLog(@"longtitude:%f", annonation.coordinate.longitude);
+//            [annonation setPostIdForAnnotation:post.postID];
+//            
+//            [self.arrayOfAnnotations addObject:annonation];
+//            
+//            NSString* stringForURL=post.photoURL;
+//            annonation.imageURL=[NSURL URLWithString:stringForURL];
+//            
+//        }
+//        
+//        NSLog(@"%@",NSStringFromCGRect(self.mapView.bounds));
+//
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    self.arrayOfAnnotations=[NSMutableArray new];
+    
+    
+    NSArray* tempArray=[Post MR_findAll];
+    self.arrayOfPosts=[tempArray mutableCopy];
+    
+    
+    for (Post *post in self.arrayOfPosts)
+    {
+        
+        PSMapAnnotation *annonation=[[PSMapAnnotation alloc]init];
+        annonation.title=post.photoName;
+        
+        
+        self.latitudeFromPost=[post.photoLocationLatitude doubleValue];
+        
+        self.longtitudeFromPost=[post.photoLocationLongtitude doubleValue];
+        NSLog(@"%f",_latitudeFromPost);
+        NSLog(@"%f",_longtitudeFromPost);
+        
+        CLLocationCoordinate2D coordinate;
+        
+        coordinate.latitude=(CLLocationDegrees)self.latitudeFromPost;
+        coordinate.longitude=(CLLocationDegrees)self.longtitudeFromPost;
+        
+        /*
+         coordinate.latitude=(CLLocationDegrees)[post.photoLocationLatitude    doubleValue];
+         coordinate.longitude=(CLLocationDegrees)[post.photoLocationLongtitude doubleValue];
+         */
+        [annonation setCoordinate:coordinate];
+        
+        NSLog
+        (@"latitude:%f", annonation.coordinate.latitude);
+        
+        NSLog(@"longtitude:%f", annonation.coordinate.longitude);
+        [annonation setPostIdForAnnotation:post.postID];
+        
+        [self.arrayOfAnnotations addObject:annonation];
+        
+        NSString* stringForURL=post.photoURL;
+        annonation.imageURL=[NSURL URLWithString:stringForURL];
+
+    }
     
     
     if ([CLLocationManager locationServicesEnabled]) {
