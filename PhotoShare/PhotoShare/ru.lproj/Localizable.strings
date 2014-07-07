@@ -6,6 +6,11 @@
   Copyright (c) 2014 Eugene. All rights reserved.
 */
 
+
+
+//Sign up controller
+"SignedUpSuccessfullyKey"="Регистрация завершена успешно";
+
 //NearViewController
 "DistanceMeasurementKey"="км";
 

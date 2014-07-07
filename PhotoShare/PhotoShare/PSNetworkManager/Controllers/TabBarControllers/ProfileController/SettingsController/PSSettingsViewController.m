@@ -31,7 +31,7 @@
     User *userWithEmptyEmail=[[User MR_findByAttribute:@"email" withValue:@""] firstObject];
     if (!userWithEmptyEmail)
     {
-        userWithEmptyEmail=[User MR_createEntity];
+       // userWithEmptyEmail=[User MR_createEntity];
         userWithEmptyEmail.email=@"";
         [PSUserStore userStoreManager].activeUser=userWithEmptyEmail;
         [userWithEmptyEmail.managedObjectContext MR_saveToPersistentStoreAndWait];

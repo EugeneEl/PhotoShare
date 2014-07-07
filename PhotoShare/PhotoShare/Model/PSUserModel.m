@@ -14,19 +14,13 @@
 
 - (BOOL) isSignUpValid
 {
-
-//    return  ([self.name ps_isNameValid] && ([self.email ps_isEmailValid]) && ([self.password ps_isPasswordValid]) && ([self.facebookId ps_isFacebookIDValid]));
-    return  ([self.name ps_isNameValid] && ([self.email ps_isEmailValid]) && ([self.password ps_isPasswordValid]));
-    
-  
+    return  (([self.name ps_isNameValid]) && ([self.email ps_isEmailValid]) && ([self.password ps_isPasswordValid]));
 }
 
 
 - (BOOL)isLoginValid
 {
-    
     return  ([self.email ps_isEmailValid]) && ([self.password ps_isPasswordValid]) ;
-    
 }
 
 

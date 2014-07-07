@@ -16,7 +16,7 @@
     self.email=userModel.email;
     self.password=userModel.password;
     self.name=userModel.name;
-//    self.facebookID=userModel.facebookId;
+    self.user_id=[NSNumber numberWithInt:userModel.userID];
     [self.managedObjectContext MR_saveToPersistentStoreAndWait];
     
     return self;

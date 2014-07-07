@@ -54,7 +54,7 @@
     User *existingUser=[[User MR_findByAttribute:@"email" withValue:userModel.email] firstObject];
     if (!existingUser)
     {
-        existingUser=[User MR_createEntity];
+        //existingUser=[User MR_createEntity];
         existingUser.email=userModel.email;
         [PSUserStore userStoreManager].activeUser=existingUser;
         NSLog(@"added active user with email:%@",[PSUserStore userStoreManager].activeUser.email);

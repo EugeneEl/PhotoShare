@@ -2,26 +2,27 @@
 //  Post.h
 //  PhotoShare
 //
-//  Created by Евгений on 17.06.14.
+//  Created by Евгений on 04.07.14.
 //  Copyright (c) 2014 Eugene. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Comment;
+@class Comment, User;
 
 @interface Post : NSManagedObject
 
 @property (nonatomic, retain) NSString * authorMail;
-@property (nonatomic, retain) NSNumber * likes;
+@property (nonatomic, retain) NSNumber * likesCount;
 @property (nonatomic, retain) NSDate * photoDate;
+@property (nonatomic, retain) NSNumber * photoLocationLatitude;
+@property (nonatomic, retain) NSNumber * photoLocationLongtitude;
 @property (nonatomic, retain) NSString * photoName;
 @property (nonatomic, retain) NSString * photoURL;
 @property (nonatomic, retain) NSNumber * postID;
-@property (nonatomic, retain) NSNumber * photoLocationLatitude;
-@property (nonatomic, retain) NSNumber * photoLocationLongtitude;
 @property (nonatomic, retain) NSSet *comments;
+@property (nonatomic, retain) User *user;
 @end
 
 @interface Post (CoreDataGeneratedAccessors)

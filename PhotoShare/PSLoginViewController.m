@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Eugene. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "PSLoginViewController.h"
 #import "PSNetworkManager.h"
 #import "PSSignUpViewController.h"
@@ -13,10 +14,21 @@
 #import "MBProgressHUD.h"
 #import "PSUserModel.h"
 #import "User.h"
-#import "PSSplashViewController.h"
 #import "CustomSegueForStart.h"
 #import "NSString+PSValidation.h"
 #import "User+PSMapWithModel.h"
+#import "Parser.h"
+#import "PSUserParser.h"
+#import "PSFollowersParser.h"
+
+/*
+@interface ParserID : NSObject
+@property (nonatomic, strong) id objectToParse;
+
+- (instancetype) initWithId:(id)identifier;
+
+- (NSInteger) getUserID;
+*/
 
 //typedef void (^sumBlock)(NSInteger a,NSInteger b);
 
@@ -27,7 +39,6 @@
 @property (nonatomic, assign) BOOL  keyboardIsShown;
 @property(nonatomic,assign) BOOL isRegistered;
 @property (nonatomic,strong) PSUserModel* userModel;
-
 
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UITextField *loginTextField;
@@ -82,6 +93,8 @@
     [_scrollView setContentOffset:CGPointZero];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [ self.navigationController.navigationBar setHidden:NO];
+    
+    
 
 }
 
@@ -198,41 +211,87 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     __weak typeof(self) weakSelf = self;
-    [[PSNetworkManager sharedManager]loginWithModel:self.userModel
-    success:^
-     {
-         NSLog(@"success");
-         weakSelf.resultLabel.text=@"Logged in";
-      
-         
-         User *existingUserForLogin=[[User MR_findByAttribute:@"email" withValue:weakSelf.userModel.email] firstObject];
-         
-         if (!existingUserForLogin) {
+    [[PSNetworkManager sharedManager] loginWithModel:_userModel
+    success:^(id responseObject)
+    {
+        NSLog(@"success");
+        weakSelf.resultLabel.text=@"Logged in";
+        User *existingUserForLogin=[[User MR_findByAttribute:@"email" withValue:weakSelf.userModel.email] firstObject];
+        
+        NSLog(@"%@",responseObject);
+        
+        
+        PSUserParser *userParser=[[PSUserParser alloc]initWithId:responseObject];
+        
+        _userModel.userID=[userParser getUserID];
+        
+        if (!existingUserForLogin) {
             existingUserForLogin=[User MR_createEntity];
             existingUserForLogin=[existingUserForLogin mapWithModel:weakSelf.userModel];
-         }
-         
-         [PSUserStore userStoreManager].activeUser=existingUserForLogin;
-         NSLog(@"active user logged in:%@",[PSUserStore userStoreManager].activeUser.email);
-         
-         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-         [self performSegueWithIdentifier:@"goToUserBarFromLog" sender:nil];
-     }
+        }
+        
+        existingUserForLogin.ava_imageURL=[userParser getAvaImageURL];
+        existingUserForLogin.follower_count=[NSNumber numberWithInt:[userParser getCountOfFollowers]];
+        existingUserForLogin.followed_count= [NSNumber numberWithInt:[[userParser getArrayOfFollowed]count]];
+        
+        //add followers
+        PSFollowersParser *followersParser=[[PSFollowersParser alloc] initWithId:responseObject];
+        if (followersParser.arrayOfFollowers!=nil)
+        {
+            for (NSDictionary *dictionary in followersParser.arrayOfFollowers)
+            {
+                User *followerToAdd=[User MR_createEntity];
+                followerToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
+                followerToAdd.email=[followersParser getFollowerEmail:dictionary];
+                followerToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
+                followerToAdd.name=[followersParser getFollowerName:dictionary];
+                
+                [existingUserForLogin addFollowersObject:followerToAdd];
+            }
+        }
+        
+        //add followings
+        if (followersParser.arrayOfFollowed!=nil)
+        {
+            
+            
+            for (NSDictionary *dictionary in followersParser.arrayOfFollowers)
+            {
+                User *followedToAdd=[User MR_createEntity];
+                followedToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
+                followedToAdd.email=[followersParser getFollowerEmail:dictionary];
+                followedToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
+                followedToAdd.name=[followersParser getFollowerName:dictionary];
+                
+                [existingUserForLogin addFollowersObject:followedToAdd];
+            }
+        }
+        
+        
+       [existingUserForLogin.managedObjectContext MR_saveToPersistentStoreAndWait];
+        
+        
+        NSArray *users=[User MR_findAll];
+        for (User* user in users)
+        {
+            NSLog(@"%@id",user.user_id);
+        }
+        
+        
+        
+        [PSUserStore userStoreManager].activeUser=existingUserForLogin;
+        NSLog(@"active user logged in:%@",[PSUserStore userStoreManager].activeUser.email);
+        
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [self performSegueWithIdentifier:@"goToUserBarFromLog" sender:nil];
+    }
      
-     error:^(NSError *error)
-     {
-         NSString *errorDescription=[error description];
-         NSLog(@"error:%@",errorDescription);
-         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-         
-         UIAlertView *alertOnError=[[UIAlertView alloc]
-                                    initWithTitle:@"Error!"
-                                    message:errorDescription
-                                    delegate:nil
-                                    cancelButtonTitle:@"Ok"
-                                    otherButtonTitles:nil];
-         [alertOnError show];
-     }];
+    error:^(NSError *error)
+    {
+        
+    }];
+    
+    
     
     
 }

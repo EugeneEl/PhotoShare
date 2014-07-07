@@ -14,27 +14,34 @@
 #import "UIScrollView+SVPullToRefresh.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "UIViewController+UIViewController_PSSharingDataComposer.h"
+#import "PSNetworkManager.h"
+#import "PSUserStore.h"
+#import "User.h"
+#import "Post+mapWithModel.h"
+#import "Parser.h"
+#import "PSPostModel.h"
+#import "PSPostsParser.h"
 
 typedef enum {
     kNew,
     kFavourite
 } sortPostsByKey;
-
-static NSString *keyForPostID                                 =@"post_id";
-static NSString *keyForPhotoDate                              =@"photo_date";
-static NSString *keyForLikes                                  =@"likes";
-static NSString *keyForAuthorMail                             =@"authoremail";
-static NSString *keyForPhotoName                              =@"photoName";
-static NSString *keyForPhotoURL                               =@"photoURL";
-static NSString *keyForLocationDictionary                     =@"location";
-static NSString *keyPathForLatitude                           =@"location.latitude";
-static NSString *keyPathForLongtitude                         =@"location.longitude";
-static NSString *keyForCommentsArray                          =@"comments";
-static NSString *keyForCommentIDInComments                    =@"comment_id";
-static NSString *keyForCommentatorNameInComments              =@"commentatorName";
-static NSString *keyForCommentTextInComments                  =@"text";
-static NSString *keyForCommentDateInComments                  =@"comment_date";
-
+//
+//static NSString *keyForPostID                                 =@"post_id";
+//static NSString *keyForPhotoDate                              =@"photo_date";
+//static NSString *keyForLikes                                  =@"likes";
+//static NSString *keyForAuthorMail                             =@"authoremail";
+//static NSString *keyForPhotoName                              =@"photoName";
+//static NSString *keyForPhotoURL                               =@"photoURL";
+//static NSString *keyForLocationDictionary                     =@"location";
+//static NSString *keyPathForLatitude                           =@"location.latitude";
+//static NSString *keyPathForLongtitude                         =@"location.longitude";
+//static NSString *keyForCommentsArray                          =@"comments";
+//static NSString *keyForCommentIDInComments                    =@"comment_id";
+//static NSString *keyForCommentatorNameInComments              =@"commentatorName";
+//static NSString *keyForCommentTextInComments                  =@"text";
+//static NSString *keyForCommentDateInComments                  =@"comment_date";
+//
 static NSString *keyForSortSettings                           =@"sortKey";
 
 
@@ -42,6 +49,8 @@ static NSString *keyForSortSettings                           =@"sortKey";
 @interface PSStreamViewController() <UITableViewDelegate ,UITableViewDataSource, NSFetchedResultsControllerDelegate, PhotoFromStreamTableViewCell,UIActionSheetDelegate>
 //@property (weak, nonatomic) IBOutlet UIImageView *imageFromPost;
 
+
+@property (nonatomic, assign) NSInteger userID;
 @property (nonatomic, strong) NSNumber * post_idParsed;
 @property (nonatomic, strong) NSNumber * likesParsed;
 @property (nonatomic, copy) NSString * authorMailParsed;
@@ -58,6 +67,7 @@ static NSString *keyForSortSettings                           =@"sortKey";
 @property (nonatomic,assign) NSUInteger offset;
 @property (nonatomic, strong) NSData *imageDataToShare;
 @property (nonatomic, copy)  NSString *photoName;
+@property (nonatomic, assign) NSInteger count;
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
@@ -85,187 +95,90 @@ static NSString *keyForSortSettings                           =@"sortKey";
 
 @implementation PSStreamViewController
 
-
--(void)viewDidLoad {
-   
-    
-    [super viewDidLoad];
+#pragma mark - ViewDidLoad
+-(void)viewDidLoad
+{
+   [super viewDidLoad];
+    self.streamTableView.dataSource=self;
+    self.streamTableView.delegate=self;
     [self loadSettins];
     self.offset=5;
     _cellCount=0;
     self.streamTableView.contentSize=CGSizeMake(self.streamTableView.bounds.size.width,330.0f);
-    
     self.streamTableView.clipsToBounds=NO;
-    
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
-    NSData *dataFromJSON=[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"response1" ofType:@"json" inDirectory:nil]];
-    NSLog(@"file context:%@",dataFromJSON);
     
-    NSMutableArray *parsedData= [[NSJSONSerialization JSONObjectWithData:dataFromJSON
-                                                    options:0 error:nil] mutableCopy];
-    NSLog(@"parsedArray:%@",parsedData);
-
-    NSDictionary* searchedPost=[NSDictionary new];
+    PSUserStore *userStore= [PSUserStore userStoreManager];
+    User *currentUser=userStore.activeUser;
+    _userID=[currentUser.user_id integerValue];
+    NSLog(@"user_id:%d",_userID);
     
     
-    //sort array by date
-    NSSortDescriptor *descriptor=[[NSSortDescriptor alloc] initWithKey:@"photo_date" ascending:NO];
-    NSArray *descriptors=[NSArray arrayWithObject: descriptor];
-    NSArray *reverseOrder=[parsedData sortedArrayUsingDescriptors:descriptors];
-    
-    parsedData=[reverseOrder mutableCopy];
-  
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
-    //writing posts to CoreData
-    for (NSDictionary *dict in parsedData)
+    __weak typeof(self) weakSelf = self;
+    [[PSNetworkManager sharedManager] getAllUserPostsWithUserID:_userID
+     success:^(id responseObject)
     {
+        NSLog(@"%@",responseObject);
         
-        //Reading data from JSON
-        self.post_idParsed=[dict objectForKey:keyForPostID];
-        NSLog(@"post_id:%@",self.post_idParsed);
-        self.likesParsed=[dict objectForKey:keyForLikes];
-        NSLog(@"likes:%@",self.likesParsed);
-        self.authorMailParsed=[dict objectForKey:keyForAuthorMail];
-        NSLog(@"authorMail:%@",self.authorMailParsed);
-        self.photoNameParsed=[dict objectForKey:keyForPhotoName];
-        NSLog(@"photoName:%@",self.photoNameParsed);
-        self.photoURLParsed=[dict objectForKey:keyForPhotoURL];
-        NSLog(@"photoURL:%@",self.photoURLParsed);
-        
-        
-        //coordinates in degrees @"key1.@specialKey.
-        self.photoLatitudeParsed=[[dict valueForKeyPath:keyPathForLatitude]doubleValue ];
-        self.photoLongtitudeParsed=[[dict valueForKeyPath:keyPathForLongtitude] doubleValue];
-        
-        NSLog(@"latitudeParsed:%f",self.photoLatitudeParsed);
-        NSLog(@"longtitudeParsed:%f",self.photoLongtitudeParsed);
-        
-        
-        
-        NSMutableArray *commentsArray=[dict objectForKey:keyForCommentsArray];
-        NSLog(@"commentsArray:%@",commentsArray);
-
-
-        NSLog(@"date:%@",[dict objectForKey:keyForPhotoDate]);
-        
-        self.photo_dateParsed=[dateFormatter dateFromString:[dict objectForKey:keyForPhotoDate]];
-        
-        NSLog(@"photo_date:%@",self.photo_dateParsed);
-        
-
-        
-        //check if the parsed post exists in CoreData
-        Post *existingPost=[[Post MR_findByAttribute:@"postID" withValue:self.post_idParsed]firstObject];
-        
-        if (!existingPost)
+            PSPostsParser *postParser=[[PSPostsParser alloc]initWithId:responseObject];
+            PSPostModel *model=[PSPostModel new];
+        NSLog(@"%@",postParser.arrayOfPosts);
+        if (postParser.arrayOfPosts)
         {
-            existingPost=[Post MR_createEntity];
-            
-            existingPost.postID=self.post_idParsed;
-            existingPost.likes=self.likesParsed;
-            existingPost.authorMail=self.authorMailParsed;
-            existingPost.photoName=self.photoNameParsed;
-            existingPost.photoURL=self.photoURLParsed;
-            existingPost.photoDate=self.photo_dateParsed;
-            existingPost.photoLocationLatitude=[NSNumber numberWithDouble:self.photoLatitudeParsed];
-            existingPost.photoLocationLongtitude=[NSNumber numberWithDouble:self.photoLongtitudeParsed];
-            
-
-            
-            //parse and check comments
-            for (NSDictionary *dictOfComments in commentsArray)
+            for (NSDictionary* dictionary in postParser.arrayOfPosts)
             {
-                
-                self.commentIDParsed=[dictOfComments objectForKey:keyForCommentIDInComments];
-                
-                if ([[existingPost.comments filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"commentID == %@",self.commentIDParsed]] anyObject])
+                model.postTime=[postParser getPostTime:dictionary];
+                model.postID=[postParser getPostID:dictionary];
+                model.postImageURL=[postParser getPostImageURL:dictionary];
+                model.postImageLat=[postParser getPostImageLat:dictionary];
+                model.postImageLng=[postParser getPostImageLng:dictionary];
+                model.postImageName=[postParser getPostImageName:dictionary];
+                model.postArrayOfComments=[postParser getPostArrayOfComments:dictionary];
+                if ([postParser getPostLikesArray:dictionary])
                 {
-                    NSLog(@"Post %@ has comment with id %@",existingPost.postID, self.commentIDParsed);
-                    
+                    model.postLikesCount=[[postParser getPostLikesArray:dictionary] count];
                 }
-                
                 else
                 {
-                    //parsed date,text,name of comment
-                    self.commentatorNameParsed=[dictOfComments objectForKey:keyForCommentatorNameInComments];
-                    self.commentTextParsed=[dictOfComments objectForKey:keyForCommentTextInComments];
-                    self.commentDateParsed=[dateFormatter dateFromString:[dictOfComments objectForKey:keyForCommentDateInComments]];
-                                            
-                     NSLog(@"photo_date:%@",self.commentDateParsed);
-                    
-                    //creating an instance of Comment entity
-                    
-                    Comment *commentToAdd=[Comment MR_createEntity];
-                    
-                    commentToAdd.commentID=self.commentIDParsed;
-                    commentToAdd.commentatorName=self.commentatorNameParsed;
-                    commentToAdd.commentText=self.commentTextParsed;
-                    commentToAdd.commentDate=self.commentDateParsed;
-                    
-                    [existingPost addCommentsObject:commentToAdd];
+                    model.postLikesCount=0;
                 }
-                    
+                
+                Post *post=[Post MR_createEntity];
+                post=[post mapWithModel:model];
+                NSLog(@"Post added%@]n",post);
+                [currentUser addPostsObject:post];
                 
             }
             
-            
-            NSLog(@"added post with id:%@ to database", existingPost.postID);
-            NSLog(@"Post coords:%@, %@",existingPost.photoLocationLatitude,existingPost.photoLocationLongtitude );
-            [existingPost.managedObjectContext MR_saveToPersistentStoreAndWait];
-            
+            [currentUser.managedObjectContext save:nil];
+            [weakSelf.streamTableView reloadData];
         }
         
     
-        else if (existingPost) {
-            NSLog(@"Post with id:%@ already exists in database",existingPost.postID);
-        }
-    
-        
     }
-    
-    
-    
-    //taking the last Post from sortded by date array
-    searchedPost=[parsedData firstObject];
-    
-    
-    NSLog(@"firstPost:%@",searchedPost);
-    NSURL *urlForImage = [NSURL URLWithString:[searchedPost objectForKey:keyForPhotoURL]];
-    [self.image setImageWithURL:urlForImage];
-    self.streamTableView.dataSource=self;
-    self.streamTableView.delegate=self;
-
-//       __weak typeof(self) weakSelf = self;
-//    [self.streamTableView addInfiniteScrollingWithActionHandler:^{
-//        [weakSelf insertRowAtBottom];
-//    }];
-//  [self setAutomaticallyAdjustsScrollViewInsets:NO];
-
+      error:^(NSError *error)
+    {
+        NSLog(@"error");
+    }];
+     NSInteger count = [Post MR_countOfEntities];
+    self.count=count;
+    NSLog(@"allPosts:%@",[Post MR_findAll]);
+//    [self.streamTableView reloadData];
 }
-
-
--(NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource=[NSMutableArray array];
-    }
-    return _dataSource;
-}
-
 
 
 
 #pragma mark UITableViewDataSource
 
+     
+     
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger count = [Post MR_countOfEntities];
  //менять в
-    if (_offset>count) {
-        return count;
-    }
-    return _offset;
+   
+    return count;
 }
 
 
@@ -350,11 +263,11 @@ static NSString *keyForSortSettings                           =@"sortKey";
     }
     
     NSFetchRequest* fetchRequest=[[NSFetchRequest alloc]initWithEntityName:@"Post"];
-    NSSortDescriptor *descriptor=[NSSortDescriptor sortDescriptorWithKey:@"likes" ascending:NO];
+    NSSortDescriptor *descriptor=[NSSortDescriptor sortDescriptorWithKey:@"likesCount" ascending:NO];
     
     [fetchRequest setSortDescriptors:@[descriptor]];
      
-     fetchRequest.fetchOffset=_offset;
+
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
@@ -388,7 +301,7 @@ static NSString *keyForSortSettings                           =@"sortKey";
     NSFetchRequest* fetchRequest=[[NSFetchRequest alloc]initWithEntityName:@"Post"];
     NSSortDescriptor *descriptor=[NSSortDescriptor sortDescriptorWithKey:@"photoDate" ascending:NO];
     [fetchRequest setSortDescriptors:@[descriptor]];
-    fetchRequest.fetchOffset=_offset;
+   // fetchRequest.fetchOffset=_offset;
     _dateFetchedResultsController = [[NSFetchedResultsController alloc]
                                                              initWithFetchRequest:fetchRequest
                                                              managedObjectContext:[NSManagedObjectContext MR_defaultContext]
@@ -415,12 +328,12 @@ static NSString *keyForSortSettings                           =@"sortKey";
 {
     if (self.sortKey==kNew) {
         _fetchedResultsController=self.dateFetchedResultsController;
-        _offset=5;
+       // _offset=5;
     }
    
     else if (self.sortKey==kFavourite) {
         _fetchedResultsController=self.likeFetchedResultsController;
-        _offset=5;
+      //  _offset=5;
     }
     
     return _fetchedResultsController;
@@ -496,6 +409,7 @@ static NSString *keyForSortSettings                           =@"sortKey";
 {
     PSPhotoFromStreamTableViewCell *aCell = (id)cell;
     
+    NSLog(@"%@",indexPath);
     Post  *postTest=[self.fetchedResultsController objectAtIndexPath:indexPath];
     //cell=(PSPhotoFromStreamTableViewCell*)cell;
     
@@ -504,8 +418,25 @@ static NSString *keyForSortSettings                           =@"sortKey";
     aCell.timeintervalLabel.text=[self timeIntervalFromPhoto:postTest.photoDate];
     NSString *commentsNumberString =[NSString stringWithFormat:@"%lu", (unsigned long)[postTest.comments count]];
     aCell.commentsNumberLabel.text=commentsNumberString;
-    [aCell.imageForPost setImageWithURL: [NSURL URLWithString:postTest.photoURL]];
-    aCell.likesNumberLabel.text=[NSString stringWithFormat:@"%@",postTest.likes];
+    
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+    dispatch_async(queue, ^(void)
+    {
+        
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:postTest.photoURL]];
+        
+        UIImage* image = [[UIImage alloc] initWithData:imageData];
+        
+        dispatch_async(dispatch_get_main_queue(),
+        ^{
+            [aCell.imageForPost setImage:image];
+            [aCell setNeedsLayout]; //test here
+        });
+    });
+    
+//[aCell.imageForPost setImageWithURL: [NSURL URLWithString:postTest.photoURL]];
+   // aCell.likesNumberLabel.text=[NSString stringWithFormat:@"%@",postTest.likes];
     aCell.delegate=self;
     
     

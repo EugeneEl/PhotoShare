@@ -4,38 +4,6 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PhotoShare/Libs/AFNetworking/AFURLRequestSerialization.m"
-            timestampString = "424110436.366421"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
-            landmarkName = "-requestWithMethod:URLString:parameters:error:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PhotoShare/Model/PSUserModel.m"
-            timestampString = "424270598.930695"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "-isSignUpValid"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
@@ -162,11 +130,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoShare/PSNetworkManager/Controllers/TabBarControllers/StreamController/PSStreamViewController.m"
-            timestampString = "425995460.818701"
+            timestampString = "426430338.781333"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "818"
-            endingLineNumber = "818">
+            startingLineNumber = "682"
+            endingLineNumber = "682"
+            landmarkName = "-actionSheet:clickedButtonAtIndex:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -176,11 +146,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoShare/PSNetworkManager/Controllers/TabBarControllers/StreamController/PSStreamViewController.m"
-            timestampString = "425995460.818701"
+            timestampString = "426430338.781333"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "823"
-            endingLineNumber = "823">
+            startingLineNumber = "687"
+            endingLineNumber = "687"
+            landmarkName = "-actionSheet:clickedButtonAtIndex:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

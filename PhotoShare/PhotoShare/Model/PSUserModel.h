@@ -10,10 +10,14 @@
 
 @interface PSUserModel : NSObject
 
-@property(nonatomic,copy)   NSString  *email;
-//@property(nonatomic,copy) NSString  *facebookId;
-@property(nonatomic,copy)   NSString  *password;
-@property (nonatomic,copy)  NSString  *name;
+@property(nonatomic,copy)     NSString  *email;
+@property(nonatomic,copy)     NSString  *password;
+@property (nonatomic,copy)    NSString  *name;
+
+@property (nonatomic, assign) NSInteger userID;
+//@property (nonatomic, );
+
+
 @property (nonatomic,assign,getter = isSignUpValid,readonly) BOOL     signUpValid;
 @property (nonatomic,assign,getter = isLoginValid,readonly)  BOOL     loginValid;
 

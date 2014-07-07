@@ -81,7 +81,7 @@
     
     [self.timeOfPhotoLabel setText:[dateFormatter stringFromDate:_post.photoDate]];
     [self.photoNameLabel setText:_post.photoName];
-    [self.likesNumLabel setText:[NSString stringWithFormat:@"%i", [_post.likes intValue]]];
+    //[self.likesNumLabel setText:[NSString stringWithFormat:@"%i", [_post.likes intValue]]];
     
     [self.commentsNumLabel setText:[NSString stringWithFormat:@"%i", [_post.comments count]]];
     

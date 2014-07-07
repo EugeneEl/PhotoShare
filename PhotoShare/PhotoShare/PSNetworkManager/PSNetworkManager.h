@@ -10,6 +10,8 @@
 @class AFHTTPRequestOperation;
 @class PSUserModel;
 
+typedef void (^successBlockWithId)(id);
+
 typedef void (^successBlock)(void);
 typedef void (^errorBlock)(NSError* error);
 
@@ -28,12 +30,22 @@ typedef void (^errorBlock)(NSError* error);
                                          error:(errorBlock)errorBlock;
 
 - (AFHTTPRequestOperation *) loginWithModel:(PSUserModel*)model
-                                    success:(successBlock)success
+                                    success:(successBlockWithId)success
                                       error:(errorBlock) error;
 
 
 - (AFHTTPRequestOperation *) fetchUserStream:(PSUserModel*)model
                                      success:(successBlock)success
                                        error:(errorBlock)error;
+
+- (AFHTTPRequestOperation *) getPostsPage:(NSInteger)page
+                                 pageSize:(NSInteger)pageSize
+                                  success:(successBlockWithId)success
+                                    error:(errorBlock)error
+                                   userID:(NSInteger)userID;
+- (AFHTTPRequestOperation *)getAllUserPostsWithUserID:(NSInteger)userID
+                                              success:(successBlockWithId)success
+                                                error:(errorBlock)error;
+
 
 @end

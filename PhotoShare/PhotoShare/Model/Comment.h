@@ -2,7 +2,7 @@
 //  Comment.h
 //  PhotoShare
 //
-//  Created by Евгений on 17.06.14.
+//  Created by Евгений on 04.07.14.
 //  Copyright (c) 2014 Eugene. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSDate * commentDate;
 @property (nonatomic, retain) NSNumber * commentID;
 @property (nonatomic, retain) NSString * commentText;
+@property (nonatomic, retain) NSNumber * commentatorID;
 @property (nonatomic, retain) Post *post;
 
 @end

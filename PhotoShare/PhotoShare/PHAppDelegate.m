@@ -8,11 +8,11 @@
 
 #import "PHAppDelegate.h"
 #import "PSLoginViewController.h"
-#import "PSSplashViewController.h"
+//#import "PSSplashViewController.h"
 #import "User.h"
 #import "Post.h"
 
-const int numberOfUsersForTest = 5;
+const int numberOfUsersForTest=5;
 
 @implementation PHAppDelegate
 
@@ -20,8 +20,8 @@ const int numberOfUsersForTest = 5;
 {
     [MagicalRecord setupCoreDataStack];
     
-   //[User MR_truncateAll];
-   //[Post MR_truncateAll];
+    //[User MR_truncateAll];
+    [Post MR_truncateAll];
     
     return YES;
 }

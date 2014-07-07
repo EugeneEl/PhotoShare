@@ -57,9 +57,6 @@
     return self;
 }
 
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.scrollView.delegate=self;
@@ -79,7 +76,6 @@
         _userModel.name=self.nameForSignUpTextField.text;
         _userModel.email=self.emailForSignUpTextField.text;
         _userModel.password=self.passwordForSignUpTextField.text;
-
     }
     return _userModel;
     
@@ -129,7 +125,15 @@
      
     success:^
     {
-        
+        UIAlertView *alert=[[UIAlertView alloc]
+                            initWithTitle:NSLocalizedString(@"alertViewSuccessKey", "")
+                            message:NSLocalizedString(@"SignedUpSuccessfullyKey", "")
+                            delegate:nil
+                            cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+                            otherButtonTitles:nil, nil];
+        [alert show];
+
+
         NSLog(@"success");
        [ [PSUserStore userStoreManager] addActiveUserToCoreDataWithModel:weakSelf.userModel];
                                              
@@ -141,16 +145,15 @@
      {
          NSString *errorDescription=[error description];
          NSLog(@"error:%@",errorDescription);
-         //review: self в блоке
          [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-         
-         UIAlertView *alertOnError=[[UIAlertView alloc]
-                                    initWithTitle:@"Error!"
-                                    message:errorDescription
-                                    delegate:weakSelf
-                                    cancelButtonTitle:@"Ok"
-                                    otherButtonTitles:nil];
-         [alertOnError show];
+    
+         UIAlertView *alert=[[UIAlertView alloc]
+                             initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+                             message:errorDescription
+                             delegate:nil
+                             cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")
+                             otherButtonTitles:nil, nil];
+         [alert show];
      }];
 }
 

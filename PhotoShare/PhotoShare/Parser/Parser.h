@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ParserID : NSObject
+@interface Parser : NSObject
+@property (nonatomic, strong) id objectToParse;
+
+- (instancetype) initWithId:(id)identifier;
+//- (NSInteger) getUserID;
+//
+//
+//- (NSInteger) getPostID;
+//- (NSString *) getPostImageURL;
+//- (NSInteger) getPostImageLat;
+//- (NSInteger) getPostImageLng;
+//- (NSString *) getPostImageName;
+//- (NSArray *) getPostArrayOfComments;
+//- (NSString *) getPostTimeKey;
 
 @end
