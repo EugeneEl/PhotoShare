@@ -109,6 +109,14 @@ static NSString *keyForSortSettings                           =@"sortKey";
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     
+  
+ 
+//    [self.streamTableView reloadData];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     PSUserStore *userStore= [PSUserStore userStoreManager];
     User *currentUser=userStore.activeUser;
     _userID=[currentUser.user_id integerValue];
@@ -117,56 +125,51 @@ static NSString *keyForSortSettings                           =@"sortKey";
     
     __weak typeof(self) weakSelf = self;
     [[PSNetworkManager sharedManager] getAllUserPostsWithUserID:_userID
-     success:^(id responseObject)
-    {
-        NSLog(@"%@",responseObject);
-        
-            PSPostsParser *postParser=[[PSPostsParser alloc]initWithId:responseObject];
-            PSPostModel *model=[PSPostModel new];
-        NSLog(@"%@",postParser.arrayOfPosts);
-        if (postParser.arrayOfPosts)
-        {
-            for (NSDictionary* dictionary in postParser.arrayOfPosts)
-            {
-                model.postTime=[postParser getPostTime:dictionary];
-                model.postID=[postParser getPostID:dictionary];
-                model.postImageURL=[postParser getPostImageURL:dictionary];
-                model.postImageLat=[postParser getPostImageLat:dictionary];
-                model.postImageLng=[postParser getPostImageLng:dictionary];
-                model.postImageName=[postParser getPostImageName:dictionary];
-                model.postArrayOfComments=[postParser getPostArrayOfComments:dictionary];
-                if ([postParser getPostLikesArray:dictionary])
-                {
-                    model.postLikesCount=[[postParser getPostLikesArray:dictionary] count];
-                }
-                else
-                {
-                    model.postLikesCount=0;
-                }
-                
-                Post *post=[Post MR_createEntity];
-                post=[post mapWithModel:model];
-                NSLog(@"Post added%@]n",post);
-                [currentUser addPostsObject:post];
-                
-            }
-            
-            [currentUser.managedObjectContext save:nil];
-            [weakSelf.streamTableView reloadData];
-        }
-        
-    
-    }
-      error:^(NSError *error)
-    {
-        NSLog(@"error");
-    }];
-     NSInteger count = [Post MR_countOfEntities];
-    self.count=count;
-    NSLog(@"allPosts:%@",[Post MR_findAll]);
-//    [self.streamTableView reloadData];
+                                                        success:^(id responseObject)
+     {
+         NSLog(@"%@",responseObject);
+         
+         PSPostsParser *postParser=[[PSPostsParser alloc]initWithId:responseObject];
+         PSPostModel *model=[PSPostModel new];
+         NSLog(@"%@",postParser.arrayOfPosts);
+         if (postParser.arrayOfPosts)
+         {
+             for (NSDictionary* dictionary in postParser.arrayOfPosts)
+             {
+                 model.postTime=[postParser getPostTime:dictionary];
+                 model.postID=[postParser getPostID:dictionary];
+                 model.postImageURL=[postParser getPostImageURL:dictionary];
+                 model.postImageLat=[postParser getPostImageLat:dictionary];
+                 model.postImageLng=[postParser getPostImageLng:dictionary];
+                 model.postImageName=[postParser getPostImageName:dictionary];
+                 model.postArrayOfComments=[postParser getPostArrayOfComments:dictionary];
+                 if ([postParser getPostLikesArray:dictionary])
+                 {
+                     model.postLikesCount=[[postParser getPostLikesArray:dictionary] count];
+                 }
+                 else
+                 {
+                     model.postLikesCount=0;
+                 }
+                 
+                 Post *post=[Post MR_createEntity];
+                 post=[post mapWithModel:model];
+                 NSLog(@"Post added%@]n",post);
+                 [currentUser addPostsObject:post];
+                 
+             }
+             
+             [currentUser.managedObjectContext save:nil];
+             [weakSelf.streamTableView reloadData];
+         }
+         
+         
+     }
+                                                          error:^(NSError *error)
+     {
+         NSLog(@"error");
+     }];
 }
-
 
 
 #pragma mark UITableViewDataSource
@@ -321,6 +324,16 @@ static NSString *keyForSortSettings                           =@"sortKey";
     return _dateFetchedResultsController;
 
 }
+
+- (void)photoStreamCellLikeButtonPressed:(PSPhotoFromStreamTableViewCell  *)tableCell {
+    NSLog(@"button like pressed");
+}
+
+- (void)photoStreamCellCommentButtonPressed:(PSPhotoFromStreamTableViewCell *)
+tableCell {
+    NSLog(@"button comment pressed");
+}
+
 
 
 
@@ -536,8 +549,8 @@ static NSString *keyForSortSettings                           =@"sortKey";
 - (void)photoStreamCellShareButtonPressed:(PSPhotoFromStreamTableViewCell  *)
 tableCell
 {
-    NSData *data=[NSData new];
-    data=[NSData dataWithContentsOfURL:[NSURL URLWithString:tableCell.postForCell.photoURL]];
+ 
+    NSData *data=[NSData dataWithContentsOfURL:[NSURL URLWithString:tableCell.postForCell.photoURL]];
     UIImage* image=[UIImage imageWithData:data];
     self.imageDataToShare=UIImageJPEGRepresentation(image, 1.0);
     self.photoName=tableCell.postForCell.photoName;

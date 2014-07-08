@@ -10,7 +10,7 @@
 "SignedUpSuccessfullyKey"="Signed up successfully";
 
 
-(@ "alertViewOnSaveSuccessKey", "")
+
 
 //NearViewController
 "DistanceMeasurementKey"="km";

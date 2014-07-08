@@ -340,13 +340,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     request=[request stringByAppendingString:[NSString stringWithFormat:@"%d?cnt=%d&page=%d",userID,pageSize,page]];
     
     
-    
-    
-    NSDictionary *dictionaryForRequest=@{
-                                         @"cnt" : @(pageSize),
-                                         @"page" : @(page)
-                                        };
-    
+   
     return [_requestManager GET:request
             
                      parameters:nil
@@ -433,16 +427,21 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
                                  error:(errorBlock)errorWithCode
 
 {
+    NSDictionary *params = @{
+                             @"lat":@(lat),
+                             @"lng":@(lng),
+                             @"text":text,
+                             @"author_id":@(userID)
+                             };
     
-    
-    return  [_requestManager POST:@"posts/" parameters:nil
+    return  [_requestManager POST:@"posts/" parameters:params
         constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
         {
          if (image)
          {
                 [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 1.0)
-                                        name:@"primary_photo"
-                                    fileName:@"image.jpg"
+                                        name:@"pic"
+                                    fileName:@"pic.jpg"
                                     mimeType:@"image/jpeg"
                  ];
          }

@@ -826,7 +826,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="x9e-nH-s9O" kind="push" id="IAX-3R-u9C"/>
+                                    <action selector="actionGoToUpload:" destination="hUN-tH-vZh" eventType="touchUpInside" id="f0g-BN-7sz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -853,6 +853,7 @@
                     <connections>
                         <outlet property="imageForPhoto" destination="bTL-yF-zrj" id="m2v-ik-jmx"/>
                         <outlet property="postButton" destination="lGF-La-3dp" id="RBy-gT-8WF"/>
+                        <segue destination="x9e-nH-s9O" kind="push" identifier="goToUpload" id="b2E-5l-LVf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6rA-ch-oSf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -867,7 +868,7 @@
                         <viewControllerLayoutGuide type="top" id="UYE-hb-1wp"/>
                         <viewControllerLayoutGuide type="bottom" id="yan-10-BUV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="fdj-9w-FmY">
+                    <view key="view" contentMode="scaleToFill" id="fdj-9w-FmY" customClass="UIControl">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -883,7 +884,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" keyboardType="alphabet" returnKeyType="done"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgw-wL-Jt7">
                                 <rect key="frame" x="122" y="240" width="77" height="30"/>
@@ -891,11 +892,20 @@
                                 <state key="normal" title="Upload">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="sendPhoto:" destination="x9e-nH-s9O" eventType="touchUpInside" id="xUv-hC-g6y"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="dismissKeyboardOnTap:" destination="x9e-nH-s9O" eventType="touchUpInside" id="Y0p-Dv-URt"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="98L-fP-FuS"/>
+                    <connections>
+                        <outlet property="photoNameTextView" destination="sAz-YP-8JC" id="wdb-3i-woW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lQv-w7-nWx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

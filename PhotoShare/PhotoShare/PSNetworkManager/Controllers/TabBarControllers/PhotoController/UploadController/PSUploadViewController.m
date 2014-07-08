@@ -7,43 +7,142 @@
 //
 
 #import "PSUploadViewController.h"
+#import "PSNetworkManager.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface PSUploadViewController ()
+@interface PSUploadViewController () <CLLocationManagerDelegate, UITextViewDelegate>
+
+@property (nonatomic, assign) double lat;
+@property (nonatomic, assign) double lng;
+
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocation *currentLocation;
+@property (nonatomic, strong) NSString *text;
+- (IBAction)dismissKeyboardOnTap:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UITextView *photoNameTextView;
+- (IBAction)sendPhoto:(id)sender;
 
 @end
 
 @implementation PSUploadViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithImage:(UIImage *)image andUserID:(int)userID
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
+    if (self = [super init]) {
+        _image = image;
+        _userID=userID;
+}
+    
     return self;
 }
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+
+        if ([CLLocationManager locationServicesEnabled]) {
+            self.locationManager = [[CLLocationManager alloc] init];
+            self.locationManager.delegate = self;
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+            [self.locationManager startUpdatingLocation];
+        }
+        else
+        {
+            NSLog(@"Location is not enabled");
+        }
+
+    
+    
+        self.text=@"text";
+    
+
 }
 
-- (void)didReceiveMemoryWarning
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.currentLocation = [locations objectAtIndex:0];
+//    NSLog(@"currentPosition:latitude%f   longtitude:%f",(double)self.currentLocation.coordinate.latitude, (double)self.currentLocation.coordinate.longitude);
+ 
+
+    [self.locationManager stopUpdatingLocation];
+    self.lng=self.currentLocation.coordinate.longitude;
+    self.lat=self.currentLocation.coordinate.latitude;
+    NSLog(@"lat:%f",_lat);
+    NSLog(@"lng:%f",_lng);
+
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+
+- (IBAction)sendPhoto:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ((_image) && (_userID) && (self.lat) && (self.lng) && (_text))
+    {
+        
+        [[PSNetworkManager sharedManager] sendImage:self.image withLatitude:self.lat
+                                      andLongtitude:self.lng
+                                           withText:_text fromUserID:_userID
+        success:^(id responseObject)
+        {
+          NSLog(@"image send successfully");
+        }
+        error:^(NSError *error)
+        {
+            
+        }];
+
+    }
+    else if ((!_lat) || (!_lng))
+    {
+        NSLog(@"problem with location");
+    }
+    else
+    {
+         NSLog(@"an error has occurred");
+    }
 }
-*/
+
+- (void) checkLocationServicesTurnedOn {
+    if (![CLLocationManager locationServicesEnabled]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"== Opps! =="
+                                                        message:@"'Location Services' need to be on."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];      
+    }     
+}
+
+
+-(void) checkApplicationHasLocationServicesPermission {
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"== Opps! =="
+                                                        message:@"This application needs 'Location Services' to be turned on."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];      
+    }    
+}
+
+
+
+#pragma mark - UITextFieldDelegate
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    _text=textView.text;
+    
+}
+
+
+
+- (IBAction)dismissKeyboardOnTap:(id)sender
+{
+       [[self view] endEditing:YES];
+}
+
 
 @end

@@ -90,9 +90,8 @@
     
     NSURL *urlForImage=[NSURL URLWithString:_post.photoURL];
     
-    
-    NSData *data=[NSData new];
-    data=[NSData dataWithContentsOfURL:urlForImage];
+
+    NSData *data=[NSData dataWithContentsOfURL:urlForImage];
     self.photoData=[NSData dataWithContentsOfURL:urlForImage];
     self.image=[UIImage imageWithData:data];
     [self.photoImageView setImage:self.image];
