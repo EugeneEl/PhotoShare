@@ -13,6 +13,8 @@
 - (Like *)mapWithEmail:(NSString *) email
 {
     self.email=email;
+    
+    [self.managedObjectContext MR_saveToPersistentStoreAndWait];
     return self;
 }
 @end

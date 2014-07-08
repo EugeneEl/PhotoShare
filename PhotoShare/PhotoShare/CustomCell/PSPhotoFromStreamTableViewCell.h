@@ -34,6 +34,10 @@ tableCell;
 @property (weak, nonatomic) IBOutlet UILabel *likesNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentsNumberLabel;
 @property (strong, nonatomic) Post *postForCell;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (nonatomic, assign) BOOL likesStatus;
+
+
 
 @property (weak, nonatomic) IBOutlet UILabel *timeintervalLabel;
 

@@ -47,6 +47,7 @@
 		3E4D9D0E196C073400472A7B /* Like.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D0D196C073400472A7B /* Like.m */; };
 		3E4D9D11196C073400472A7B /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D10196C073400472A7B /* Post.m */; };
 		3E4D9D14196C0BF600472A7B /* Like+mapWithEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D13196C0BF600472A7B /* Like+mapWithEmail.m */; };
+		3E4D9D16196C139100472A7B /* grey_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4D9D15196C139100472A7B /* grey_heart.png */; };
 		3E51B54F1962AD31004F0FD4 /* User+PSMapWithModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B54E1962AD31004F0FD4 /* User+PSMapWithModel.m */; };
 		3E51B5521962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5511962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m */; };
 		3E51B5581962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5551962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m */; };
@@ -220,6 +221,7 @@
 		3E4D9D10196C073400472A7B /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		3E4D9D12196C0BF600472A7B /* Like+mapWithEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Like+mapWithEmail.h"; sourceTree = "<group>"; };
 		3E4D9D13196C0BF600472A7B /* Like+mapWithEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Like+mapWithEmail.m"; sourceTree = "<group>"; };
+		3E4D9D15196C139100472A7B /* grey_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey_heart.png; sourceTree = "<group>"; };
 		3E51B54D1962AD31004F0FD4 /* User+PSMapWithModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+PSMapWithModel.h"; sourceTree = "<group>"; };
 		3E51B54E1962AD31004F0FD4 /* User+PSMapWithModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+PSMapWithModel.m"; sourceTree = "<group>"; };
 		3E51B5501962B59F004F0FD4 /* UIImageView+ps_setRoundImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ps_setRoundImage.h"; sourceTree = "<group>"; };
@@ -908,6 +910,7 @@
 		938B50498E527D4FCB80445B /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				3E4D9D15196C139100472A7B /* grey_heart.png */,
 				3E35130E1954413C00433F26 /* comment.png */,
 				938B5480C36E21FFD25F39C2 /* dislike.png */,
 				938B59B0BDE26B187E28716B /* heart-icon.png */,
@@ -1049,6 +1052,7 @@
 				3EDF9BF8195C231F003E5868 /* compass2.png in Resources */,
 				938B5FC42806EDFB95CF0C7D /* dislike.png in Resources */,
 				938B5507FB436C1B73F0F816 /* heart-icon.png in Resources */,
+				3E4D9D16196C139100472A7B /* grey_heart.png in Resources */,
 				3EDF9BFC195C2496003E5868 /* compass3.png in Resources */,
 				938B5D808CF059F488CB4A14 /* near.png in Resources */,
 				938B529F33E337409D00DD36 /* userIconBar.png in Resources */,

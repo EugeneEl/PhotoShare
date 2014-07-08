@@ -21,34 +21,20 @@
 #import "Parser.h"
 #import "PSPostModel.h"
 #import "PSPostsParser.h"
+#import "Like.h"
+#import "Like+mapWithEmail.h"
+#import "PSLikesParser.h"
 
 typedef enum {
     kNew,
     kFavourite
 } sortPostsByKey;
-//
-//static NSString *keyForPostID                                 =@"post_id";
-//static NSString *keyForPhotoDate                              =@"photo_date";
-//static NSString *keyForLikes                                  =@"likes";
-//static NSString *keyForAuthorMail                             =@"authoremail";
-//static NSString *keyForPhotoName                              =@"photoName";
-//static NSString *keyForPhotoURL                               =@"photoURL";
-//static NSString *keyForLocationDictionary                     =@"location";
-//static NSString *keyPathForLatitude                           =@"location.latitude";
-//static NSString *keyPathForLongtitude                         =@"location.longitude";
-//static NSString *keyForCommentsArray                          =@"comments";
-//static NSString *keyForCommentIDInComments                    =@"comment_id";
-//static NSString *keyForCommentatorNameInComments              =@"commentatorName";
-//static NSString *keyForCommentTextInComments                  =@"text";
-//static NSString *keyForCommentDateInComments                  =@"comment_date";
-//
+
 static NSString *keyForSortSettings                           =@"sortKey";
 
 
 
 @interface PSStreamViewController() <UITableViewDelegate ,UITableViewDataSource, NSFetchedResultsControllerDelegate, PhotoFromStreamTableViewCell,UIActionSheetDelegate>
-//@property (weak, nonatomic) IBOutlet UIImageView *imageFromPost;
-
 
 @property (nonatomic, assign) NSInteger userID;
 @property (nonatomic, strong) NSNumber * post_idParsed;
@@ -120,6 +106,7 @@ static NSString *keyForSortSettings                           =@"sortKey";
     PSUserStore *userStore= [PSUserStore userStoreManager];
     User *currentUser=userStore.activeUser;
     _userID=[currentUser.user_id integerValue];
+    _authorMailParsed=currentUser.email;
     NSLog(@"user_id:%d",_userID);
     
     
@@ -143,18 +130,30 @@ static NSString *keyForSortSettings                           =@"sortKey";
                  model.postImageLng=[postParser getPostImageLng:dictionary];
                  model.postImageName=[postParser getPostImageName:dictionary];
                  model.postArrayOfComments=[postParser getPostArrayOfComments:dictionary];
+                 
+                 
+                 Post *post=[Post MR_createEntity];
                  if ([postParser getPostLikesArray:dictionary])
                  {
                      model.postLikesCount=[[postParser getPostLikesArray:dictionary] count];
+                     PSLikesParser *likeParser=[PSLikesParser new];
+                     likeParser.arrayOfLikes=[postParser getPostLikesArray:dictionary];
                      
+                     for (NSDictionary *dictionary in likeParser.arrayOfLikes)
+                     {
+                         Like *like=[Like MR_createEntity];
+                         [like mapWithEmail:[likeParser getAuthorEmail:dictionary]];
+                         [post addLikesObject:like];
+                     }
+                     
+                 
                  }
                  else
                  {
                      model.postLikesCount=0;
                  }
                
-                 
-                 Post *post=[Post MR_createEntity];
+             
                  post=[post mapWithModel:model];
                  NSLog(@"Post added%@]n",post);
                  [currentUser addPostsObject:post];
@@ -211,18 +210,11 @@ static NSString *keyForSortSettings                           =@"sortKey";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-   
-    
    PSPhotoFromStreamTableViewCell *cell=[self.streamTableView dequeueReusableCellWithIdentifier:@"photoCell"];
-    
-    
-    
     [self configureCell:cell atIndexPath:indexPath];
 
     cell.selected=NO;
     return cell;
-    
 }
 
 
@@ -327,8 +319,48 @@ static NSString *keyForSortSettings                           =@"sortKey";
 
 }
 
-- (void)photoStreamCellLikeButtonPressed:(PSPhotoFromStreamTableViewCell  *)tableCell {
-    NSLog(@"button like pressed");
+- (void)photoStreamCellLikeButtonPressed:(PSPhotoFromStreamTableViewCell  *)tableCell
+{
+    if (!tableCell.likesStatus)
+    {
+        [[PSNetworkManager sharedManager]
+         likePostWithID:[tableCell.postForCell.postID intValue]
+         byUser:_userID
+         success:^(id responseObject)
+         {
+             NSLog(@"liked successfully");
+             Like *likeToAdd=[Like MR_createEntity];
+             [likeToAdd mapWithEmail:_authorMailParsed];
+             [tableCell.postForCell addLikesObject:likeToAdd];
+             
+         }
+         error:^(NSError *error)
+         {
+             NSLog(@"error");
+         }];
+        [self.streamTableView reloadData];
+    }
+    if (tableCell.likesStatus)
+    {
+        [[PSNetworkManager sharedManager] unlikePostWithID:[tableCell.postForCell.postID intValue]
+            byUser:_userID success:^(id responseObject)
+            {
+                NSLog(@"unlikes success ");
+                for (Like *like in tableCell.postForCell.likes)
+                {
+                    if (like.email==_authorMailParsed)
+                    {
+                        [tableCell.postForCell.likes delete:like];
+                        break;
+                    }
+                }
+            }
+            error:^(NSError *error)
+            {
+                NSLog(@"error");
+            }];
+        [self.streamTableView reloadData];
+    }
 }
 
 - (void)photoStreamCellCommentButtonPressed:(PSPhotoFromStreamTableViewCell *)
@@ -449,6 +481,28 @@ tableCell {
             [aCell setNeedsLayout]; //test here
         });
     });
+    
+    aCell.likesStatus=NO;
+    if (![postTest.likesCount intValue])
+    {
+     //  aCell.likeButton.imageView.image=[UIImage imageNamed:@"heart-icon.png"];
+        [aCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
+        NSLog(@"no likes");
+    }
+    for (Like *like in postTest.likes)
+    {
+        if (_authorMailParsed==like.email)
+        {
+             [aCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
+            aCell.likesStatus=YES;
+            break;
+        }
+        else
+        {
+           [aCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
+        }
+    }
+    
     
 //[aCell.imageForPost setImageWithURL: [NSURL URLWithString:postTest.photoURL]];
    // aCell.likesNumberLabel.text=[NSString stringWithFormat:@"%@",postTest.likes];

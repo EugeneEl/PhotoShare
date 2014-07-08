@@ -534,8 +534,8 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEt-oz-Xyt">
-                                                            <rect key="frame" x="25" y="297" width="29" height="27"/>
-                                                            <state key="normal" image="heart-icon.png">
+                                                            <rect key="frame" x="25" y="297" width="30" height="34"/>
+                                                            <state key="normal" title="l">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
@@ -575,6 +575,7 @@
                                         <connections>
                                             <outlet property="commentsNumberLabel" destination="Yea-ZH-TR3" id="rux-uB-jGu"/>
                                             <outlet property="imageForPost" destination="tJ3-QP-wke" id="lpq-ZA-yeg"/>
+                                            <outlet property="likeButton" destination="DEt-oz-Xyt" id="VPa-Vb-DGx"/>
                                             <outlet property="likesNumberLabel" destination="rvV-XC-bgk" id="BDg-Bx-5HO"/>
                                             <outlet property="photoDateLabel" destination="jHu-58-4H9" id="omw-yx-nks"/>
                                             <outlet property="photoNameLabel" destination="Q0S-w5-fI4" id="bPy-e0-ad1"/>
@@ -1063,7 +1064,6 @@
         <image name="PhotosteamIcon.png" width="48" height="32"/>
         <image name="compass5.png" width="50" height="50"/>
         <image name="friendsIconBar.png" width="48" height="32"/>
-        <image name="heart-icon.png" width="256" height="256"/>
         <image name="photoBarIcon.png" width="48" height="32"/>
         <image name="userIconBar.png" width="48" height="32"/>
     </resources>
