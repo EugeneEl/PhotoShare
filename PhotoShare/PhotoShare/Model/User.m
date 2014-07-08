@@ -2,7 +2,7 @@
 //  User.m
 //  PhotoShare
 //
-//  Created by Евгений on 04.07.14.
+//  Created by Евгений on 08.07.14.
 //  Copyright (c) 2014 Eugene. All rights reserved.
 //
 
@@ -13,6 +13,7 @@
 
 @implementation User
 
+@dynamic ava_imageURL;
 @dynamic email;
 @dynamic followed_count;
 @dynamic follower_count;
@@ -20,9 +21,8 @@
 @dynamic password;
 @dynamic posts_count;
 @dynamic user_id;
-@dynamic ava_imageURL;
-@dynamic followers;
 @dynamic followed;
+@dynamic followers;
 @dynamic posts;
 
 @end

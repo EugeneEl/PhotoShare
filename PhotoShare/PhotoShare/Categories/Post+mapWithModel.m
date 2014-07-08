@@ -20,8 +20,8 @@
 
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd'T'hh:mm:ss.SSSSSS"];
-    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [dateFormat setDateFormat:@"yyyy-MM-dd'T'hh:mm:ss.SSSSSS'+'00:00"];
+    //[dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     NSDate *date = [dateFormat dateFromString:postModel.postTime];
     NSLog(@"%@",date);
     

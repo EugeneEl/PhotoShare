@@ -42,6 +42,11 @@
 		3E4A702119508428003EFD21 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4A702019508428003EFD21 /* CoreLocation.framework */; };
 		3E4A702419509BEE003EFD21 /* UIView+PSMKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A702319509BEE003EFD21 /* UIView+PSMKAnnotationView.m */; };
 		3E4B0E7319642E8300238BD9 /* PSMailComposerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4B0E7219642E8300238BD9 /* PSMailComposerDelegate.m */; };
+		3E4D9D08196C073300472A7B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D07196C073300472A7B /* User.m */; };
+		3E4D9D0B196C073400472A7B /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D0A196C073400472A7B /* Comment.m */; };
+		3E4D9D0E196C073400472A7B /* Like.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D0D196C073400472A7B /* Like.m */; };
+		3E4D9D11196C073400472A7B /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D10196C073400472A7B /* Post.m */; };
+		3E4D9D14196C0BF600472A7B /* Like+mapWithEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D13196C0BF600472A7B /* Like+mapWithEmail.m */; };
 		3E51B54F1962AD31004F0FD4 /* User+PSMapWithModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B54E1962AD31004F0FD4 /* User+PSMapWithModel.m */; };
 		3E51B5521962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5511962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m */; };
 		3E51B5581962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5551962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m */; };
@@ -113,9 +118,6 @@
 		3EF1A8311966E9CF001D0D69 /* PSFollowersParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1A8301966E9CF001D0D69 /* PSFollowersParser.m */; };
 		3EF1A8371966F076001D0D69 /* PScommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1A8361966F076001D0D69 /* PScommentModel.m */; };
 		3EF1A83A1966F1EC001D0D69 /* Comment+mapWthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1A8391966F1EC001D0D69 /* Comment+mapWthModel.m */; };
-		3EF1A8461966F45F001D0D69 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1A8451966F45F001D0D69 /* User.m */; };
-		3EF1A8491966F45F001D0D69 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1A8481966F45F001D0D69 /* Comment.m */; };
-		3EF1A84C1966F45F001D0D69 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1A84B1966F45F001D0D69 /* Post.m */; };
 		3EFC9A27195DC33200846D47 /* UIViewController+UIViewController_PSSharingDataComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC9A26195DC33200846D47 /* UIViewController+UIViewController_PSSharingDataComposer.m */; };
 		82A7044E1952F7DB002EB459 /* PSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A7044D1952F7DB002EB459 /* PSLoginViewController.m */; };
 		938B50E906BEC7EF35DA3FC9 /* PhotosteamIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 938B570A2EC19C77E23C1B08 /* PhotosteamIcon.png */; };
@@ -208,6 +210,16 @@
 		3E4A702319509BEE003EFD21 /* UIView+PSMKAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PSMKAnnotationView.m"; sourceTree = "<group>"; };
 		3E4B0E7119642E8300238BD9 /* PSMailComposerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSMailComposerDelegate.h; sourceTree = "<group>"; };
 		3E4B0E7219642E8300238BD9 /* PSMailComposerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSMailComposerDelegate.m; sourceTree = "<group>"; };
+		3E4D9D06196C073300472A7B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		3E4D9D07196C073300472A7B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		3E4D9D09196C073400472A7B /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		3E4D9D0A196C073400472A7B /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		3E4D9D0C196C073400472A7B /* Like.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Like.h; sourceTree = "<group>"; };
+		3E4D9D0D196C073400472A7B /* Like.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Like.m; sourceTree = "<group>"; };
+		3E4D9D0F196C073400472A7B /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		3E4D9D10196C073400472A7B /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		3E4D9D12196C0BF600472A7B /* Like+mapWithEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Like+mapWithEmail.h"; sourceTree = "<group>"; };
+		3E4D9D13196C0BF600472A7B /* Like+mapWithEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Like+mapWithEmail.m"; sourceTree = "<group>"; };
 		3E51B54D1962AD31004F0FD4 /* User+PSMapWithModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+PSMapWithModel.h"; sourceTree = "<group>"; };
 		3E51B54E1962AD31004F0FD4 /* User+PSMapWithModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+PSMapWithModel.m"; sourceTree = "<group>"; };
 		3E51B5501962B59F004F0FD4 /* UIImageView+ps_setRoundImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ps_setRoundImage.h"; sourceTree = "<group>"; };
@@ -341,12 +353,6 @@
 		3EF1A8361966F076001D0D69 /* PScommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PScommentModel.m; sourceTree = "<group>"; };
 		3EF1A8381966F1EC001D0D69 /* Comment+mapWthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Comment+mapWthModel.h"; sourceTree = "<group>"; };
 		3EF1A8391966F1EC001D0D69 /* Comment+mapWthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Comment+mapWthModel.m"; sourceTree = "<group>"; };
-		3EF1A8441966F45F001D0D69 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		3EF1A8451966F45F001D0D69 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		3EF1A8471966F45F001D0D69 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
-		3EF1A8481966F45F001D0D69 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
-		3EF1A84A1966F45F001D0D69 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
-		3EF1A84B1966F45F001D0D69 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		3EFC9A25195DC33200846D47 /* UIViewController+UIViewController_PSSharingDataComposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+UIViewController_PSSharingDataComposer.h"; sourceTree = "<group>"; };
 		3EFC9A26195DC33200846D47 /* UIViewController+UIViewController_PSSharingDataComposer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+UIViewController_PSSharingDataComposer.m"; sourceTree = "<group>"; };
 		82A7044C1952F7DB002EB459 /* PSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLoginViewController.h; sourceTree = SOURCE_ROOT; };
@@ -526,6 +532,8 @@
 				3EF1A8211966B516001D0D69 /* Post+mapWithModel.m */,
 				3EF1A8381966F1EC001D0D69 /* Comment+mapWthModel.h */,
 				3EF1A8391966F1EC001D0D69 /* Comment+mapWthModel.m */,
+				3E4D9D12196C0BF600472A7B /* Like+mapWithEmail.h */,
+				3E4D9D13196C0BF600472A7B /* Like+mapWithEmail.m */,
 			);
 			name = Categories;
 			path = PhotoShare/Categories;
@@ -848,13 +856,15 @@
 		3EAF84E719471D33003D1987 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3E4D9D0F196C073400472A7B /* Post.h */,
+				3E4D9D10196C073400472A7B /* Post.m */,
+				3E4D9D0C196C073400472A7B /* Like.h */,
+				3E4D9D0D196C073400472A7B /* Like.m */,
+				3E4D9D09196C073400472A7B /* Comment.h */,
+				3E4D9D0A196C073400472A7B /* Comment.m */,
+				3E4D9D06196C073300472A7B /* User.h */,
+				3E4D9D07196C073300472A7B /* User.m */,
 				3E11884E194B2E9D00D562A1 /* UserDataModel.xcdatamodeld */,
-				3EF1A84A1966F45F001D0D69 /* Post.h */,
-				3EF1A84B1966F45F001D0D69 /* Post.m */,
-				3EF1A8471966F45F001D0D69 /* Comment.h */,
-				3EF1A8481966F45F001D0D69 /* Comment.m */,
-				3EF1A8441966F45F001D0D69 /* User.h */,
-				3EF1A8451966F45F001D0D69 /* User.m */,
 				3EAF852E19476C95003D1987 /* PSUserModel.h */,
 				3EAF852F19476C95003D1987 /* PSUserModel.m */,
 				3EF1A81D1966B356001D0D69 /* PSPostModel.h */,
@@ -1075,10 +1085,10 @@
 				3E11883D194AE2FF00D562A1 /* PSProfileViewController.m in Sources */,
 				3EF1A8251966C081001D0D69 /* PSUserParser.m in Sources */,
 				3EF1A82B1966E15B001D0D69 /* PSCommentsParser.m in Sources */,
+				3E4D9D08196C073300472A7B /* User.m in Sources */,
 				3E51B5591962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m in Sources */,
-				3EF1A8461966F45F001D0D69 /* User.m in Sources */,
+				3E4D9D0B196C073400472A7B /* Comment.m in Sources */,
 				3EAF84E019471AAF003D1987 /* MagicalRecord+Options.m in Sources */,
-				3EF1A8491966F45F001D0D69 /* Comment.m in Sources */,
 				3EAF848819471A86003D1987 /* AFURLConnectionOperation.m in Sources */,
 				82A7044E1952F7DB002EB459 /* PSLoginViewController.m in Sources */,
 				3EAF84CD19471AAF003D1987 /* NSNumber+MagicalDataImport.m in Sources */,
@@ -1129,8 +1139,9 @@
 				3EAF851E19473D66003D1987 /* PSNetworkManager.m in Sources */,
 				3EAF84D319471AAF003D1987 /* NSManagedObject+MagicalFinders.m in Sources */,
 				3EAF84D519471AAF003D1987 /* NSManagedObject+MagicalRequests.m in Sources */,
+				3E4D9D11196C073400472A7B /* Post.m in Sources */,
 				3EAF84D219471AAF003D1987 /* NSManagedObject+MagicalDataImport.m in Sources */,
-				3EF1A84C1966F45F001D0D69 /* Post.m in Sources */,
+				3E4D9D14196C0BF600472A7B /* Like+mapWithEmail.m in Sources */,
 				3E48C24D1948906E00AC842D /* PSSignUpViewController.m in Sources */,
 				3EAF84E219471AAF003D1987 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				3E3F8C381949E136009916BD /* UIImageView+AFNetworking.m in Sources */,
@@ -1146,6 +1157,7 @@
 				3E3F8C3A1949E136009916BD /* UIRefreshControl+AFNetworking.m in Sources */,
 				3EF1A8371966F076001D0D69 /* PScommentModel.m in Sources */,
 				3EAF84CE19471AAF003D1987 /* NSObject+MagicalDataImport.m in Sources */,
+				3E4D9D0E196C073400472A7B /* Like.m in Sources */,
 				3EAF848619471A86003D1987 /* AFNetworkReachabilityManager.m in Sources */,
 				3E3F8C3B1949E136009916BD /* UIWebView+AFNetworking.m in Sources */,
 				3E4A702419509BEE003EFD21 /* UIView+PSMKAnnotationView.m in Sources */,

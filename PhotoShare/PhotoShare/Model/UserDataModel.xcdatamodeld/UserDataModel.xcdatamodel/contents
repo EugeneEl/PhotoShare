@@ -8,7 +8,10 @@
         <attribute name="commentText" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="comments" inverseEntity="Post" syncable="YES"/>
     </entity>
-    <entity name="Like" syncable="YES"/>
+    <entity name="Like" representedClassName="Like" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="likes" inverseEntity="Post" syncable="YES"/>
+    </entity>
     <entity name="Post" representedClassName="Post" syncable="YES">
         <attribute name="authorMail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="likesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -19,6 +22,7 @@
         <attribute name="photoURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="post" inverseEntity="Comment" syncable="YES"/>
+        <relationship name="likes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Like" inverseName="post" inverseEntity="Like" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="posts" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
@@ -35,9 +39,9 @@
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Post" inverseName="user" inverseEntity="Post" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Comment" positionX="-72" positionY="-2736" width="128" height="133"/>
-        <element name="Like" positionX="-234" positionY="-2646" width="128" height="45"/>
-        <element name="Post" positionX="-236" positionY="-2736" width="128" height="193"/>
-        <element name="User" positionX="-405" positionY="-2736" width="128" height="208"/>
+        <element name="Comment" positionX="-119" positionY="-2772" width="128" height="133"/>
+        <element name="Like" positionX="-227" positionY="-2518" width="128" height="73"/>
+        <element name="Post" positionX="-270" positionY="-2772" width="128" height="208"/>
+        <element name="User" positionX="-486" positionY="-2754" width="128" height="208"/>
     </elements>
 </model>

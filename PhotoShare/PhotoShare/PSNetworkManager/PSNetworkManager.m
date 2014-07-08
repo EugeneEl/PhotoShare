@@ -390,6 +390,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 }
 
 
+
 - (AFHTTPRequestOperation *) getUserPosts:(NSInteger)page
                              pageSize:(NSInteger)pageSize
                              success:(successBlockWithId)success
@@ -459,6 +460,63 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
     
 }
+
+- (AFHTTPRequestOperation *)likePostWithID:(int)PostID byUser:(int)userID
+                                  success:(successBlockWithId)success
+                                              error:(errorBlock)error
+{
+    NSString *request=@"posts/";
+    request=[request stringByAppendingString:[NSString stringWithFormat:@"%d/like/%d",userID,PostID]];
+    return [_requestManager GET:request
+            
+            parameters:nil
+            
+            success:^(AFHTTPRequestOperation *operation, id responseObject)
+            {
+                NSLog(@"Posts was liked");
+                success(responseObject);
+                
+            }
+            
+            
+            failure:^(AFHTTPRequestOperation *operation, NSError *e)
+            {
+                error(e);
+                NSLog(@"error:%@",[e localizedDescription]);
+            }];
+}
+
+
+
+- (AFHTTPRequestOperation *)unlikePostWithID:(int)PostID byUser:(int)userID
+                                   success:(successBlockWithId)success
+                                     error:(errorBlock)error
+{
+    NSString *request=@"posts/";
+    request=[request stringByAppendingString:[NSString stringWithFormat:@"%d/unlike/%d",userID,PostID]];
+    return [_requestManager GET:request
+            
+                     parameters:nil
+            
+                        success:^(AFHTTPRequestOperation *operation, id responseObject)
+            {
+                NSLog(@"Posts was unliked");
+                success(responseObject);
+                
+            }
+            
+            
+                        failure:^(AFHTTPRequestOperation *operation, NSError *e)
+            {
+                error(e);
+                NSLog(@"error:%@",[e localizedDescription]);
+            }];
+}
+
+
+
+
+
 
 
 @end

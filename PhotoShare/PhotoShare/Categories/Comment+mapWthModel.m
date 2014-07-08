@@ -18,7 +18,7 @@
     self.commentatorName=commentModel.commentatorName;
     self.commentText=commentModel.commentText;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd'T'hh:mm:ss.SSSSSS"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd'T'hh:mm:ss.SSSSSS'+'00:00"];
     [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     NSDate *date = [dateFormat dateFromString:commentModel.commentDateString];
     NSLog(@"%@",date);

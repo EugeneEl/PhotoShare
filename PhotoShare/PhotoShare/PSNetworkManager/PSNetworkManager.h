@@ -46,9 +46,22 @@ typedef void (^errorBlock)(NSError* error);
 - (AFHTTPRequestOperation *)getAllUserPostsWithUserID:(NSInteger)userID
                                               success:(successBlockWithId)success
                                                 error:(errorBlock)error;
+
 - (AFHTTPRequestOperation *) sendImage:(UIImage *)image withLatitude:(double)lat andLongtitude:(double)lng withText:(NSString *)text  fromUserID:(NSInteger)userID
                                success:(successBlockWithId)successWithId
                                  error:(errorBlock)errorWithCode;
+
+
+
+
+- (AFHTTPRequestOperation *)likePostWithID:(int)PostID byUser:(int)userID
+                                   success:(successBlockWithId)success
+                                     error:(errorBlock)error;
+
+
+- (AFHTTPRequestOperation *)unlikePostWithID:(int)PostID byUser:(int)userID
+                                     success:(successBlockWithId)success
+                                       error:(errorBlock)error;
 
 
 @end

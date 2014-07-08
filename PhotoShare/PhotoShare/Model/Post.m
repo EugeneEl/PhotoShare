@@ -2,12 +2,13 @@
 //  Post.m
 //  PhotoShare
 //
-//  Created by Евгений on 04.07.14.
+//  Created by Евгений on 08.07.14.
 //  Copyright (c) 2014 Eugene. All rights reserved.
 //
 
 #import "Post.h"
 #import "Comment.h"
+#import "Like.h"
 #import "User.h"
 
 
@@ -23,5 +24,6 @@
 @dynamic postID;
 @dynamic comments;
 @dynamic user;
+@dynamic likes;
 
 @end

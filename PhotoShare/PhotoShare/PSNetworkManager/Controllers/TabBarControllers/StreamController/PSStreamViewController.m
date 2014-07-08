@@ -146,11 +146,13 @@ static NSString *keyForSortSettings                           =@"sortKey";
                  if ([postParser getPostLikesArray:dictionary])
                  {
                      model.postLikesCount=[[postParser getPostLikesArray:dictionary] count];
+                     
                  }
                  else
                  {
                      model.postLikesCount=0;
                  }
+               
                  
                  Post *post=[Post MR_createEntity];
                  post=[post mapWithModel:model];

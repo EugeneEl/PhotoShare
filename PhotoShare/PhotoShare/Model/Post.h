@@ -2,14 +2,14 @@
 //  Post.h
 //  PhotoShare
 //
-//  Created by Евгений on 04.07.14.
+//  Created by Евгений on 08.07.14.
 //  Copyright (c) 2014 Eugene. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Comment, User;
+@class Comment, Like, User;
 
 @interface Post : NSManagedObject
 
@@ -23,6 +23,7 @@
 @property (nonatomic, retain) NSNumber * postID;
 @property (nonatomic, retain) NSSet *comments;
 @property (nonatomic, retain) User *user;
+@property (nonatomic, retain) NSSet *likes;
 @end
 
 @interface Post (CoreDataGeneratedAccessors)
@@ -31,5 +32,10 @@
 - (void)removeCommentsObject:(Comment *)value;
 - (void)addComments:(NSSet *)values;
 - (void)removeComments:(NSSet *)values;
+
+- (void)addLikesObject:(Like *)value;
+- (void)removeLikesObject:(Like *)value;
+- (void)addLikes:(NSSet *)values;
+- (void)removeLikes:(NSSet *)values;
 
 @end
