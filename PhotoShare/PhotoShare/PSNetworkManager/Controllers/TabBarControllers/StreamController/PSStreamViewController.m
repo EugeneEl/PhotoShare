@@ -331,7 +331,7 @@ static NSString *keyForSortSettings=@"sortKey";
              [tableCell.postForCell addLikesObject:likeToAdd];
              tableCell.likesStatus=YES;
              [tableCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
-             
+             [tableCell.postForCell.managedObjectContext save:nil];
              
          }
          error:^(NSError *error)
@@ -352,12 +352,13 @@ static NSString *keyForSortSettings=@"sortKey";
                 [tableCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
                 for (Like *like in tableCell.postForCell.likes)
                 {
-                    if (like.email==_authorMailParsed)
+                    if ([like.email isEqualToString:_authorMailParsed])
                     {
-                        [tableCell.postForCell.likes delete:like];
+                        [tableCell.postForCell removeLikesObject:like];
                         break;
                     }
                 }
+                [tableCell.postForCell.managedObjectContext save:nil];
             }
             error:^(NSError *error)
             {
