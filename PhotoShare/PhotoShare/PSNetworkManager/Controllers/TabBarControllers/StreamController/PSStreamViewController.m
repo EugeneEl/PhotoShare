@@ -86,15 +86,6 @@ static NSString *keyForSortSettings=@"sortKey";
     self.streamTableView.clipsToBounds=NO;
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
-    
-  
- 
-//    [self.streamTableView reloadData];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     PSUserStore *userStore= [PSUserStore userStoreManager];
     User *currentUser=userStore.activeUser;
     _userID=[currentUser.user_id integerValue];
@@ -125,27 +116,32 @@ static NSString *keyForSortSettings=@"sortKey";
                  
                  
                  Post *post=[Post MR_createEntity];
-                 if ([postParser getPostLikesArray:dictionary])
+                 if ([postParser getPostLikesArray:dictionary]!=nil)
                  {
                      model.postLikesCount=[[postParser getPostLikesArray:dictionary] count];
+                     NSLog(@"%@",dictionary);
                      PSLikesParser *likeParser=[PSLikesParser new];
                      likeParser.arrayOfLikes=[postParser getPostLikesArray:dictionary];
                      
-                     for (NSDictionary *dictionary in likeParser.arrayOfLikes)
+                     if ([likeParser.arrayOfLikes count])
                      {
-                         Like *like=[Like MR_createEntity];
-                         [like mapWithEmail:[likeParser getAuthorEmail:dictionary]];
-                         [post addLikesObject:like];
+                         
+                         
+                         for (NSDictionary *dictionary in likeParser.arrayOfLikes)
+                         {
+                             Like *like=[Like MR_createEntity];
+                             [like mapWithEmail:[likeParser getAuthorEmail:dictionary]];
+                             [post addLikesObject:like];
+                         }
+                         
                      }
-                     
-                 
                  }
                  else
                  {
                      model.postLikesCount=0;
                  }
-               
-             
+                 
+                 
                  post=[post mapWithModel:model];
                  NSLog(@"Post added%@]n",post);
                  [currentUser addPostsObject:post];
@@ -162,7 +158,16 @@ static NSString *keyForSortSettings=@"sortKey";
      {
          NSLog(@"error");
      }];
+
+  
+ 
+//    [self.streamTableView reloadData];
 }
+
+
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    }
 
 
 #pragma mark UITableViewDataSource
@@ -324,20 +329,27 @@ static NSString *keyForSortSettings=@"sortKey";
              Like *likeToAdd=[Like MR_createEntity];
              [likeToAdd mapWithEmail:_authorMailParsed];
              [tableCell.postForCell addLikesObject:likeToAdd];
+             tableCell.likesStatus=YES;
+             [tableCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
+             
              
          }
          error:^(NSError *error)
          {
              NSLog(@"error");
          }];
-        [self.streamTableView reloadData];
+//        [self.streamTableView reloadData];
     }
     if (tableCell.likesStatus)
     {
         [[PSNetworkManager sharedManager] unlikePostWithID:[tableCell.postForCell.postID intValue]
-            byUser:_userID success:^(id responseObject)
+            byUser:_userID
+            success:^(id responseObject)
             {
+                
                 NSLog(@"unlikes success ");
+                tableCell.likesStatus=NO;
+                [tableCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
                 for (Like *like in tableCell.postForCell.likes)
                 {
                     if (like.email==_authorMailParsed)
@@ -351,8 +363,9 @@ static NSString *keyForSortSettings=@"sortKey";
             {
                 NSLog(@"error");
             }];
-        [self.streamTableView reloadData];
+//        [self.streamTableView reloadData];
     }
+     [self.streamTableView reloadData];
 }
 
 - (void)photoStreamCellCommentButtonPressed:(PSPhotoFromStreamTableViewCell *)
@@ -481,18 +494,22 @@ tableCell {
         [aCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
         NSLog(@"no likes");
     }
-    for (Like *like in postTest.likes)
+    else
     {
-        if (_authorMailParsed==like.email)
+        for (Like *like in postTest.likes)
         {
-             [aCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
-            aCell.likesStatus=YES;
-            break;
+            if ([like.email isEqualToString:_authorMailParsed])
+            {
+                [aCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
+                aCell.likesStatus=YES;
+                break;
+            }
+            else
+            {
+                [aCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
+            }
         }
-        else
-        {
-           [aCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
-        }
+
     }
     
     

@@ -14,7 +14,7 @@
 {
     self.email=email;
     
-    [self.managedObjectContext MR_saveToPersistentStoreAndWait];
+
     return self;
 }
 @end
