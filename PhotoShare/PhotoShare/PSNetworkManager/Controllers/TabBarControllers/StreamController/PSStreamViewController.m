@@ -30,9 +30,7 @@ typedef enum {
     kFavourite
 } sortPostsByKey;
 
-static NSString *keyForSortSettings                           =@"sortKey";
-
-
+static NSString *keyForSortSettings=@"sortKey";
 
 @interface PSStreamViewController() <UITableViewDelegate ,UITableViewDataSource, NSFetchedResultsControllerDelegate, PhotoFromStreamTableViewCell,UIActionSheetDelegate>
 
@@ -43,9 +41,7 @@ static NSString *keyForSortSettings                           =@"sortKey";
 @property (nonatomic, copy) NSString * photoNameParsed;
 @property (nonatomic, copy) NSString * photoURLParsed;
 @property (nonatomic, copy) NSDate * photo_dateParsed;
-
 @property (nonatomic, assign) NSInteger cellCount;
-
 @property (nonatomic,strong) NSNumber * commentIDParsed;
 @property (nonatomic,copy) NSString * commentatorNameParsed;
 @property (nonatomic,copy) NSString * commentTextParsed;
@@ -54,18 +50,14 @@ static NSString *keyForSortSettings                           =@"sortKey";
 @property (nonatomic, strong) NSData *imageDataToShare;
 @property (nonatomic, copy)  NSString *photoName;
 @property (nonatomic, assign) NSInteger count;
-
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic,assign) double photoLatitudeParsed;
+@property (nonatomic,assign) double photoLongtitudeParsed;
+@property (nonatomic,assign) sortPostsByKey sortKey;
+
 
 - (IBAction)switchSortKey:(id)sender;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *changeSortKeySegmentController;
-
-
-@property (nonatomic,assign) double photoLatitudeParsed;
-@property (nonatomic,assign) double photoLongtitudeParsed;
-
-@property (nonatomic,assign) sortPostsByKey sortKey;
-
 @property (weak, nonatomic) IBOutlet UITableView *streamTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (strong,nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -486,7 +478,7 @@ tableCell {
     if (![postTest.likesCount intValue])
     {
      //  aCell.likeButton.imageView.image=[UIImage imageNamed:@"heart-icon.png"];
-        [aCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
+        [aCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
         NSLog(@"no likes");
     }
     for (Like *like in postTest.likes)

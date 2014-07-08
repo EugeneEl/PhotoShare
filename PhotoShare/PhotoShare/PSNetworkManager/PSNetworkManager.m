@@ -467,6 +467,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 {
     NSString *request=@"posts/";
     request=[request stringByAppendingString:[NSString stringWithFormat:@"%d/like/%d",userID,PostID]];
+    NSLog(@"%@",request);
     return [_requestManager GET:request
             
             parameters:nil
