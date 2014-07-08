@@ -16,7 +16,6 @@
 @implementation PSPhotoFromStreamTableViewCell
 
 - (IBAction)likeAction:(id)sender {
-    
     [self.delegate photoStreamCellLikeButtonPressed:self];
     
 }

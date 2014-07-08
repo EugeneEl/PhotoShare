@@ -147,7 +147,7 @@
 "kfN-rc-Sjh.title" = "Настройки";
 
 /* Class = "IBUIButton"; normalTitle = "comment"; ObjectID = "mW7-eO-ub3"; */
-"mW7-eO-ub3.normalTitle" = "comment";
+"mW7-eO-ub3.normalTitle" = "Комментировать";
 
 /* Class = "IBUITabBarItem"; title = "Photo"; ObjectID = "nRy-8y-w5Q"; */
 "nRy-8y-w5Q.title" = "Фото";

@@ -447,6 +447,9 @@
                                         <state key="normal" title="Change photo">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="actionChangePhoto:" destination="sdy-UA-vG0" eventType="touchUpInside" id="SDW-OD-H8Z"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8k-XB-Ooi">
                                         <rect key="frame" x="70" y="236" width="181" height="30"/>

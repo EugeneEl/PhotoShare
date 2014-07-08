@@ -84,7 +84,7 @@
 "Q0S-w5-fI4.text" = "photoName";
 
 /* Class = "IBUIButton"; normalTitle = "%Login"; ObjectID = "QCA-I9-1dV"; */
-"QCA-I9-1dV.normalTitle" = "%Login";
+"QCA-I9-1dV.normalTitle" = "Login";
 
 /* Class = "IBUITabBarItem"; title = "Photostream"; ObjectID = "QqV-gH-NZg"; */
 "QqV-gH-NZg.title" = "Photostream";

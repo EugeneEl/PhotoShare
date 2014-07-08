@@ -15,8 +15,6 @@
 
 @interface PSPhotoController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
-
-
 @property (nonatomic,copy) NSArray*  arrayOfImages;
 @property (strong, atomic) ALAssetsLibrary* library;
 @property (weak, nonatomic) IBOutlet UIButton *postButton;
@@ -84,26 +82,26 @@
     
     [self presentViewController:picker animated:YES completion:NULL];
 }
-
-- (IBAction)actionTakeFromAlbum:(id)sender {
-    
-    UIImagePickerControllerSourceType type=UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    BOOL ok=[UIImagePickerController isSourceTypeAvailable:type];
-    if (!ok) {
-        NSLog(@"error");
-        return;
-    }
-    
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.sourceType = type;
-    NSLog(@"%@",picker.mediaTypes);
-    picker.delegate = self;
-    picker.editing=NO;
-
-    [self presentViewController:picker animated:YES completion:NULL];
-    
-}
+//
+//- (IBAction)actionTakeFromAlbum:(id)sender {
+//    
+//    UIImagePickerControllerSourceType type=UIImagePickerControllerSourceTypePhotoLibrary;
+//    
+//    BOOL ok=[UIImagePickerController isSourceTypeAvailable:type];
+//    if (!ok) {
+//        NSLog(@"error");
+//        return;
+//    }
+//    
+//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//    picker.sourceType = type;
+//    NSLog(@"%@",picker.mediaTypes);
+//    picker.delegate = self;
+//    picker.editing=NO;
+//
+//    [self presentViewController:picker animated:YES completion:NULL];
+//    
+//}
 
 #pragma mark - Image Picker Controller delegate methods
     
@@ -178,8 +176,6 @@
 [picker dismissViewControllerAnimated:YES completion:NULL];
         
 }
-
-
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

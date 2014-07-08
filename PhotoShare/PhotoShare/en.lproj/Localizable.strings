@@ -85,3 +85,10 @@
 
 
 
+//  SettingController
+"actionSheetButtonFromLibraryKey"="Take from library";
+"actionSheetButtonFromCameraKey"="Take from camera";
+
+
+
+

@@ -320,6 +320,9 @@ static NSString *keyForSortSettings=@"sortKey";
 {
     if (!tableCell.likesStatus)
     {
+        if ([tableCell isWaitingForLikeResponse]) return;
+        [tableCell setWaitingForLikeResponse:YES];
+        
         [[PSNetworkManager sharedManager]
          likePostWithID:[tableCell.postForCell.postID intValue]
          byUser:_userID
@@ -332,16 +335,21 @@ static NSString *keyForSortSettings=@"sortKey";
              tableCell.likesStatus=YES;
              [tableCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
              [tableCell.postForCell.managedObjectContext save:nil];
+             [tableCell setWaitingForLikeResponse:NO];
              
          }
          error:^(NSError *error)
          {
+                          [tableCell setWaitingForLikeResponse:NO];
              NSLog(@"error");
          }];
 //        [self.streamTableView reloadData];
     }
     if (tableCell.likesStatus)
     {
+        if ([tableCell isWaitingForLikeResponse]) return;
+                [tableCell setWaitingForLikeResponse:YES];
+        
         [[PSNetworkManager sharedManager] unlikePostWithID:[tableCell.postForCell.postID intValue]
             byUser:_userID
             success:^(id responseObject)
@@ -350,6 +358,7 @@ static NSString *keyForSortSettings=@"sortKey";
                 NSLog(@"unlikes success ");
                 tableCell.likesStatus=NO;
                 [tableCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
+                             [tableCell setWaitingForLikeResponse:NO];
                 for (Like *like in tableCell.postForCell.likes)
                 {
                     if ([like.email isEqualToString:_authorMailParsed])
@@ -362,6 +371,7 @@ static NSString *keyForSortSettings=@"sortKey";
             }
             error:^(NSError *error)
             {
+                             [tableCell setWaitingForLikeResponse:NO];
                 NSLog(@"error");
             }];
 //        [self.streamTableView reloadData];

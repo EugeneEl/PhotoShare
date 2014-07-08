@@ -17,8 +17,6 @@
 
 - (Post *)mapWithModel:(PSPostModel*) postModel
 {
-
-    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'hh:mm:ss.SSSSSS'+'00:00"];
     //[dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];

@@ -14,8 +14,7 @@
 @interface PSSettingsViewController()
 
 
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *passwordLabel;
+
 
 - (IBAction)logout:(id)sender;
 
@@ -23,6 +22,22 @@
 
 
 @implementation PSSettingsViewController
+- (IBAction)actionChangePhoto:(id)sender
+{
+    UIActionSheet* actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:nil
+                                  delegate:self
+                                  cancelButtonTitle:NSLocalizedString
+                                  (@"actionSheetButtonCancelNameKey", "")
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:nil, nil];
+
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"actionSheetButtonFromCameraKey", "")];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"actionSheetButtonFromLibraryKey", "")];
+    
+    //without next line action sheet does not appear on iphone 3.5 inch
+    [actionSheet showFromTabBar:(UIView*)self.view];
+}
 
 - (IBAction)logout:(id)sender {
     
@@ -52,6 +67,72 @@
     
 
 }
+
+
+
+
+
+
+/*
+ - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+ {
+ NSLog(@"%@",info);
+ 
+ 
+ 
+ if (picker.sourceType==UIImagePickerControllerSourceTypeCamera)
+ {
+ UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+ 
+ [self.library saveImage:chosenImage toAlbum:@"PhotoShare" withCompletionBlock:^(NSError *error) {
+ if (error)
+ {
+ NSLog(@"Error: %@", [error description]);
+ UIAlertView *alert=[[UIAlertView alloc]
+ initWithTitle:NSLocalizedString(@ "ErrorStringKey","")
+ message:NSLocalizedString(@"alertViewOnSaveErrorKey","") delegate:nil
+ cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey","")otherButtonTitles:nil, nil];
+ [alert show];
+ }
+ else
+ {
+ UIAlertView *alert=[[UIAlertView alloc]
+ initWithTitle:NSLocalizedString(@"alertViewSuccessKey","")
+ message:NSLocalizedString(@"alertViewOnSaveSuccessKey","")
+ delegate:nil
+ cancelButtonTitle:NSLocalizedString(@"alertViewOkKey","") otherButtonTitles:nil, nil];
+ [alert show];
+ [_postButton setHidden:NO];
+ }
+ }];
+ 
+ NSLog(@"%@",chosenImage);
+ 
+ 
+ 
+ NSDictionary *dictionary=[info valueForKey:UIImagePickerControllerMediaMetadata];
+ NSLog(@"metaData:%@",dictionary);
+ 
+ self.imageForPhoto.image = chosenImage;
+ self.imageForUpload=chosenImage;
+ [picker dismissViewControllerAnimated:YES completion:NULL];
+ }
+ 
+ else
+ {
+ UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+ 
+ 
+ self.imageForPhoto.image = chosenImage;
+ self.imageForPhoto.contentMode = UIViewContentModeScaleAspectFill;
+ NSLog(@"%@",chosenImage);
+ 
+ self.imageForUpload=chosenImage;
+ [_postButton setHidden:NO];
+ [picker dismissViewControllerAnimated:YES completion:NULL];
+ };
+ }
+ */
 
 
 

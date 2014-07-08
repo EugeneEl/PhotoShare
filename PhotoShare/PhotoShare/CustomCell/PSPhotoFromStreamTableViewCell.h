@@ -26,7 +26,7 @@ tableCell;
 @end
 
 @interface PSPhotoFromStreamTableViewCell : UITableViewCell
-
+//review никаких аутлетов в интерфейсе, заменить на назначение одного объекта
 @property(weak,nonatomic) id <PhotoFromStreamTableViewCell> delegate;
 @property (weak, nonatomic) IBOutlet UIImageView *imageForPost;
 @property (weak, nonatomic) IBOutlet UILabel *photoNameLabel;
@@ -36,8 +36,7 @@ tableCell;
 @property (strong, nonatomic) Post *postForCell;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (nonatomic, assign) BOOL likesStatus;
-
-
+@property (nonatomic, getter = isWaitingForLikeResponse) BOOL waitingForLikeResponse;
 
 @property (weak, nonatomic) IBOutlet UILabel *timeintervalLabel;
 

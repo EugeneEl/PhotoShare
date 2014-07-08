@@ -80,3 +80,9 @@
 
 //  PSPhotoController.m
 "alertViewErrorNoCameraKey"="В Вашем устройстве нет камеры";
+
+
+
+//  SettingController
+"actionSheetButtonFromLibraryKey"="Выбрать из альбома";
+"actionSheetButtonFromCameraKey"="Выбрать из камеры";
