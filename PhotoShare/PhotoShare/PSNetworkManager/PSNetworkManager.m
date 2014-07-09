@@ -455,10 +455,6 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
         {
             errorWithCode(error);
         }];
-    
-    
-    
-    
 }
 
 - (AFHTTPRequestOperation *)likePostWithID:(int)PostID byUser:(int)userID
@@ -499,7 +495,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
             
                      parameters:nil
             
-                        success:^(AFHTTPRequestOperation *operation, id responseObject)
+            success:^(AFHTTPRequestOperation *operation, id responseObject)
             {
                 NSLog(@"Posts was unliked");
                 success(responseObject);
@@ -512,6 +508,54 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
                 error(e);
                 NSLog(@"error:%@",[e localizedDescription]);
             }];
+}
+
+- (AFHTTPRequestOperation *) updateUserInforWithuserAva:(UIImage *)image newPassword:(NSString *)password newUserName:(NSString *)name  fromUserID:(int)userID
+                             success:(successBlockWithId)successWithId
+                               error:(errorBlock)errorWithCode
+
+{
+
+   
+    NSDictionary *params=[NSDictionary new];
+    if ((![password isEqualToString:@""]) && (![name isEqualToString:@""])) {
+        params = @{@"user_name":name,
+                   @"password":password,
+                   };
+    }
+    else if ( [name isEqualToString:@""] && (![password isEqualToString:@""])) {
+        params = @{@"password":password};
+    }
+    else if ( (![name isEqualToString:@""] )&& ([password isEqualToString:@""]))
+    {
+        params = @{@"user_name":name};
+    }
+    else if (([password isEqualToString:@""]) && ([name isEqualToString:@""])){
+        params=nil;
+    }
+    
+    NSString *request=[NSString stringWithFormat:@"users/%d",userID];
+
+    return  [_requestManager  POST:request parameters:params
+     constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+         {
+             if (image)
+             {
+                 [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 1.0)
+                                             name:@"pic"
+                                         fileName:@"pic.jpg"
+                                         mimeType:@"image/jpeg"
+                  ];
+             }
+         }
+                       success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             successWithId(responseObject);
+         }
+                       failure:^(AFHTTPRequestOperation *operation, NSError *error)
+         {
+             errorWithCode(error);
+         }];
 }
 
 

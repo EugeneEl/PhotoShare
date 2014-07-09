@@ -10,14 +10,27 @@
 #import "PSUserStore.h"
 #import "User.h"
 #import "CustomUnwindSegue.h"
+#import "PSNetworkManager.h"
 
-@interface PSSettingsViewController() <UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
+static NSString *PSChaningUserInfoErrorDomain = @"PSChangingUserInfoErrorDomain";
+static NSInteger PSNottingToShareErrorCode  = 101;
+
+@interface PSSettingsViewController() <UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
+
+@property (nonatomic, weak) IBOutlet UIButton *updateButton;
+@property (nonatomic, weak) IBOutlet UITextField *nameTextField;
+@property (nonatomic, weak) IBOutlet UITextField *passwordTextField;
+@property (nonatomic, weak) IBOutlet UIImageView *avaImageView;
+
+- (IBAction)actionUpdateInfo:(id)sender;
 - (IBAction)logout:(id)sender;
+
 @property (nonatomic, strong) UIImage *imageForAva;
-@property (weak, nonatomic) IBOutlet UIImageView *avaImageView;
-
-
+@property (nonatomic, copy) NSMutableString *nameToUpdate;
+@property (nonatomic, copy) NSMutableString *passwordToUpadte;
+@property (nonatomic, assign) int userID;
+@property (nonatomic, strong) User *currentUser;
 
 @end
 
@@ -27,6 +40,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [_avaImageView setHidden:YES];
+    _nameTextField.delegate=self;
+    _passwordTextField.delegate=self;
+    _nameToUpdate=[NSString new];
+    _passwordToUpadte=[NSString new];
+    PSUserStore *userStore= [PSUserStore userStoreManager];
+    _currentUser=userStore.activeUser;
+    _userID=[_currentUser.user_id integerValue];
 }
 
 
@@ -44,6 +64,55 @@
     
     //without next line action sheet does not appear on iphone 3.5 inch
     [actionSheet showFromTabBar:(UIView*)self.view];
+}
+
+- (IBAction)actionUpdateInfo:(id)sender
+{
+    if ((!_imageForAva) && (!_nameToUpdate) && (_passwordToUpadte)) {
+        UIAlertView *alert=[[UIAlertView alloc]
+            initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+            message:NSLocalizedString(@"alertViewErrorNothingToUpdateKey", "")
+            delegate:nil
+            cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+            otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
+ 
+    
+    
+        
+    
+    [[PSNetworkManager sharedManager] updateUserInforWithuserAva:_imageForAva newPassword:_passwordToUpadte newUserName:_nameToUpdate
+        fromUserID:_userID
+        success:^(id responseObject) {
+            UIAlertView *alert=[[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@ "alertViewOkKey", "")
+                              message:NSLocalizedString(@"alertViewSuccessKey", "")
+                                delegate:nil
+                                cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+                                otherButtonTitles:nil, nil];
+            [alert show];
+            
+            
+            
+
+        }
+        error:^(NSError *error)
+       {
+           
+            UIAlertView *alert=[[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+                                message:[error localizedDescription]
+                                delegate:nil
+                                cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")
+                                otherButtonTitles:nil, nil];
+            [alert show];
+
+        }];
+    
+    
 }
 
 - (IBAction)logout:(id)sender {
@@ -67,16 +136,10 @@
         NSLog(@"logout. user with email:%@",[PSUserStore userStoreManager].activeUser.email);
     }
     
-    
-    
- 
     [self performSegueWithIdentifier:@"afterLoggedOutToSplash" sender:nil];
     
 
 }
-
-
-
 
 
 #pragma mark - UIActionSheetDelegate
@@ -139,10 +202,6 @@
 
 }
 
-
-
-
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if([segue isKindOfClass:[CustomUnwindSegue class]]) {
@@ -176,6 +235,38 @@
         [_avaImageView setHidden:NO];
         [_avaImageView setImage:_imageForAva];
     };
+}
+
+
+#pragma mark - fieldsDidChanged
+
+- (IBAction)nameDidChange:(id)sender {
+    
+    self.nameToUpdate=[self.nameTextField.text copy];
+}
+
+- (IBAction)passwordDidChange:(id)sender {
+    self.passwordToUpadte=[self.passwordTextField.text copy];
+}
+
+#pragma mark - dismissKeyboard
+- (IBAction)dismissKeyboards:(id)sender
+{
+    [self.view endEditing:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField*)textField;
+{
+    if ([textField isEqual:self.nameTextField]) {
+        [self.passwordTextField becomeFirstResponder];
+    }
+    
+    else {
+        [textField resignFirstResponder];
+    }
+    return YES;
+    
 }
 
 

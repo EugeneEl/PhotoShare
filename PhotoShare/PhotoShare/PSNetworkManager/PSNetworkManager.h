@@ -63,5 +63,9 @@ typedef void (^errorBlock)(NSError* error);
                                      success:(successBlockWithId)success
                                        error:(errorBlock)error;
 
+- (AFHTTPRequestOperation *) updateUserInforWithuserAva:(UIImage *)image newPassword:(NSString *)password newUserName:(NSString *)name  fromUserID:(NSInteger)userID
+                             success:(successBlockWithId)successWithId
+                               error:(errorBlock)errorWithCode;
+
 
 @end

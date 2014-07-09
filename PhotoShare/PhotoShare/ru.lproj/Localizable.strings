@@ -31,7 +31,6 @@
 "dayAgoKey"="один день назад";
 "hourAgoKey"="один час назад";
 "minuteAgoKey"="одну минуту     назад";
-
 "secondAgoKey"="одну секунду назад";
 
 
@@ -86,3 +85,4 @@
 //  SettingController
 "actionSheetButtonFromLibraryKey"="Выбрать из альбома";
 "actionSheetButtonFromCameraKey"="Выбрать из камеры";
+"alertViewErrorNothingToUpdateKey"="Нет информации для обновления данных пользователя";
