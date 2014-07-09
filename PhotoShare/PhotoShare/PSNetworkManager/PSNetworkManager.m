@@ -428,6 +428,8 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
                                  error:(errorBlock)errorWithCode
 
 {
+    
+    
     NSDictionary *params = @{
                              @"lat":@(lat),
                              @"lng":@(lng),
@@ -548,17 +550,20 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
                   ];
              }
          }
-                       success:^(AFHTTPRequestOperation *operation, id responseObject)
+         success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
              successWithId(responseObject);
          }
-                       failure:^(AFHTTPRequestOperation *operation, NSError *error)
+         failure:^(AFHTTPRequestOperation *operation, NSError *error)
          {
              errorWithCode(error);
          }];
 }
 
-
+//- (AFHTTPRequestOperation *) commentPostID:(int)postID fromUserID:(int)userID withText:(NSString *)text
+//{
+//    
+//}
 
 
 

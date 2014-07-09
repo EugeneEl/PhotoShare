@@ -16,5 +16,7 @@
 - (NSArray *)getArrayOfFollowed;
 - (NSInteger)getCountOfFollowed;
 - (NSArray *)getArrayOfFollowers;
+- (NSString *)getUserName;
+- (NSString *)getUserPassword;
 
 @end

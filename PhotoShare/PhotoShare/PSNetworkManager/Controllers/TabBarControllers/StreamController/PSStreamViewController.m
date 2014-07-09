@@ -54,12 +54,17 @@ static NSString *keyForSortSettings=@"sortKey";
 @property (nonatomic,assign) double photoLatitudeParsed;
 @property (nonatomic,assign) double photoLongtitudeParsed;
 @property (nonatomic,assign) sortPostsByKey sortKey;
-
+@property (nonatomic, strong) User *currentUser;
+@property (nonatomic, strong) UIImage *avaImage;
 
 - (IBAction)switchSortKey:(id)sender;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *changeSortKeySegmentController;
 @property (weak, nonatomic) IBOutlet UITableView *streamTableView;
-@property (weak, nonatomic) IBOutlet UIImageView *image;
+
+@property (weak, nonatomic) IBOutlet UIImageView *userAvaImageView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+
+
 @property (strong,nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @property (nonatomic,strong) NSFetchedResultsController
@@ -82,14 +87,14 @@ static NSString *keyForSortSettings=@"sortKey";
     [self loadSettins];
     self.offset=5;
     _cellCount=0;
-    self.streamTableView.contentSize=CGSizeMake(self.streamTableView.bounds.size.width,330.0f);
-    self.streamTableView.clipsToBounds=NO;
+//    self.streamTableView.contentSize=CGSizeMake(self.streamTableView.bounds.size.width,330.0f);
+//    self.streamTableView.clipsToBounds=NO;
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     PSUserStore *userStore= [PSUserStore userStoreManager];
-    User *currentUser=userStore.activeUser;
-    _userID=[currentUser.user_id integerValue];
-    _authorMailParsed=currentUser.email;
+    _currentUser=userStore.activeUser;
+    _userID=[_currentUser.user_id integerValue];
+    _authorMailParsed=_currentUser.email;
     NSLog(@"user_id:%d",_userID);
     
     
@@ -144,11 +149,11 @@ static NSString *keyForSortSettings=@"sortKey";
                  
                  post=[post mapWithModel:model];
                  NSLog(@"Post added%@]n",post);
-                 [currentUser addPostsObject:post];
+                 [_currentUser addPostsObject:post];
                  
              }
              
-             [currentUser.managedObjectContext save:nil];
+             [_currentUser.managedObjectContext save:nil];
              [weakSelf.streamTableView reloadData];
          }
          
@@ -159,7 +164,23 @@ static NSString *keyForSortSettings=@"sortKey";
          NSLog(@"error");
      }];
 
+    
+    if (_currentUser.ava_imageURL) {
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:_currentUser.ava_imageURL]];
+        _avaImage=[UIImage imageWithData:imageData];
+        NSLog(@"%@",_avaImage);
+
+    }
   
+    if (_avaImage) {
+        _userAvaImageView.image=_avaImage;
+    }
+    
+    
+    if (_currentUser.name) {
+        _usernameLabel.text=_currentUser.name;
+        NSLog(@"%@",_currentUser.name);
+    }
  
 //    [self.streamTableView reloadData];
 }
@@ -475,7 +496,6 @@ tableCell {
     NSLog(@"%@",indexPath);
     Post  *postTest=[self.fetchedResultsController objectAtIndexPath:indexPath];
     //cell=(PSPhotoFromStreamTableViewCell*)cell;
-    
     aCell.postForCell=postTest;
     aCell.photoNameLabel.text=postTest.photoName;
     aCell.timeintervalLabel.text=[self timeIntervalFromPhoto:postTest.photoDate];
@@ -522,6 +542,8 @@ tableCell {
         }
 
     }
+    
+   
     
     
 //[aCell.imageForPost setImageWithURL: [NSURL URLWithString:postTest.photoURL]];

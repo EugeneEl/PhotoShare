@@ -11,7 +11,7 @@
 #import "User.h"
 #import "CustomUnwindSegue.h"
 #import "PSNetworkManager.h"
-
+#import "PSUserParser.h"
 
 static NSString *PSChaningUserInfoErrorDomain = @"PSChangingUserInfoErrorDomain";
 static NSInteger PSNottingToShareErrorCode  = 101;
@@ -42,8 +42,8 @@ static NSInteger PSNottingToShareErrorCode  = 101;
     [_avaImageView setHidden:YES];
     _nameTextField.delegate=self;
     _passwordTextField.delegate=self;
-    _nameToUpdate=[NSString new];
-    _passwordToUpadte=[NSString new];
+    _nameToUpdate=[NSMutableString new];
+    _passwordToUpadte=[NSMutableString new];
     PSUserStore *userStore= [PSUserStore userStoreManager];
     _currentUser=userStore.activeUser;
     _userID=[_currentUser.user_id integerValue];
@@ -79,11 +79,6 @@ static NSInteger PSNottingToShareErrorCode  = 101;
         return;
     }
     
- 
-    
-    
-        
-    
     [[PSNetworkManager sharedManager] updateUserInforWithuserAva:_imageForAva newPassword:_passwordToUpadte newUserName:_nameToUpdate
         fromUserID:_userID
         success:^(id responseObject) {
@@ -95,12 +90,16 @@ static NSInteger PSNottingToShareErrorCode  = 101;
                                 otherButtonTitles:nil, nil];
             [alert show];
             
+            NSLog(@"%@",responseObject);
             
+            PSUserParser *userParser=[[PSUserParser alloc]initWithId:responseObject];
+            _currentUser.ava_imageURL=[userParser getAvaImageURL];
+            _currentUser.name=[userParser getUserName];
+            _currentUser.password=[userParser getUserPassword];
             
-
+          
         }
-        error:^(NSError *error)
-       {
+        error:^(NSError *error) {
            
             UIAlertView *alert=[[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
@@ -111,6 +110,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
             [alert show];
 
         }];
+      [_currentUser.managedObjectContext save:nil];
     
     
 }

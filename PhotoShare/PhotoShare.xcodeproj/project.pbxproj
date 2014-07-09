@@ -25,6 +25,8 @@
 		3E35130F1954413C00433F26 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E35130E1954413C00433F26 /* comment.png */; };
 		3E3513111954713C00433F26 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3513101954713C00433F26 /* MessageUI.framework */; };
 		3E3513141954908D00433F26 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3513131954908D00433F26 /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
+		3E3BC71B196D568700771581 /* PSCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3BC71A196D568700771581 /* PSCommentsController.m */; };
+		3E3BC71F196D5A7300771581 /* PSAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3BC71E196D5A7300771581 /* PSAddCommentViewController.m */; };
 		3E3F8C121949A1F5009916BD /* PSStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C111949A1F5009916BD /* PSStreamViewController.m */; };
 		3E3F8C161949A57C009916BD /* PSPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C151949A57C009916BD /* PSPhotoController.m */; };
 		3E3F8C1D1949C4F1009916BD /* NSString+PSValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F8C1C1949C4F1009916BD /* NSString+PSValidation.m */; };
@@ -177,6 +179,10 @@
 		3E3513101954713C00433F26 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3E3513121954908D00433F26 /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
 		3E3513131954908D00433F26 /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
+		3E3BC719196D568700771581 /* PSCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCommentsController.h; sourceTree = "<group>"; };
+		3E3BC71A196D568700771581 /* PSCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCommentsController.m; sourceTree = "<group>"; };
+		3E3BC71D196D5A7300771581 /* PSAddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSAddCommentViewController.h; sourceTree = "<group>"; };
+		3E3BC71E196D5A7300771581 /* PSAddCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSAddCommentViewController.m; sourceTree = "<group>"; };
 		3E3F8C101949A1F5009916BD /* PSStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStreamViewController.h; sourceTree = "<group>"; };
 		3E3F8C111949A1F5009916BD /* PSStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSStreamViewController.m; sourceTree = "<group>"; };
 		3E3F8C141949A57C009916BD /* PSPhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSPhotoController.h; sourceTree = "<group>"; };
@@ -485,6 +491,7 @@
 			children = (
 				3E3F8C101949A1F5009916BD /* PSStreamViewController.h */,
 				3E3F8C111949A1F5009916BD /* PSStreamViewController.m */,
+				3E3BC718196D564A00771581 /* CommentsController */,
 			);
 			path = StreamController;
 			sourceTree = "<group>";
@@ -498,6 +505,25 @@
 			name = DetailController;
 			path = PhotoShare/Controllers/TabBarControllers/NearController/DetailController;
 			sourceTree = SOURCE_ROOT;
+		};
+		3E3BC718196D564A00771581 /* CommentsController */ = {
+			isa = PBXGroup;
+			children = (
+				3E3BC719196D568700771581 /* PSCommentsController.h */,
+				3E3BC71A196D568700771581 /* PSCommentsController.m */,
+				3E3BC71C196D5A3900771581 /* AddCommentController */,
+			);
+			path = CommentsController;
+			sourceTree = "<group>";
+		};
+		3E3BC71C196D5A3900771581 /* AddCommentController */ = {
+			isa = PBXGroup;
+			children = (
+				3E3BC71D196D5A7300771581 /* PSAddCommentViewController.h */,
+				3E3BC71E196D5A7300771581 /* PSAddCommentViewController.m */,
+			);
+			path = AddCommentController;
+			sourceTree = "<group>";
 		};
 		3E3F8C131949A55C009916BD /* PhotoController */ = {
 			isa = PBXGroup;
@@ -1110,6 +1136,7 @@
 				3E16A531194F385C006E8B88 /* PSCollectionCellForPhoto.m in Sources */,
 				3E3F8C1D1949C4F1009916BD /* NSString+PSValidation.m in Sources */,
 				3E35130D19542B6F00433F26 /* PSDetailedPhotoContollerViewController.m in Sources */,
+				3E3BC71F196D5A7300771581 /* PSAddCommentViewController.m in Sources */,
 				3EAF84DA19471AAF003D1987 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				3EAF84CF19471AAF003D1987 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				3EF1A8311966E9CF001D0D69 /* PSFollowersParser.m in Sources */,
@@ -1123,6 +1150,7 @@
 				3E48C2511948996100AC842D /* PSUserStore.m in Sources */,
 				3E3F8C391949E136009916BD /* UIProgressView+AFNetworking.m in Sources */,
 				3EAF84CA19471AAF003D1987 /* MagicalImportFunctions.m in Sources */,
+				3E3BC71B196D568700771581 /* PSCommentsController.m in Sources */,
 				3E3F8C341949E136009916BD /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3EAF848A19471A86003D1987 /* AFURLResponseSerialization.m in Sources */,
 				3EAF844F19471843003D1987 /* PHAppDelegate.m in Sources */,
