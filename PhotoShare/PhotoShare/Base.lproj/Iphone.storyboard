@@ -461,6 +461,10 @@
                                             <segue destination="d71-2d-2Aj" kind="custom" identifier="afterLoggedOutToSplash" customClass="CustomUnwindSegue" id="bkD-v9-yvT"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B4c-Vq-ksh">
+                                        <rect key="frame" x="45" y="274" width="240" height="133"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -481,6 +485,9 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="avaImageView" destination="B4c-Vq-ksh" id="vmD-uD-USG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i6b-b7-3id" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

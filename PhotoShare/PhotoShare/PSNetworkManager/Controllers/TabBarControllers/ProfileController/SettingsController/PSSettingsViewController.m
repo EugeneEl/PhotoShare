@@ -11,19 +11,26 @@
 #import "User.h"
 #import "CustomUnwindSegue.h"
 
-@interface PSSettingsViewController()
-
-
-
+@interface PSSettingsViewController() <UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 - (IBAction)logout:(id)sender;
+@property (nonatomic, strong) UIImage *imageForAva;
+@property (weak, nonatomic) IBOutlet UIImageView *avaImageView;
+
+
 
 @end
 
 
 @implementation PSSettingsViewController
-- (IBAction)actionChangePhoto:(id)sender
-{
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [_avaImageView setHidden:YES];
+}
+
+
+- (IBAction)actionChangePhoto:(id)sender {
     UIActionSheet* actionSheet = [[UIActionSheet alloc]
                                   initWithTitle:nil
                                   delegate:self
@@ -72,79 +79,105 @@
 
 
 
-
-/*
- - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
- {
- NSLog(@"%@",info);
- 
- 
- 
- if (picker.sourceType==UIImagePickerControllerSourceTypeCamera)
- {
- UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
- 
- [self.library saveImage:chosenImage toAlbum:@"PhotoShare" withCompletionBlock:^(NSError *error) {
- if (error)
- {
- NSLog(@"Error: %@", [error description]);
- UIAlertView *alert=[[UIAlertView alloc]
- initWithTitle:NSLocalizedString(@ "ErrorStringKey","")
- message:NSLocalizedString(@"alertViewOnSaveErrorKey","") delegate:nil
- cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey","")otherButtonTitles:nil, nil];
- [alert show];
- }
- else
- {
- UIAlertView *alert=[[UIAlertView alloc]
- initWithTitle:NSLocalizedString(@"alertViewSuccessKey","")
- message:NSLocalizedString(@"alertViewOnSaveSuccessKey","")
- delegate:nil
- cancelButtonTitle:NSLocalizedString(@"alertViewOkKey","") otherButtonTitles:nil, nil];
- [alert show];
- [_postButton setHidden:NO];
- }
- }];
- 
- NSLog(@"%@",chosenImage);
- 
- 
- 
- NSDictionary *dictionary=[info valueForKey:UIImagePickerControllerMediaMetadata];
- NSLog(@"metaData:%@",dictionary);
- 
- self.imageForPhoto.image = chosenImage;
- self.imageForUpload=chosenImage;
- [picker dismissViewControllerAnimated:YES completion:NULL];
- }
- 
- else
- {
- UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
- 
- 
- self.imageForPhoto.image = chosenImage;
- self.imageForPhoto.contentMode = UIViewContentModeScaleAspectFill;
- NSLog(@"%@",chosenImage);
- 
- self.imageForUpload=chosenImage;
- [_postButton setHidden:NO];
- [picker dismissViewControllerAnimated:YES completion:NULL];
- };
- }
- */
-
-
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+       
+        case 1:
+        {
     
-    if([segue isKindOfClass:[CustomUnwindSegue class]])
-    {
+            if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                
+                UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+                                                                      message:NSLocalizedString(@"alertViewErrorNoCameraKey","" )
+                                                                     delegate:nil
+                                                            cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+                                                            otherButtonTitles: nil];
+                
+                [myAlertView show];
+                return;
+            }
+            
+            
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [self presentViewController:picker animated:YES completion:NULL];
+
+            break;
+        }
+            
+        case 2:
+        {
+            
+            UIImagePickerControllerSourceType type=UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            BOOL ok=[UIImagePickerController isSourceTypeAvailable:type];
+            if (!ok) {
+                NSLog(@"error");
+                return;
+            }
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.sourceType = type;
+            NSLog(@"%@",picker.mediaTypes);
+            picker.delegate = self;
+            picker.editing=NO;
+            
+            
+            
+            [self presentViewController:picker animated:YES completion:NULL];
+            
+            break;
+        }
+        default:
+            break;
+    }
+
+}
+
+
+
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if([segue isKindOfClass:[CustomUnwindSegue class]]) {
         // Set the start point for the animation to center of the button for the animation
         ((CustomUnwindSegue *)segue).targetPoint = self.view.center;
     }
 }
+
+
+#pragma mark - Image Picker Controller delegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSLog(@"%@",info);
+    
+    
+    
+    if (picker.sourceType==UIImagePickerControllerSourceTypeCamera)
+    {
+        _imageForAva=info[UIImagePickerControllerEditedImage];
+        [picker dismissViewControllerAnimated:YES completion:NULL];
+        [_avaImageView setHidden:NO];
+        [_avaImageView setImage:_imageForAva];
+        
+    }
+    
+    else
+    {
+        _imageForAva = info[UIImagePickerControllerOriginalImage];
+        [picker dismissViewControllerAnimated:YES completion:NULL];
+        [_avaImageView setHidden:NO];
+        [_avaImageView setImage:_imageForAva];
+    };
+}
+
 
 
 @end

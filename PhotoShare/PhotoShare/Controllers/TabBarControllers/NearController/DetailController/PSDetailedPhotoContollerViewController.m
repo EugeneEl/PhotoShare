@@ -32,8 +32,8 @@
 
 
 @property (nonatomic, strong) NSData *photoData;
-@property (nonatomic,strong) NSArray*  arrayOfImages;
-@property (strong, atomic)   ALAssetsLibrary* library;
+@property (nonatomic,strong) NSArray *arrayOfImages;
+@property (strong, atomic)   ALAssetsLibrary *library;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) SLComposeViewController *slsCompositeViewController;
 @property (nonatomic, strong) NSData *imageDataToShare;
@@ -43,7 +43,7 @@
 - (IBAction)actionCommentPhoto:(id)sender;
 - (IBAction)actionSharePhoto:(id)sender;
 
-- (void)shareByEmail:(NSData *) photoData;
+- (void)shareByEmail:(NSData *)photoData;
 - (void)sharePhotoToFaceBook;
 - (void)sharePhotoToTwitter:(NSData *)photoData;
 
@@ -65,11 +65,8 @@
     return nil;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
     
     self.library = [[ALAssetsLibrary alloc] init];
     
