@@ -97,6 +97,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
             _currentUser.name=[userParser getUserName];
             _currentUser.password=[userParser getUserPassword];
             
+            [_currentUser.managedObjectContext MR_saveToPersistentStoreAndWait];
           
         }
         error:^(NSError *error) {
@@ -110,7 +111,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
             [alert show];
 
         }];
-      [_currentUser.managedObjectContext save:nil];
+  
     
     
 }

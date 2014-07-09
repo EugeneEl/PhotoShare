@@ -623,9 +623,9 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Z0-xG-2oG">
-                                <rect key="frame" x="117" y="7" width="86" height="35"/>
+                                <rect key="frame" x="117" y="7" width="158" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="86" id="trn-SR-SlW"/>
+                                    <constraint firstAttribute="width" constant="158" id="trn-SR-SlW"/>
                                     <constraint firstAttribute="height" constant="35" id="vSm-Z5-Jwq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
