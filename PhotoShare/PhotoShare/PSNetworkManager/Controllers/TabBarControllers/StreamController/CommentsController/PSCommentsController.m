@@ -22,6 +22,7 @@
 
 @implementation PSCommentsController
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -34,7 +35,6 @@
     _commentTableView.dataSource=self;
     [_commentTableView reloadData];
 }
-
 
 
 #pragma mark - UITableViewDataSource

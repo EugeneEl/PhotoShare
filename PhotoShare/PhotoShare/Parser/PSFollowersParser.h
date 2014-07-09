@@ -12,7 +12,6 @@
 @property (nonatomic,strong) NSArray *arrayOfFollowers;
 @property (nonatomic,strong) NSArray *arrayOfFollowed;
 
-
 - (NSString *)getFollowerImageURL:(NSDictionary*)dictionary;
 - (NSInteger)getFollowerID:(NSDictionary *)dictionary;
 - (NSString *)getFollowerName:(NSDictionary *)dictionary;

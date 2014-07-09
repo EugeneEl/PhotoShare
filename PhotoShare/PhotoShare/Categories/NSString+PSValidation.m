@@ -20,16 +20,12 @@
 }
 
 - (BOOL)ps_isEmailValid {
-    
     NSString *emailReg = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",emailReg];
-        
     return  [emailTest evaluateWithObject:self];
-        
 }
 
 - (BOOL)ps_isFacebookIDValid {
-    
     NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
     NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:self];
     return  [alphaNums isSupersetOfSet:inStringSet];

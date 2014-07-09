@@ -12,24 +12,18 @@
 
 @end
 
-
 @implementation PSPhotoFromStreamTableViewCell
 
 - (IBAction)likeAction:(id)sender {
     [self.delegate photoStreamCellLikeButtonPressed:self];
-    
 }
 
 - (IBAction)commentAction:(id)sender {
-    
     [self.delegate photoStreamCellCommentButtonPressed:self];
-     
 }
 
 - (IBAction)shareAction:(id)sender {
-    
     [self.delegate photoStreamCellShareButtonPressed:self];
-     
 }
 
 -(void)prepareForReuse {

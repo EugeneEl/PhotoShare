@@ -18,7 +18,6 @@
     if (!self.superview) {
         return nil;
     }
-    
    return  [self superAnnotationView];
 }
 

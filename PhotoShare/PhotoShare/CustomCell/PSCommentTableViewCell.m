@@ -13,10 +13,10 @@
 #import "PSNetworkManager.h"
 
 @interface PSCommentTableViewCell ()
-@property (weak, nonatomic) IBOutlet UIView *userAvaImageView;
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *commentDateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *commentTextLabel;
+@property (nonatomic, weak)IBOutlet UIView *userAvaImageView;
+@property (nonatomic, weak)IBOutlet UILabel *userNameLabel;
+@property (nonatomic, weak)IBOutlet UILabel *commentDateLabel;
+@property (nonatomic, weak)IBOutlet UILabel *commentTextLabel;
 
 @end
 
@@ -31,12 +31,8 @@
     self.commentTextLabel.text=comment.commentText;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'hh:mm:ss.SSSSSS'+'00:00"];
-    //[dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     NSString *stringFromDate = [dateFormat stringFromDate:comment.commentDate];
     self.commentDateLabel.text=stringFromDate;
 }
-
-
-
 
 @end

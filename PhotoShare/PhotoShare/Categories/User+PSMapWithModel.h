@@ -10,5 +10,5 @@
 @class PSUserModel;
 
 @interface User (PSMapWithModel)
-- (User *)mapWithModel:(PSUserModel*) userModel;
+- (User *)mapWithModel:(PSUserModel*)userModel;
 @end

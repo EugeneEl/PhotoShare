@@ -13,13 +13,13 @@
 @property (nonatomic, strong) NSArray *arrayOfPosts;
 
 
-- (NSInteger) getPostID:(NSDictionary*)dictionary;
-- (NSString *) getPostImageURL:(NSDictionary*)dictionary;
-- (double) getPostImageLat:(NSDictionary*)dictionary;
-- (double) getPostImageLng:(NSDictionary*)dictionary;
-- (NSString *) getPostImageName:(NSDictionary*)dictionary;
-- (NSArray *) getPostArrayOfComments:(NSDictionary*)dictionary;;
-- (NSString *) getPostTime:(NSDictionary*)dictionary;
-- (NSArray *) getPostLikesArray:(NSDictionary *)dictionary;
+- (NSInteger)getPostID:(NSDictionary *)dictionary;
+- (NSString *)getPostImageURL:(NSDictionary *)dictionary;
+- (double)getPostImageLat:(NSDictionary *)dictionary;
+- (double)getPostImageLng:(NSDictionary *)dictionary;
+- (NSString *)getPostImageName:(NSDictionary *)dictionary;
+- (NSArray *)getPostArrayOfComments:(NSDictionary *)dictionary;;
+- (NSString *)getPostTime:(NSDictionary *)dictionary;
+- (NSArray *)getPostLikesArray:(NSDictionary *)dictionary;
 
 @end

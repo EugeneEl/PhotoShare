@@ -27,10 +27,9 @@ static NSInteger PSMailBookSharingErrorCode=103;
 static NSInteger PSSharingErrorNoPhotoData = 100;
 
 - (void)shareToTwitterWithData:(NSData*)photoData
-                     photoName:(NSString*)photoTitle
-                       success:(void(^)(void))success
-                       failure:(void(^)(NSError *error))failure
-{
+                               photoName:(NSString*)photoTitle
+                               success:(void(^)(void))success
+                               failure:(void(^)(NSError *error))failure {
     if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         failure([[NSError alloc] initWithDomain:PSSharingErrorDomain code:PSTwitterSharingErrorCode userInfo:nil] );
         return;
@@ -44,15 +43,14 @@ static NSInteger PSSharingErrorNoPhotoData = 100;
     SLComposeViewController* slsCompositeViewController=[SLComposeViewController
     composeViewControllerForServiceType:SLServiceTypeTwitter];
     
-    
     slsCompositeViewController.completionHandler = ^(SLComposeViewControllerResult result)
     {
         switch(result)
         {
-                //  This means the user cancelled without sending the Tweet
+
             case SLComposeViewControllerResultCancelled:
                 break;
-                //  This means the user hit 'Send'
+
             case SLComposeViewControllerResultDone:
                 success();
                 break;
@@ -63,7 +61,6 @@ static NSInteger PSSharingErrorNoPhotoData = 100;
     [slsCompositeViewController addImage:[UIImage imageWithData:photoData]];
     [self presentViewController:slsCompositeViewController animated:YES completion:nil];
     
-    //success();
     
 }
 
@@ -71,8 +68,7 @@ static NSInteger PSSharingErrorNoPhotoData = 100;
 - (void)shareToFacebookWithData:(NSData*)photoData
                       photoName:(NSString*)photoTitle
                         success:(void(^)(void))success
-                        failure:(void(^)(NSError *error))failure
-{
+                        failure:(void(^)(NSError *error))failure {
     if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
     {
         failure([[NSError alloc] initWithDomain:PSSharingErrorDomain code:PSFacebookSharingErrorCode userInfo:nil] );
@@ -86,14 +82,12 @@ static NSInteger PSSharingErrorNoPhotoData = 100;
     
     SLComposeViewController* slsCompositeViewController=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
     
-    slsCompositeViewController.completionHandler = ^(SLComposeViewControllerResult result)
-    {
+    slsCompositeViewController.completionHandler = ^(SLComposeViewControllerResult result) {
         switch(result)
         {
-                //  This means the user cancelled without sending the Tweet
+ 
             case SLComposeViewControllerResultCancelled:
                 break;
-                //  This means the user hit 'Send'
             case SLComposeViewControllerResultDone:
                 success();
                 break;
@@ -104,9 +98,6 @@ static NSInteger PSSharingErrorNoPhotoData = 100;
     [slsCompositeViewController setInitialText:photoTitle];
     [slsCompositeViewController addImage:[UIImage imageWithData:photoData]];
     [self presentViewController:slsCompositeViewController animated:YES completion:nil];
-    
-
-        //success();
     
 }
 
@@ -147,11 +138,7 @@ static NSInteger PSSharingErrorNoPhotoData = 100;
 {
     
     MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
-    
-    
-    
-   // PSMailComposerDelegate *delegateForMC=[PSMailComposerDelegate new];
-    
+
     if (![MFMailComposeViewController canSendMail])
     {
         failure([[NSError alloc] initWithDomain:PSSharingErrorDomain code:PSMailBookSharingErrorCode userInfo:nil] );
@@ -168,8 +155,7 @@ static NSInteger PSSharingErrorNoPhotoData = 100;
         [composer addAttachmentData:photoData  mimeType:@"image/jpeg" fileName:@"Photograph.jpg"];
         
         [self presentViewController:composer animated:YES completion:success];
-        
-        //success();
+
  
     }
     

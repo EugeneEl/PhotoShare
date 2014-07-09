@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Eugene. All rights reserved.
 //
 
+//delete
 #import <UIKit/UIKit.h>
 
 @interface UIImageView (ps_setRoundImage)

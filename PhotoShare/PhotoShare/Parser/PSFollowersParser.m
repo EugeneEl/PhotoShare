@@ -10,73 +10,58 @@
 
 
 
-static NSString *postsFollowersKey=@"followers"; //
-static NSString *postsFollowedKey=@"followed"; //
-static NSString *followerImageURLKey=@"img_url"; //
-static NSString *followerIDKey=@"id";            //
-static NSString *followerEmailKey=@"email";
-static NSString *followerNameKey=@"user_name";
+static NSString *kPostsFollowersKey=@"followers"; //
+static NSString *kPostsFollowedKey=@"followed"; //
+static NSString *kFollowerImageURLKey=@"img_url"; //
+static NSString *kFollowerIDKey=@"id";            //
+static NSString *kFollowerEmailKey=@"email";
+static NSString *kFollowerNameKey=@"user_name";
 
 
-
-//"followers": [
-//              {
-//                  "img_url": "http://test.intern.yalantis.com/api/img/3",
-//                  "user_name": "J",
-//                  "id": 1,
-//                  "email": "black@man.com"
-//              }
-//              ],
 
 @implementation PSFollowersParser
 
-- (instancetype) initWithId:(id)identifier
-{
+- (instancetype) initWithId:(id)identifier {
     self = [super initWithId:identifier];
-    if (self)
-    {
-        if([NSNull null] == [self.objectToParse valueForKey:postsFollowersKey]) {
+    if (self) {
+        if([NSNull null] == [self.objectToParse valueForKey:kPostsFollowersKey]) {
             _arrayOfFollowers=nil;
         }
         else {
-              _arrayOfFollowers=[self.objectToParse valueForKey:postsFollowersKey];
+              _arrayOfFollowers=[self.objectToParse valueForKey:kPostsFollowersKey];
         }
         
-        if([NSNull null] == [self.objectToParse valueForKey:postsFollowedKey]) {
+        if([NSNull null] == [self.objectToParse valueForKey:kPostsFollowedKey]) {
             _arrayOfFollowed=nil;
         }
         else {
       
-        _arrayOfFollowed=[self.objectToParse valueForKey:postsFollowedKey];
+        _arrayOfFollowed=[self.objectToParse valueForKey:kPostsFollowedKey];
         }
     }
     return self;
 }
 
-- (NSString *)getFollowerImageURL:(NSDictionary*)dictionary
-{
-    NSString *followerImageURL=[dictionary valueForKey:followerImageURLKey];
+- (NSString *)getFollowerImageURL:(NSDictionary *)dictionary {
+    NSString *followerImageURL=[dictionary valueForKey:kFollowerImageURLKey];
     NSLog(@"followerImageURL:%@",followerImageURL);
     return followerImageURL;
 }
 
-- (NSInteger)getFollowerID:(NSDictionary *)dictionary
-{
-    NSInteger followerID=[[dictionary valueForKey:followerIDKey] intValue];
+- (NSInteger)getFollowerID:(NSDictionary *)dictionary {
+    NSInteger followerID=[[dictionary valueForKey:kFollowerIDKey] intValue];
     NSLog(@"followerID:%d",followerID);
     return followerID;
 }
 
-- (NSString *)getFollowerName:(NSDictionary *)dictionary
-{
-    NSString* followerName=[dictionary valueForKey:followerNameKey];
+- (NSString *)getFollowerName:(NSDictionary *)dictionary {
+    NSString* followerName=[dictionary valueForKey:kFollowerNameKey];
     NSLog(@"followerName:%@",followerName);
     return followerName;
 }
 
-- (NSString *)getFollowerEmail:(NSDictionary *)dictionary
-{
-    NSString* followerEmail=[dictionary valueForKey:followerEmailKey];
+- (NSString *)getFollowerEmail:(NSDictionary *)dictionary {
+    NSString* followerEmail=[dictionary valueForKey:kFollowerEmailKey];
     NSLog(@"followerEmail:%@",followerEmail);
     return followerEmail;
 }

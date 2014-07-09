@@ -6,22 +6,18 @@
 //  Copyright (c) 2014 Eugene. All rights reserved.
 //
 
+//delete
 #import "UIImageView+ps_setRoundImage.h"
 
 @implementation UIImageView (ps_setRoundImage)
 
 - (void)ps_setRoundImage:(UIImage *)image animated:(BOOL)animated
 {
-    // Need this custom drawing because setting layer.cornerRadius property
-    // dramatically decreases perfomance because of offscreen drawing.
-    
+ 
     CGRect rect = self.bounds;
-    
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, UIScreen.mainScreen.scale);
     [[UIBezierPath bezierPathWithRoundedRect:rect
                                 cornerRadius:rect.size.width/2.0f] addClip];
-    
-    
     [image drawInRect:rect];
     
     

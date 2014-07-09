@@ -7,25 +7,22 @@
 //
 
 #import "PSLikesParser.h"
-static NSString *postСommentsLikesKey=@"likes";
-static NSString *likesAuthorEmailKey=@"email";
+static NSString *kPostСommentsLikesKey=@"likes";
+static NSString *kLikesAuthorEmailKey=@"email";
 
 @implementation PSLikesParser
 
 
-- (instancetype) initWithId:(id)identifier
-{
+- (instancetype) initWithId:(id)identifier {
     self = [super initWithId:identifier];
-    if (self)
-    {
-        _arrayOfLikes=[self.objectToParse valueForKey:postСommentsLikesKey];
+    if (self) {
+        _arrayOfLikes=[self.objectToParse valueForKey:kPostСommentsLikesKey];
     }
     return self;
 }
 
-- (NSString *)getAuthorEmail:(NSDictionary *)dictionary
-{
-    NSString* authorEmail=[dictionary valueForKey:likesAuthorEmailKey];
+- (NSString *)getAuthorEmail:(NSDictionary *)dictionary {
+    NSString* authorEmail=[dictionary valueForKey:kLikesAuthorEmailKey];
     NSLog(@"likesAuthorEmail:%@",authorEmail);
     return authorEmail;
 }

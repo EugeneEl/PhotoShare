@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PSCollectionCellForPhoto : UICollectionViewCell
-
-@property (weak, nonatomic) IBOutlet UIImageView *imageForPhoto;
-
+@property (nonatomic, weak) IBOutlet UIImageView *imageForPhoto;
 @end

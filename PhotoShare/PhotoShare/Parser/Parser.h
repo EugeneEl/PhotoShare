@@ -11,16 +11,6 @@
 @interface Parser : NSObject
 @property (nonatomic, strong) id objectToParse;
 
-- (instancetype) initWithId:(id)identifier;
-//- (NSInteger) getUserID;
-//
-//
-//- (NSInteger) getPostID;
-//- (NSString *) getPostImageURL;
-//- (NSInteger) getPostImageLat;
-//- (NSInteger) getPostImageLng;
-//- (NSString *) getPostImageName;
-//- (NSArray *) getPostArrayOfComments;
-//- (NSString *) getPostTimeKey;
+- (instancetype)initWithId:(id)identifier;
 
 @end

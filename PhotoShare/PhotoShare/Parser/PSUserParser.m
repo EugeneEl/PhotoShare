@@ -8,69 +8,67 @@
 
 #import "PSUserParser.h"
 
-static NSString *userIdKey=@"id";
-static NSString *userCountOfFollowersKey=@"cnt_followers";
-static NSString *userCountOfFollowedKey=@"cnt_followed";
-static NSString *userArrayOfFollowersKey=@"followers";
-static NSString *userArrayOfFollowedKey=@"followed";
-static NSString *userAvaImageURLKey=@"img_url";
-static NSString *userNameKey=@"user_name";
-static NSString *userPasswordKey=@"password";
+static NSString *kUserIdKey=@"id";
+static NSString *kUserCountOfFollowersKey=@"cnt_followers";
+static NSString *kUserCountOfFollowedKey=@"cnt_followed";
+static NSString *kUserArrayOfFollowersKey=@"followers";
+static NSString *kUserArrayOfFollowedKey=@"followed";
+static NSString *kUserAvaImageURLKey=@"img_url";
+static NSString *kUserNameKey=@"user_name";
+static NSString *kUserPasswordKey=@"password";
 
 @implementation PSUserParser
 
 
 - (NSInteger)getUserID {
-    NSInteger userID=[[self.objectToParse valueForKey:userIdKey] intValue];
+    NSInteger userID=[[self.objectToParse valueForKey:kUserIdKey] intValue];
     NSLog(@"userID:%d",userID);
     return userID;
 }
 
 - (NSInteger)getCountOfFollowers {
-    if([NSNull null] == [self.objectToParse valueForKey:userCountOfFollowersKey]) return 0;
-    NSInteger countOfFollowers=[[self.objectToParse valueForKey:userCountOfFollowersKey] intValue];
+    if([NSNull null] == [self.objectToParse valueForKey:kUserCountOfFollowersKey]) return 0;
+    NSInteger countOfFollowers=[[self.objectToParse valueForKey:kUserCountOfFollowersKey] intValue];
     return countOfFollowers;
 }
 
 - (NSInteger)getCountOfFollowed {
-     if([NSNull null] == [self.objectToParse valueForKey:userCountOfFollowedKey]) return 0;
-    NSInteger countOfFollowed=[[self.objectToParse valueForKey:userCountOfFollowedKey] intValue];
+     if([NSNull null] == [self.objectToParse valueForKey:kUserCountOfFollowedKey]) return 0;
+    NSInteger countOfFollowed=[[self.objectToParse valueForKey:kUserCountOfFollowedKey] intValue];
     return countOfFollowed;
 }
 
 
-
 - (NSArray *)getArrayOfFollowers {
-    if([NSNull null] == [self.objectToParse valueForKey:userArrayOfFollowersKey]) return nil;
-    NSArray *arrayOfFollowers=[self.objectToParse valueForKey:userArrayOfFollowersKey];
+    if([NSNull null] == [self.objectToParse valueForKey:kUserArrayOfFollowersKey]) return nil;
+    NSArray *arrayOfFollowers=[self.objectToParse valueForKey:kUserArrayOfFollowersKey];
     return arrayOfFollowers;
 }
 
 
-
 - (NSArray *)getArrayOfFollowed {
-    if([NSNull null] == [self.objectToParse valueForKey:userArrayOfFollowedKey]) return nil;
-    NSArray *arrayOfFollowed=[self.objectToParse valueForKey:userArrayOfFollowedKey];
+    if([NSNull null] == [self.objectToParse valueForKey:kUserArrayOfFollowedKey]) return nil;
+    NSArray *arrayOfFollowed=[self.objectToParse valueForKey:kUserArrayOfFollowedKey];
     return arrayOfFollowed;
 }
 
 
 - (NSString *)getAvaImageURL {
-    if([NSNull null] == [self.objectToParse valueForKey:userAvaImageURLKey]) return nil;
-    NSString *avaImageURL=[self.objectToParse valueForKey:userAvaImageURLKey];
+    if([NSNull null] == [self.objectToParse valueForKey:kUserAvaImageURLKey]) return nil;
+    NSString *avaImageURL=[self.objectToParse valueForKey:kUserAvaImageURLKey];
     return avaImageURL;
 }
 
 
 - (NSString *)getUserName {
-    if([NSNull null] == [self.objectToParse valueForKey:userNameKey]) return nil;
-    NSString *userName=[self.objectToParse valueForKey:userNameKey];
+    if([NSNull null] == [self.objectToParse valueForKey:kUserNameKey]) return nil;
+    NSString *userName=[self.objectToParse valueForKey:kUserNameKey];
     return userName;
 }
 
 - (NSString *)getUserPassword {
-    if([NSNull null] == [self.objectToParse valueForKey:userPasswordKey]) return nil;
-    NSString *userPassword=[self.objectToParse valueForKey:userPasswordKey];
+    if([NSNull null] == [self.objectToParse valueForKey:kUserPasswordKey]) return nil;
+    NSString *userPassword=[self.objectToParse valueForKey:kUserPasswordKey];
     return userPassword;
 }
 

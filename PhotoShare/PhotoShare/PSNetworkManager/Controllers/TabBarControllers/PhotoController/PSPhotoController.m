@@ -13,6 +13,9 @@
 #import "PSUploadViewController.h"
 #import "PSUserStore.h"
 
+
+
+
 @interface PSPhotoController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic,copy) NSArray*  arrayOfImages;
@@ -82,29 +85,10 @@
     
     [self presentViewController:picker animated:YES completion:NULL];
 }
-//
-//- (IBAction)actionTakeFromAlbum:(id)sender {
-//    
-//    UIImagePickerControllerSourceType type=UIImagePickerControllerSourceTypePhotoLibrary;
-//    
-//    BOOL ok=[UIImagePickerController isSourceTypeAvailable:type];
-//    if (!ok) {
-//        NSLog(@"error");
-//        return;
-//    }
-//    
-//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//    picker.sourceType = type;
-//    NSLog(@"%@",picker.mediaTypes);
-//    picker.delegate = self;
-//    picker.editing=NO;
-//
-//    [self presentViewController:picker animated:YES completion:NULL];
-//    
-//}
+
 
 #pragma mark - Image Picker Controller delegate methods
-    
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
         NSLog(@"%@",info);
@@ -153,6 +137,15 @@
     {
         UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
       
+        
+        
+       ALAsset *asset=[[ALAsset  alloc]init];
+        NSMutableDictionary *assetMetadata = [[[asset defaultRepresentation] metadata] mutableCopy];
+         CLLocation *assetLocation = [asset valueForProperty:ALAssetPropertyLocation];
+         NSDictionary *gpsData = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:[assetLocation coordinate].longitude], @"Longitude", [NSNumber numberWithDouble:[assetLocation coordinate].latitude], @"Latitude", nil];
+        
+        
+         [assetMetadata setObject:gpsData forKey:@"Location Information"];
         
         self.imageForPhoto.image = chosenImage;
         self.imageForPhoto.contentMode = UIViewContentModeScaleAspectFill;

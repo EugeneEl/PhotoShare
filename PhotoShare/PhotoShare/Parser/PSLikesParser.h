@@ -10,6 +10,5 @@
 
 @interface PSLikesParser : Parser
 @property (nonatomic,strong) NSArray *arrayOfLikes;
-
 - (NSString *)getAuthorEmail:(NSDictionary *)dictionary;
 @end

@@ -8,21 +8,15 @@
 
 #import "PHAppDelegate.h"
 #import "PSLoginViewController.h"
-
-#import "User.h"
 #import "Post.h"
 
 const int numberOfUsersForTest=5;
 
 @implementation PHAppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [MagicalRecord setupCoreDataStack];
-    
-    //[User MR_truncateAll];
     [Post MR_truncateAll];
-    
     return YES;
 }
 

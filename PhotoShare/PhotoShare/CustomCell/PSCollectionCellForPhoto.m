@@ -10,19 +10,15 @@
 
 @implementation PSCollectionCellForPhoto
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
          [self setBounds:CGRectMake(0.f, 0.f, 200.f, 200.f)];
          [self.layer setBorderWidth:2.0f];
          [self.layer setBackgroundColor:[UIColor whiteColor].CGColor];
-        // [self.layer setCornerRadius:100.0f]; consume too much
-         
     }
     return self;
 }
-
 
 -(void)prepareForReuse {
     self.imageForPhoto.image=nil;

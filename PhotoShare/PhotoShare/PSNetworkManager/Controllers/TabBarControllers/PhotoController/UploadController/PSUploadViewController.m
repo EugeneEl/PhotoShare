@@ -10,6 +10,7 @@
 #import "PSNetworkManager.h"
 #import <CoreLocation/CoreLocation.h>
 
+
 @interface PSUploadViewController () <CLLocationManagerDelegate, UITextViewDelegate>
 
 @property (nonatomic, assign) double lat;
@@ -24,6 +25,10 @@
 - (IBAction)sendPhoto:(id)sender;
 
 @end
+
+
+
+
 
 @implementation PSUploadViewController
 

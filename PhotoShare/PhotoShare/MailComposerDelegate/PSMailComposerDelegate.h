@@ -10,9 +10,7 @@
 #import <MessageUI/MessageUI.h>
 
 @interface PSMailComposerDelegate : NSObject <MFMailComposeViewControllerDelegate>
-
 typedef void (^MailComposeControllerCompletionHandler)(MFMailComposeViewController *controller);
-
 @property (nonatomic,copy) MailComposeControllerCompletionHandler didSave;
 @property (nonatomic,copy) MailComposeControllerCompletionHandler didCancel;
 @property (nonatomic,copy) MailComposeControllerCompletionHandler didSend;
