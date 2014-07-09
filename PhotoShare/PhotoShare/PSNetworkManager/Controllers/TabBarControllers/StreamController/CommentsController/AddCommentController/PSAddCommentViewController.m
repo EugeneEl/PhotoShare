@@ -7,11 +7,14 @@
 //
 
 #import "PSAddCommentViewController.h"
+#import "PSNetworkManager.h"
 
-@interface PSAddCommentViewController()
+@interface PSAddCommentViewController() <UITextViewDelegate>
 - (IBAction)actionSendComment:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 
+@property (nonatomic, strong)
+NSString *textForComment;
 @end
 
 @implementation PSAddCommentViewController
@@ -24,8 +27,21 @@
   
 }
 
+- (IBAction)dismissKeyboard:(id)sender {
+    [[self view] endEditing:YES];
+}
 
 
 - (IBAction)actionSendComment:(id)sender {
 }
+
+
+#pragma mark - UITextViewDelegate
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    _textForComment=textView.text;
+    
+}
+
 @end
+
+

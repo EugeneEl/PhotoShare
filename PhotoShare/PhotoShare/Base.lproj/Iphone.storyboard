@@ -665,12 +665,12 @@
                         <outlet property="streamTableView" destination="rJn-mW-17Q" id="qOt-Gy-MZP"/>
                         <outlet property="userAvaImageView" destination="swb-pm-MKc" id="gRk-Ed-7xQ"/>
                         <outlet property="usernameLabel" destination="1Z0-xG-2oG" id="o4T-8o-GAb"/>
-                        <segue destination="dUc-27-flY" kind="push" id="zdF-BK-e39"/>
+                        <segue destination="dUc-27-flY" kind="push" identifier="goToComments" id="zdF-BK-e39"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QYj-6U-ExR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2549" y="352"/>
+            <point key="canvasLocation" x="2591" y="352"/>
         </scene>
         <!--Comments Controller-->
         <scene sceneID="ICI-CJ-1Qh">
@@ -684,12 +684,12 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="71" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="75W-ct-WWp">
-                                <rect key="frame" x="0.0" y="-6" width="320" height="461"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="71" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="75W-ct-WWp">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="71" id="3pD-pe-JiO">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="71" id="3pD-pe-JiO" customClass="PSCommentTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3pD-pe-JiO" id="y7A-hp-PTb">
@@ -714,30 +714,51 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Comment comment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nam-74-elF">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment comment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nam-74-elF">
                                                     <rect key="frame" x="95" y="29" width="205" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="V7D-Eo-Mte"/>
+                                                        <constraint firstAttribute="width" constant="205" id="yko-9e-Rqd"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="nam-74-elF" secondAttribute="trailing" constant="20" id="5fr-8m-tmj"/>
+                                                <constraint firstAttribute="bottom" secondItem="nam-74-elF" secondAttribute="bottom" constant="20" id="bWw-x6-N13"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="commentDateLabel" destination="E8T-Aq-EdF" id="yB5-YC-r24"/>
+                                            <outlet property="commentTextLabel" destination="nam-74-elF" id="MT1-TG-pkG"/>
+                                            <outlet property="userAvaImageView" destination="y7A-hp-PTb" id="UFZ-7Z-uEN"/>
+                                            <outlet property="userNameLabel" destination="IU1-EK-QzF" id="rIj-mB-xBc"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kAp-Uq-eP2" firstAttribute="top" secondItem="75W-ct-WWp" secondAttribute="bottom" id="5dJ-NT-rD7"/>
+                            <constraint firstItem="75W-ct-WWp" firstAttribute="leading" secondItem="4Xq-10-bdC" secondAttribute="leading" id="H92-sI-AT8"/>
+                            <constraint firstItem="75W-ct-WWp" firstAttribute="top" secondItem="4Xq-10-bdC" secondAttribute="top" id="bat-e0-zRm"/>
+                            <constraint firstAttribute="trailing" secondItem="75W-ct-WWp" secondAttribute="trailing" id="z6z-7X-Jcf"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jg7-3P-Qrp">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="aL6-fk-E5a"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="hQF-Sa-nU4" kind="push" id="Y0Y-df-qOj"/>
+                        <outlet property="commentTableView" destination="75W-ct-WWp" id="lrx-Ym-qZx"/>
+                        <segue destination="hQF-Sa-nU4" kind="push" identifier="goToAddComment" id="Y0Y-df-qOj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DXL-al-LBU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2591" y="1011"/>
+            <point key="canvasLocation" x="2591" y="1127"/>
         </scene>
         <!--Add Comment View Controller - New comment-->
         <scene sceneID="IsQ-g8-ddd">
@@ -747,19 +768,29 @@
                         <viewControllerLayoutGuide type="top" id="Ga6-Jb-3WN"/>
                         <viewControllerLayoutGuide type="bottom" id="tZV-Bd-Kxp"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6pY-Rq-d1u">
+                    <view key="view" contentMode="scaleToFill" id="6pY-Rq-d1u" customClass="UIControl">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Text" translatesAutoresizingMaskIntoConstraints="NO" id="kGL-Iq-5rN">
-                                <rect key="frame" x="26" y="12" width="268" height="166"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kGL-Iq-5rN">
+                                <rect key="frame" x="32" y="49" width="268" height="137"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Text:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHn-pF-MHR">
+                                <rect key="frame" x="32" y="20" width="98" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="dismissKeyboard:" destination="hQF-Sa-nU4" eventType="valueChanged" id="5Yn-N1-9sa"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="New comment" id="uCa-Bg-Y0y">
                         <barButtonItem key="rightBarButtonItem" title="Send" id="9J2-xR-8rC">
@@ -774,7 +805,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="944-k2-TsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2591" y="1678"/>
+            <point key="canvasLocation" x="2591" y="1772"/>
         </scene>
         <!--Tab Bar Controller - userTabBar-->
         <scene sceneID="Vns-fX-hUZ">

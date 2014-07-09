@@ -24,6 +24,7 @@
 #import "Like.h"
 #import "Like+mapWithEmail.h"
 #import "PSLikesParser.h"
+#import "PSCommentsController.h"
 
 typedef enum {
     kNew,
@@ -204,34 +205,11 @@ static NSString *keyForSortSettings=@"sortKey";
 }
 
 
-//PhotoShare[5505:60b] *** Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'Invalid update: invalid number of rows in section 0.  The number of rows contained in an existing section after the update (10) must be equal to the number of rows contained in that section before the update (5), plus or minus the number of rows inserted or deleted from that section (1 inserted, 0 deleted) and plus or minus the number of rows moved into or out of that section (0 moved in, 0 moved out).'
-
-
-
-//- (void)insertRowAtBottom {
-//   __weak typeof(self) weakSelf = self;
-//
-//    int64_t delayInSeconds = 2.0;
-//   dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//       [weakSelf.streamTableView beginUpdates];
-//        _offset+=5;
-//        
-//              
-//    [weakSelf.streamTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.dataSource.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-//        
-//        [weakSelf.streamTableView endUpdates];
-//        
-//        [weakSelf.streamTableView.infiniteScrollingView stopAnimating];
-//    });
-//}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    PSPhotoFromStreamTableViewCell *cell=[self.streamTableView dequeueReusableCellWithIdentifier:@"photoCell"];
     [self configureCell:cell atIndexPath:indexPath];
-
-    cell.selected=NO;
+    cell.selected=NO; //does not work
     return cell;
 }
 
@@ -316,7 +294,6 @@ static NSString *keyForSortSettings=@"sortKey";
     NSFetchRequest* fetchRequest=[[NSFetchRequest alloc]initWithEntityName:@"Post"];
     NSSortDescriptor *descriptor=[NSSortDescriptor sortDescriptorWithKey:@"photoDate" ascending:NO];
     [fetchRequest setSortDescriptors:@[descriptor]];
-   // fetchRequest.fetchOffset=_offset;
     _dateFetchedResultsController = [[NSFetchedResultsController alloc]
                                                              initWithFetchRequest:fetchRequest
                                                              managedObjectContext:[NSManagedObjectContext MR_defaultContext]
@@ -402,11 +379,11 @@ static NSString *keyForSortSettings=@"sortKey";
 
 - (void)photoStreamCellCommentButtonPressed:(PSPhotoFromStreamTableViewCell *)
 tableCell {
+    
+    
+    [self performSegueWithIdentifier:@"goToComments" sender:tableCell];
     NSLog(@"button comment pressed");
 }
-
-
-
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
@@ -428,8 +405,6 @@ tableCell {
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.streamTableView beginUpdates];
 }
-
-
 
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
@@ -670,9 +645,6 @@ tableCell
     
     //without next line action sheet does not appear on iphone 3.5 inch
     [actionSheet showFromTabBar:(UIView*)self.view];
-
-
-
 }
 
 
@@ -843,6 +815,20 @@ tableCell
     }
 }
 
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"goToComments"]) {
+        {
+            if ([sender isKindOfClass:[PSPhotoFromStreamTableViewCell class]]) {
+                PSPhotoFromStreamTableViewCell *cell=(PSPhotoFromStreamTableViewCell *)sender;
+                Post *post=cell.postForCell;
+                PSCommentsController *destinationController=segue.destinationViewController;
+                destinationController.postToComment=post;
+            }
+        }
+        
+    }
+}
 
 
 

@@ -106,28 +106,28 @@
     }
 }
 
-- (void) checkLocationServicesTurnedOn {
-    if (![CLLocationManager locationServicesEnabled]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"== Opps! =="
-                                                        message:@"'Location Services' need to be on."
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];      
-    }     
-}
+//- (void) checkLocationServicesTurnedOn {
+//    if (![CLLocationManager locationServicesEnabled]) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"== Opps! =="
+//                                                        message:@"'Location Services' need to be on."
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"OK"
+//                                              otherButtonTitles:nil];
+//        [alert show];      
+//    }     
+//}
 
-
--(void) checkApplicationHasLocationServicesPermission {
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"== Opps! =="
-                                                        message:@"This application needs 'Location Services' to be turned on."
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];      
-    }    
-}
+//
+//-(void) checkApplicationHasLocationServicesPermission {
+//    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"== Opps! =="
+//                                                        message:@"This application needs 'Location Services' to be turned on."
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"OK"
+//                                              otherButtonTitles:nil];
+//        [alert show];      
+//    }    
+//}
 
 
 

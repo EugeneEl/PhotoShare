@@ -47,4 +47,6 @@ tableCell;
 - (IBAction)commentAction:(id)sender;
 - (IBAction)shareAction:(id)sender;
 
+- (void)configureWithPost:(Post *)post;
+
 @end

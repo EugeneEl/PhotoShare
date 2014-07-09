@@ -55,6 +55,7 @@
 		3E51B5581962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5551962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m */; };
 		3E51B5591962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5571962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m */; };
 		3E585E3D19582DB400A96B2B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E585E3C19582DB400A96B2B /* Social.framework */; };
+		3E81A1A7196DA0640049D0CE /* PSCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E81A1A6196DA0640049D0CE /* PSCommentTableViewCell.m */; };
 		3E9267331950303800A55AC8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9267321950303800A55AC8 /* MapKit.framework */; };
 		3E9267391950322400A55AC8 /* PSNearLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9267381950322400A55AC8 /* PSNearLocationViewController.m */; };
 		3E92673C19503C0000A55AC8 /* PSMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E92673B19503C0000A55AC8 /* PSMapAnnotation.m */; };
@@ -238,6 +239,8 @@
 		3E51B5561962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		3E51B5571962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		3E585E3C19582DB400A96B2B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		3E81A1A5196DA0640049D0CE /* PSCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCommentTableViewCell.h; sourceTree = "<group>"; };
+		3E81A1A6196DA0640049D0CE /* PSCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCommentTableViewCell.m; sourceTree = "<group>"; };
 		3E9267321950303800A55AC8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3E9267371950322400A55AC8 /* PSNearLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSNearLocationViewController.h; path = PhotoShare/Controllers/TabBarControllers/NearController/PSNearLocationViewController.h; sourceTree = SOURCE_ROOT; };
 		3E9267381950322400A55AC8 /* PSNearLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSNearLocationViewController.m; path = PhotoShare/Controllers/TabBarControllers/NearController/PSNearLocationViewController.m; sourceTree = SOURCE_ROOT; };
@@ -440,6 +443,8 @@
 				3E16A52D194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m */,
 				3E16A52F194F385C006E8B88 /* PSCollectionCellForPhoto.h */,
 				3E16A530194F385C006E8B88 /* PSCollectionCellForPhoto.m */,
+				3E81A1A5196DA0640049D0CE /* PSCommentTableViewCell.h */,
+				3E81A1A6196DA0640049D0CE /* PSCommentTableViewCell.m */,
 			);
 			name = CustomCell;
 			path = PhotoShare/CustomCell;
@@ -1155,6 +1160,7 @@
 				3EAF848A19471A86003D1987 /* AFURLResponseSerialization.m in Sources */,
 				3EAF844F19471843003D1987 /* PHAppDelegate.m in Sources */,
 				3E298E7419658E28006E140C /* PSSplashViewController.m in Sources */,
+				3E81A1A7196DA0640049D0CE /* PSCommentTableViewCell.m in Sources */,
 				3E3F8C361949E136009916BD /* UIAlertView+AFNetworking.m in Sources */,
 				3E328887194986BB00B0DD90 /* MBProgressHUD.m in Sources */,
 				3EF1A8221966B516001D0D69 /* Post+mapWithModel.m in Sources */,

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Post;
 
 @interface PSCommentsController : UIViewController
+@property (nonatomic, strong) Post *postToComment;
+@property (nonatomic, assign) int userID;
 
 @end
