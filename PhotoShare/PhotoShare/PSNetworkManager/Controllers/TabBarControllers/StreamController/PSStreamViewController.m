@@ -35,48 +35,40 @@ static NSString *keyForSortSettings=@"sortKey";
 
 @interface PSStreamViewController() <UITableViewDelegate ,UITableViewDataSource, NSFetchedResultsControllerDelegate, PhotoFromStreamTableViewCell,UIActionSheetDelegate>
 
-@property (nonatomic, assign) NSInteger userID;
-@property (nonatomic, strong) NSNumber * post_idParsed;
-@property (nonatomic, strong) NSNumber * likesParsed;
-@property (nonatomic, copy) NSString * authorMailParsed;
-@property (nonatomic, copy) NSString * photoNameParsed;
-@property (nonatomic, copy) NSString * photoURLParsed;
-@property (nonatomic, copy) NSDate * photo_dateParsed;
-@property (nonatomic, assign) NSInteger cellCount;
-@property (nonatomic,strong) NSNumber * commentIDParsed;
+@property (nonatomic,assign)NSInteger userID;
+@property (nonatomic,strong)NSNumber * post_idParsed;
+@property (nonatomic,strong)NSNumber * likesParsed;
+@property (nonatomic,copy)NSString * authorMailParsed;
+@property (nonatomic,copy)NSString * photoNameParsed;
+@property (nonatomic,copy)NSString * photoURLParsed;
+@property (nonatomic,copy)NSDate * photo_dateParsed;
+@property (nonatomic,assign)NSInteger cellCount;
+@property (nonatomic,strong)NSNumber * commentIDParsed;
 @property (nonatomic,copy) NSString * commentatorNameParsed;
 @property (nonatomic,copy) NSString * commentTextParsed;
 @property (nonatomic,copy) NSDate * commentDateParsed;
 @property (nonatomic,assign) NSUInteger offset;
-@property (nonatomic, strong) NSData *imageDataToShare;
-@property (nonatomic, copy)  NSString *photoName;
-@property (nonatomic, assign) NSInteger count;
-@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic,strong) NSData *imageDataToShare;
+@property (nonatomic,copy)  NSString *photoName;
+@property (nonatomic,assign) NSInteger count;
+@property (nonatomic,strong) NSMutableArray *dataSource;
 @property (nonatomic,assign) double photoLatitudeParsed;
 @property (nonatomic,assign) double photoLongtitudeParsed;
 @property (nonatomic,assign) sortPostsByKey sortKey;
-@property (nonatomic, strong) User *currentUser;
-@property (nonatomic, strong) UIImage *avaImage;
+@property (nonatomic,strong) User *currentUser;
+@property (nonatomic,strong) UIImage *avaImage;
 
 - (IBAction)switchSortKey:(id)sender;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *changeSortKeySegmentController;
-@property (weak, nonatomic) IBOutlet UITableView *streamTableView;
+@property (nonatomic,weak)IBOutlet UISegmentedControl *changeSortKeySegmentController;
+@property (nonatomic,weak)IBOutlet UITableView *streamTableView;
+@property (nonatomic,weak)IBOutlet UIImageView *userAvaImageView;
+@property (nonatomic,weak)IBOutlet UILabel *usernameLabel;
+@property (nonatomic,strong)NSFetchedResultsController *fetchedResultsController;
 
-@property (weak, nonatomic) IBOutlet UIImageView *userAvaImageView;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-
-
-@property (strong,nonatomic) NSFetchedResultsController *fetchedResultsController;
-
-@property (nonatomic,strong) NSFetchedResultsController
-    *likeFetchedResultsController;
-@property (nonatomic,strong) NSFetchedResultsController
-    *dateFetchedResultsController;
+@property (nonatomic,strong)NSFetchedResultsController *likeFetchedResultsController;
+@property (nonatomic,strong)NSFetchedResultsController *dateFetchedResultsController;
 
 @end
-
-
-
 @implementation PSStreamViewController
 
 #pragma mark - ViewDidLoad
@@ -86,19 +78,12 @@ static NSString *keyForSortSettings=@"sortKey";
     self.streamTableView.dataSource=self;
     self.streamTableView.delegate=self;
     [self loadSettins];
-    self.offset=5;
-    _cellCount=0;
-//    self.streamTableView.contentSize=CGSizeMake(self.streamTableView.bounds.size.width,330.0f);
-//    self.streamTableView.clipsToBounds=NO;
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    
     PSUserStore *userStore= [PSUserStore userStoreManager];
     _currentUser=userStore.activeUser;
     _userID=[_currentUser.user_id integerValue];
     _authorMailParsed=_currentUser.email;
     NSLog(@"user_id:%d",_userID);
-    
-    
     __weak typeof(self) weakSelf = self;
     [[PSNetworkManager sharedManager] getAllUserPostsWithUserID:_userID
                                                         success:^(id responseObject)
@@ -154,7 +139,7 @@ static NSString *keyForSortSettings=@"sortKey";
                  
              }
              
-             [_currentUser.managedObjectContext save:nil];
+             [_currentUser.managedObjectContext MR_saveToPersistentStoreAndWait];
              [weakSelf.streamTableView reloadData];
          }
          
@@ -187,21 +172,11 @@ static NSString *keyForSortSettings=@"sortKey";
 }
 
 
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    }
-
 
 #pragma mark UITableViewDataSource
-
-     
-     
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger count = [Post MR_countOfEntities];
- //менять в
-   
-    return count;
+    return [Post MR_countOfEntities];
 }
 
 
@@ -377,24 +352,18 @@ static NSString *keyForSortSettings=@"sortKey";
      [self.streamTableView reloadData];
 }
 
-- (void)photoStreamCellCommentButtonPressed:(PSPhotoFromStreamTableViewCell *)
-tableCell {
-    
-    
+- (void)photoStreamCellCommentButtonPressed:(PSPhotoFromStreamTableViewCell *)tableCell {
     [self performSegueWithIdentifier:@"goToComments" sender:tableCell];
     NSLog(@"button comment pressed");
 }
 
-- (NSFetchedResultsController *)fetchedResultsController
-{
+- (NSFetchedResultsController *)fetchedResultsController {
     if (self.sortKey==kNew) {
         _fetchedResultsController=self.dateFetchedResultsController;
-       // _offset=5;
     }
    
     else if (self.sortKey==kFavourite) {
         _fetchedResultsController=self.likeFetchedResultsController;
-      //  _offset=5;
     }
     
     return _fetchedResultsController;
@@ -476,8 +445,7 @@ tableCell {
     aCell.timeintervalLabel.text=[self timeIntervalFromPhoto:postTest.photoDate];
     NSString *commentsNumberString =[NSString stringWithFormat:@"%lu", (unsigned long)[postTest.comments count]];
     aCell.commentsNumberLabel.text=commentsNumberString;
-    
-    
+    aCell.likesNumberLabel.text=[NSString stringWithFormat:@"%@", postTest.likesCount];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     dispatch_async(queue, ^(void)
     {
@@ -518,11 +486,7 @@ tableCell {
 
     }
     
-   
-    
-    
-//[aCell.imageForPost setImageWithURL: [NSURL URLWithString:postTest.photoURL]];
-   // aCell.likesNumberLabel.text=[NSString stringWithFormat:@"%@",postTest.likes];
+
     aCell.delegate=self;
     
     
@@ -652,14 +616,7 @@ tableCell
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    // NSLog(@"Была нажата кнопка с номером - %d",buttonIndex);
-    //Cancel   0
-    //Email    1
-    //Twitter  2
-    //FaceBook 3
-    //Save     4
-    
-    
+ 
     switch (buttonIndex) {
         {case 1: //Email photo
             

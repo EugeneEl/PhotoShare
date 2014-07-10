@@ -94,6 +94,13 @@
         success:^(id responseObject)
         {
           NSLog(@"image send successfully");
+            UIAlertView *alert=[[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@ "alertViewOkKey", "")
+                                message:NSLocalizedString(@"alertViewSuccessKey", "")
+                                delegate:nil
+                                cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+                                otherButtonTitles:nil, nil];
+            [alert show];
         }
         error:^(NSError *error)
         {

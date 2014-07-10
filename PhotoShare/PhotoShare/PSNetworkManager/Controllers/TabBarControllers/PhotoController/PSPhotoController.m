@@ -13,9 +13,6 @@
 #import "PSUploadViewController.h"
 #import "PSUserStore.h"
 
-
-
-
 @interface PSPhotoController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic,copy) NSArray*  arrayOfImages;

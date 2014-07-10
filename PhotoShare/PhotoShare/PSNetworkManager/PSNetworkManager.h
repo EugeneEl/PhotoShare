@@ -68,4 +68,8 @@ typedef void (^errorBlock)(NSError* error);
                                error:(errorBlock)errorWithCode;
 
 
+- (AFHTTPRequestOperation *)commentPostID:(int)PostID fronUserID:(int)userID withText:(NSString *)text
+                                  success:(successBlockWithId)successWithId
+                                    error:(errorBlock)errorWithCode;
+
 @end

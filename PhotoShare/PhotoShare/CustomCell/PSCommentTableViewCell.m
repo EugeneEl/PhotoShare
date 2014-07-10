@@ -33,6 +33,7 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'hh:mm:ss.SSSSSS'+'00:00"];
     NSString *stringFromDate = [dateFormat stringFromDate:comment.commentDate];
     self.commentDateLabel.text=stringFromDate;
+    [self.textLabel sizeToFit];
 }
 
 @end

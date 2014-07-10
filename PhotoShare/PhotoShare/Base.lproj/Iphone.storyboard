@@ -585,7 +585,7 @@
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mW7-eO-ub3">
                                                             <rect key="frame" x="77" y="254" width="71" height="30"/>
-                                                            <state key="normal" title="comment">
+                                                            <state key="normal" backgroundImage="comment.png">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
@@ -689,15 +689,15 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="71" id="3pD-pe-JiO" customClass="PSCommentTableViewCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="71"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="70" id="3pD-pe-JiO" customClass="PSCommentTableViewCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3pD-pe-JiO" id="y7A-hp-PTb">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ac0-4W-1Xr">
-                                                    <rect key="frame" x="20" y="10" width="67" height="50"/>
+                                                    <rect key="frame" x="12" y="5" width="67" height="49"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IU1-EK-QzF">
@@ -714,21 +714,13 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment comment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nam-74-elF">
-                                                    <rect key="frame" x="95" y="29" width="205" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Comment comment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nam-74-elF">
+                                                    <rect key="frame" x="95" y="29" width="205" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="V7D-Eo-Mte"/>
-                                                        <constraint firstAttribute="width" constant="205" id="yko-9e-Rqd"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="nam-74-elF" secondAttribute="trailing" constant="20" id="5fr-8m-tmj"/>
-                                                <constraint firstAttribute="bottom" secondItem="nam-74-elF" secondAttribute="bottom" constant="20" id="bWw-x6-N13"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="commentDateLabel" destination="E8T-Aq-EdF" id="yB5-YC-r24"/>
@@ -749,7 +741,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jg7-3P-Qrp">
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="aL6-fk-E5a"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="aL6-fk-E5a">
+                            <connections>
+                                <action selector="actionAddComment:" destination="dUc-27-flY" id="UNK-oY-tWo"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="commentTableView" destination="75W-ct-WWp" id="lrx-Ym-qZx"/>
@@ -772,7 +768,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kGL-Iq-5rN">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="New comment" translatesAutoresizingMaskIntoConstraints="NO" id="kGL-Iq-5rN">
                                 <rect key="frame" x="32" y="49" width="268" height="137"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -780,7 +776,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Text:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHn-pF-MHR">
-                                <rect key="frame" x="32" y="20" width="98" height="21"/>
+                                <rect key="frame" x="32" y="20" width="98" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1252,6 +1248,7 @@
     </scenes>
     <resources>
         <image name="PhotosteamIcon.png" width="48" height="32"/>
+        <image name="comment.png" width="64" height="64"/>
         <image name="compass5.png" width="50" height="50"/>
         <image name="friendsIconBar.png" width="48" height="32"/>
         <image name="photoBarIcon.png" width="48" height="32"/>

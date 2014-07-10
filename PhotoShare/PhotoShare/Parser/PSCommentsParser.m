@@ -16,7 +16,20 @@ static NSString *kCommentAuthorNameKey=@"author";  //
 static NSString *kCommentTextKey=@"text";          //
 static NSString *kCommentTimeKey=@"tstamp";        //
 
-
+/*
+ {
+ "text": "newComment",
+ "author": {
+ "user_name": "J",
+ "id": 1,
+ "email": "black@man.com"
+ },
+ "tstamp": "2014-07-09T11:39:00.097246+00:00",
+ "id": 6,
+ "post_id": 1
+ }
+ 
+ */
 @implementation PSCommentsParser
 
 - (instancetype) initWithId:(id)identifier {

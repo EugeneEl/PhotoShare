@@ -565,6 +565,31 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 //    
 //}
 
+- (AFHTTPRequestOperation *)commentPostID:(int)PostID fronUserID:(int)userID withText:(NSString *)text
+                            success:(successBlockWithId)successWithId
+                                    error:(errorBlock)errorWithCode {
+    
+    NSString *request=@"comments/";
+    
+    
+    
+    NSDictionary *params = @{@"author_id":@(userID),
+                             @"post_id":@(PostID),
+                             @"text":text};
+    
+    
+    
+    return  [_requestManager POST:request
+            parameters:params
+            success:^(AFHTTPRequestOperation *operation, id responseObject)
+            {
+                successWithId(responseObject);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                errorWithCode(error);
+            }];
+    
+}
+
 
 
 

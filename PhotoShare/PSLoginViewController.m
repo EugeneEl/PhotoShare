@@ -231,6 +231,7 @@
         }
         
         existingUserForLogin.ava_imageURL=[userParser getAvaImageURL];
+        existingUserForLogin.name=[userParser getUserName];
         existingUserForLogin.follower_count=[NSNumber numberWithInt:[userParser getCountOfFollowers]];
         existingUserForLogin.followed_count= [NSNumber numberWithInt:[[userParser getArrayOfFollowed]count]];
         

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Post;
 
 @interface PSAddCommentViewController : UIViewController
-
+@property (nonatomic, strong) Post *postToComment;
 @end
