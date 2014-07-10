@@ -136,20 +136,35 @@
     else
     {
         UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-      
+        NSURL *urlPath = [info valueForKey:UIImagePickerControllerReferenceURL];
         
         
+        
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+        [library assetForURL:urlPath resultBlock:^(ALAsset *asset)
+         {
+             NSMutableDictionary *assetMetadata = [[[asset defaultRepresentation] metadata] mutableCopy];
+             CLLocation *assetLocation = [asset valueForProperty:ALAssetPropertyLocation];
+             NSDictionary *gpsData = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:[assetLocation coordinate].longitude], @"Longitude", [NSNumber numberWithDouble:[assetLocation coordinate].latitude], @"Latitude", nil];
+             
+             [assetMetadata setObject:gpsData forKey:@"Location Information"];
+                    NSLog(@"%@",gpsData);
+          
+         }
+                failureBlock:^(NSError *error)
+         {
+             // error handling
+             NSLog(@"failure-----");
+         }];
+        
+       
        ALAsset *asset=[[ALAsset  alloc]init];
-        NSMutableDictionary *assetMetadata = [[[asset defaultRepresentation] metadata] mutableCopy];
-         CLLocation *assetLocation = [asset valueForProperty:ALAssetPropertyLocation];
-         NSDictionary *gpsData = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:[assetLocation coordinate].longitude], @"Longitude", [NSNumber numberWithDouble:[assetLocation coordinate].latitude], @"Latitude", nil];
         
         
-         [assetMetadata setObject:gpsData forKey:@"Location Information"];
-        
+    
         self.imageForPhoto.image = chosenImage;
         self.imageForPhoto.contentMode = UIViewContentModeScaleAspectFill;
-        NSLog(@"%@",chosenImage);
+ 
         
         self.imageForUpload=chosenImage;
         [_postButton setHidden:NO];
