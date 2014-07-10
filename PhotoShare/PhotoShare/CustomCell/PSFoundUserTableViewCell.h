@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@class PSFoundUserTableViewCell;
+
+@protocol FoundUserTableViewCell;
+@protocol FoundUserTableViewCell <NSObject>
+@optional
+
+- (void)foundUserTableCellFollowButtonPressed:(PSFoundUserTableViewCell *)tableCell;
+@end
 
 @interface PSFoundUserTableViewCell : UITableViewCell
-
+@property(nonatomic, weak)id <FoundUserTableViewCell> delegate;
 @end

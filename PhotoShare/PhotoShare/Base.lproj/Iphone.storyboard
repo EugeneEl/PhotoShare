@@ -433,7 +433,7 @@
                     <connections>
                         <outlet property="searchButton" destination="TIA-H0-3Qh" id="lb5-rF-eXH"/>
                         <outlet property="searchTextField" destination="SRc-VZ-WZC" id="70R-uU-Eyc"/>
-                        <segue destination="gqs-Yi-RJ4" kind="push" id="zh4-Hq-uRH"/>
+                        <segue destination="gqs-Yi-RJ4" kind="push" identifier="goToFollow" id="zh4-Hq-uRH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mz8-Ev-QuA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -480,6 +480,9 @@
                                                     <state key="normal" title="Button">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="actionFollow:" destination="jNR-jV-iZl" eventType="touchUpInside" id="nWj-PM-qeC"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Follows me" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eny-Uw-74G">
                                                     <rect key="frame" x="222" y="42" width="70" height="21"/>
@@ -503,6 +506,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Found" id="7Zj-8t-Okf"/>
+                    <connections>
+                        <outlet property="tableView" destination="DtX-iC-p02" id="xcR-7o-nnA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5P5-RC-gWi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

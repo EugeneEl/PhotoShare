@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PSFoundUsersViewController : UIViewController
-
+@property (nonatomic, strong) NSMutableArray *arrayOfUsersToDisplay;
 @end

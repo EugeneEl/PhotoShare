@@ -9,6 +9,9 @@
 #import "PSFoundUsersViewController.h"
 
 @interface PSFoundUsersViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+
 
 @end
 

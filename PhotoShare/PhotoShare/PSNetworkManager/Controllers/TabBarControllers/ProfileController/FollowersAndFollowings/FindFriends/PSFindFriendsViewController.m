@@ -13,6 +13,7 @@
 #import "PSFollowersParser.h"
 #import "User+PSMapWithModel.h"
 #import "PSUserModel.h"
+#import "PSFoundUsersViewController.h"
 
 @interface PSFindFriendsViewController () <UITextFieldDelegate>
 @property (nonatomic, weak) IBOutlet UITextField *searchTextField;
@@ -90,7 +91,7 @@
                 [userToAdd.managedObjectContext MR_saveToPersistentStoreAndWait];
              
              [_arrayOfFoundUsers addObject:userToAdd];
-             [self performSegueWithIdentifier:@"" sender:self];
+             [self performSegueWithIdentifier:@"goToFollow" sender:self];
          }
      }
     error:^(NSError *error) {
@@ -115,6 +116,15 @@
         [_searchButton setEnabled:NO];
     }
     else [_searchButton setEnabled:YES];
+}
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"goToFollow"]) {
+        
+        PSFoundUsersViewController *destinationController=segue.destinationViewController;
+        destinationController.arrayOfUsersToDisplay=_arrayOfFoundUsers;
+    }
 }
 
 #pragma mark - UITextFieldDelegate
