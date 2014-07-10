@@ -12,6 +12,7 @@
 #import "PSUserParser.h"
 #import "PSFollowersParser.h"
 #import "User+PSMapWithModel.h"
+#import "PSUserModel.h"
 
 @interface PSFindFriendsViewController () <UITextFieldDelegate>
 @property (nonatomic, weak) IBOutlet UITextField *searchTextField;
@@ -22,6 +23,7 @@
 - (IBAction)textForSearch:(id)sender;
 @property (nonatomic, assign) int userID;
 @property (nonatomic, strong) User *currentUser;
+@property (nonatomic, strong) NSMutableArray *arrayOfFoundUsers;
 
 @end
 
@@ -32,6 +34,7 @@
     [super viewDidLoad];
     [_searchButton setEnabled:NO];
     [_searchTextField setDelegate:self];
+    
 }
 
 
@@ -41,6 +44,54 @@
      {
          NSLog(@"success");
          NSLog(@"%@",responseObject);
+        _arrayOfFoundUsers=responseObject;
+         
+         for (NSDictionary *dictionary in _arrayOfFoundUsers) {
+         PSUserParser *userParser=[[PSUserParser alloc]initWithId:dictionary];
+         int userID=[userParser getUserID];
+         User *userToAdd=[User MR_createEntity];
+         if ([[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:userID] ]firstObject]) {
+             userToAdd=[[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:userID] ]firstObject];
+         }
+             userToAdd.ava_imageURL=[userParser getAvaImageURL];
+             userToAdd.name=[userParser getUserName];
+             userToAdd.followed_count=[NSNumber numberWithInt:[userParser getCountOfFollowed]];
+             userToAdd.follower_count=[NSNumber numberWithInt:[userParser getCountOfFollowers]];
+             
+             //add followers
+             PSFollowersParser *followersParser=[[PSFollowersParser alloc] initWithId:responseObject];
+             if (followersParser.arrayOfFollowers!=nil) {
+                 for (NSDictionary *dictionary in followersParser.arrayOfFollowers)
+                 {
+                     User *followerToAdd=[User MR_createEntity];
+                     followerToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
+                     followerToAdd.email=[followersParser getFollowerEmail:dictionary];
+                     followerToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
+                     followerToAdd.name=[followersParser getFollowerName:dictionary];
+                     
+                     [userToAdd addFollowersObject:followerToAdd];
+                 }
+             }
+             
+             //add followings
+             if (followersParser.arrayOfFollowed!=nil) {
+                 for (NSDictionary *dictionary in followersParser.arrayOfFollowers)
+                 {
+                     User *followedToAdd=[User MR_createEntity];
+                     followedToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
+                     followedToAdd.email=[followersParser getFollowerEmail:dictionary];
+                     followedToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
+                     followedToAdd.name=[followersParser getFollowerName:dictionary];
+                     
+                     [userToAdd addFollowersObject:followedToAdd];
+                 }
+             }
+             
+                [userToAdd.managedObjectContext MR_saveToPersistentStoreAndWait];
+             
+             [_arrayOfFoundUsers addObject:userToAdd];
+             [self performSegueWithIdentifier:@"" sender:self];
+         }
      }
     error:^(NSError *error) {
                                                       
