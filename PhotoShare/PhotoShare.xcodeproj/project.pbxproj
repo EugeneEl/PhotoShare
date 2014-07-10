@@ -15,6 +15,10 @@
 		3E16A52E194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E16A52D194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m */; };
 		3E16A531194F385C006E8B88 /* PSCollectionCellForPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E16A530194F385C006E8B88 /* PSCollectionCellForPhoto.m */; };
 		3E1CC6441951B62F00032216 /* PSMKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1CC6431951B62F00032216 /* PSMKAnnotationView.m */; };
+		3E23C631196E95EF00691ACB /* PSFindFriendsAndFollowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E23C630196E95EF00691ACB /* PSFindFriendsAndFollowsViewController.m */; };
+		3E23C634196E965200691ACB /* PSFindFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E23C633196E965200691ACB /* PSFindFriendsViewController.m */; };
+		3E23C638196E97ED00691ACB /* PSFoundUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E23C637196E97ED00691ACB /* PSFoundUsersViewController.m */; };
+		3E23C63B196E9A4800691ACB /* PSFoundUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E23C63A196E9A4800691ACB /* PSFoundUserTableViewCell.m */; };
 		3E298E7419658E28006E140C /* PSSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E298E7319658E28006E140C /* PSSplashViewController.m */; };
 		3E298E7819659BDB006E140C /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E298E7719659BDB006E140C /* Parser.m */; };
 		3E2EA768195AD745008AC688 /* Iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EA76A195AD745008AC688 /* Iphone.storyboard */; };
@@ -160,6 +164,14 @@
 		3E16A530194F385C006E8B88 /* PSCollectionCellForPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCollectionCellForPhoto.m; sourceTree = "<group>"; };
 		3E1CC6421951B62F00032216 /* PSMKAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSMKAnnotationView.h; path = PhotoShare/Controllers/TabBarControllers/NearController/PSMKAnnotationView.h; sourceTree = SOURCE_ROOT; };
 		3E1CC6431951B62F00032216 /* PSMKAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSMKAnnotationView.m; path = PhotoShare/Controllers/TabBarControllers/NearController/PSMKAnnotationView.m; sourceTree = SOURCE_ROOT; };
+		3E23C62F196E95EF00691ACB /* PSFindFriendsAndFollowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSFindFriendsAndFollowsViewController.h; sourceTree = "<group>"; };
+		3E23C630196E95EF00691ACB /* PSFindFriendsAndFollowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSFindFriendsAndFollowsViewController.m; sourceTree = "<group>"; };
+		3E23C632196E965200691ACB /* PSFindFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSFindFriendsViewController.h; sourceTree = "<group>"; };
+		3E23C633196E965200691ACB /* PSFindFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSFindFriendsViewController.m; sourceTree = "<group>"; };
+		3E23C636196E97ED00691ACB /* PSFoundUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSFoundUsersViewController.h; sourceTree = "<group>"; };
+		3E23C637196E97ED00691ACB /* PSFoundUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSFoundUsersViewController.m; sourceTree = "<group>"; };
+		3E23C639196E9A4800691ACB /* PSFoundUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSFoundUserTableViewCell.h; sourceTree = "<group>"; };
+		3E23C63A196E9A4800691ACB /* PSFoundUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSFoundUserTableViewCell.m; sourceTree = "<group>"; };
 		3E298E7219658E28006E140C /* PSSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSSplashViewController.h; sourceTree = "<group>"; };
 		3E298E7319658E28006E140C /* PSSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSSplashViewController.m; sourceTree = "<group>"; };
 		3E298E7619659BDB006E140C /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
@@ -422,6 +434,7 @@
 			children = (
 				3E11883B194AE2FF00D562A1 /* PSProfileViewController.h */,
 				3E11883C194AE2FF00D562A1 /* PSProfileViewController.m */,
+				3E23C62B196E95B000691ACB /* FollowersAndFollowings */,
 				3E11883E194AE97900D562A1 /* SettingsController */,
 			);
 			path = ProfileController;
@@ -445,9 +458,56 @@
 				3E16A530194F385C006E8B88 /* PSCollectionCellForPhoto.m */,
 				3E81A1A5196DA0640049D0CE /* PSCommentTableViewCell.h */,
 				3E81A1A6196DA0640049D0CE /* PSCommentTableViewCell.m */,
+				3E23C639196E9A4800691ACB /* PSFoundUserTableViewCell.h */,
+				3E23C63A196E9A4800691ACB /* PSFoundUserTableViewCell.m */,
 			);
 			name = CustomCell;
 			path = PhotoShare/CustomCell;
+			sourceTree = "<group>";
+		};
+		3E23C62B196E95B000691ACB /* FollowersAndFollowings */ = {
+			isa = PBXGroup;
+			children = (
+				3E23C62C196E95B000691ACB /* FindFriends */,
+				3E23C62D196E95B000691ACB /* Followers */,
+				3E23C62E196E95B000691ACB /* Followings */,
+				3E23C62F196E95EF00691ACB /* PSFindFriendsAndFollowsViewController.h */,
+				3E23C630196E95EF00691ACB /* PSFindFriendsAndFollowsViewController.m */,
+			);
+			path = FollowersAndFollowings;
+			sourceTree = "<group>";
+		};
+		3E23C62C196E95B000691ACB /* FindFriends */ = {
+			isa = PBXGroup;
+			children = (
+				3E23C632196E965200691ACB /* PSFindFriendsViewController.h */,
+				3E23C633196E965200691ACB /* PSFindFriendsViewController.m */,
+				3E23C635196E97DB00691ACB /* FoundUsers */,
+			);
+			path = FindFriends;
+			sourceTree = "<group>";
+		};
+		3E23C62D196E95B000691ACB /* Followers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Followers;
+			sourceTree = "<group>";
+		};
+		3E23C62E196E95B000691ACB /* Followings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Followings;
+			sourceTree = "<group>";
+		};
+		3E23C635196E97DB00691ACB /* FoundUsers */ = {
+			isa = PBXGroup;
+			children = (
+				3E23C636196E97ED00691ACB /* PSFoundUsersViewController.h */,
+				3E23C637196E97ED00691ACB /* PSFoundUsersViewController.m */,
+			);
+			path = FoundUsers;
 			sourceTree = "<group>";
 		};
 		3E298E7519659BCB006E140C /* Parser */ = {
@@ -1138,6 +1198,7 @@
 				3E3F8C351949E136009916BD /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				3EAF848319471A86003D1987 /* AFHTTPRequestOperation.m in Sources */,
 				3EAF84D919471AAF003D1987 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
+				3E23C638196E97ED00691ACB /* PSFoundUsersViewController.m in Sources */,
 				3E16A531194F385C006E8B88 /* PSCollectionCellForPhoto.m in Sources */,
 				3E3F8C1D1949C4F1009916BD /* NSString+PSValidation.m in Sources */,
 				3E35130D19542B6F00433F26 /* PSDetailedPhotoContollerViewController.m in Sources */,
@@ -1183,6 +1244,7 @@
 				3E48C24D1948906E00AC842D /* PSSignUpViewController.m in Sources */,
 				3EAF84E219471AAF003D1987 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				3E3F8C381949E136009916BD /* UIImageView+AFNetworking.m in Sources */,
+				3E23C631196E95EF00691ACB /* PSFindFriendsAndFollowsViewController.m in Sources */,
 				3EAF848519471A86003D1987 /* AFHTTPSessionManager.m in Sources */,
 				3EAF84DB19471AAF003D1987 /* NSPersistentStore+MagicalRecord.m in Sources */,
 				3E3F8C3F1949EE83009916BD /* CustomSegueForStart.m in Sources */,
@@ -1201,10 +1263,12 @@
 				3E4A702419509BEE003EFD21 /* UIView+PSMKAnnotationView.m in Sources */,
 				3EF1A81F1966B356001D0D69 /* PSPostModel.m in Sources */,
 				3EAF84D119471AAF003D1987 /* NSManagedObject+MagicalAggregation.m in Sources */,
+				3E23C63B196E9A4800691ACB /* PSFoundUserTableViewCell.m in Sources */,
 				3E92673C19503C0000A55AC8 /* PSMapAnnotation.m in Sources */,
 				3EAF844B19471843003D1987 /* main.m in Sources */,
 				3EAF84DE19471AAF003D1987 /* MagicalRecord+ErrorHandling.m in Sources */,
 				3E3513141954908D00433F26 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
+				3E23C634196E965200691ACB /* PSFindFriendsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

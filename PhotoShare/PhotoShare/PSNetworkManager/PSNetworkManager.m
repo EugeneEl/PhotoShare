@@ -590,7 +590,24 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
 }
 
-
+- (AFHTTPRequestOperation *)findFriendsByName:(NSString *)  nameForSearch
+                                      success:(successBlockWithId)success
+                                        error:(errorBlock)errorBlock {
+    NSString *request=@"users?search=";
+    request=[request stringByAppendingString:nameForSearch];
+    
+    
+    return  [_requestManager GET:request
+                     parameters:nil
+                     success:^(AFHTTPRequestOperation *operation, id responseObject)
+                     {
+                         success(responseObject);
+                     }
+                 failure:^(AFHTTPRequestOperation *operation, NSError *error)
+                     {
+                     errorBlock(error);
+                     }];
+}
 
 
 
