@@ -24,7 +24,8 @@
 - (IBAction)textForSearch:(id)sender;
 @property (nonatomic, assign) int userID;
 @property (nonatomic, strong) User *currentUser;
-@property (nonatomic, strong) NSMutableArray *arrayOfFoundUsers;
+@property (nonatomic, copy) NSMutableArray *arrayOfFoundUsers;
+@property (nonatomic, copy) NSMutableArray *arrayToPath;
 
 @end
 
@@ -35,6 +36,7 @@
     [super viewDidLoad];
     [_searchButton setEnabled:NO];
     [_searchTextField setDelegate:self];
+    _arrayToPath=[NSMutableArray array];
     
 }
 
@@ -45,7 +47,7 @@
      {
          NSLog(@"success");
          NSLog(@"%@",responseObject);
-        _arrayOfFoundUsers=responseObject;
+        _arrayOfFoundUsers=[responseObject mutableCopy];
          
          for (NSDictionary *dictionary in _arrayOfFoundUsers) {
          PSUserParser *userParser=[[PSUserParser alloc]initWithId:dictionary];
@@ -62,8 +64,9 @@
              //add followers
              PSFollowersParser *followersParser=[[PSFollowersParser alloc] initWithId:responseObject];
              if (followersParser.arrayOfFollowers!=nil) {
-                 for (NSDictionary *dictionary in followersParser.arrayOfFollowers)
+                 for (NSDictionary *dictionary in [followersParser.arrayOfFollowers firstObject])
                  {
+                    //tempory solution (array nested in another extra array)
                      User *followerToAdd=[User MR_createEntity];
                      followerToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
                      followerToAdd.email=[followersParser getFollowerEmail:dictionary];
@@ -76,7 +79,7 @@
              
              //add followings
              if (followersParser.arrayOfFollowed!=nil) {
-                 for (NSDictionary *dictionary in followersParser.arrayOfFollowers)
+                 for (NSDictionary *dictionary in [followersParser.arrayOfFollowers firstObject])
                  {
                      User *followedToAdd=[User MR_createEntity];
                      followedToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
@@ -90,7 +93,7 @@
              
                 [userToAdd.managedObjectContext MR_saveToPersistentStoreAndWait];
              
-             [_arrayOfFoundUsers addObject:userToAdd];
+             [_arrayToPath addObject:userToAdd];
              [self performSegueWithIdentifier:@"goToFollow" sender:self];
          }
      }
@@ -123,7 +126,7 @@
     if ([segue.identifier isEqualToString:@"goToFollow"]) {
         
         PSFoundUsersViewController *destinationController=segue.destinationViewController;
-        destinationController.arrayOfUsersToDisplay=_arrayOfFoundUsers;
+        destinationController.arrayOfUsersToDisplay=_arrayToPath;
     }
 }
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class PSFoundUserTableViewCell;
+@class User;
 
 @protocol FoundUserTableViewCell;
 @protocol FoundUserTableViewCell <NSObject>
@@ -18,4 +19,5 @@
 
 @interface PSFoundUserTableViewCell : UITableViewCell
 @property(nonatomic, weak)id <FoundUserTableViewCell> delegate;
+- (void)configureCellWithFollower:(User *)follower;
 @end
