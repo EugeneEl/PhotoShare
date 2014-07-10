@@ -111,46 +111,7 @@
     
 }
 
-/*
-{
- 
- - (void)keyboardWasShown:(NSNotification*)aNotification {
- NSDictionary* info = [aNotification userInfo];
- CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
- CGFloat keyboardHeight = kbSize.height;
- 
- 
- [UIView animateWithDuration:0.3 animations:^{
- 
- 
- self.guidingLoginConstraint.constant = keyboardHeight + 20.f;
- [self.view layoutIfNeeded];
- 
- 
- [_scrollView setContentSize:CGSizeMake(320.f, 186.f)];
- [_scrollView setContentOffset:CGPointZero animated:YES];
- 
- [self.view layoutIfNeeded];
- }];
- 
- 
- }
- 
- // Called when the UIKeyboardWillHideNotification is sent
- - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
- [UIView animateWithDuration:0.3 animations:^{
- _guidingLoginConstraint.constant = 0.f;
- [self.view layoutIfNeeded];
- }];
- }
- 
- - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
- [self.view endEditing:YES];
- }
- 
 
-}
-*/
 #pragma mark - keyboardNotification
 - (void)keyboardWasShown:(NSNotification*)aNotification {
     NSDictionary* info = [aNotification userInfo];

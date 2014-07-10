@@ -68,7 +68,6 @@ NSString *textForComment;
             commentModel.commentatorName=[commentParser getAuthorName:responseObject];
             commentModel.commentID=[commentParser getCommentID:responseObject];
             commentModel.commentDateString=[commentParser getCommentTime:responseObject];
-                    
             Comment *commentToAdd=[Comment MR_createEntity];
             commentToAdd=[commentToAdd commentWithMapModel:commentModel];
             [_postToComment addCommentsObject:commentToAdd];

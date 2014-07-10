@@ -7,6 +7,7 @@
 //
 
 #import "PSProfileViewController.h"
+#import "PSFindFriendsViewController.h"
 #import "Post.h"
 #import "Comment.h"
 #import "PSCollectionCellForPhoto.h"
@@ -24,6 +25,14 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 
 @property (nonatomic, strong) NSMutableArray *arrayOfURLPhotos;
 
+@property (weak, nonatomic) IBOutlet UIImageView *avaImageView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *countsOfPostsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *countOfFollowersLabel;
+@property (weak, nonatomic) IBOutlet UILabel *countOfFlollowingsLabel;
+- (IBAction)actionFindFriends:(id)sender;
+- (IBAction)actionToFollowers:(id)sender;
+- (IBAction)actionToFollowings:(id)sender;
 
 @property (nonatomic, copy) NSMutableArray *arrayOfPosts;
 
@@ -67,39 +76,35 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 
 
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PSCollectionCellForPhoto *cell=[self.photoCollectionView dequeueReusableCellWithReuseIdentifier:viewCellIdentifier forIndexPath:indexPath];
-
-    
-    /*
-    __weak typeof(cell) weakCell = cell;
-    
-    
-    NSURLRequest *urlRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:[self.arrayOfURLPhotos objectAtIndex:indexPath.row]]
-];
-    
-    
-    [cell.imageForPhoto setImageWithURLRequest:urlRequest                     placeholderImage:nil
-    success:^
-    (NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
-    {
-        [weakCell.imageForPhoto ps_setRoundImage:image animated:YES];
-    }
-    failure:(nil)
-     ];
-     
-    */
-    
-    
     [cell.imageForPhoto setImageWithURL:[NSURL URLWithString:[self.arrayOfURLPhotos objectAtIndex:indexPath.row]]];
-    
-    
     return cell;
      
 }
+
+
+
+
+- (IBAction)actionFindFriends:(id)sender {
+      [self performSegueWithIdentifier:@"goToFindFriends" sender:sender];
+}
+
+- (IBAction)actionToFollowers:(id)sender {
+}
+
+- (IBAction)actionToFollowings:(id)sender {
+}
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"goToFindFriends"]) {
+        
+        PSFindFriendsViewController *destinationController=(PSFindFriendsViewController *)segue.destinationViewController;
+    }
+}
+
+
 
 
 
