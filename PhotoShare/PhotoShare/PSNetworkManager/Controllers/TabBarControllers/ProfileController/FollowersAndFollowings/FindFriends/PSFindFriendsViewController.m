@@ -16,7 +16,7 @@
 @interface PSFindFriendsViewController () <UITextFieldDelegate>
 @property (nonatomic, weak) IBOutlet UITextField *searchTextField;
 - (IBAction)actionSearch:(id)sender;
-@property (nonatomic, weak) NSString *searchText;
+@property (nonatomic, copy) NSString *searchText;
 @property (nonatomic, weak) IBOutlet UIButton *searchButton;
 - (IBAction)dismissKeyboard:(id)sender;
 - (IBAction)textForSearch:(id)sender;
@@ -67,8 +67,7 @@
 }
 
 #pragma mark - UITextFieldDelegate
--(BOOL)textFieldShouldReturn:(UITextField*)textField;
-{
+-(BOOL)textFieldShouldReturn:(UITextField*)textField; {
     if ([textField isEqual:_searchTextField]) {
         [textField resignFirstResponder];
     }
