@@ -987,6 +987,9 @@
                                 <state key="normal" title="Like">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="actionLikePhoto:" destination="41B-0C-j1f" eventType="touchDragInside" id="63M-3V-3JU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYZ-FI-Vg5">
                                 <rect key="frame" x="171" y="349" width="129" height="26"/>
@@ -1024,6 +1027,7 @@
                     <connections>
                         <outlet property="commentImageView" destination="xqy-An-SAZ" id="cQD-2U-aSI"/>
                         <outlet property="commentsNumLabel" destination="ULJ-mM-C30" id="1gF-AP-btq"/>
+                        <outlet property="likeButton" destination="dwx-st-tKm" id="7rn-cn-QGb"/>
                         <outlet property="likeImageView" destination="McJ-V7-Y5F" id="kCo-s6-Pxh"/>
                         <outlet property="likesNumLabel" destination="Dgj-Lu-KvN" id="2Z3-ap-X9W"/>
                         <outlet property="photoImageView" destination="sq3-Oa-bw5" id="W1Q-bc-58K"/>

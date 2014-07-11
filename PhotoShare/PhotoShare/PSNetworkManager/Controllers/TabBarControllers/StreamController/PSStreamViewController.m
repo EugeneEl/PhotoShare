@@ -301,7 +301,6 @@ static NSString *keyForSortSettings=@"sortKey";
     {
         if ([tableCell isWaitingForLikeResponse]) return;
         [tableCell setWaitingForLikeResponse:YES];
-        
         [[PSNetworkManager sharedManager]
          likePostWithID:[tableCell.postForCell.postID intValue]
          byUser:_userID
@@ -311,15 +310,21 @@ static NSString *keyForSortSettings=@"sortKey";
              Like *likeToAdd=[Like MR_createEntity];
              [likeToAdd mapWithEmail:_authorMailParsed];
              [tableCell.postForCell addLikesObject:likeToAdd];
+             
+             
+            
+             int newLikesCount = [tableCell.postForCell.likesCount intValue] +1;
+             tableCell.postForCell.likesCount=[NSNumber numberWithInt:newLikesCount];
+             
              tableCell.likesStatus=YES;
              [tableCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
-             [tableCell.postForCell.managedObjectContext save:nil];
+             [tableCell.postForCell.managedObjectContext MR_saveToPersistentStoreAndWait];
              [tableCell setWaitingForLikeResponse:NO];
              
          }
          error:^(NSError *error)
          {
-                          [tableCell setWaitingForLikeResponse:NO];
+        [tableCell setWaitingForLikeResponse:NO];
              NSLog(@"error");
          }];
 //        [self.streamTableView reloadData];
@@ -343,10 +348,13 @@ static NSString *keyForSortSettings=@"sortKey";
                     if ([like.email isEqualToString:_authorMailParsed])
                     {
                         [tableCell.postForCell removeLikesObject:like];
+                        
+                        int newLikesCount = [tableCell.postForCell.likesCount intValue] -1;
+                        tableCell.postForCell.likesCount=[NSNumber numberWithInt:newLikesCount];
                         break;
                     }
                 }
-                [tableCell.postForCell.managedObjectContext save:nil];
+                [tableCell.postForCell.managedObjectContext MR_saveToPersistentStoreAndWait];
             }
             error:^(NSError *error)
             {
