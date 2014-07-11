@@ -65,7 +65,7 @@
 
 - (void) tableViewCell:(PSFoundUserTableViewCell *)cell didSelectUser:(User *)_userToDisplay {
     //goToProfileController
-    [self performSegueWithIdentifier:@"goToDetail" sender:cell];
+    [self performSegueWithIdentifier:@"goToProfileController" sender:cell];
 }
 
 
