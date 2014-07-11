@@ -11,7 +11,7 @@
 
 @implementation User (PSGetCurrentUser)
 
-- (User *)getCurrentUser {
++ (User *)getCurrentUser {
     PSUserStore *userStore = [PSUserStore userStoreManager];
     return userStore.activeUser;
 }

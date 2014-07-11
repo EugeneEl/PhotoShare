@@ -12,7 +12,8 @@
 #import "User.h"
 #import "PSUserStore.h"
 #import "User+updateFollowersAndFollowed.h"
-
+#import "AFHTTPRequestOperation.h"
+#import "User+PSGetCurrentUser.h"
 
 @interface PSFoundUsersViewController () <UITableViewDataSource, UITableViewDelegate, FoundUserTableViewCell>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -38,8 +39,7 @@
     [_tableView setDelegate:self];
     [_tableView setDataSource:self];
     [_tableView reloadData];
-    PSUserStore *userStore= [PSUserStore userStoreManager];
-    _currentUser=userStore.activeUser;
+    _currentUser = [User getCurrentUser];
     _userID=[_currentUser.user_id integerValue];
 }
 
@@ -62,60 +62,88 @@
 
 #pragma mark - FoundUserTableViewCell
 - (void)foundUserTableCellFollowButtonPressed:(PSFoundUserTableViewCell *)tableCell {
-   [[PSNetworkManager sharedManager]
-    PSFollowToUserWithID:[tableCell.foundUser.user_id intValue]
-    fromUserWithID:[_currentUser.user_id intValue]
-    success:^(id responseObject) {
-        UIAlertView *alert=[[UIAlertView alloc ] initWithTitle:@"Ok"
-                                                       message:@"follow success"
-                                                      delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-        [alert show];
-        [User updateFollowersAndFollowedForCurrentUser];
-        NSLog(@"currentUserAfterUpdate:%@",_currentUser);
+    if (!tableCell.isFollowed) {
+        
+        [[PSNetworkManager sharedManager]
+         PSFollowToUserWithID:[tableCell.foundUser.user_id intValue]
+         fromUserWithID:[_currentUser.user_id intValue]
+         
+         
+         
+         
+         success:^(id responseObject) {
+             UIAlertView *alert=[[UIAlertView alloc ] initWithTitle:@"Ok"
+                                                            message:@"follow success"
+                                                           delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+             [alert show];
+             [User updateFollowersAndFollowedForCurrentUser];
+             NSLog(@"currentUserAfterUpdate:%@",_currentUser);
+             [tableCell.followButton setBackgroundColor:[UIColor yellowColor]];
+             [tableCell.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+             tableCell.isFollowed=YES;
+         }
+         error:^(NSError *error) {
+             
+             /*
+              [(NSHTTPURLResponse *)error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode]
+              */
+             
+             if ([(NSHTTPURLResponse *)error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode]==401) {
+                 [tableCell.followButton setBackgroundColor:[UIColor blueColor]];
+                 [tableCell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+             }
+             
+             else
+             {
+                 UIAlertView *alert=[[UIAlertView alloc ] initWithTitle:@"Error"
+                                                                message:[error description]
+                                                               delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+                 [alert show];
+             }
+         }];
+
     }
-    error:^(NSError *error) {
-        
-        /*
-         [(NSHTTPURLResponse *)error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode]
-         */
-        
-        if ([(NSHTTPURLResponse *)error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode]==401) {
-            
-        }
+    else {
         
         
         
-        
-        
-//        NSLog(@"error:%@",error);
-//        if (error.code == 401) {
-//            UIAlertView *alert=[[UIAlertView alloc ] initWithTitle:@"Error"
-//                                                           message:@"You already follow this user"
-//                                                          delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-//            [alert show];
-//        }
-        else
-        {
-        UIAlertView *alert=[[UIAlertView alloc ] initWithTitle:@"Error"
-        message:[error description]
-                                                      delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-        [alert show];
-        }
-    }];
+        [[PSNetworkManager sharedManager]
+         PSUnfollowUserWithID:[tableCell.foundUser.user_id intValue]
+         fromUserWithID:[_currentUser.user_id intValue]
+         success:^(id responseObject) {
+             UIAlertView *alert=[[UIAlertView alloc ] initWithTitle:@"Ok"
+                                                            message:@"unfollow success"
+                                                           delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+             [alert show];
+             [User updateFollowersAndFollowedForCurrentUser];
+             NSLog(@"currentUserAfterUpdate:%@",_currentUser);
+             [tableCell.followButton setBackgroundColor:[UIColor blueColor]];
+             [tableCell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+             tableCell.isFollowed=NO;
+         }
+         error:^(NSError *error) {
+             
+             /*
+              [(NSHTTPURLResponse *)error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode]
+              */
+             
+             if ([(NSHTTPURLResponse *)error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode]==401) {
+                 [tableCell.followButton setBackgroundColor:[UIColor yellowColor]];
+                 [tableCell.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+             }
+             
+             else
+             {
+                 UIAlertView *alert=[[UIAlertView alloc ] initWithTitle:@"Error"
+                                                                message:[error description]
+                                                               delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+                 [alert show];
+             }
+         }];
+    }
     
     
 }
-
-#pragma mark - NSFetchedResultsControllerDelegate
-
-
-
-#pragma mark - UITableViewDelegate
-
-
-
-
-
 
 
 @end

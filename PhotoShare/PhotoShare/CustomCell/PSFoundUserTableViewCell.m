@@ -13,10 +13,9 @@
 @interface PSFoundUserTableViewCell ()
 @property (nonatomic, weak) IBOutlet UIImageView *avaImageView;
 @property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
-@property (nonatomic, weak) IBOutlet UIButton *followButton;
+
 @property (nonatomic, weak) IBOutlet UIButton *actionFollow;
 @property (nonatomic, weak) IBOutlet UILabel *followsMeLabel;
-@property (nonatomic, assign) BOOL isFollowed;
 @property (nonatomic, assign) int userID;
 @property (nonatomic, strong) User *currentUser;
 
@@ -61,6 +60,7 @@
     [_followButton setBackgroundColor:[UIColor blueColor]];
     [_followButton setTitle:@"Follow" forState:UIControlStateNormal];
     _foundUser=follower;
+    _isFollowed=NO;
     //if I follow she/he
     
     [_followsMeLabel setHidden:YES];

@@ -188,11 +188,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoShare/CustomCell/PSFoundUserTableViewCell.m"
-            timestampString = "426777985.208826"
+            timestampString = "426781247.388972"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "-configureCellWithFollower:"
             landmarkType = "5">
          </BreakpointContent>
@@ -204,11 +204,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoShare/CustomCell/PSFoundUserTableViewCell.m"
-            timestampString = "426777985.208826"
+            timestampString = "426781247.388972"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "-configureCellWithFollower:"
             landmarkType = "5">
          </BreakpointContent>
