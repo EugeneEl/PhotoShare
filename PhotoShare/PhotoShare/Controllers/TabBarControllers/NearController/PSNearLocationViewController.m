@@ -40,62 +40,6 @@
 
 @implementation PSNearLocationViewController
 
-
-//- (instancetype)initWithCoder:(NSCoder *)coder
-//{
-//    NSLog(@"initWithCoder");
-//    self = [super initWithCoder:coder];
-//    if (self) {
-//        self.arrayOfAnnotations=[NSMutableArray new];
-//        
-//        
-//        NSArray* tempArray=[Post MR_findAll];
-//        self.arrayOfPosts=[tempArray mutableCopy];
-//        
-//        
-//        for (Post *post in self.arrayOfPosts)
-//        {
-//            
-//            PSMapAnnotation *annonation=[[PSMapAnnotation alloc]init];
-//            annonation.title=post.photoName;
-//            
-//            
-//            self.latitudeFromPost=[post.photoLocationLatitude doubleValue];
-//            
-//            self.longtitudeFromPost=[post.photoLocationLongtitude doubleValue];
-//            NSLog(@"%f",_latitudeFromPost);
-//            NSLog(@"%f",_longtitudeFromPost);
-//            
-//            CLLocationCoordinate2D coordinate;
-//            
-//            coordinate.latitude=(CLLocationDegrees)self.latitudeFromPost;
-//            coordinate.longitude=(CLLocationDegrees)self.longtitudeFromPost;
-//            
-//            /*
-//             coordinate.latitude=(CLLocationDegrees)[post.photoLocationLatitude    doubleValue];
-//             coordinate.longitude=(CLLocationDegrees)[post.photoLocationLongtitude doubleValue];
-//             */
-//            [annonation setCoordinate:coordinate];
-//            
-//            NSLog
-//            (@"latitude:%f", annonation.coordinate.latitude);
-//            
-//            NSLog(@"longtitude:%f", annonation.coordinate.longitude);
-//            [annonation setPostIdForAnnotation:post.postID];
-//            
-//            [self.arrayOfAnnotations addObject:annonation];
-//            
-//            NSString* stringForURL=post.photoURL;
-//            annonation.imageURL=[NSURL URLWithString:stringForURL];
-//            
-//        }
-//        
-//        NSLog(@"%@",NSStringFromCGRect(self.mapView.bounds));
-//
-//    }
-//    return self;
-//}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -124,11 +68,7 @@
         
         coordinate.latitude=(CLLocationDegrees)self.latitudeFromPost;
         coordinate.longitude=(CLLocationDegrees)self.longtitudeFromPost;
-        
-        /*
-         coordinate.latitude=(CLLocationDegrees)[post.photoLocationLatitude    doubleValue];
-         coordinate.longitude=(CLLocationDegrees)[post.photoLocationLongtitude doubleValue];
-         */
+
         [annonation setCoordinate:coordinate];
         
         NSLog
@@ -156,9 +96,6 @@
         NSLog(@"Location is not enabled");
     }
 
-   // [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
-   // [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    
     [self.mapView addAnnotations:self.arrayOfAnnotations];
 
 }
@@ -297,44 +234,7 @@ if (![view isKindOfClass:[PSMKAnnotationView class]]) {
     NSLog(@"currentPosition:latitude%f   longtitude:%f",(double)self.currentLocation.coordinate.latitude, (double)self.currentLocation.coordinate.longitude);
 
     [self.locationManager stopUpdatingLocation];
-   
-    /*
 
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
-    [geocoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error)
-     {
-         if (!(error))
-         {
-             CLPlacemark *placemark = [placemarks objectAtIndex:0];
-             NSLog(@"\nCurrent Location Detected\n");
-             NSLog(@"placemark %@",placemark);
-             NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-             NSString *Address = [[NSString alloc]initWithString:locatedAt];
-             NSString *Area = [[NSString alloc]initWithString:placemark.locality];
-             NSString *Country = [[NSString alloc]initWithString:placemark.country];
-             NSString *CountryArea = [NSString stringWithFormat:@"%@, %@", Area,Country];
-             NSLog(@"%@",CountryArea);
-         }
-         else
-         {
-             NSLog(@"Geocode failed with error %@", error);
-             NSLog(@"\nCurrent Location Not Detected\n");
-             //return;
-             //CountryArea = NULL;
-         }
-         --- For more results
-          placemark.region);
-          placemark.country);
-          placemark.locality);
-          placemark.name);
-          placemark.ocean);
-     placemark.postalCode); 25 июн. в 22:41
-     Eugene Markov <euegnemarkov@yandex.ru>
-          placemark.subLocality);
-          placemark.location);
-          ------
-     }];
-     */
  
 }
 

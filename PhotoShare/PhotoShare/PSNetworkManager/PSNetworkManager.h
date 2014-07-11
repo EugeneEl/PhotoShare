@@ -77,12 +77,15 @@ typedef void (^errorBlock)(NSError* error);
                                         error:(errorBlock)errorBlock;
 
 
-- (AFHTTPRequestOperation *)followToUserWithID:(int)followerID fromUserWithID:(int)userID
+- (AFHTTPRequestOperation *)PSFollowToUserWithID:(int)followerID fromUserWithID:(int)userID
                                        success:(successBlockWithId)success
                                          error:(errorBlock)errorBlock;
 
-- (AFHTTPRequestOperation *)unfollowUserWithID:(int)followerID fromUserWithID:(int)userID
+- (AFHTTPRequestOperation *)PSUnfollowUserWithID:(int)followerID fromUserWithID:(int)userID
                                        success:(successBlockWithId)success
                                          error:(errorBlock)errorBlock;
+- (AFHTTPRequestOperation *)PSGetInfoFromUser:(int)userID
+                                      success:(successBlockWithId)success
+                                        error:(errorBlock)errorBlock;
 
 @end

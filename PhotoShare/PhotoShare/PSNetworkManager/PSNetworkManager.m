@@ -609,7 +609,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
                      }];
 }
 
-- (AFHTTPRequestOperation *)followToUserWithID:(int)followerID fromUserWithID:(int)userID
+- (AFHTTPRequestOperation *)PSFollowToUserWithID:(int)followerID fromUserWithID:(int)userID
                                        success:(successBlockWithId)success
                                          error:(errorBlock)errorBlock
 
@@ -630,7 +630,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
 }
 
-- (AFHTTPRequestOperation *)unfollowUserWithID:(int)followerID fromUserWithID:(int)userID
+- (AFHTTPRequestOperation *)PSUnfollowUserWithID:(int)followerID fromUserWithID:(int)userID
                                        success:(successBlockWithId)success
                                          error:(errorBlock)errorBlock
 
@@ -650,6 +650,28 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
     
 }
+
+- (AFHTTPRequestOperation *)PSGetInfoFromUser:(int)userID
+                                       success:(successBlockWithId)success
+                                         error:(errorBlock)errorBlock
+
+{
+    NSString *request=[NSString stringWithFormat:@"users/%d",userID];
+    
+    return  [_requestManager GET:request
+                      parameters:nil
+                         success:^(AFHTTPRequestOperation *operation, id responseObject)
+             {
+                 success(responseObject);
+             }
+                         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+             {
+                 errorBlock(error);
+             }];
+    
+    
+}
+
 
 
 

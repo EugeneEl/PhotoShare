@@ -12,7 +12,6 @@
 #import "Comment.h"
 #import "PSCollectionCellForPhoto.h"
 #import "UIImageView+AFNetworking.h"
-#import "UIImageView+ps_setRoundImage.h"
 
 static NSString *viewCellIdentifier=@"collectionCellForPhoto";
 

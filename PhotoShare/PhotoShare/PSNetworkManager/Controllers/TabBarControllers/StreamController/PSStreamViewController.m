@@ -11,8 +11,6 @@
 #import "Post.h"
 #import "Comment.h"
 #import "PSPhotoFromStreamTableViewCell.h"
-#import "UIScrollView+SVPullToRefresh.h"
-#import "UIScrollView+SVInfiniteScrolling.h"
 #import "UIViewController+UIViewController_PSSharingDataComposer.h"
 #import "PSNetworkManager.h"
 #import "PSUserStore.h"

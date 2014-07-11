@@ -42,6 +42,8 @@ static NSString *kFollowerNameKey=@"user_name";
     return self;
 }
 
+
+
 - (NSString *)getFollowerImageURL:(NSDictionary *)dictionary {
     NSString *followerImageURL=[dictionary valueForKey:kFollowerImageURLKey];
     NSLog(@"followerImageURL:%@",followerImageURL);

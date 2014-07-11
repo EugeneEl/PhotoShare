@@ -398,7 +398,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SRc-VZ-WZC">
-                                <rect key="frame" x="51" y="60" width="249" height="30"/>
+                                <rect key="frame" x="31" y="91" width="249" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -407,13 +407,13 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter name to search" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4Q-ji-9lK">
-                                <rect key="frame" x="89" y="20" width="164" height="32"/>
+                                <rect key="frame" x="73" y="37" width="164" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIA-H0-3Qh">
-                                <rect key="frame" x="129" y="120" width="84" height="30"/>
+                                <rect key="frame" x="113" y="152" width="84" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Search">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -512,7 +512,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5P5-RC-gWi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2186" y="2437"/>
+            <point key="canvasLocation" x="2197" y="2437"/>
         </scene>
         <!--Settings View Controller - Settings-->
         <scene sceneID="eU5-0x-bM1">
@@ -1134,7 +1134,9 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="cameraBarButton" destination="7IX-uX-Qtb" id="Mj5-Dw-8Vn"/>
                         <outlet property="imageForPhoto" destination="bTL-yF-zrj" id="m2v-ik-jmx"/>
+                        <outlet property="photolibraryBarButton" destination="DFt-ml-TMS" id="uTc-eL-QXU"/>
                         <outlet property="postButton" destination="lGF-La-3dp" id="RBy-gT-8WF"/>
                         <segue destination="x9e-nH-s9O" kind="push" identifier="goToUpload" id="b2E-5l-LVf"/>
                     </connections>

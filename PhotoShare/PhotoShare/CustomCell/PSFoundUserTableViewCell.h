@@ -20,4 +20,6 @@
 @interface PSFoundUserTableViewCell : UITableViewCell
 @property(nonatomic, weak)id <FoundUserTableViewCell> delegate;
 - (void)configureCellWithFollower:(User *)follower;
+@property (nonatomic, strong) User *foundUser;
+
 @end

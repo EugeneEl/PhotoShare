@@ -54,9 +54,6 @@
 		3E4D9D14196C0BF600472A7B /* Like+mapWithEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D13196C0BF600472A7B /* Like+mapWithEmail.m */; };
 		3E4D9D16196C139100472A7B /* grey_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4D9D15196C139100472A7B /* grey_heart.png */; };
 		3E51B54F1962AD31004F0FD4 /* User+PSMapWithModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B54E1962AD31004F0FD4 /* User+PSMapWithModel.m */; };
-		3E51B5521962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5511962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m */; };
-		3E51B5581962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5551962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m */; };
-		3E51B5591962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5571962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m */; };
 		3E52E54A196EF77000051376 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E52E549196EF77000051376 /* User.m */; };
 		3E585E3D19582DB400A96B2B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E585E3C19582DB400A96B2B /* Social.framework */; };
 		3E81A1A7196DA0640049D0CE /* PSCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E81A1A6196DA0640049D0CE /* PSCommentTableViewCell.m */; };
@@ -117,6 +114,8 @@
 		3EDF9BFC195C2496003E5868 /* compass3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EDF9BFB195C2496003E5868 /* compass3.png */; };
 		3EDF9BFE195C25C0003E5868 /* compass5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EDF9BFD195C25C0003E5868 /* compass5.png */; };
 		3EDF9C04195C39F1003E5868 /* response1.json in Resources */ = {isa = PBXBuildFile; fileRef = 3EDF9C03195C39F1003E5868 /* response1.json */; };
+		3EE186DC19701EB900A901CC /* User+updateFollowersAndFollowed.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE186DB19701EB900A901CC /* User+updateFollowersAndFollowed.m */; };
+		3EE186DF1970201F00A901CC /* User+PSGetCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE186DE1970201F00A901CC /* User+PSGetCurrentUser.m */; };
 		3EF1A81F1966B356001D0D69 /* PSPostModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1A81E1966B356001D0D69 /* PSPostModel.m */; };
 		3EF1A8221966B516001D0D69 /* Post+mapWithModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1A8211966B516001D0D69 /* Post+mapWithModel.m */; };
 		3EF1A8251966C081001D0D69 /* PSUserParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1A8241966C081001D0D69 /* PSUserParser.m */; };
@@ -241,13 +240,6 @@
 		3E4D9D15196C139100472A7B /* grey_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey_heart.png; sourceTree = "<group>"; };
 		3E51B54D1962AD31004F0FD4 /* User+PSMapWithModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+PSMapWithModel.h"; sourceTree = "<group>"; };
 		3E51B54E1962AD31004F0FD4 /* User+PSMapWithModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+PSMapWithModel.m"; sourceTree = "<group>"; };
-		3E51B5501962B59F004F0FD4 /* UIImageView+ps_setRoundImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ps_setRoundImage.h"; sourceTree = "<group>"; };
-		3E51B5511962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ps_setRoundImage.m"; sourceTree = "<group>"; };
-		3E51B5531962DEFE004F0FD4 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
-		3E51B5541962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
-		3E51B5551962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
-		3E51B5561962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
-		3E51B5571962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		3E52E548196EF77000051376 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = PhotoShare/Model/User.h; sourceTree = "<group>"; };
 		3E52E549196EF77000051376 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = PhotoShare/Model/User.m; sourceTree = "<group>"; };
 		3E585E3C19582DB400A96B2B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -358,6 +350,10 @@
 		3EDF9BFB195C2496003E5868 /* compass3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass3.png; sourceTree = "<group>"; };
 		3EDF9BFD195C25C0003E5868 /* compass5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass5.png; sourceTree = "<group>"; };
 		3EDF9C03195C39F1003E5868 /* response1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response1.json; sourceTree = "<group>"; };
+		3EE186DA19701EB900A901CC /* User+updateFollowersAndFollowed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+updateFollowersAndFollowed.h"; sourceTree = "<group>"; };
+		3EE186DB19701EB900A901CC /* User+updateFollowersAndFollowed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+updateFollowersAndFollowed.m"; sourceTree = "<group>"; };
+		3EE186DD1970201F00A901CC /* User+PSGetCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+PSGetCurrentUser.h"; sourceTree = "<group>"; };
+		3EE186DE1970201F00A901CC /* User+PSGetCurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+PSGetCurrentUser.m"; sourceTree = "<group>"; };
 		3EF1A81D1966B356001D0D69 /* PSPostModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSPostModel.h; sourceTree = "<group>"; };
 		3EF1A81E1966B356001D0D69 /* PSPostModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPostModel.m; sourceTree = "<group>"; };
 		3EF1A8201966B516001D0D69 /* Post+mapWithModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Post+mapWithModel.h"; sourceTree = "<group>"; };
@@ -605,11 +601,6 @@
 		3E3F8C1A1949C4C1009916BD /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				3E51B5531962DEFE004F0FD4 /* SVPullToRefresh.h */,
-				3E51B5541962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.h */,
-				3E51B5551962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m */,
-				3E51B5561962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.h */,
-				3E51B5571962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m */,
 				3E3513121954908D00433F26 /* ALAssetsLibrary+CustomPhotoAlbum.h */,
 				3E3513131954908D00433F26 /* ALAssetsLibrary+CustomPhotoAlbum.m */,
 				3E3F8C1B1949C4F1009916BD /* NSString+PSValidation.h */,
@@ -620,14 +611,16 @@
 				3EFC9A26195DC33200846D47 /* UIViewController+UIViewController_PSSharingDataComposer.m */,
 				3E51B54D1962AD31004F0FD4 /* User+PSMapWithModel.h */,
 				3E51B54E1962AD31004F0FD4 /* User+PSMapWithModel.m */,
-				3E51B5501962B59F004F0FD4 /* UIImageView+ps_setRoundImage.h */,
-				3E51B5511962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m */,
 				3EF1A8201966B516001D0D69 /* Post+mapWithModel.h */,
 				3EF1A8211966B516001D0D69 /* Post+mapWithModel.m */,
 				3EF1A8381966F1EC001D0D69 /* Comment+mapWthModel.h */,
 				3EF1A8391966F1EC001D0D69 /* Comment+mapWthModel.m */,
 				3E4D9D12196C0BF600472A7B /* Like+mapWithEmail.h */,
 				3E4D9D13196C0BF600472A7B /* Like+mapWithEmail.m */,
+				3EE186DA19701EB900A901CC /* User+updateFollowersAndFollowed.h */,
+				3EE186DB19701EB900A901CC /* User+updateFollowersAndFollowed.m */,
+				3EE186DD1970201F00A901CC /* User+PSGetCurrentUser.h */,
+				3EE186DE1970201F00A901CC /* User+PSGetCurrentUser.m */,
 			);
 			name = Categories;
 			path = PhotoShare/Categories;
@@ -1174,14 +1167,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EAF848919471A86003D1987 /* AFURLRequestSerialization.m in Sources */,
-				3E51B5521962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m in Sources */,
 				3E014A37196AE21D00F25AA7 /* PSUploadViewController.m in Sources */,
 				3EF1A82E1966E66C001D0D69 /* PSLikesParser.m in Sources */,
 				3EAF84DF19471AAF003D1987 /* MagicalRecord+iCloud.m in Sources */,
 				3E11883D194AE2FF00D562A1 /* PSProfileViewController.m in Sources */,
 				3EF1A8251966C081001D0D69 /* PSUserParser.m in Sources */,
 				3EF1A82B1966E15B001D0D69 /* PSCommentsParser.m in Sources */,
-				3E51B5591962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				3E4D9D0B196C073400472A7B /* Comment.m in Sources */,
 				3EAF84E019471AAF003D1987 /* MagicalRecord+Options.m in Sources */,
 				3EAF848819471A86003D1987 /* AFURLConnectionOperation.m in Sources */,
@@ -1200,6 +1191,7 @@
 				3EAF84D919471AAF003D1987 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				3E23C638196E97ED00691ACB /* PSFoundUsersViewController.m in Sources */,
 				3E16A531194F385C006E8B88 /* PSCollectionCellForPhoto.m in Sources */,
+				3EE186DC19701EB900A901CC /* User+updateFollowersAndFollowed.m in Sources */,
 				3E3F8C1D1949C4F1009916BD /* NSString+PSValidation.m in Sources */,
 				3E35130D19542B6F00433F26 /* PSDetailedPhotoContollerViewController.m in Sources */,
 				3E3BC71F196D5A7300771581 /* PSAddCommentViewController.m in Sources */,
@@ -1229,7 +1221,6 @@
 				3EAF84D719471AAF003D1987 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				3E16A52E194EFA9A006E8B88 /* PSPhotoFromStreamTableViewCell.m in Sources */,
 				3EAF84DD19471AAF003D1987 /* MagicalRecord+Actions.m in Sources */,
-				3E51B5581962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				3EAF84CB19471AAF003D1987 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				3E118850194B2E9D00D562A1 /* UserDataModel.xcdatamodeld in Sources */,
 				3EAF84D619471AAF003D1987 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
@@ -1240,6 +1231,7 @@
 				3EAF84D519471AAF003D1987 /* NSManagedObject+MagicalRequests.m in Sources */,
 				3E4D9D11196C073400472A7B /* Post.m in Sources */,
 				3EAF84D219471AAF003D1987 /* NSManagedObject+MagicalDataImport.m in Sources */,
+				3EE186DF1970201F00A901CC /* User+PSGetCurrentUser.m in Sources */,
 				3E4D9D14196C0BF600472A7B /* Like+mapWithEmail.m in Sources */,
 				3E48C24D1948906E00AC842D /* PSSignUpViewController.m in Sources */,
 				3EAF84E219471AAF003D1987 /* MagicalRecord+ShorthandSupport.m in Sources */,
