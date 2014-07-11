@@ -231,6 +231,10 @@ static NSString *keyForSortSettings=@"sortKey";
     }
     
     NSFetchRequest* fetchRequest=[[NSFetchRequest alloc]initWithEntityName:@"Post"];
+    
+    [fetchRequest setRelationshipKeyPathsForPrefetching:@[@"followers"]];
+    
+    [fetchRequest setRelationshipKeyPathsForPrefetching:@[@"followed"]];
     NSSortDescriptor *descriptor=[NSSortDescriptor sortDescriptorWithKey:@"likesCount" ascending:NO];
     
     [fetchRequest setSortDescriptors:@[descriptor]];
@@ -269,13 +273,15 @@ static NSString *keyForSortSettings=@"sortKey";
     NSFetchRequest* fetchRequest=[[NSFetchRequest alloc]initWithEntityName:@"Post"];
     NSSortDescriptor *descriptor=[NSSortDescriptor sortDescriptorWithKey:@"photoDate" ascending:NO];
     [fetchRequest setSortDescriptors:@[descriptor]];
+     [fetchRequest setRelationshipKeyPathsForPrefetching:@[@"followers"]];
+     [fetchRequest setRelationshipKeyPathsForPrefetching:@[@"followed"]];
     _dateFetchedResultsController = [[NSFetchedResultsController alloc]
                                                              initWithFetchRequest:fetchRequest
                                                              managedObjectContext:[NSManagedObjectContext MR_defaultContext]
                                                              sectionNameKeyPath:nil
                                                              cacheName:nil];
     
-    
+   
     _dateFetchedResultsController.delegate = self;
     
 	NSError *error = nil;

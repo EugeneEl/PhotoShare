@@ -609,6 +609,48 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
                      }];
 }
 
+- (AFHTTPRequestOperation *)followToUserWithID:(int)followerID fromUserWithID:(int)userID
+                                       success:(successBlockWithId)success
+                                         error:(errorBlock)errorBlock
+
+{
+    NSString *request=[NSString stringWithFormat:@"users/%d/follow/%d",userID,followerID];
+    
+    return  [_requestManager GET:request
+                      parameters:nil
+                         success:^(AFHTTPRequestOperation *operation, id responseObject)
+             {
+                 success(responseObject);
+             }
+                         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+             {
+                 errorBlock(error);
+             }];
+
+    
+}
+
+- (AFHTTPRequestOperation *)unfollowUserWithID:(int)followerID fromUserWithID:(int)userID
+                                       success:(successBlockWithId)success
+                                         error:(errorBlock)errorBlock
+
+{
+    NSString *request=[NSString stringWithFormat:@"users/%d/unfollow/%d",userID,followerID];
+    
+    return  [_requestManager GET:request
+                      parameters:nil
+                         success:^(AFHTTPRequestOperation *operation, id responseObject)
+             {
+                 success(responseObject);
+             }
+                         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+             {
+                 errorBlock(error);
+             }];
+    
+    
+}
+
 
 
 @end

@@ -175,6 +175,41 @@
     [[PSNetworkManager sharedManager] loginWithModel:_userModel
     success:^(id responseObject)
     {
+        
+        
+//         responseObject=@{
+//         @"cnt_followers": 1,
+//         @"followed": [
+//         @{
+//         "img_url": "http://test.intern.yalantis.com/api/img/17",
+//         "user_name": "april28NewName2",
+//         "id": 4,
+//         "email": "april28@yandex.ua"
+//         }
+//         ],
+//         "user_name": "Skiv",
+//         "posts": [],
+//         "email": "skiv@mail.com",
+//         "image_id": null,
+//         "followers": [
+//         @{
+//         @"img_url": "http://test.intern.yalantis.com/api/img/3",
+//         @"user_name": "J",
+//         @"id": 1,
+//         @"email": "black@man.com"
+//         }
+//         ],
+//         @"cnt_posts": 0,
+//         @"cnt_followed": 1,
+//         @"password": "123",
+//         @"img_url": null,
+//         @"id": 2
+//         };
+
+         
+        
+        
+        
         NSLog(@"success");
         weakSelf.resultLabel.text=@"Logged in";
         User *existingUserForLogin=[[User MR_findByAttribute:@"email" withValue:weakSelf.userModel.email] firstObject];
@@ -207,8 +242,11 @@
                 followerToAdd.email=[followersParser getFollowerEmail:dictionary];
                 followerToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
                 followerToAdd.name=[followersParser getFollowerName:dictionary];
+                if (![existingUserForLogin.followers containsObject:followerToAdd]) {
+                    [existingUserForLogin addFollowersObject:followerToAdd];
+                }
                 
-                [existingUserForLogin addFollowersObject:followerToAdd];
+                 
             }
         }
         
@@ -225,7 +263,12 @@
                 followedToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
                 followedToAdd.name=[followersParser getFollowerName:dictionary];
                 
-                [existingUserForLogin addFollowersObject:followedToAdd];
+                
+                if (![existingUserForLogin.followed containsObject:followedToAdd]) {
+                    [existingUserForLogin addFollowedObject:followedToAdd];
+                }
+                
+             
             }
         }
         

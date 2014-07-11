@@ -34,14 +34,14 @@
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="posts_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="user_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="followed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="followed" inverseEntity="User" syncable="YES"/>
-        <relationship name="followers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="followers" inverseEntity="User" syncable="YES"/>
+        <relationship name="followed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="followers" inverseEntity="User" syncable="YES"/>
+        <relationship name="followers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="followed" inverseEntity="User" syncable="YES"/>
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Post" inverseName="user" inverseEntity="Post" syncable="YES"/>
     </entity>
     <elements>
         <element name="Comment" positionX="-119" positionY="-2772" width="128" height="133"/>
         <element name="Like" positionX="-227" positionY="-2518" width="128" height="73"/>
         <element name="Post" positionX="-270" positionY="-2772" width="128" height="208"/>
-        <element name="User" positionX="-486" positionY="-2754" width="128" height="208"/>
+        <element name="User" positionX="-630" positionY="-2763" width="128" height="208"/>
     </elements>
 </model>

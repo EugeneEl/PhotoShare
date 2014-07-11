@@ -49,22 +49,27 @@
                    });
     //if he/she follows me
     if ([_currentUser.followed containsObject:follower]) {
+        [_followButton setBackgroundColor:[UIColor redColor]];
+        [_followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+        _isFollowed=YES;
+        
+       
+    }
+    else {
+        [_followButton setBackgroundColor:[UIColor blueColor]];
+        [_followButton setTitle:@"follow" forState:UIControlStateNormal];
+        _isFollowed=NO;
+        
+        
+      
+    }
+    
+    //if I follow she/he
+    if ([follower.followers containsObject:_currentUser]) {
         [_followsMeLabel setHidden:NO];
     }
     else {
         [_followsMeLabel setHidden:YES];
-    }
-    
-    //if I follow she/he
-    if ([_currentUser.followers containsObject:follower ]) {
-        [_followButton setBackgroundColor:[UIColor redColor]];
-        [_followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
-        _isFollowed=YES;
-    }
-    else {
-        [_followButton setBackgroundColor:[UIColor blueColor]];
-        [_followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
-        _isFollowed=NO;
     }
     
 }

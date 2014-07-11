@@ -75,4 +75,14 @@ typedef void (^errorBlock)(NSError* error);
 - (AFHTTPRequestOperation *)findFriendsByName:(NSString *)  nameForSearch
                                       success:(successBlockWithId)success
                                         error:(errorBlock)errorBlock;
+
+
+- (AFHTTPRequestOperation *)followToUserWithID:(int)followerID fromUserWithID:(int)userID
+                                       success:(successBlockWithId)success
+                                         error:(errorBlock)errorBlock;
+
+- (AFHTTPRequestOperation *)unfollowUserWithID:(int)followerID fromUserWithID:(int)userID
+                                       success:(successBlockWithId)success
+                                         error:(errorBlock)errorBlock;
+
 @end

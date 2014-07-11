@@ -48,7 +48,6 @@
 		3E4A702119508428003EFD21 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4A702019508428003EFD21 /* CoreLocation.framework */; };
 		3E4A702419509BEE003EFD21 /* UIView+PSMKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A702319509BEE003EFD21 /* UIView+PSMKAnnotationView.m */; };
 		3E4B0E7319642E8300238BD9 /* PSMailComposerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4B0E7219642E8300238BD9 /* PSMailComposerDelegate.m */; };
-		3E4D9D08196C073300472A7B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D07196C073300472A7B /* User.m */; };
 		3E4D9D0B196C073400472A7B /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D0A196C073400472A7B /* Comment.m */; };
 		3E4D9D0E196C073400472A7B /* Like.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D0D196C073400472A7B /* Like.m */; };
 		3E4D9D11196C073400472A7B /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D9D10196C073400472A7B /* Post.m */; };
@@ -58,6 +57,7 @@
 		3E51B5521962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5511962B59F004F0FD4 /* UIImageView+ps_setRoundImage.m */; };
 		3E51B5581962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5551962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m */; };
 		3E51B5591962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51B5571962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m */; };
+		3E52E54A196EF77000051376 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E52E549196EF77000051376 /* User.m */; };
 		3E585E3D19582DB400A96B2B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E585E3C19582DB400A96B2B /* Social.framework */; };
 		3E81A1A7196DA0640049D0CE /* PSCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E81A1A6196DA0640049D0CE /* PSCommentTableViewCell.m */; };
 		3E9267331950303800A55AC8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9267321950303800A55AC8 /* MapKit.framework */; };
@@ -230,8 +230,6 @@
 		3E4A702319509BEE003EFD21 /* UIView+PSMKAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PSMKAnnotationView.m"; sourceTree = "<group>"; };
 		3E4B0E7119642E8300238BD9 /* PSMailComposerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSMailComposerDelegate.h; sourceTree = "<group>"; };
 		3E4B0E7219642E8300238BD9 /* PSMailComposerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSMailComposerDelegate.m; sourceTree = "<group>"; };
-		3E4D9D06196C073300472A7B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		3E4D9D07196C073300472A7B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		3E4D9D09196C073400472A7B /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		3E4D9D0A196C073400472A7B /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		3E4D9D0C196C073400472A7B /* Like.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Like.h; sourceTree = "<group>"; };
@@ -250,6 +248,8 @@
 		3E51B5551962DEFE004F0FD4 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		3E51B5561962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		3E51B5571962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
+		3E52E548196EF77000051376 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = PhotoShare/Model/User.h; sourceTree = "<group>"; };
+		3E52E549196EF77000051376 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = PhotoShare/Model/User.m; sourceTree = "<group>"; };
 		3E585E3C19582DB400A96B2B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3E81A1A5196DA0640049D0CE /* PSCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCommentTableViewCell.h; sourceTree = "<group>"; };
 		3E81A1A6196DA0640049D0CE /* PSCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCommentTableViewCell.m; sourceTree = "<group>"; };
@@ -470,7 +470,6 @@
 			children = (
 				3E23C62C196E95B000691ACB /* FindFriends */,
 				3E23C62D196E95B000691ACB /* Followers */,
-				3E23C62E196E95B000691ACB /* Followings */,
 				3E23C62F196E95EF00691ACB /* PSFindFriendsAndFollowsViewController.h */,
 				3E23C630196E95EF00691ACB /* PSFindFriendsAndFollowsViewController.m */,
 			);
@@ -498,7 +497,8 @@
 			isa = PBXGroup;
 			children = (
 			);
-			path = Followings;
+			name = Followings;
+			path = ../../Followings;
 			sourceTree = "<group>";
 		};
 		3E23C635196E97DB00691ACB /* FoundUsers */ = {
@@ -506,6 +506,7 @@
 			children = (
 				3E23C636196E97ED00691ACB /* PSFoundUsersViewController.h */,
 				3E23C637196E97ED00691ACB /* PSFoundUsersViewController.m */,
+				3E23C62E196E95B000691ACB /* Followings */,
 			);
 			path = FoundUsers;
 			sourceTree = "<group>";
@@ -716,6 +717,8 @@
 		3EAF843219471843003D1987 = {
 			isa = PBXGroup;
 			children = (
+				3E52E548196EF77000051376 /* User.h */,
+				3E52E549196EF77000051376 /* User.m */,
 				3E298E7219658E28006E140C /* PSSplashViewController.h */,
 				3E298E7319658E28006E140C /* PSSplashViewController.m */,
 				3EDF9C03195C39F1003E5868 /* response1.json */,
@@ -955,8 +958,6 @@
 				3E4D9D0D196C073400472A7B /* Like.m */,
 				3E4D9D09196C073400472A7B /* Comment.h */,
 				3E4D9D0A196C073400472A7B /* Comment.m */,
-				3E4D9D06196C073300472A7B /* User.h */,
-				3E4D9D07196C073300472A7B /* User.m */,
 				3E11884E194B2E9D00D562A1 /* UserDataModel.xcdatamodeld */,
 				3EAF852E19476C95003D1987 /* PSUserModel.h */,
 				3EAF852F19476C95003D1987 /* PSUserModel.m */,
@@ -1180,7 +1181,6 @@
 				3E11883D194AE2FF00D562A1 /* PSProfileViewController.m in Sources */,
 				3EF1A8251966C081001D0D69 /* PSUserParser.m in Sources */,
 				3EF1A82B1966E15B001D0D69 /* PSCommentsParser.m in Sources */,
-				3E4D9D08196C073300472A7B /* User.m in Sources */,
 				3E51B5591962DEFE004F0FD4 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				3E4D9D0B196C073400472A7B /* Comment.m in Sources */,
 				3EAF84E019471AAF003D1987 /* MagicalRecord+Options.m in Sources */,
@@ -1255,6 +1255,7 @@
 				3E298E7819659BDB006E140C /* Parser.m in Sources */,
 				3EFC9A27195DC33200846D47 /* UIViewController+UIViewController_PSSharingDataComposer.m in Sources */,
 				3E3F8C3A1949E136009916BD /* UIRefreshControl+AFNetworking.m in Sources */,
+				3E52E54A196EF77000051376 /* User.m in Sources */,
 				3EF1A8371966F076001D0D69 /* PScommentModel.m in Sources */,
 				3EAF84CE19471AAF003D1987 /* NSObject+MagicalDataImport.m in Sources */,
 				3E4D9D0E196C073400472A7B /* Like.m in Sources */,

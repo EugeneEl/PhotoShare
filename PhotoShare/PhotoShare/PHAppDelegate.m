@@ -9,6 +9,7 @@
 #import "PHAppDelegate.h"
 #import "PSLoginViewController.h"
 #import "Post.h"
+#import "User.h"
 
 const int numberOfUsersForTest=5;
 
