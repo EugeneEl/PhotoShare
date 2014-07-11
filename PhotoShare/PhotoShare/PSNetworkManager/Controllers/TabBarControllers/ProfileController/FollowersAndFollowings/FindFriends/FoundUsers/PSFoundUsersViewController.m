@@ -14,6 +14,7 @@
 #import "User+updateFollowersAndFollowed.h"
 #import "AFHTTPRequestOperation.h"
 #import "User+PSGetCurrentUser.h"
+#import "PSProfileViewController.h"
 
 @interface PSFoundUsersViewController () <UITableViewDataSource, UITableViewDelegate, FoundUserTableViewCell>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -62,8 +63,9 @@
 
 #pragma mark - FoundUserTableViewCell
 
-- (void) tableViewCell:self didSelectUser:(User *)_userToDisplay {
-    
+- (void) tableViewCell:(PSFoundUserTableViewCell *)cell didSelectUser:(User *)_userToDisplay {
+    //goToProfileController
+    [self performSegueWithIdentifier:@"goToDetail" sender:cell];
 }
 
 
@@ -150,6 +152,20 @@
     
     
 }
+
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"goToProfileController"]) {
+        
+        if ([sender isKindOfClass:[PSFoundUserTableViewCell class]]) {
+            PSFoundUserTableViewCell *cell = (PSFoundUserTableViewCell *) sender;
+            PSProfileViewController *destinationController = segue.destinationViewController;
+            destinationController.userToDisplay = cell.foundUser;
+        }
+    }
+}
+
 
 
 @end

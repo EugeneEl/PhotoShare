@@ -32,7 +32,9 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 - (IBAction)actionToFollowers:(id)sender;
 - (IBAction)actionToFollowings:(id)sender;
 @property (nonatomic, copy) NSMutableArray *arrayOfPosts;
-@property (nonatomic, strong) User *userToDisplay;
+@property (strong, nonatomic) User *currentUser;
+@property (nonatomic, assign) BOOL displayMe;
+
 
 @end
 
@@ -43,28 +45,36 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
     
     [super viewDidLoad];
     
+    _displayMe=YES;
+    
     if (_userToDisplay!=[User getCurrentUser]) {
-        
+        NSLog(@"display another user");
+        _displayMe=YES;
     }
-    else {
-        
-        _arrayOfPosts=[[Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",[User getCurrentUser].user_id] mutableCopy]];
-        NSLog(@"Posts:",_arrayOfPosts);
-        NSArray* tempArray=[Post MR_findAll];
-        self.arrayOfPosts=[tempArray mutableCopy];
-        self.arrayOfURLPhotos=[NSMutableArray new];
-        for (Post *post in self.arrayOfPosts)
-        {
+    
+    if (_displayMe) {
+
+            _currentUser=[User getCurrentUser];
+            NSArray *array=[Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",_currentUser.user_id]];
             
-            [self.arrayOfURLPhotos addObject:post.photoURL];
+            _arrayOfPosts=[array mutableCopy];
+            NSLog(@"Posts:",_arrayOfPosts);
+            NSArray* tempArray=[Post MR_findAll];
+            self.arrayOfPosts=[tempArray mutableCopy];
+            self.arrayOfURLPhotos=[NSMutableArray new];
+            for (Post *post in self.arrayOfPosts)
+            {
+                
+                [self.arrayOfURLPhotos addObject:post.photoURL];
+                
+            }
             
-        }
-        
-        for (NSString *photoURLString in self.arrayOfURLPhotos)
-        {
-            NSLog(@"added to an array photoURL:%@",photoURLString);
-        }
+            for (NSString *photoURLString in self.arrayOfURLPhotos)
+            {
+                NSLog(@"added to an array photoURL:%@",photoURLString);
+            }
     }
+    
     
 }
 

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class User;
 
 @interface PSProfileViewController : UIViewController
-
+@property (nonatomic, strong) User *userToDisplay;
 @end

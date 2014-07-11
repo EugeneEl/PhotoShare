@@ -232,11 +232,11 @@
                         <viewControllerLayoutGuide type="bottom" id="jYr-MP-FRd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="37f-NZ-a6t">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zJF-A7-s3W">
-                                <rect key="frame" x="20" y="108" width="280" height="347"/>
+                                <rect key="frame" x="20" y="157" width="280" height="347"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DZq-Yp-wCg">
                                     <size key="itemSize" width="237" height="243"/>
@@ -394,7 +394,7 @@
                         <viewControllerLayoutGuide type="bottom" id="rcx-f2-hkM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xHd-QU-XTH" customClass="UIControl">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SRc-VZ-WZC">
@@ -449,11 +449,11 @@
                         <viewControllerLayoutGuide type="bottom" id="hVa-9H-3iD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6NF-CD-mzO">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="78" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DtX-iC-p02">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -508,6 +508,7 @@
                     <navigationItem key="navigationItem" title="Found" id="7Zj-8t-Okf"/>
                     <connections>
                         <outlet property="tableView" destination="DtX-iC-p02" id="xcR-7o-nnA"/>
+                        <segue destination="n4a-qQ-HIc" kind="push" identifier="goToProfileController" id="WIo-0w-CJx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5P5-RC-gWi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1359,6 +1360,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="3D1-8Y-Y9W"/>
+        <segue reference="WIo-0w-CJx"/>
         <segue reference="bkD-v9-yvT"/>
     </inferredMetricsTieBreakers>
 </document>

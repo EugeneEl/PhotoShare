@@ -27,18 +27,18 @@
 @implementation PSFoundUserTableViewCell
 
 - (void)configureCellWithFollower:(User *)follower {
-
     _userToDisplay=follower;
     PSUserStore *userStore= [PSUserStore userStoreManager];
     _currentUser=userStore.activeUser;
     _userID=[_currentUser.user_id integerValue];
+    [_avaImageView setUserInteractionEnabled:YES];
+     _tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
      [_avaImageView addGestureRecognizer:_tapRecognizer];
     [_userNameLabel setText:follower.name];
 
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     dispatch_async(queue, ^(void)
                    {
-                       
                        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:follower.ava_imageURL]];
                        
                        UIImage* image = [[UIImage alloc] initWithData:imageData];
