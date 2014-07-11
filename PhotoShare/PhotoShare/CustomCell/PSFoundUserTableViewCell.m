@@ -18,7 +18,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *followsMeLabel;
 @property (nonatomic, assign) int userID;
 @property (nonatomic, strong) User *currentUser;
-
+@property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
+@property (nonatomic, strong) User *userToDisplay;
 
 @end
 
@@ -27,10 +28,11 @@
 
 - (void)configureCellWithFollower:(User *)follower {
 
+    _userToDisplay=follower;
     PSUserStore *userStore= [PSUserStore userStoreManager];
     _currentUser=userStore.activeUser;
     _userID=[_currentUser.user_id integerValue];
-    
+     [_avaImageView addGestureRecognizer:_tapRecognizer];
     [_userNameLabel setText:follower.name];
 
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
@@ -91,8 +93,11 @@
 }
 
 - (IBAction)actionFollow:(id)sender {
-       [self.delegate foundUserTableCellFollowButtonPressed:self];
+    [self.delegate foundUserTableCellFollowButtonPressed:self];
 }
 
+-(void)tap:(UITapGestureRecognizer*)recognizer {
+    [_delegate tableViewCell:self didSelectUser:(User *)_userToDisplay];
+}
 
 @end

@@ -61,6 +61,12 @@
 
 
 #pragma mark - FoundUserTableViewCell
+
+- (void) tableViewCell:self didSelectUser:(User *)_userToDisplay {
+    
+}
+
+
 - (void)foundUserTableCellFollowButtonPressed:(PSFoundUserTableViewCell *)tableCell {
     if (!tableCell.isFollowed) {
         

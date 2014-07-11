@@ -13,8 +13,8 @@
 @protocol FoundUserTableViewCell;
 @protocol FoundUserTableViewCell <NSObject>
 @optional
-
 - (void)foundUserTableCellFollowButtonPressed:(PSFoundUserTableViewCell *)tableCell;
+- (void)tableViewCell:self didSelectUser:(User *)_userToDisplay;
 @end
 
 @interface PSFoundUserTableViewCell : UITableViewCell

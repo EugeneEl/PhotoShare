@@ -12,10 +12,9 @@
 #import "Comment.h"
 #import "PSCollectionCellForPhoto.h"
 #import "UIImageView+AFNetworking.h"
+#import "User+PSGetCurrentUser.h"
 
 static NSString *viewCellIdentifier=@"collectionCellForPhoto";
-
-
 
 @interface
 PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
@@ -32,8 +31,8 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 - (IBAction)actionFindFriends:(id)sender;
 - (IBAction)actionToFollowers:(id)sender;
 - (IBAction)actionToFollowings:(id)sender;
-
 @property (nonatomic, copy) NSMutableArray *arrayOfPosts;
+@property (nonatomic, strong) User *userToDisplay;
 
 @end
 
@@ -43,24 +42,29 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 {
     
     [super viewDidLoad];
-    NSArray* tempArray=[Post MR_findAll];
-    self.arrayOfPosts=[tempArray mutableCopy];
     
-    
-    self.arrayOfURLPhotos=[NSMutableArray new];
-    
-    for (Post *post in self.arrayOfPosts)
-    {
+    if (_userToDisplay!=[User getCurrentUser]) {
         
-        [self.arrayOfURLPhotos addObject:post.photoURL];
-       
     }
-    
-    for (NSString *photoURLString in self.arrayOfURLPhotos)
-    {
-        NSLog(@"added to an array photoURL:%@",photoURLString);
+    else {
+        
+        _arrayOfPosts=[[Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",[User getCurrentUser].user_id] mutableCopy]];
+        NSLog(@"Posts:",_arrayOfPosts);
+        NSArray* tempArray=[Post MR_findAll];
+        self.arrayOfPosts=[tempArray mutableCopy];
+        self.arrayOfURLPhotos=[NSMutableArray new];
+        for (Post *post in self.arrayOfPosts)
+        {
+            
+            [self.arrayOfURLPhotos addObject:post.photoURL];
+            
+        }
+        
+        for (NSString *photoURLString in self.arrayOfURLPhotos)
+        {
+            NSLog(@"added to an array photoURL:%@",photoURLString);
+        }
     }
-    
     
 }
 
@@ -70,7 +74,7 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return  [self.arrayOfURLPhotos count];
-
+    
 }
 
 
@@ -79,14 +83,11 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
     PSCollectionCellForPhoto *cell=[self.photoCollectionView dequeueReusableCellWithReuseIdentifier:viewCellIdentifier forIndexPath:indexPath];
     [cell.imageForPhoto setImageWithURL:[NSURL URLWithString:[self.arrayOfURLPhotos objectAtIndex:indexPath.row]]];
     return cell;
-     
+    
 }
 
-
-
-
 - (IBAction)actionFindFriends:(id)sender {
-      [self performSegueWithIdentifier:@"goToFindFriends" sender:sender];
+    [self performSegueWithIdentifier:@"goToFindFriends" sender:sender];
 }
 
 - (IBAction)actionToFollowers:(id)sender {
@@ -102,10 +103,6 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
         PSFindFriendsViewController *destinationController=(PSFindFriendsViewController *)segue.destinationViewController;
     }
 }
-
-
-
-
 
 
 @end
