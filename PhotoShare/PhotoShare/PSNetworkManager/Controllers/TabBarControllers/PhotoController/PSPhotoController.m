@@ -13,11 +13,15 @@
 #import "PSUploadViewController.h"
 #import "PSUserStore.h"
 
-@interface PSPhotoController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface PSPhotoController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic,copy) NSArray*  arrayOfImages;
 @property (strong, atomic) ALAssetsLibrary* library;
 @property (weak, nonatomic) IBOutlet UIButton *postButton;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocation *currentLocation;
+@property (nonatomic, assign) double lng;
+@property (nonatomic, assign) double lat;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageForPhoto;
 @property (nonatomic,strong) UIImage *imageForUpload;
@@ -34,6 +38,19 @@
     [super viewDidLoad];
     self.library = [[ALAssetsLibrary alloc] init];
     [_postButton setHidden:YES];
+    [self checkLocationServicesTurnedOn];
+    [self checkApplicationHasLocationServicesPermission];
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [self.locationManager startUpdatingLocation];
+    }
+    else
+    {
+        NSLog(@"Location is not enabled");
+    }
+    
 }
 
 
@@ -114,6 +131,10 @@
                                     delegate:nil
                                     cancelButtonTitle:NSLocalizedString(@"alertViewOkKey","") otherButtonTitles:nil, nil];
                 [alert show];
+                self.lng=self.currentLocation.coordinate.longitude;
+                self.lat=self.currentLocation.coordinate.latitude;
+                NSLog(@"lat:%f",_lat);
+                NSLog(@"lng:%f",_lng);
                 [_postButton setHidden:NO];
             }
         }];
@@ -146,7 +167,12 @@
              
              [assetMetadata setObject:gpsData forKey:@"Location Information"];
                     NSLog(@"%@",gpsData);
-          
+             
+             self.lng=[[gpsData valueForKey:@"Longtitude"] doubleValue];
+             self.lat=[[gpsData valueForKey:@"Latitude"] doubleValue];
+             NSLog(@"lat:%f",_lat);
+             NSLog(@"lng:%f",_lng);
+
          }
                 failureBlock:^(NSError *error)
          {
@@ -155,17 +181,28 @@
          }];
         
        
-       ALAsset *asset=[[ALAsset  alloc]init];
+        if (_lat && _lng) {
+            
+            
+            self.imageForPhoto.image = chosenImage;
+            self.imageForPhoto.contentMode = UIViewContentModeScaleAspectFill;
+            
+            self.imageForUpload=chosenImage;
+            [_postButton setHidden:NO];
+            [picker dismissViewControllerAnimated:YES completion:NULL];
+            
+        }
         
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"== Opps! =="
+                                                            message:@"Photo doesn't have coordinates.Try another photo"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [picker dismissViewControllerAnimated:YES completion:NULL];
+        }
         
-    
-        self.imageForPhoto.image = chosenImage;
-        self.imageForPhoto.contentMode = UIViewContentModeScaleAspectFill;
- 
-        
-        self.imageForUpload=chosenImage;
-        [_postButton setHidden:NO];
-        [picker dismissViewControllerAnimated:YES completion:NULL];
     };
 }
     
@@ -194,9 +231,44 @@
         NSLog(@"user_id:%d",_userID);
         destinationController.userID=_userID;
         destinationController.image=_imageForUpload;
+        destinationController.lat=_lat;
+        destinationController.lng=_lng;
     }
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    self.currentLocation = [locations objectAtIndex:0];
+    //    NSLog(@"currentPosition:latitude%f   longtitude:%f",(double)self.currentLocation.coordinate.latitude, (double)self.currentLocation.coordinate.longitude);
+    [self.locationManager stopUpdatingLocation];
+
+}
+
+
+
+
+- (void) checkLocationServicesTurnedOn {
+    if (![CLLocationManager locationServicesEnabled]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"== Opps! =="
+                                                        message:@"'Location Services' need to be on."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+
+-(void) checkApplicationHasLocationServicesPermission {
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"== Opps! =="
+                                                        message:@"This application needs 'Location Services' to be turned on."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
 
 
 @end

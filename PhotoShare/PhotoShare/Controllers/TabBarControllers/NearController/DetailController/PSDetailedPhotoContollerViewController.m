@@ -112,7 +112,7 @@
     _likesStatus=NO;
     
     
-    for (Like *like in _post.likes) {
+    for (Like *like in [_post.likes allObjects]) {
         if (_authorMailParsed==like.email) {
             _likesStatus=YES;
             break;
@@ -123,7 +123,7 @@
         [_likeButton setImage:[UIImage imageNamed:@"grey_heart"] forState:UIControlStateNormal];
     }
     else {
-        [_likeButton setImage:[UIImage imageNamed:@"heart_icon.png"] forState:UIControlStateNormal];
+        [_likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
     }
     
     

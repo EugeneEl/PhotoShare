@@ -48,30 +48,46 @@
                                       });
                    });
     //if he/she follows me
-    if ([_currentUser.followed containsObject:follower]) {
-        [_followButton setBackgroundColor:[UIColor redColor]];
-        [_followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
-        _isFollowed=YES;
-        
-       
-    }
-    else {
-        [_followButton setBackgroundColor:[UIColor blueColor]];
-        [_followButton setTitle:@"follow" forState:UIControlStateNormal];
-        _isFollowed=NO;
-        
-        
-      
-    }
+//    
+//    for (User *user  in [follower.followed allObjects]) {
+//        NSLog(@"%@",user);
+//    }
+    
+//    for (User *user in [User MR_findAll]) {
+//        NSLog(@"%@",user);
+//    }
+
+    [_followButton setBackgroundColor:[UIColor blueColor]];
+    [_followButton setTitle:@"Follow" forState:UIControlStateNormal];
+  
     
     //if I follow she/he
-    if ([follower.followers containsObject:_currentUser]) {
-        [_followsMeLabel setHidden:NO];
-    }
-    else {
-        [_followsMeLabel setHidden:YES];
+    
+    [_followsMeLabel setHidden:YES];
+    
+    for (User *user in [follower.followed allObjects])
+    {
+        if (user.user_id==_currentUser.user_id) {
+               [_followsMeLabel setHidden:NO];
+            break;
+        }
     }
     
+    NSArray *followers = [User MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"followed CONTAINS %@", _currentUser]];
+    NSLog(@"%@",followers);
+    
+    
+    
+    for (User *user in followers)
+//    for (User *user in [follower.followers allObjects])
+    {
+        if (user.user_id==_currentUser.user_id) {
+            [_followButton setBackgroundColor:[UIColor redColor]];
+            [_followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+            _isFollowed=YES;
+            break;
+        }
+ }
 }
 
 - (IBAction)actionFollow:(id)sender {

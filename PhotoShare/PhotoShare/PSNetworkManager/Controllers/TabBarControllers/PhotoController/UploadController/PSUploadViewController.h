@@ -11,6 +11,7 @@
 @interface PSUploadViewController : UIViewController
 
 @property (nonatomic, strong) UIImage *image;
+@property (nonatomic, assign) double lat;
+@property (nonatomic, assign) double lng;
 @property (nonatomic, assign) int userID;
-- (instancetype)initWithImage:(UIImage *)image andUserID:(int)userID;
 @end

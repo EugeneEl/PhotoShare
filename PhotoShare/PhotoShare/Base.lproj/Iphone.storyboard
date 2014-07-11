@@ -951,38 +951,30 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="McJ-V7-Y5F">
-                                <rect key="frame" x="23" y="380" width="27" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xqy-An-SAZ">
-                                <rect key="frame" x="138" y="380" width="27" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Likes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgj-Lu-KvN">
-                                <rect key="frame" x="65" y="380" width="42" height="41"/>
+                                <rect key="frame" x="19" y="407" width="42" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Comms" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULJ-mM-C30">
-                                <rect key="frame" x="186" y="380" width="60" height="41"/>
+                                <rect key="frame" x="86" y="407" width="60" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCh-5X-ZCw">
-                                <rect key="frame" x="102" y="424" width="81" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCh-5X-ZCw">
+                                <rect key="frame" x="81" y="376" width="71" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="comment">
+                                <state key="normal" image="comment.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="actionCommentPhoto:" destination="41B-0C-j1f" eventType="touchUpInside" id="3tQ-vK-rRc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwx-st-tKm">
-                                <rect key="frame" x="-2" y="424" width="81" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwx-st-tKm">
+                                <rect key="frame" x="15" y="376" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Like">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1025,10 +1017,8 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="qtP-GD-12N"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="commentImageView" destination="xqy-An-SAZ" id="cQD-2U-aSI"/>
                         <outlet property="commentsNumLabel" destination="ULJ-mM-C30" id="1gF-AP-btq"/>
                         <outlet property="likeButton" destination="dwx-st-tKm" id="7rn-cn-QGb"/>
-                        <outlet property="likeImageView" destination="McJ-V7-Y5F" id="kCo-s6-Pxh"/>
                         <outlet property="likesNumLabel" destination="Dgj-Lu-KvN" id="2Z3-ap-X9W"/>
                         <outlet property="photoImageView" destination="sq3-Oa-bw5" id="W1Q-bc-58K"/>
                         <outlet property="photoNameLabel" destination="bFU-FV-qD4" id="rzs-kv-eky"/>

@@ -27,7 +27,7 @@
 @property (nonatomic, strong) NSMutableArray *arrayOfFoundID;
 
 @property (nonatomic, copy) NSMutableArray *arrayOfFoundUsers;
-@property (nonatomic, strong) NSMutableArray *arrayToPath;
+@property (nonatomic, strong) NSMutableArray *arrayToPass;
 @property (nonatomic, strong) User *currentUser;
 
 @end
@@ -39,7 +39,7 @@
     [super viewDidLoad];
     [_searchButton setEnabled:NO];
     [_searchTextField setDelegate:self];
-    _arrayToPath=[NSMutableArray array];
+    _arrayToPass=[NSMutableArray array];
     PSUserStore *userStore= [PSUserStore userStoreManager];
     _currentUser=userStore.activeUser;
     
@@ -50,7 +50,7 @@
     [[PSNetworkManager sharedManager] findFriendsByName:_searchText
                                                 success:^(id responseObject)
      {
-         _arrayToPath=[NSMutableArray array];
+         _arrayToPass=[NSMutableArray array];
          _arrayOfFoundID=[NSMutableArray array];
          NSLog(@"success");
          NSLog(@"%@",responseObject);
@@ -58,9 +58,17 @@
          
          for (NSDictionary *dictionary in _arrayOfFoundUsers) {
              PSUserParser *userParser=[[PSUserParser alloc]initWithId:dictionary];
-             int userID=[userParser getUserID];
              
-             User *userToAdd;
+             
+             NSLog(@"newLOOP\n");
+             for (User *user in [User MR_findAll]) {
+                 NSLog(@"user_id:%d",[user.user_id intValue]);
+                 
+             }
+             
+             
+             int userID=[userParser getUserID];
+             User *userToAdd = nil;
              if ([[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:userID] ]firstObject]) {
                  userToAdd=[[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:userID] ]firstObject];
              } else {
@@ -70,6 +78,7 @@
              userToAdd.name=[userParser getUserName];
              userToAdd.followed_count=[NSNumber numberWithInt:[userParser getCountOfFollowed]];
              userToAdd.follower_count=[NSNumber numberWithInt:[userParser getCountOfFollowers]];
+             userToAdd.user_id=[NSNumber numberWithInt:[userParser getUserID]];
              
              //add followers
              PSFollowersParser *followersParser=[[PSFollowersParser alloc] initWithId:responseObject];
@@ -77,35 +86,33 @@
                  for (NSDictionary *dictionary in [followersParser.arrayOfFollowers firstObject])
                  {
                      
-//                     if ([_currentUser.user_id intValue]==[followersParser getFollowerID:dictionary]) {
-//                         //working with currentUser
-//                         if ([_currentUser.followed containsObject:userToAdd]) {
-//                             break;
-//                         }
-//                     }
                      
-                     //tempory solution (array nested in another extra array)
-                     User *followerToAdd=[User MR_createEntityInContext:userToAdd.managedObjectContext];
+                     
+                     int followerToAddTestID = [followersParser getFollowerID:dictionary];
+                     User *followerToAdd = nil;
+                     if ([[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followerToAddTestID] ]firstObject]) {
+                         followerToAdd=[[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followerToAddTestID] ]firstObject];
+                     } else {
+                         followerToAdd = [User MR_createEntityInContext:[NSManagedObjectContext MR_defaultContext]];
+                     }
+
                      followerToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
                      followerToAdd.email=[followersParser getFollowerEmail:dictionary];
                      followerToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
                      followerToAdd.name=[followersParser getFollowerName:dictionary];
                      
-//                     NSMutableArray *array=[NSMutableArray arrayWithArray: [userToAdd.followers allObjects]];
-//                     [array addObject:followerToAdd];
-//                     userToAdd.followers = [NSSet setWithArray:array];
+
                      
-                     if (![userToAdd.followers containsObject:followerToAdd]) {
+                     if (![[userToAdd.followers allObjects] containsObject:followerToAdd]) {
                          [userToAdd addFollowersObject:followerToAdd];
+                         
+                         NSLog(@"followerAdded");
+                         for (User *user in [User MR_findAll]) {
+                             NSLog(@"user_id:%d",[user.user_id intValue]);
+                             
+                         }
+                               
                      }
-                     
-                     
-//                     NSMutableArray *array1 = [NSMutableArray arrayWithArray:[followerToAdd.followers allObjects]];
-//                     [array1 addObject:userToAdd];
-//                     followerToAdd.followers=[NSSet setWithArray:array1];
-            
-                    
-                     
                  }
              }
              
@@ -113,34 +120,49 @@
              if (followersParser.arrayOfFollowed!=nil) {
                  for (NSDictionary *dictionary in [followersParser.arrayOfFollowed firstObject])
                  {
-                     
-//                     
-//                     if ([_currentUser.user_id intValue]==[followersParser getFollowerID:dictionary]) {
-//                         //working with currentUser
-//                         if ([_currentUser.followers containsObject:userToAdd]) {
-//                             break;
-//                         }
-//                     }
-                     User *followedToAdd=[User MR_createEntityInContext:userToAdd.managedObjectContext];
+                     int followedToAddTestID = [followersParser getFollowerID:dictionary];
+                     User *followedToAdd = nil;
+                     if ([[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followedToAddTestID] ]firstObject]) {
+                         followedToAdd=[[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followedToAddTestID] ]firstObject];
+                     } else {
+                         followedToAdd = [User MR_createEntityInContext:[NSManagedObjectContext MR_defaultContext]];
+                     }
+
                      followedToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
                      followedToAdd.email=[followersParser getFollowerEmail:dictionary];
                      followedToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
                      followedToAdd.name=[followersParser getFollowerName:dictionary];
                      
                      
-                     if (![userToAdd.followed containsObject:followedToAdd]) {
+                     if (![[userToAdd.followed allObjects]containsObject:followedToAdd]) {
                          [userToAdd addFollowedObject:followedToAdd];
+                         NSLog(@"followedAdded");
+                         for (User *user in [User MR_findAll]) {
+                             NSLog(@"user_id:%d",[user.user_id intValue]);
+                             
+                         }
                      }
                      
                     // [userToAdd addFollowersObject:followedToAdd];
 //                     [followedToAdd addFollowedObject:userToAdd];
                  }
              }
-         
-             [userToAdd.managedObjectContext MR_saveToPersistentStoreAndWait];
-            // [_currentUser.managedObjectContext MR_saveToPersistentStoreAndWait];
              
-             [_arrayToPath addObject:userToAdd];
+             NSLog(@"Before save");
+             for (User *user in [User MR_findAll]) {
+                 NSLog(@"user_id:%d",[user.user_id intValue]);
+                 
+             }
+             
+             [userToAdd.managedObjectContext MR_saveToPersistentStoreAndWait];
+             
+             NSLog(@"after save");
+             for (User *user in [User MR_findAll]) {
+                 NSLog(@"user_id:%d",[user.user_id intValue]);
+                 
+             }
+             
+             [_arrayToPass addObject:userToAdd];
              [_arrayOfFoundID addObject:userToAdd.user_id];
              [self performSegueWithIdentifier:@"goToFollow" sender:self];
          }
@@ -174,7 +196,7 @@
     if ([segue.identifier isEqualToString:@"goToFollow"]) {
         
         PSFoundUsersViewController *destinationController=segue.destinationViewController;
-        destinationController.arrayOfUsersToDisplay=_arrayOfFoundID;
+        destinationController.arrayOfUsersToDisplay=_arrayToPass;
     }
 }
 

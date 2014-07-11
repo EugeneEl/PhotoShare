@@ -952,13 +952,13 @@
 		3EAF84E719471D33003D1987 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3E11884E194B2E9D00D562A1 /* UserDataModel.xcdatamodeld */,
 				3E4D9D0F196C073400472A7B /* Post.h */,
 				3E4D9D10196C073400472A7B /* Post.m */,
 				3E4D9D0C196C073400472A7B /* Like.h */,
 				3E4D9D0D196C073400472A7B /* Like.m */,
 				3E4D9D09196C073400472A7B /* Comment.h */,
 				3E4D9D0A196C073400472A7B /* Comment.m */,
-				3E11884E194B2E9D00D562A1 /* UserDataModel.xcdatamodeld */,
 				3EAF852E19476C95003D1987 /* PSUserModel.h */,
 				3EAF852F19476C95003D1987 /* PSUserModel.m */,
 				3EF1A81D1966B356001D0D69 /* PSPostModel.h */,
