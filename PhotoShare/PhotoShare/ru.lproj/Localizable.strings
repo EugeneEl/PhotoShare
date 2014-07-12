@@ -80,7 +80,8 @@
 //  PSPhotoController.m
 "alertViewErrorNoCameraKey"="В Вашем устройстве нет камеры";
 
-
+//PSAddCommentController
+"alertViewErrorUnableToSendCommentKey"="Не удалось отправить сообщение";
 
 //  SettingController
 "actionSheetButtonFromLibraryKey"="Выбрать из альбома";

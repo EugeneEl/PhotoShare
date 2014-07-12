@@ -568,9 +568,9 @@
 		3E1971831970EA1500CEBE74 /* CommentsController */ = {
 			isa = PBXGroup;
 			children = (
-				3E1971841970EA1500CEBE74 /* AddCommentController */,
 				3E1971871970EA1500CEBE74 /* PSCommentsController.h */,
 				3E1971881970EA1500CEBE74 /* PSCommentsController.m */,
+				3E1971841970EA1500CEBE74 /* AddCommentController */,
 			);
 			path = CommentsController;
 			sourceTree = "<group>";
