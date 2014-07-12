@@ -271,6 +271,7 @@ static NSString *keyForSortSettings=@"sortKey";
 
 - (void)photoStreamCellLikeButtonPressed:(PSPhotoFromStreamTableViewCell  *)tableCell
 {
+       __weak typeof(self) weakSelf = self;
     if (!tableCell.likesStatus)
     {
         if ([tableCell isWaitingForLikeResponse]) return;
@@ -290,7 +291,7 @@ static NSString *keyForSortSettings=@"sortKey";
              [tableCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
              [tableCell.postForCell.managedObjectContext MR_saveToPersistentStoreAndWait];
              [tableCell setWaitingForLikeResponse:NO];
-             [_streamTableView reloadData];
+             [weakSelf.streamTableView reloadData];
              
          }
          error:^(NSError *error)
@@ -325,7 +326,7 @@ static NSString *keyForSortSettings=@"sortKey";
                     }
                 }
                 [tableCell.postForCell.managedObjectContext MR_saveToPersistentStoreAndWait];
-                [_streamTableView reloadData];
+                [weakSelf.streamTableView reloadData];
             }
             error:^(NSError *error)
             {
