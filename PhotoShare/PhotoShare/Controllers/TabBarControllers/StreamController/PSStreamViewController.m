@@ -23,6 +23,7 @@
 #import "Like+mapWithEmail.h"
 #import "PSLikesParser.h"
 #import "PSCommentsController.h"
+#import "MBProgressHUD.h"
 
 typedef enum {
     kNew,
@@ -47,10 +48,10 @@ static NSString *keyForSortSettings=@"sortKey";
 @property (nonatomic,strong) NSMutableArray *dataSource;
 @property (nonatomic,assign) sortPostsByKey sortKey;
 @property (nonatomic,strong) User *currentUser;
-@property (nonatomic,strong) UIImage *avaImage;
-@property (nonatomic,strong)NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic,strong)NSFetchedResultsController *likeFetchedResultsController;
-@property (nonatomic,strong)NSFetchedResultsController *dateFetchedResultsController;
+@property (nonatomic,strong)  UIImage *avaImage;
+@property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic,strong) NSFetchedResultsController *likeFetchedResultsController;
+@property (nonatomic,strong) NSFetchedResultsController *dateFetchedResultsController;
 
 @property (nonatomic,weak)IBOutlet UISegmentedControl *changeSortKeySegmentController;
 @property (nonatomic,weak)IBOutlet UITableView *streamTableView;
@@ -65,8 +66,8 @@ static NSString *keyForSortSettings=@"sortKey";
 -(void)viewDidLoad
 {
    [super viewDidLoad];
-    self.streamTableView.dataSource=self;
-    self.streamTableView.delegate=self;
+    _streamTableView.dataSource = self;
+    _streamTableView.delegate = self;
     [self loadSettins];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     PSUserStore *userStore = [PSUserStore userStoreManager];
@@ -75,6 +76,8 @@ static NSString *keyForSortSettings=@"sortKey";
     _authorMailParsed =_currentUser.email;
     NSLog(@"user_id:%d",_userID);
     __weak typeof(self) weakSelf = self;
+   // [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [[PSNetworkManager sharedManager] getAllUserPostsWithUserID:_userID
                                                         success:^(id responseObject)
      {
@@ -130,6 +133,7 @@ static NSString *keyForSortSettings=@"sortKey";
              }
              
              [_currentUser.managedObjectContext MR_saveToPersistentStoreAndWait];
+             [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
              [weakSelf.streamTableView reloadData];
          }
          
@@ -158,7 +162,6 @@ static NSString *keyForSortSettings=@"sortKey";
 }
 
 
-
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -182,21 +185,21 @@ static NSString *keyForSortSettings=@"sortKey";
     rotation.m34 = 1.0/ -600;
     
     cell.layer.shadowColor = [[UIColor blackColor]CGColor];
-    cell.layer.shadowOffset = CGSizeMake(10, 10);
-    cell.alpha = 0;
+    cell.layer.shadowOffset = CGSizeMake(10.f, 10.f);
+    cell.alpha = 0.f;
     
     cell.layer.transform = rotation;
-    cell.layer.anchorPoint = CGPointMake(0, 0.5);
+    cell.layer.anchorPoint = CGPointMake(0.f, 0.5f);
     
-    if(cell.layer.position.x != 0){
-        cell.layer.position = CGPointMake(0, cell.layer.position.y);
+    if(cell.layer.position.x != 0.f){
+        cell.layer.position = CGPointMake(0.f, cell.layer.position.y);
     }
 
     [UIView beginAnimations:@"rotation" context:NULL];
-    [UIView setAnimationDuration:0.8];
+    [UIView setAnimationDuration:0.8f];
     cell.layer.transform = CATransform3DIdentity;
     cell.alpha = 1;
-    cell.layer.shadowOffset = CGSizeMake(0, 0);
+    cell.layer.shadowOffset = CGSizeMake(0.f, 0.f);
     [UIView commitAnimations];
 }
 
@@ -287,7 +290,7 @@ static NSString *keyForSortSettings=@"sortKey";
              [tableCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
              [tableCell.postForCell.managedObjectContext MR_saveToPersistentStoreAndWait];
              [tableCell setWaitingForLikeResponse:NO];
-             [self.streamTableView reloadData];
+             [_streamTableView reloadData];
              
          }
          error:^(NSError *error)
@@ -322,7 +325,7 @@ static NSString *keyForSortSettings=@"sortKey";
                     }
                 }
                 [tableCell.postForCell.managedObjectContext MR_saveToPersistentStoreAndWait];
-                [self.streamTableView reloadData];
+                [_streamTableView reloadData];
             }
             error:^(NSError *error)
             {
@@ -338,12 +341,12 @@ static NSString *keyForSortSettings=@"sortKey";
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
-    if (self.sortKey == kNew) {
-        _fetchedResultsController = self.dateFetchedResultsController;
+    if (_sortKey == kNew) {
+        _fetchedResultsController = _dateFetchedResultsController;
     }
    
     else if (self.sortKey == kFavourite) {
-        _fetchedResultsController = self.likeFetchedResultsController;
+        _fetchedResultsController = _likeFetchedResultsController;
     }
     
     return _fetchedResultsController;
@@ -352,7 +355,7 @@ static NSString *keyForSortSettings=@"sortKey";
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self.streamTableView beginUpdates];
+    [_streamTableView beginUpdates];
 }
 
 
@@ -498,15 +501,15 @@ static NSString *keyForSortSettings=@"sortKey";
     {
         self.sortKey=kNew;
         [self saveSettings];
-        [self.streamTableView setContentOffset:CGPointMake(0, 0)];
-        [self.streamTableView reloadData];
+        [_streamTableView setContentOffset:CGPointMake(0.f, 0.f)];
+        [_streamTableView reloadData];
         
     }
     else if (selectedSegment == 1)
     {
         self.sortKey=kFavourite;
-        [self.streamTableView reloadData];
-        [self.streamTableView setContentOffset:CGPointMake(0, 0)];
+        [_streamTableView reloadData];
+        [_streamTableView setContentOffset:CGPointMake(0.f, 0.f)];
         [self saveSettings];
     }
     
@@ -518,10 +521,10 @@ static NSString *keyForSortSettings=@"sortKey";
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    if (self.sortKey == kNew) {
+    if (_sortKey == kNew) {
        [userDefaults setInteger:0 forKey:keyForSortSettings];
     }
-    else if (self.sortKey == kFavourite) {
+    else if (_sortKey == kFavourite) {
        [userDefaults setInteger:1 forKey:keyForSortSettings];
     }
     [userDefaults synchronize];
@@ -536,19 +539,19 @@ static NSString *keyForSortSettings=@"sortKey";
     
     if (KeyFromDefaults == 0)
     {
-        self.sortKey = kNew;
-        self.changeSortKeySegmentController.selectedSegmentIndex = 0;
+        _sortKey = kNew;
+        _changeSortKeySegmentController.selectedSegmentIndex = 0;
     }
     
     else if (KeyFromDefaults == 1)
     {
-        self.sortKey = kFavourite;
-        self.changeSortKeySegmentController.selectedSegmentIndex = 1;
+        _sortKey = kFavourite;
+        _changeSortKeySegmentController.selectedSegmentIndex = 1;
     }
     else
     {
-        self.sortKey = kNew;
-        self.changeSortKeySegmentController.selectedSegmentIndex = 0;
+        _sortKey = kNew;
+        _changeSortKeySegmentController.selectedSegmentIndex = 0;
     }
     
 }
@@ -560,8 +563,8 @@ tableCell
  
     NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:tableCell.postForCell.photoURL]];
     UIImage* image = [UIImage imageWithData:data];
-    self.imageDataToShare = UIImageJPEGRepresentation(image, 1.0);
-    self.photoName = tableCell.postForCell.photoName;
+    _imageDataToShare = UIImageJPEGRepresentation(image, 1.0);
+    _photoName = tableCell.postForCell.photoName;
     
     UIActionSheet* actionSheet = [[UIActionSheet alloc]
                                   initWithTitle:@"Share"
