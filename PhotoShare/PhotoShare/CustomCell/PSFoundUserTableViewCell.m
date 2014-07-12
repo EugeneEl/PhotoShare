@@ -67,7 +67,7 @@
     
     [_followsMeLabel setHidden:YES];
     
-    for (User *user in [follower.followed allObjects])
+    for (User *user in follower.followed)
     {
         if (user.user_id==_currentUser.user_id) {
                [_followsMeLabel setHidden:NO];
@@ -79,9 +79,19 @@
     NSLog(@"%@",followers);
     
     
+    for (User *user in _currentUser.followed) {
+        if (user.user_id==_currentUser.user_id) {
+            
+        
+        [_followButton setBackgroundColor:[UIColor redColor]];
+        [_followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+        _isFollowed=YES;
+        break;
+        }
+    }
     
-//    for (User *user in followers)
-////    for (User *user in [follower.followers allObjects])
+    
+//   for (User *user in [follower.followers allObjects])
 //    {
 //        if (user.user_id==_currentUser.user_id) {
 //            [_followButton setBackgroundColor:[UIColor redColor]];

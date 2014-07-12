@@ -13,6 +13,8 @@
 #import "PSCollectionCellForPhoto.h"
 #import "UIImageView+AFNetworking.h"
 #import "User+PSGetCurrentUser.h"
+#import  "PSNetworkManager.h"
+#import "User+PSUpdatePosts.h"
 
 static NSString *viewCellIdentifier=@"collectionCellForPhoto";
 
@@ -49,16 +51,15 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
     
     if (_userToDisplay!=[User getCurrentUser]) {
         NSLog(@"display another user");
-        _displayMe=YES;
+        _displayMe=NO;
     }
-    
     if (_displayMe) {
 
             _currentUser=[User getCurrentUser];
-            NSArray *array=[Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",_currentUser.user_id]];
+            NSArray *array=[[Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",_currentUser.user_id]] mutableCopy];
             
             _arrayOfPosts=[array mutableCopy];
-            NSLog(@"Posts:",_arrayOfPosts);
+            NSLog(@"Posts:%@",_arrayOfPosts);
             NSArray* tempArray=[Post MR_findAll];
             self.arrayOfPosts=[tempArray mutableCopy];
             self.arrayOfURLPhotos=[NSMutableArray new];
@@ -74,8 +75,42 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
                 NSLog(@"added to an array photoURL:%@",photoURLString);
             }
     }
+    else {
+        NSArray *array=[Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",_userToDisplay.user_id]];
+        
+        if (!array) {
+            [_userToDisplay updatePostsForUserID:[_userToDisplay.user_id intValue]];
+        }
+        array=[Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",_userToDisplay.user_id]];
+        
+        _arrayOfPosts=[array mutableCopy];
+        
+        
+        NSLog(@"Posts:%@",_arrayOfPosts);
+        NSArray* tempArray=[Post MR_findAll];
+        self.arrayOfPosts=[tempArray mutableCopy];
+        self.arrayOfURLPhotos=[NSMutableArray new];
+        for (Post *post in self.arrayOfPosts)
+        {
+            
+            [self.arrayOfURLPhotos addObject:post.photoURL];
+            
+        }
+        
+        for (NSString *photoURLString in self.arrayOfURLPhotos)
+        {
+            NSLog(@"added to an array photoURL:%@",photoURLString);
+        }
+
+    }
     
-    
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+   // [_arrayOfPosts removeAllObjects];
+    //[_arrayOfURLPhotos removeAllObjects];
 }
 
 #pragma mark - UICollectionViewDataSource

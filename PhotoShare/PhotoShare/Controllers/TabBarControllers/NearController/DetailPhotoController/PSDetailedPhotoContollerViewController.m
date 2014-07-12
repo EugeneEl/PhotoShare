@@ -14,7 +14,6 @@
 #import "UIImageView+AFNetworking.h"
 #import "UIViewController+UIViewController_PSSharingDataComposer.h"
 #import "Post.h"
-#import "PSMailComposerDelegate.h"
 #import "Like.h"
 #import "PSUserStore.h"
 #import "PSNetworkManager.h"
@@ -40,7 +39,6 @@
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) SLComposeViewController *slsCompositeViewController;
 @property (nonatomic, strong) NSData *imageDataToShare;
-@property (nonatomic, strong) PSMailComposerDelegate *mailComposerDelegate;
 @property (nonatomic, strong) User *currentUser;
 @property (nonatomic, assign) int userID;
 @property (nonatomic, strong) NSString *authorMailParsed;
@@ -53,9 +51,9 @@
 - (IBAction)actionLikePhoto:(id)sender;
 
 
-- (void)shareByEmail:(NSData *)photoData;
-- (void)sharePhotoToFaceBook;
-- (void)sharePhotoToTwitter:(NSData *)photoData;
+//- (void)shareByEmail:(NSData *)photoData;
+//- (void)sharePhotoToFaceBook;
+//- (void)sharePhotoToTwitter:(NSData *)photoData;
 
 @end
 
@@ -64,7 +62,6 @@
 - (instancetype)initWithPost:(Post *)post {
     if (self = [super init]) {
         _post = post;
-        _mailComposerDelegate = [PSMailComposerDelegate new];
     }
     
     return self;

@@ -30,8 +30,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    PSUserStore *userStore= [PSUserStore userStoreManager];
+    PSUserStore *userStore = [PSUserStore userStoreManager];
     if (!(userStore.activeUser)) {
         [self.navigationController performSegueWithIdentifier:@"login" sender:nil];
         NSLog(@"no active user");

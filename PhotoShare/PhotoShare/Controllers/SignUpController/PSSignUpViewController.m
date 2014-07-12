@@ -29,16 +29,17 @@
 - (IBAction)passwordFieldDidChanged:(id)sender;
 - (IBAction)dismissAllKeyboards:(id)sender;
 
+
 @end
 
 @implementation PSSignUpViewController
 
-
+#pragma mark - dealloc
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
+#pragma mark - initWithCoder
 -(instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self)
@@ -57,28 +58,26 @@
     return self;
 }
 
+#pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.scrollView.delegate=self;
-    self.scrollView.scrollEnabled=YES;
+    _scrollView.delegate=self;
+    _scrollView.scrollEnabled=YES;
     _keyboardIsShown = NO;
-    [self.scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
+    [_scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
     [_scrollView setContentOffset:CGPointZero];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    NSLog(@"scrollView.Size:%@",NSStringFromCGRect(self.scrollView.bounds));
 }
 
-
+#pragma mark - getUserModekl
 -(PSUserModel*)userModel {
-    if (!_userModel)
-    {
+    if (!_userModel) {
         _userModel=[PSUserModel new];
         _userModel.name=self.nameForSignUpTextField.text;
         _userModel.email=self.emailForSignUpTextField.text;
         _userModel.password=self.passwordForSignUpTextField.text;
     }
     return _userModel;
-    
 }
 
 
@@ -95,34 +94,28 @@
     _userModel.password=self.passwordForSignUpTextField.text;
 }
 
-
-
 #pragma mark - dismissKeyboards
 - (IBAction)dismissAllKeyboards:(id)sender {
     [self.view endEditing:YES];
 }
 
 #pragma mark - signUp
-
-
 - (IBAction)doneSignUp:(id)sender
 {
     
     if (![self.userModel isSignUpValid]) {
         UIAlertView *alert=[[UIAlertView alloc]
-                            initWithTitle:@"Error"
-                            message:@"Fields must not be empty"
+                            initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+                            message: NSLocalizedString(@"alertViewOnWrongFieldsErrorKey", "")
                             delegate:nil
-                            cancelButtonTitle:@"Ok"
+                            cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")
                             otherButtonTitles:nil, nil];
         [alert show];
         return;
     }
     
      __weak typeof(self) weakSelf = self;
-    
     [[PSNetworkManager sharedManager]signUpModel:self.userModel
-     
     success:^
     {
         UIAlertView *alert=[[UIAlertView alloc]
@@ -157,7 +150,7 @@
      }];
 }
 
-
+#pragma mark - KeyBoard
 - (void)keyboardWasShown:(NSNotification*)aNotification {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
@@ -167,7 +160,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         
         
-        self.guidingConstraint.constant = keyboardHeight + 20.f;
+        _guidingConstraint.constant = keyboardHeight + 20.f;
         [self.view layoutIfNeeded];
         
         
@@ -177,10 +170,9 @@
         [self.view layoutIfNeeded];
     }];
 
-    
     }
 
-// Called when the UIKeyboardWillHideNotification is sent
+
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
     [UIView animateWithDuration:0.3 animations:
      ^{
@@ -189,20 +181,18 @@
      }];
 }
 
+#pragma mark - hideKeyBoard
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.activeTextField = textField;
-    NSLog(@"(void)textFieldDidBeginEditing:(UITextField *)textField");
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     self.activeTextField = nil;
-    NSLog(@"(void)textFieldDidEndEditing:(UITextField *)textField");
+
 
 }
 

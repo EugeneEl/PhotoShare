@@ -296,9 +296,8 @@
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
-//        _cameraBarButton.enabled=NO;
-//        _photolibraryBarButton.enabled=NO;
-//        [alert show];
+
+      [alert show];
     }
     else {
         

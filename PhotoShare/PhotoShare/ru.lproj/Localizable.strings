@@ -86,3 +86,7 @@
 "actionSheetButtonFromLibraryKey"="Выбрать из альбома";
 "actionSheetButtonFromCameraKey"="Выбрать из камеры";
 "alertViewErrorNothingToUpdateKey"="Нет информации для обновления данных пользователя";
+
+//SignUpController
+
+"alertViewOnWrongFieldsErrorKey"="Поля пустые или заполненны неверно";

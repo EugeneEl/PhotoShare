@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 @interface PSLoginViewController : UIViewController
-
 
 @end

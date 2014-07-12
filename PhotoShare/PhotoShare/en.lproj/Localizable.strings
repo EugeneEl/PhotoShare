@@ -90,6 +90,8 @@
 "actionSheetButtonFromCameraKey"="Take from camera";
 "alertViewErrorNothingToUpdateKey"="Nothing to updtae";
 
+//SignUpController
+ "alertViewOnWrongFieldsErrorKey"="Fields are empty or filled wrong";
 
 
 

@@ -33,39 +33,31 @@ static NSString *keyForSortSettings=@"sortKey";
 
 @interface PSStreamViewController() <UITableViewDelegate ,UITableViewDataSource, NSFetchedResultsControllerDelegate, PhotoFromStreamTableViewCell,UIActionSheetDelegate>
 
-@property (nonatomic,assign)NSInteger userID;
-@property (nonatomic,strong)NSNumber * post_idParsed;
-@property (nonatomic,strong)NSNumber * likesParsed;
-@property (nonatomic,copy)NSString * authorMailParsed;
-@property (nonatomic,copy)NSString * photoNameParsed;
-@property (nonatomic,copy)NSString * photoURLParsed;
-@property (nonatomic,copy)NSDate * photo_dateParsed;
-@property (nonatomic,assign)NSInteger cellCount;
-@property (nonatomic,strong)NSNumber * commentIDParsed;
-@property (nonatomic,copy) NSString * commentatorNameParsed;
-@property (nonatomic,copy) NSString * commentTextParsed;
-@property (nonatomic,copy) NSDate * commentDateParsed;
-@property (nonatomic,assign) NSUInteger offset;
+@property (nonatomic,assign) NSInteger userID;
+@property (nonatomic,strong) NSNumber *post_idParsed;
+@property (nonatomic,strong)NSNumber *likesParsed;
+@property (nonatomic,copy) NSString *authorMailParsed;
+@property (nonatomic,copy) NSString *photoNameParsed;
+@property (nonatomic,copy) NSString *photoURLParsed;
+@property (nonatomic,copy) NSDate *photo_dateParsed;
+@property (nonatomic,strong) NSNumber *commentIDParsed;
+@property (nonatomic,copy) NSString *commentatorNameParsed;
 @property (nonatomic,strong) NSData *imageDataToShare;
-@property (nonatomic,copy)  NSString *photoName;
-@property (nonatomic,assign) NSInteger count;
+@property (nonatomic,copy) NSString *photoName;
 @property (nonatomic,strong) NSMutableArray *dataSource;
-@property (nonatomic,assign) double photoLatitudeParsed;
-@property (nonatomic,assign) double photoLongtitudeParsed;
 @property (nonatomic,assign) sortPostsByKey sortKey;
 @property (nonatomic,strong) User *currentUser;
 @property (nonatomic,strong) UIImage *avaImage;
+@property (nonatomic,strong)NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic,strong)NSFetchedResultsController *likeFetchedResultsController;
+@property (nonatomic,strong)NSFetchedResultsController *dateFetchedResultsController;
 
-- (IBAction)switchSortKey:(id)sender;
 @property (nonatomic,weak)IBOutlet UISegmentedControl *changeSortKeySegmentController;
 @property (nonatomic,weak)IBOutlet UITableView *streamTableView;
 @property (nonatomic,weak)IBOutlet UIImageView *userAvaImageView;
 @property (nonatomic,weak)IBOutlet UILabel *usernameLabel;
-@property (nonatomic,strong)NSFetchedResultsController *fetchedResultsController;
 
-@property (nonatomic,strong)NSFetchedResultsController *likeFetchedResultsController;
-@property (nonatomic,strong)NSFetchedResultsController *dateFetchedResultsController;
-
+- (IBAction)switchSortKey:(id)sender;
 @end
 @implementation PSStreamViewController
 
@@ -77,10 +69,10 @@ static NSString *keyForSortSettings=@"sortKey";
     self.streamTableView.delegate=self;
     [self loadSettins];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    PSUserStore *userStore= [PSUserStore userStoreManager];
-    _currentUser=userStore.activeUser;
+    PSUserStore *userStore = [PSUserStore userStoreManager];
+    _currentUser = userStore.activeUser;
     _userID=[_currentUser.user_id integerValue];
-    _authorMailParsed=_currentUser.email;
+    _authorMailParsed =_currentUser.email;
     NSLog(@"user_id:%d",_userID);
     __weak typeof(self) weakSelf = self;
     [[PSNetworkManager sharedManager] getAllUserPostsWithUserID:_userID
@@ -88,29 +80,29 @@ static NSString *keyForSortSettings=@"sortKey";
      {
          NSLog(@"%@",responseObject);
          
-         PSPostsParser *postParser=[[PSPostsParser alloc]initWithId:responseObject];
+         PSPostsParser *postParser = [[PSPostsParser alloc]initWithId:responseObject];
          PSPostModel *model=[PSPostModel new];
          NSLog(@"%@",postParser.arrayOfPosts);
          if (postParser.arrayOfPosts)
          {
              for (NSDictionary* dictionary in postParser.arrayOfPosts)
              {
-                 model.postTime=[postParser getPostTime:dictionary];
+                 model.postTime = [postParser getPostTime:dictionary];
                  model.postID=[postParser getPostID:dictionary];
-                 model.postImageURL=[postParser getPostImageURL:dictionary];
-                 model.postImageLat=[postParser getPostImageLat:dictionary];
-                 model.postImageLng=[postParser getPostImageLng:dictionary];
-                 model.postImageName=[postParser getPostImageName:dictionary];
-                 model.postArrayOfComments=[postParser getPostArrayOfComments:dictionary];
+                 model.postImageURL = [postParser getPostImageURL:dictionary];
+                 model.postImageLat = [postParser getPostImageLat:dictionary];
+                 model.postImageLng = [postParser getPostImageLng:dictionary];
+                 model.postImageName = [postParser getPostImageName:dictionary];
+                 model.postArrayOfComments = [postParser getPostArrayOfComments:dictionary];
                  
                  
-                 Post *post=[Post MR_createEntity];
-                 if ([postParser getPostLikesArray:dictionary]!=nil)
+                 Post *post = [Post MR_createEntity];
+                 if ([postParser getPostLikesArray:dictionary] != nil)
                  {
-                     model.postLikesCount=[[postParser getPostLikesArray:dictionary] count];
+                     model.postLikesCount = [[postParser getPostLikesArray:dictionary] count];
                      NSLog(@"%@",dictionary);
-                     PSLikesParser *likeParser=[PSLikesParser new];
-                     likeParser.arrayOfLikes=[postParser getPostLikesArray:dictionary];
+                     PSLikesParser *likeParser = [PSLikesParser new];
+                     likeParser.arrayOfLikes = [postParser getPostLikesArray:dictionary];
                      
                      if ([likeParser.arrayOfLikes count])
                      {
@@ -118,7 +110,7 @@ static NSString *keyForSortSettings=@"sortKey";
                          
                          for (NSDictionary *dictionary in likeParser.arrayOfLikes)
                          {
-                             Like *like=[Like MR_createEntity];
+                             Like *like = [Like MR_createEntity];
                              [like mapWithEmail:[likeParser getAuthorEmail:dictionary]];
                              [post addLikesObject:like];
                          }
@@ -127,7 +119,7 @@ static NSString *keyForSortSettings=@"sortKey";
                  }
                  else
                  {
-                     model.postLikesCount=0;
+                     model.postLikesCount = 0;
                  }
                  
                  
@@ -143,7 +135,7 @@ static NSString *keyForSortSettings=@"sortKey";
          
          
      }
-                                                          error:^(NSError *error)
+     error:^(NSError *error)
      {
          NSLog(@"error");
      }];
@@ -152,21 +144,17 @@ static NSString *keyForSortSettings=@"sortKey";
     if (_currentUser.ava_imageURL) {
         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:_currentUser.ava_imageURL]];
         _avaImage=[UIImage imageWithData:imageData];
-        NSLog(@"%@",_avaImage);
 
     }
   
     if (_avaImage) {
-        _userAvaImageView.image=_avaImage;
+        _userAvaImageView.image = _avaImage;
     }
     
     
     if (_currentUser.name) {
-        _usernameLabel.text=_currentUser.name;
-        NSLog(@"%@",_currentUser.name);
+        _usernameLabel.text = _currentUser.name;
     }
- 
-//    [self.streamTableView reloadData];
 }
 
 
@@ -180,26 +168,19 @@ static NSString *keyForSortSettings=@"sortKey";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   PSPhotoFromStreamTableViewCell *cell=[self.streamTableView dequeueReusableCellWithIdentifier:@"photoCell"];
+   PSPhotoFromStreamTableViewCell *cell = [self.streamTableView dequeueReusableCellWithIdentifier:@"photoCell"];
     [self configureCell:cell atIndexPath:indexPath];
-    cell.selected=NO; //does not work
     return cell;
 }
 
 
 
-//This function is where all the magic happens
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    //1. Setup the CATransform3D structure
     CATransform3D rotation;
     rotation = CATransform3DMakeRotation( (90.0*M_PI)/180, 0.0, 0.7, 0.4);
-    //rotation = CATransform3DMakeRotation( (90.0*M_PI)/180, 1.0, 1.0, 0.0);
     rotation.m34 = 1.0/ -600;
     
-    
-    //2. Define the initial state (Before the animation)
     cell.layer.shadowColor = [[UIColor blackColor]CGColor];
     cell.layer.shadowOffset = CGSizeMake(10, 10);
     cell.alpha = 0;
@@ -207,15 +188,12 @@ static NSString *keyForSortSettings=@"sortKey";
     cell.layer.transform = rotation;
     cell.layer.anchorPoint = CGPointMake(0, 0.5);
     
-    //!!!FIX for issue #1 Cell position wrong------------
     if(cell.layer.position.x != 0){
         cell.layer.position = CGPointMake(0, cell.layer.position.y);
     }
-    
-    //4. Define the final state (After the animation) and commit the animation
+
     [UIView beginAnimations:@"rotation" context:NULL];
     [UIView setAnimationDuration:0.8];
-    //[UIView setAnimationDuration:5.8];
     cell.layer.transform = CATransform3DIdentity;
     cell.alpha = 1;
     cell.layer.shadowOffset = CGSizeMake(0, 0);
@@ -224,7 +202,7 @@ static NSString *keyForSortSettings=@"sortKey";
 
 
 - (NSFetchedResultsController *)likeFetchedResultsController {
-    if (_likeFetchedResultsController!=nil) {
+    if (_likeFetchedResultsController != nil) {
         return _likeFetchedResultsController;
     }
     
@@ -236,12 +214,8 @@ static NSString *keyForSortSettings=@"sortKey";
     NSSortDescriptor *descriptor=[NSSortDescriptor sortDescriptorWithKey:@"likesCount" ascending:NO];
     
     [fetchRequest setSortDescriptors:@[descriptor]];
-     
-
     
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-  _likeFetchedResultsController = [[NSFetchedResultsController alloc]
+    _likeFetchedResultsController = [[NSFetchedResultsController alloc]
                                                              initWithFetchRequest:fetchRequest
                                                              managedObjectContext:[NSManagedObjectContext MR_defaultContext]
                                                              sectionNameKeyPath:nil
@@ -264,12 +238,12 @@ static NSString *keyForSortSettings=@"sortKey";
 
 - (NSFetchedResultsController *)dateFetchedResultsController {
     
-    if (_dateFetchedResultsController!=nil) {
+    if (_dateFetchedResultsController != nil) {
         return _dateFetchedResultsController;
     }
     
-    NSFetchRequest* fetchRequest=[[NSFetchRequest alloc]initWithEntityName:@"Post"];
-    NSSortDescriptor *descriptor=[NSSortDescriptor sortDescriptorWithKey:@"photoDate" ascending:NO];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"Post"];
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"photoDate" ascending:NO];
     [fetchRequest setSortDescriptors:@[descriptor]];
      [fetchRequest setRelationshipKeyPathsForPrefetching:@[@"followers"]];
      [fetchRequest setRelationshipKeyPathsForPrefetching:@[@"followed"]];
@@ -279,7 +253,6 @@ static NSString *keyForSortSettings=@"sortKey";
                                                              sectionNameKeyPath:nil
                                                              cacheName:nil];
     
-   
     _dateFetchedResultsController.delegate = self;
     
 	NSError *error = nil;
@@ -305,19 +278,16 @@ static NSString *keyForSortSettings=@"sortKey";
          success:^(id responseObject)
          {
              NSLog(@"liked successfully");
-             Like *likeToAdd=[Like MR_createEntity];
+             Like *likeToAdd = [Like MR_createEntity];
              [likeToAdd mapWithEmail:_authorMailParsed];
              [tableCell.postForCell addLikesObject:likeToAdd];
-             
-             
-            
              int newLikesCount = [tableCell.postForCell.likesCount intValue] +1;
-             tableCell.postForCell.likesCount=[NSNumber numberWithInt:newLikesCount];
-             
-             tableCell.likesStatus=YES;
+             tableCell.postForCell.likesCount = [NSNumber numberWithInt:newLikesCount];
+             tableCell.likesStatus = YES;
              [tableCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
              [tableCell.postForCell.managedObjectContext MR_saveToPersistentStoreAndWait];
              [tableCell setWaitingForLikeResponse:NO];
+             [self.streamTableView reloadData];
              
          }
          error:^(NSError *error)
@@ -325,7 +295,6 @@ static NSString *keyForSortSettings=@"sortKey";
         [tableCell setWaitingForLikeResponse:NO];
              NSLog(@"error");
          }];
-//        [self.streamTableView reloadData];
     }
     if (tableCell.likesStatus)
     {
@@ -338,7 +307,7 @@ static NSString *keyForSortSettings=@"sortKey";
             {
                 
                 NSLog(@"unlikes success ");
-                tableCell.likesStatus=NO;
+                tableCell.likesStatus = NO;
                 [tableCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
                              [tableCell setWaitingForLikeResponse:NO];
                 for (Like *like in tableCell.postForCell.likes)
@@ -353,15 +322,14 @@ static NSString *keyForSortSettings=@"sortKey";
                     }
                 }
                 [tableCell.postForCell.managedObjectContext MR_saveToPersistentStoreAndWait];
+                [self.streamTableView reloadData];
             }
             error:^(NSError *error)
             {
-                             [tableCell setWaitingForLikeResponse:NO];
-                NSLog(@"error");
+              [tableCell setWaitingForLikeResponse:NO];
+              NSLog(@"error");
             }];
-//        [self.streamTableView reloadData];
     }
-     [self.streamTableView reloadData];
 }
 
 - (void)photoStreamCellCommentButtonPressed:(PSPhotoFromStreamTableViewCell *)tableCell {
@@ -370,12 +338,12 @@ static NSString *keyForSortSettings=@"sortKey";
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
-    if (self.sortKey==kNew) {
-        _fetchedResultsController=self.dateFetchedResultsController;
+    if (self.sortKey == kNew) {
+        _fetchedResultsController = self.dateFetchedResultsController;
     }
    
-    else if (self.sortKey==kFavourite) {
-        _fetchedResultsController=self.likeFetchedResultsController;
+    else if (self.sortKey == kFavourite) {
+        _fetchedResultsController = self.likeFetchedResultsController;
     }
     
     return _fetchedResultsController;
@@ -448,16 +416,16 @@ static NSString *keyForSortSettings=@"sortKey";
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     PSPhotoFromStreamTableViewCell *aCell = (id)cell;
-    
+    [aCell prepareForReuse];
+
     NSLog(@"%@",indexPath);
-    Post  *postTest=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    //cell=(PSPhotoFromStreamTableViewCell*)cell;
-    aCell.postForCell=postTest;
-    aCell.photoNameLabel.text=postTest.photoName;
-    aCell.timeintervalLabel.text=[self timeIntervalFromPhoto:postTest.photoDate];
-    NSString *commentsNumberString =[NSString stringWithFormat:@"%lu", (unsigned long)[postTest.comments count]];
-    aCell.commentsNumberLabel.text=commentsNumberString;
-    aCell.likesNumberLabel.text=[NSString stringWithFormat:@"%@", postTest.likesCount];
+    Post  *postTest = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    aCell.postForCell = postTest;
+    aCell.photoNameLabel.text = postTest.photoName;
+    aCell.timeintervalLabel.text = [self timeIntervalFromPhoto:postTest.photoDate];
+    NSString *commentsNumberString = [NSString stringWithFormat:@"%lu", (unsigned long)[postTest.comments count]];
+    aCell.commentsNumberLabel.text = commentsNumberString;
+    aCell.likesNumberLabel.text = [NSString stringWithFormat:@"%@", postTest.likesCount];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     dispatch_async(queue, ^(void)
     {
@@ -469,15 +437,13 @@ static NSString *keyForSortSettings=@"sortKey";
         dispatch_async(dispatch_get_main_queue(),
         ^{
             [aCell.imageForPost setImage:image];
-            [aCell setNeedsLayout]; //test here
+            [aCell setNeedsLayout];
         });
     });
     
     aCell.likesStatus=NO;
     if (![postTest.likesCount intValue])
-    {
-     //  aCell.likeButton.imageView.image=[UIImage imageNamed:@"heart-icon.png"];
-        [aCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
+    {   [aCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
         NSLog(@"no likes");
     }
     else
@@ -498,30 +464,23 @@ static NSString *keyForSortSettings=@"sortKey";
 
     }
     
-
     aCell.delegate=self;
-    
-    
 }
 
 - (NSString *)timeIntervalFromPhoto:(NSDate *) date
 {
     NSTimeInterval timeIntervalBetweenPhotos=[date timeIntervalSinceNow];
     
-    if ((timeIntervalBetweenPhotos/-86400>1))
-    
-    {
-        return [NSString stringWithFormat:@"%i days ago",abs(timeIntervalBetweenPhotos/(60*60*24))];
+    if ((timeIntervalBetweenPhotos / -86400 > 1)) {
+        return [NSString stringWithFormat:@"%i days ago",abs(timeIntervalBetweenPhotos / (60 * 60 * 24))];
     }
     
-    else if ((timeIntervalBetweenPhotos/-3600)>1)
-    {
-        return [NSString stringWithFormat:@"%i hours ago",abs(timeIntervalBetweenPhotos/3600)];
+    else if ((timeIntervalBetweenPhotos / -3600) > 1) {
+        return [NSString stringWithFormat:@"%i hours ago",abs(timeIntervalBetweenPhotos / 3600)];
     }
     
-    else if ((timeIntervalBetweenPhotos/-60)>1)
-    {
-        return [NSString stringWithFormat:@"%i minutes ago",abs(timeIntervalBetweenPhotos/60)];
+    else if ((timeIntervalBetweenPhotos / -60) > 1) {
+        return [NSString stringWithFormat:@"%i minutes ago",abs(timeIntervalBetweenPhotos / 60)];
     }
     
     else
@@ -557,12 +516,12 @@ static NSString *keyForSortSettings=@"sortKey";
 
 - (void)saveSettings {
     
-    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    if (self.sortKey==kNew) {
+    if (self.sortKey == kNew) {
        [userDefaults setInteger:0 forKey:keyForSortSettings];
     }
-    else if (self.sortKey==kFavourite) {
+    else if (self.sortKey == kFavourite) {
        [userDefaults setInteger:1 forKey:keyForSortSettings];
     }
     [userDefaults synchronize];
@@ -570,26 +529,26 @@ static NSString *keyForSortSettings=@"sortKey";
 
 - (void)loadSettins {
     
-    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     int KeyFromDefaults;
     
-    KeyFromDefaults=[userDefaults integerForKey:keyForSortSettings];
+    KeyFromDefaults = [userDefaults integerForKey:keyForSortSettings];
     
-    if (KeyFromDefaults==0)
+    if (KeyFromDefaults == 0)
     {
-        self.sortKey=kNew;
-        self.changeSortKeySegmentController.selectedSegmentIndex=0;
+        self.sortKey = kNew;
+        self.changeSortKeySegmentController.selectedSegmentIndex = 0;
     }
     
-    else if (KeyFromDefaults==1)
+    else if (KeyFromDefaults == 1)
     {
-        self.sortKey=kFavourite;
-        self.changeSortKeySegmentController.selectedSegmentIndex=1;
+        self.sortKey = kFavourite;
+        self.changeSortKeySegmentController.selectedSegmentIndex = 1;
     }
     else
     {
-        self.sortKey=kNew;
-        self.changeSortKeySegmentController.selectedSegmentIndex=0;
+        self.sortKey = kNew;
+        self.changeSortKeySegmentController.selectedSegmentIndex = 0;
     }
     
 }
@@ -599,10 +558,10 @@ static NSString *keyForSortSettings=@"sortKey";
 tableCell
 {
  
-    NSData *data=[NSData dataWithContentsOfURL:[NSURL URLWithString:tableCell.postForCell.photoURL]];
-    UIImage* image=[UIImage imageWithData:data];
-    self.imageDataToShare=UIImageJPEGRepresentation(image, 1.0);
-    self.photoName=tableCell.postForCell.photoName;
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:tableCell.postForCell.photoURL]];
+    UIImage* image = [UIImage imageWithData:data];
+    self.imageDataToShare = UIImageJPEGRepresentation(image, 1.0);
+    self.photoName = tableCell.postForCell.photoName;
     
     UIActionSheet* actionSheet = [[UIActionSheet alloc]
                                   initWithTitle:@"Share"
@@ -637,7 +596,7 @@ tableCell
              {
                  
                  //NSLog(@"Photo was posted to facebook successfully");
-                 UIAlertView *alert=[[UIAlertView alloc]
+                 UIAlertView *alert = [[UIAlertView alloc]
                                      initWithTitle:NSLocalizedString(@"alertViewSuccessKey", "")
                                      message:NSLocalizedString(@"alertViewOnMailSuccesstKey","")
                                      delegate:nil
@@ -649,14 +608,14 @@ tableCell
              
                        failure:^(NSError *error)
              {
-                 if (error.code==100)
+                 if (error.code == 100)
                  {
                      UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Error" message:NSLocalizedString(@"alertViewOnTwitterErrorNoPhotoKey", "") delegate:self cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")  otherButtonTitles:nil, nil];
                      [alert show];
                      
                  }
                  
-                 else if (error.code==103)
+                 else if (error.code == 103)
                  {
                      UIAlertView *alert=[[UIAlertView alloc]
                                          initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
@@ -692,16 +651,16 @@ tableCell
                                  failure:^(NSError *error)
              {
                  
-                 if (error.code==100)
+                 if (error.code == 100)
                  {
                      UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Error" message:NSLocalizedString(@"alertViewOnTwitterErrorNoPhotoKey", "") delegate:self cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")  otherButtonTitles:nil, nil];
                      [alert show];
                      
                  }
                  
-                 else if (error.code==101)
+                 else if (error.code == 101)
                  {
-                     UIAlertView *alert=[[UIAlertView alloc]
+                     UIAlertView *alert = [[UIAlertView alloc]
                                          initWithTitle:NSLocalizedString(@"alertViewOnTwitterConfigerAccountKey", "")
                                          message:NSLocalizedString(@"alertViewOnMailConfigerAccountKey","")
                                          delegate:nil
@@ -721,7 +680,7 @@ tableCell
                                   success:^
              {
                  NSLog(@"Photo was successfully posted to facebook");
-                 UIAlertView *alert=[[UIAlertView alloc]
+                 UIAlertView *alert = [[UIAlertView alloc]
                                      initWithTitle:NSLocalizedString(@"alertViewSuccessKey", "")
                                      message:NSLocalizedString(@ "alertViewOnFacebookSuccesstKey","")
                                      delegate:nil
@@ -729,25 +688,26 @@ tableCell
                                      otherButtonTitles:nil, nil];
                  [alert show];
              }
-                                  failure:^(NSError *error) {
+            failure:^(NSError *error)
+            {
                                       
-                                      if (error.code==100)
-                                      {
-                                          UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Error" message:NSLocalizedString(@"alertViewOnTwitterErrorNoPhotoKey", "") delegate:self cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")  otherButtonTitles:nil, nil];
+                if (error.code == 100)
+                    {
+                        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Error" message:NSLocalizedString(@"alertViewOnTwitterErrorNoPhotoKey", "") delegate:self cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")  otherButtonTitles:nil, nil];
                                           [alert show];
                                           
-                                      }
+                    }
                                       
-                                      else if (error.code==102)
-                                      {
-                                          UIAlertView *alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
-                                                                                        message:NSLocalizedString(@"alertViewOnFacebookConfigerAccountKey", "")
-                                                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "") otherButtonTitles:nil, nil];
-                                          [alert show];
+                        else if (error.code == 102)
+                    {
+                         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+                            message:NSLocalizedString(@"alertViewOnFacebookConfigerAccountKey", "")
+                            delegate:self cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "") otherButtonTitles:nil, nil];
+                        [alert show];
                                           
-                                      }
+                    }
                                       
-                                  }];
+                }];
             
             
             
@@ -756,18 +716,18 @@ tableCell
             
         {case 4:
             [self SaveToAlbumWithData:_imageDataToShare
-                              success:^{
-                                  UIAlertView *alert=[[UIAlertView alloc]
-                                                      initWithTitle:NSLocalizedString(@"alertViewSuccessKey", "")
-                                                      message:NSLocalizedString(@ "alertViewOnSaveSuccessKey", "")
-                                                      delegate:nil
-                                                      cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
-                                                      otherButtonTitles:nil, nil];
+        success:^{
+             UIAlertView *alert=[[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"alertViewSuccessKey", "")
+                                message:NSLocalizedString(@ "alertViewOnSaveSuccessKey", "")
+                                delegate:nil
+                                cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+                                otherButtonTitles:nil, nil];
                                   [alert show];
                               }
                               failure:^(NSError *error) {
                                   
-                                  UIAlertView *alert=[[UIAlertView alloc]
+                                  UIAlertView *alert = [[UIAlertView alloc]
                                                       initWithTitle:NSLocalizedString(@"alertViewSuccessKey", "")
                                                       message:NSLocalizedString(@ "alertViewOnSaveSuccessKey", "")
                                                       delegate:nil

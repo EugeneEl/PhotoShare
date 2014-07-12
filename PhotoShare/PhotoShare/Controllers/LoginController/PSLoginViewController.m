@@ -21,36 +21,26 @@
 #import "PSUserParser.h"
 #import "PSFollowersParser.h"
 
-/*
-@interface ParserID : NSObject
-@property (nonatomic, strong) id objectToParse;
-
-- (instancetype) initWithId:(id)identifier;
-
-- (NSInteger) getUserID;
-*/
-
-//typedef void (^sumBlock)(NSInteger a,NSInteger b);
 
 @class PSUserModel;
 
 @interface PSLoginViewController () <UITextFieldDelegate, UIScrollViewDelegate>
 
-@property (nonatomic, assign) BOOL  keyboardIsShown;
-@property(nonatomic,assign) BOOL isRegistered;
+@property (nonatomic, assign) BOOL keyboardIsShown;
+@property (nonatomic,assign) BOOL isRegistered;
 @property (nonatomic,strong) PSUserModel* userModel;
 
-@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
-@property (weak, nonatomic) IBOutlet UITextField *loginTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *guidingLoginConstraint;
+@property (nonatomic, weak) IBOutlet UILabel *resultLabel;
+@property (nonatomic, weak) IBOutlet UITextField *loginTextField;
+@property (nonatomic, weak) IBOutlet UITextField *passwordTextField;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *guidingLoginConstraint;
 
 - (IBAction)loginDidChange:(id)sender;
 - (IBAction)passwordDidChange:(id)sender;
-- (IBAction)signUp:(id)sender;
 - (IBAction)login:(id)sender;
 - (IBAction)dismissKeyboards:(id)sender;
+- (IBAction)signUp:(id)sender;
 
 @end
 
@@ -60,7 +50,6 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 #pragma mark - init
 -(instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -84,56 +73,47 @@
 #pragma mark - viewDidLoad
 -(void)viewDidLoad {
     [super viewDidLoad];
-    self.loginTextField.delegate=self;
-    self.passwordTextField.delegate=self;
-    self.scrollView.delegate=self;
-    self.scrollView.scrollEnabled=YES;
+    self.loginTextField.delegate = self;
+    self.passwordTextField.delegate = self;
+    self.scrollView.delegate = self;
+    self.scrollView.scrollEnabled = YES;
     _keyboardIsShown = NO;
     [self.scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
     [_scrollView setContentOffset:CGPointZero];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [ self.navigationController.navigationBar setHidden:NO];
-    
-    
-
 }
 
 
 #pragma mark - userModel
 -(PSUserModel*)userModel {
-    if (!_userModel)
-    {
-        _userModel=[PSUserModel new];
-        _userModel.email=self.loginTextField.text;
-        _userModel.password=self.passwordTextField.text;
+    if (!_userModel) {
+        _userModel = [PSUserModel new];
+        _userModel.email = self.loginTextField.text;
+        _userModel.password = self.passwordTextField.text;
     }
     return _userModel;
     
 }
 
+#pragma mark - goToSignUp
+- (IBAction)signUp:(id)sender {
+    [self performSegueWithIdentifier:@"goToSignUp" sender:nil];
+}
 
 #pragma mark - keyboardNotification
 - (void)keyboardWasShown:(NSNotification*)aNotification {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGFloat keyboardHeight = kbSize.height;
-    
-    
     [UIView animateWithDuration:0.3 animations:^
-     
     {
         self.guidingLoginConstraint.constant = keyboardHeight + 25.f;
         [self.view layoutIfNeeded];
-        
-        [_scrollView setContentSize:CGSizeMake(320.f, 186.f)]; //186
+        [_scrollView setContentSize:CGSizeMake(320.f, 186.f)];
         [_scrollView setContentOffset:CGPointZero animated:YES];
-        
         [self.view layoutIfNeeded];
-    }
-     
-    ];
-    
-    
+    }];
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
@@ -150,10 +130,6 @@
 
 #pragma mark - LoginAndSignUpMethods
 
-
-- (IBAction)signUp:(id)sender {
-    
-}
 
 - (IBAction)login:(id)sender {
     
@@ -175,41 +151,6 @@
     [[PSNetworkManager sharedManager] loginWithModel:_userModel
     success:^(id responseObject)
     {
-        
-        
-//         responseObject=@{
-//         @"cnt_followers": 1,
-//         @"followed": [
-//         @{
-//         "img_url": "http://test.intern.yalantis.com/api/img/17",
-//         "user_name": "april28NewName2",
-//         "id": 4,
-//         "email": "april28@yandex.ua"
-//         }
-//         ],
-//         "user_name": "Skiv",
-//         "posts": [],
-//         "email": "skiv@mail.com",
-//         "image_id": null,
-//         "followers": [
-//         @{
-//         @"img_url": "http://test.intern.yalantis.com/api/img/3",
-//         @"user_name": "J",
-//         @"id": 1,
-//         @"email": "black@man.com"
-//         }
-//         ],
-//         @"cnt_posts": 0,
-//         @"cnt_followed": 1,
-//         @"password": "123",
-//         @"img_url": null,
-//         @"id": 2
-//         };
-
-         
-        
-        
-        
         NSLog(@"success");
         weakSelf.resultLabel.text=@"Logged in";
         User *existingUserForLogin=[[User MR_findByAttribute:@"email" withValue:weakSelf.userModel.email] firstObject];
@@ -231,60 +172,9 @@
         existingUserForLogin.follower_count=[NSNumber numberWithInt:[userParser getCountOfFollowers]];
         existingUserForLogin.followed_count= [NSNumber numberWithInt:[[userParser getArrayOfFollowed]count]];
         
-        //add followers
-        PSFollowersParser *followersParser=[[PSFollowersParser alloc] initWithId:responseObject];
-        if (followersParser.arrayOfFollowers!=nil)
-        {
-            for (NSDictionary *dictionary in followersParser.arrayOfFollowers)
-            {
-                User *followerToAdd=[User MR_createEntity];
-                followerToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
-                followerToAdd.email=[followersParser getFollowerEmail:dictionary];
-                followerToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
-                followerToAdd.name=[followersParser getFollowerName:dictionary];
-                if (![existingUserForLogin.followers containsObject:followerToAdd]) {
-                    [existingUserForLogin addFollowersObject:followerToAdd];
-                }
-                
-                 
-            }
-        }
-        
-        //add followings
-        if (followersParser.arrayOfFollowed!=nil)
-        {
-            
-            
-            for (NSDictionary *dictionary in followersParser.arrayOfFollowers)
-            {
-                User *followedToAdd=[User MR_createEntity];
-                followedToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
-                followedToAdd.email=[followersParser getFollowerEmail:dictionary];
-                followedToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
-                followedToAdd.name=[followersParser getFollowerName:dictionary];
-                
-                
-                if (![existingUserForLogin.followed containsObject:followedToAdd]) {
-                    [existingUserForLogin addFollowedObject:followedToAdd];
-                }
-                
-             
-            }
-        }
-        
-        
+    
        [existingUserForLogin.managedObjectContext MR_saveToPersistentStoreAndWait];
-        
-        
-        NSArray *users=[User MR_findAll];
-        for (User* user in users)
-        {
-            NSLog(@"%@id",user.user_id);
-        }
-        
-        
-        
-        [PSUserStore userStoreManager].activeUser=existingUserForLogin;
+       [PSUserStore userStoreManager].activeUser=existingUserForLogin;
         NSLog(@"active user logged in:%@",[PSUserStore userStoreManager].activeUser.email);
         
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
@@ -295,10 +185,6 @@
     {
         
     }];
-    
-    
-    
-    
 }
 
 #pragma mark - fieldsDidChanged
@@ -313,15 +199,12 @@
     NSLog(@"password:%@",self.userModel.password);
 }
 
-
-- (IBAction)dismissKeyboards:(id)sender
-{
+- (IBAction)dismissKeyboards:(id)sender {
     [self.view endEditing:YES];
 }
 
 #pragma mark - PrepareForSegueTranstion
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue isKindOfClass:[CustomSegueForStart class]])
     {
         ((CustomSegueForStart *)segue).originatingPoint = self.view.center;
@@ -330,8 +213,7 @@
 
 
 #pragma mark - UITextFieldDelegate
--(BOOL)textFieldShouldReturn:(UITextField*)textField;
-{
+-(BOOL)textFieldShouldReturn:(UITextField*)textField; {
     if ([textField isEqual:self.loginTextField]) {
         [self.passwordTextField becomeFirstResponder];
     }

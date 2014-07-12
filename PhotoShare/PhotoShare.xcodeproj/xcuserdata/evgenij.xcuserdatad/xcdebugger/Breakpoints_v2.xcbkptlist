@@ -203,13 +203,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PhotoShare/PSNetworkManager/Controllers/TabBarControllers/ProfileController/FollowersAndFollowings/FindFriends/FoundUsers/PSFoundUsersViewController.m"
-            timestampString = "426785965.51662"
+            filePath = "PhotoShare/PSNetworkManager/Controllers/TabBarControllers/ProfileController/PSProfileViewController.m"
+            timestampString = "426790756.336477"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "-tableViewCell:didSelectUser:"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhotoShare/PSNetworkManager/Controllers/TabBarControllers/ProfileController/PSProfileViewController.m"
+            timestampString = "426791255.327652"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
