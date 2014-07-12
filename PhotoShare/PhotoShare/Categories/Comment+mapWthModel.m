@@ -22,6 +22,7 @@
     [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     NSDate *date = [dateFormat dateFromString:commentModel.commentDateString];
     NSLog(@"%@",date);
+    self.commentatorAvaURL=commentModel.commentatorAvaURL;
     self.commentDate=date;
 
     [self.managedObjectContext MR_saveToPersistentStoreAndWait];

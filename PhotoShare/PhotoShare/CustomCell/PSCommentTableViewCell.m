@@ -16,10 +16,11 @@
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 @interface PSCommentTableViewCell ()
-@property (nonatomic, weak) IBOutlet UIView *userAvaImageView;
+
 @property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *commentDateLabel;
 @property (nonatomic, weak) IBOutlet UITextView *commentTextView;
+@property (weak, nonatomic) IBOutlet UIImageView *userAvaImageView;
 
 
 @end
@@ -39,17 +40,38 @@
 
 #pragma mark - configureCellWithComment
 - (void)configureCellWithComment:(Comment *)comment {
-    _commentTextView.text = @"";
     self.userNameLabel.text = comment.commentatorName;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'hh:mm:ss.SSSSSS'+'00:00"];
     NSString *stringFromDate = [dateFormat stringFromDate:comment.commentDate];
     self.commentDateLabel.text = stringFromDate;
+    
     _commentTextView.text=comment.commentText;
     CGRect frame = _commentTextView.frame;
     frame.size.height = _commentTextView.contentSize.height;
     _commentTextView.frame = frame;
-    [_commentTextView sizeToFit];
+    _commentTextView.scrollEnabled=NO;
+   
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+    dispatch_async(queue, ^(void)
+                   {
+                       NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:comment.commentatorAvaURL]];
+                       
+                       UIImage* image = [[UIImage alloc] initWithData:imageData];
+                       
+                       dispatch_async(dispatch_get_main_queue(),
+                                      ^{
+                                          [_userAvaImageView setImage:image];
+                                          [_userAvaImageView setNeedsLayout]; //test here
+                                      });
+                   });
+    
+    
+}
+
+#pragma mark - PrepareForReuse 
+- (void)prepareForReuse {
+    //need some fix here to call cellHeightForObject: every time before reuse
 }
 
 #pragma mark - TextViewSizeDependingOnText

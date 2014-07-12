@@ -73,15 +73,15 @@
 #pragma mark - viewDidLoad
 -(void)viewDidLoad {
     [super viewDidLoad];
-    self.loginTextField.delegate = self;
-    self.passwordTextField.delegate = self;
-    self.scrollView.delegate = self;
-    self.scrollView.scrollEnabled = YES;
+    _loginTextField.delegate = self;
+    _passwordTextField.delegate = self;
+    _scrollView.delegate = self;
+    _scrollView.scrollEnabled = YES;
     _keyboardIsShown = NO;
-    [self.scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
+    [_scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
     [_scrollView setContentOffset:CGPointZero];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    [ self.navigationController.navigationBar setHidden:NO];
+    [self.navigationController.navigationBar setHidden:NO];
 }
 
 

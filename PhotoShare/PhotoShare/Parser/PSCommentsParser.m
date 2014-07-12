@@ -8,28 +8,14 @@
 
 #import "PSCommentsParser.h"
 
-//keys for Commets JSON
 static NSString *kPostСommentsKey=@"comments";
-static NSString *kCommentIDKey=@"id";              //
-static NSString *kCommentAuthorIDKey=@"author_id"; //
-static NSString *kCommentAuthorNameKey=@"author";  //
-static NSString *kCommentTextKey=@"text";          //
-static NSString *kCommentTimeKey=@"tstamp";        //
+static NSString *kCommentIDKey=@"id";
+static NSString *kCommentAuthorIDKey=@"author_id";
+static NSString *kCommentAuthorNameKey=@"author";
+static NSString *kCommentTextKey=@"text";
+static NSString *kCommentTimeKey=@"tstamp";
+static NSString *kUserAvaImageURLKey=@"img_url";
 
-/*
- {
- "text": "newComment",
- "author": {
- "user_name": "J",
- "id": 1,
- "email": "black@man.com"
- },
- "tstamp": "2014-07-09T11:39:00.097246+00:00",
- "id": 6,
- "post_id": 1
- }
- 
- */
 @implementation PSCommentsParser
 
 - (instancetype) initWithId:(id)identifier {
@@ -45,6 +31,13 @@ static NSString *kCommentTimeKey=@"tstamp";        //
       
     }
     return self;
+}
+
+- (NSString *)getCommentatorAvaURL:(NSDictionary *)dictionary; {
+    if([NSNull null] == [dictionary valueForKey:kUserAvaImageURLKey]) return nil;
+    NSString *avaImageURL=[dictionary valueForKey:kUserAvaImageURLKey];
+    NSLog(@"%@",avaImageURL);
+    return avaImageURL;
 }
 
 - (NSString *)getCommentText:(NSDictionary *)dictionary {

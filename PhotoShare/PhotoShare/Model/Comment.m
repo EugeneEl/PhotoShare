@@ -2,7 +2,7 @@
 //  Comment.m
 //  PhotoShare
 //
-//  Created by Евгений on 08.07.14.
+//  Created by Евгений on 12.07.14.
 //  Copyright (c) 2014 Eugene. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 @dynamic commentDate;
 @dynamic commentID;
 @dynamic commentText;
+@dynamic commentatorAvaURL;
 @dynamic post;
 
 @end

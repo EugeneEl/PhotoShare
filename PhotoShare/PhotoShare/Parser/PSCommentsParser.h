@@ -16,5 +16,6 @@
 - (NSInteger)getCommentID:(NSDictionary *)dictionary;
 - (NSInteger)getAuthorID:(NSDictionary *)dictionary;
 - (NSString *)getCommentTime:(NSDictionary *)dictionary;
+- (NSString *)getCommentatorAvaURL:(NSDictionary *)dictionary;;
 
 @end

@@ -48,7 +48,7 @@
             commentModel.commentatorName=[commentParser getAuthorName:dictionary];
             commentModel.commentID=[commentParser getCommentID:dictionary];
             commentModel.commentDateString=[commentParser getCommentTime:dictionary];
-            
+            commentModel.commentatorAvaURL=[commentParser getCommentatorAvaURL:dictionary];
             Comment *commentToAdd=[Comment MR_createEntity];
             commentToAdd=[commentToAdd commentWithMapModel:commentModel];
             [self addCommentsObject:commentToAdd];

@@ -10,10 +10,10 @@
 
 @interface PSCommentModel : NSObject
 
-@property(nonatomic,copy)     NSString  *commentText;
-@property(nonatomic,copy)     NSString  *commentDateString;
-@property (nonatomic,copy)    NSString  *commentatorName;
-@property (nonatomic,assign)  NSInteger commentID;
-
+@property (nonatomic, copy) NSString  *commentText;
+@property (nonatomic, copy) NSString  *commentDateString;
+@property (nonatomic, copy) NSString  *commentatorName;
+@property (nonatomic, assign) NSInteger commentID;
+@property (nonatomic, strong) NSString *commentatorAvaURL;
 
 @end
