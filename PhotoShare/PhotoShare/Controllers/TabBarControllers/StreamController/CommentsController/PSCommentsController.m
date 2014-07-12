@@ -24,11 +24,11 @@
 
 @implementation PSCommentsController
 
-
+#pragma mark - viewDidLoad
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _arrayOfComments=[[_postToComment.comments allObjects] mutableCopy];
+    _arrayOfComments = [[_postToComment.comments allObjects] mutableCopy];
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"commentDate" ascending:YES];
     _arrayOfComments=[[_arrayOfComments sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] mutableCopy];
@@ -42,7 +42,6 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [_postToComment.comments count];
-    //return ([_postToComment.comments count]) ? [_postToComment.comments count] : 1;
 }
 
 
@@ -53,20 +52,21 @@
     return cell;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-////    PSCommentTableViewCell *cell=(PSCommentTableViewCell *)[_commentTableView cellForRowAtIndexPath:indexPath];
-////    CGFloat newHeight=cell.textLabel.bounds.size.height+50.0f;
-////    return newHeight;
-//}
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = [PSCommentTableViewCell cellHeightForObject:[_arrayOfComments objectAtIndex:indexPath.row]];
+    return height;
+}
 
+#pragma mark - PerformSegueGoToAddComment
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"goToAddComment"]) {
         
-         PSAddCommentViewController *destinationController=segue.destinationViewController;
+        PSAddCommentViewController *destinationController=segue.destinationViewController;
         destinationController.postToComment=_postToComment;
     }
 }
-
 
 - (IBAction)actionAddComment:(id)sender {
     [self performSegueWithIdentifier:@"goToAddComment" sender:sender];

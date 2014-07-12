@@ -66,8 +66,8 @@ static NSString *keyForSortSettings=@"sortKey";
 -(void)viewDidLoad
 {
    [super viewDidLoad];
-    _streamTableView.dataSource = self;
-    _streamTableView.delegate = self;
+    self.streamTableView.dataSource = self;
+    self.streamTableView.delegate = self;
     [self loadSettins];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     PSUserStore *userStore = [PSUserStore userStoreManager];
@@ -133,7 +133,7 @@ static NSString *keyForSortSettings=@"sortKey";
              }
              
              [_currentUser.managedObjectContext MR_saveToPersistentStoreAndWait];
-             [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+           //  [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
              [weakSelf.streamTableView reloadData];
          }
          
@@ -342,11 +342,11 @@ static NSString *keyForSortSettings=@"sortKey";
 
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_sortKey == kNew) {
-        _fetchedResultsController = _dateFetchedResultsController;
+        _fetchedResultsController = self.dateFetchedResultsController;
     }
    
     else if (self.sortKey == kFavourite) {
-        _fetchedResultsController = _likeFetchedResultsController;
+        _fetchedResultsController = self.likeFetchedResultsController;
     }
     
     return _fetchedResultsController;
