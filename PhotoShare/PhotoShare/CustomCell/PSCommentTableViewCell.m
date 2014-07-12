@@ -21,6 +21,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *commentDateLabel;
 @property (nonatomic, weak) IBOutlet UITextView *commentTextView;
 
+
 @end
 
 @implementation PSCommentTableViewCell
@@ -38,12 +39,17 @@
 
 #pragma mark - configureCellWithComment
 - (void)configureCellWithComment:(Comment *)comment {
+    _commentTextView.text = @"";
     self.userNameLabel.text = comment.commentatorName;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'hh:mm:ss.SSSSSS'+'00:00"];
     NSString *stringFromDate = [dateFormat stringFromDate:comment.commentDate];
     self.commentDateLabel.text = stringFromDate;
-    [self.textLabel sizeToFit];
+    _commentTextView.text=comment.commentText;
+    CGRect frame = _commentTextView.frame;
+    frame.size.height = _commentTextView.contentSize.height;
+    _commentTextView.frame = frame;
+    [_commentTextView sizeToFit];
 }
 
 #pragma mark - TextViewSizeDependingOnText

@@ -76,7 +76,7 @@ static NSString *keyForSortSettings=@"sortKey";
     _authorMailParsed =_currentUser.email;
     NSLog(@"user_id:%d",_userID);
     __weak typeof(self) weakSelf = self;
-   // [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [[PSNetworkManager sharedManager] getAllUserPostsWithUserID:_userID
                                                         success:^(id responseObject)
@@ -133,7 +133,7 @@ static NSString *keyForSortSettings=@"sortKey";
              }
              
              [_currentUser.managedObjectContext MR_saveToPersistentStoreAndWait];
-           //  [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+             [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
              [weakSelf.streamTableView reloadData];
          }
          
