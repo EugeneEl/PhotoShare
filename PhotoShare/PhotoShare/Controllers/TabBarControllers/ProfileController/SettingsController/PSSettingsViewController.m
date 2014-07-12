@@ -12,6 +12,9 @@
 #import "CustomUnwindSegue.h"
 #import "PSNetworkManager.h"
 #import "PSUserParser.h"
+#import "Comment.h"
+#import "Like.h"
+#import "Post.h"
 
 static NSString *PSChaningUserInfoErrorDomain = @"PSChangingUserInfoErrorDomain";
 static NSInteger PSNottingToShareErrorCode  = 101;
@@ -127,9 +130,15 @@ static NSInteger PSNottingToShareErrorCode  = 101;
     }
     
     else {
+        [Post MR_truncateAll];
+        [Comment MR_truncateAll];
+        [User MR_truncateAll];
+        [Like MR_truncateAll];
         [PSUserStore userStoreManager].activeUser=userWithEmptyEmail;
         NSLog(@"logout. user with email:%@",[PSUserStore userStoreManager].activeUser.email);
     }
+    
+    
     
     [self performSegueWithIdentifier:@"afterLoggedOutToSplash" sender:nil];
 }

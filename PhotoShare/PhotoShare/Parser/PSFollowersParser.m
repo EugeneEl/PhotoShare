@@ -56,7 +56,7 @@ static NSString *kFollowerNameKey=@"user_name";
 }
 
 - (NSInteger)getFollowerID:(NSDictionary *)dictionary {
-    NSInteger followerID=[[dictionary valueForKey:kFollowerIDKey] intValue];
+    NSInteger followerID=[NSNumber numberWithInt:[dictionary valueForKey:kFollowerIDKey]];
     NSLog(@"followerID:%d",followerID);
     return followerID;
 }

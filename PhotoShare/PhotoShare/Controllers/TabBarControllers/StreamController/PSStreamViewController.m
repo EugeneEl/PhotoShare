@@ -76,7 +76,7 @@ static NSString *keyForSortSettings=@"sortKey";
     _authorMailParsed =_currentUser.email;
     NSLog(@"user_id:%d",_userID);
     __weak typeof(self) weakSelf = self;
-   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+   //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [[PSNetworkManager sharedManager] getAllUserPostsWithUserID:_userID
                                                         success:^(id responseObject)

@@ -194,6 +194,7 @@
                  }
              }
              [_post.managedObjectContext MR_saveToPersistentStoreAndWait];
+             _isWaitingForLikeResponse = NO;
          }
          error:^(NSError *error)
          {

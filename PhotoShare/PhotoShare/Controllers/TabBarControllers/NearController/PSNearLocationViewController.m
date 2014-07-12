@@ -164,8 +164,7 @@ if (![view isKindOfClass:[PSMKAnnotationView class]]) {
 
 #pragma mark - CLLocationManagerDelegate
 
-- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
-{
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay {
     if (![overlay isKindOfClass:[MKCircle class]]) {
         return nil;
     }

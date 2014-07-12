@@ -43,7 +43,7 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 -(void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
     _displayMe=YES;
     
     if (_userToDisplay!=[User getCurrentUser]) {
