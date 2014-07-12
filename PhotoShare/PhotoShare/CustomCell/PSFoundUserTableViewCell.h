@@ -19,9 +19,9 @@
 
 @interface PSFoundUserTableViewCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UIButton *followButton;
-@property (nonatomic, assign) BOOL isFollowed;
-@property(nonatomic, weak)id <FoundUserTableViewCell> delegate;
-- (void)configureCellWithFollower:(User *)follower;
 @property (nonatomic, strong) User *foundUser;
+@property (nonatomic, assign) BOOL isFollowed;
+@property (nonatomic, weak)id <FoundUserTableViewCell> delegate;
+- (void)configureCellWithFollower:(User *)follower;
 
 @end

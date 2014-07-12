@@ -34,11 +34,11 @@
 {
     [super viewDidLoad];
     User *currentUser = [User getCurrentUser];
-    _userID=[currentUser.user_id intValue];
+    _userID = [currentUser.user_id intValue];
     NSLog(@"user_id:%d",_userID);
     _waitingForResponse = NO;
     _textForComment = @"Text for comment";
-    _commentTextView.delegate=self;
+    _commentTextView.delegate = self;
 }
 
 #pragma mark - dismissKeyboard
@@ -51,6 +51,7 @@
     if (_waitingForResponse) return;
     _waitingForResponse = YES;
     
+     __weak typeof(self) weakSelf = self;
     [[PSNetworkManager sharedManager]
         commentPostID:[_postToComment.postID intValue]
         fronUserID:_userID
@@ -71,9 +72,9 @@
             commentModel.commentDateString = [commentParser getCommentTime:responseObject];
             Comment *commentToAdd = [Comment MR_createEntity];
             commentToAdd=[commentToAdd commentWithMapModel:commentModel];
-            [_postToComment addCommentsObject:commentToAdd];
-            [_postToComment.managedObjectContext MR_saveToPersistentStoreAndWait];
-            _waitingForResponse = NO;
+            [weakSelf.postToComment addCommentsObject:commentToAdd];
+            [weakSelf.postToComment.managedObjectContext MR_saveToPersistentStoreAndWait];
+            weakSelf.waitingForResponse = NO;
             
         } error:^(NSError *error) {
             UIAlertView *alert = [[UIAlertView alloc]
@@ -83,7 +84,7 @@
                                   cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")
                                   otherButtonTitles:nil, nil];
             [alert show];
-            _waitingForResponse = NO;
+            weakSelf.waitingForResponse = NO;
         
     }];
 }

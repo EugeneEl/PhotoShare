@@ -21,6 +21,7 @@
 @implementation User (PSUpdatePosts)
 
 - (void)updatePostsForUserID:(int)userID {
+     __weak typeof(self) weakSelf = self;
     [[PSNetworkManager sharedManager] getAllUserPostsWithUserID:[self.user_id intValue] success:^(id responseObject) {
         
         
@@ -33,18 +34,6 @@
             for (NSDictionary* dictionary in postParser.arrayOfPosts)
             {
                 NSNumber *postIDToCheck=[NSNumber numberWithInt:model.postID=[postParser getPostID:dictionary]];
-                
-                
-                /*
-                 User *followerToAdd = nil;
-                 if ([[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followerToAddTestID] ]firstObject]) {
-                 followerToAdd=[[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followerToAddTestID] ]firstObject];
-                 } else {
-                 followerToAdd = [User MR_createEntityInContext:[NSManagedObjectContext MR_defaultContext]];
-                 }
-                 */
-                
-                
                 
                 Post *post=nil;
                 if ([[Post  MR_findByAttribute:@"postID" withValue:postIDToCheck ]firstObject])
@@ -90,11 +79,11 @@
                     
                     post=[post mapWithModel:model];
                     NSLog(@"Post added%@]n",post);
-                    [self addPostsObject:post];
+                    [weakSelf addPostsObject:post];
                     
                 }
                 
-                [self.managedObjectContext MR_saveToPersistentStoreAndWait];
+                [weakSelf.managedObjectContext MR_saveToPersistentStoreAndWait];
                 
             }
         }

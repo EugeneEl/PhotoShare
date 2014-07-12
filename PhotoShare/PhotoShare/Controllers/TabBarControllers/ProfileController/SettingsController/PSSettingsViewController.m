@@ -79,7 +79,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
         [alert show];
         return;
     }
-    
+        __weak typeof(self) weakSelf = self;
     [[PSNetworkManager sharedManager] updateUserInforWithuserAva:_imageForAva newPassword:_passwordToUpadte newUserName:_nameToUpdate
         fromUserID:_userID
         success:^(id responseObject) {
@@ -94,11 +94,10 @@ static NSInteger PSNottingToShareErrorCode  = 101;
             NSLog(@"%@",responseObject);
             
             PSUserParser *userParser=[[PSUserParser alloc]initWithId:responseObject];
-            _currentUser.ava_imageURL=[userParser getAvaImageURL];
-            _currentUser.name=[userParser getUserName];
-            _currentUser.password=[userParser getUserPassword];
-            
-            [_currentUser.managedObjectContext MR_saveToPersistentStoreAndWait];
+            weakSelf.currentUser.ava_imageURL=[userParser getAvaImageURL];
+            weakSelf.currentUser.name=[userParser getUserName];
+            weakSelf.currentUser.password=[userParser getUserPassword];
+            [weakSelf.currentUser.managedObjectContext MR_saveToPersistentStoreAndWait];
           
         }
         error:^(NSError *error) {

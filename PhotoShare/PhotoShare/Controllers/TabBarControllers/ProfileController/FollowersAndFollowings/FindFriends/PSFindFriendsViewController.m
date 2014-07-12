@@ -47,14 +47,16 @@
 
 
 - (IBAction)actionSearch:(id)sender {
+    
+    __weak typeof(self) weakSelf = self;
     [[PSNetworkManager sharedManager] findFriendsByName:_searchText
-                                                success:^(id responseObject)
+    success:^(id responseObject)
      {
-         _arrayToPass=[NSMutableArray array];
-         _arrayOfFoundID=[NSMutableArray array];
+         weakSelf.arrayToPass=[NSMutableArray array];
+         weakSelf.arrayOfFoundID=[NSMutableArray array];
          NSLog(@"success");
          NSLog(@"%@",responseObject);
-        _arrayOfFoundUsers=[responseObject mutableCopy];
+        weakSelf.arrayOfFoundUsers=[responseObject mutableCopy];
          
          for (NSDictionary *dictionary in _arrayOfFoundUsers) {
              PSUserParser *userParser=[[PSUserParser alloc]initWithId:dictionary];
@@ -162,21 +164,22 @@
                  
              }
              
-             [_arrayToPass addObject:userToAdd];
-             [_arrayOfFoundID addObject:userToAdd.user_id];
-             [self performSegueWithIdentifier:@"goToFollow" sender:self];
+             [weakSelf.arrayToPass addObject:userToAdd];
+             [weakSelf.arrayOfFoundID addObject:userToAdd.user_id];
+             [weakSelf performSegueWithIdentifier:@"goToFollow" sender:self];
          }
      }
-    error:^(NSError *error) {
+    error:^(NSError *error)
+    {
                                                       
-                                                      UIAlertView *alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
-                                                                                                    message:[error localizedDescription]
-                                                                                                   delegate:nil
-                                                                                          cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")
-                                                                                          otherButtonTitles:nil, nil];
-                                                      [alert show];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+                           message:[error localizedDescription]
+                           delegate:nil
+                           cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")
+                            otherButtonTitles:nil, nil];
+                            [alert show];
                                                       
-                                                  }];
+   }];
 }
 
 - (IBAction)dismissKeyboard:(id)sender {

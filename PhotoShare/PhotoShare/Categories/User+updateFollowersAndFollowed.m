@@ -37,9 +37,9 @@
                     }
                     
                     followerToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
-                    followerToAdd.email=[followersParser getFollowerEmail:dictionary];
-                    followerToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
-                    followerToAdd.name=[followersParser getFollowerName:dictionary];
+                    followerToAdd.email = [followersParser getFollowerEmail:dictionary];
+                    followerToAdd.ava_imageURL = [followersParser getFollowerImageURL:dictionary];
+                    followerToAdd.name = [followersParser getFollowerName:dictionary];
                     if (![[currentUser.followers allObjects] containsObject:followerToAdd])
                     {
                         [currentUser addFollowersObject:followerToAdd];
@@ -55,21 +55,21 @@
             }
             
             //add followings
-            if (followersParser.arrayOfFollowed!=nil) {
+            if (followersParser.arrayOfFollowed != nil) {
                 for (NSDictionary *dictionary in [followersParser.arrayOfFollowed firstObject])
                 {
                     int followedToAddTestID = [followersParser getFollowerID:dictionary];
                     User *followedToAdd = nil;
                     if ([[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followedToAddTestID] ]firstObject]) {
-                        followedToAdd=[[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followedToAddTestID] ]firstObject];
+                        followedToAdd = [[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followedToAddTestID] ]firstObject];
                     } else {
                         followedToAdd = [User MR_createEntityInContext:[NSManagedObjectContext MR_defaultContext]];
                     }
                     
-                    followedToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
-                    followedToAdd.email=[followersParser getFollowerEmail:dictionary];
-                    followedToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
-                    followedToAdd.name=[followersParser getFollowerName:dictionary];
+                    followedToAdd.user_id = [NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
+                    followedToAdd.email = [followersParser getFollowerEmail:dictionary];
+                    followedToAdd.ava_imageURL = [followersParser getFollowerImageURL:dictionary];
+                    followedToAdd.name = [followersParser getFollowerName:dictionary];
                     
                     
                     if (![[currentUser.followed allObjects]containsObject:followedToAdd]) {

@@ -27,15 +27,15 @@
 @implementation PSFoundUserTableViewCell
 
 - (void)configureCellWithFollower:(User *)follower {
-    _userToDisplay=follower;
-    PSUserStore *userStore= [PSUserStore userStoreManager];
-    _currentUser=userStore.activeUser;
+    _userToDisplay = follower;
+    PSUserStore *userStore = [PSUserStore userStoreManager];
+    _currentUser = userStore.activeUser;
     _userID=[_currentUser.user_id integerValue];
     [_avaImageView setUserInteractionEnabled:YES];
-     _tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
+     _tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
      [_avaImageView addGestureRecognizer:_tapRecognizer];
     [_userNameLabel setText:follower.name];
-
+    
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     dispatch_async(queue, ^(void)
                    {
@@ -90,16 +90,6 @@
         }
     }
     
-    
-//   for (User *user in [follower.followers allObjects])
-//    {
-//        if (user.user_id==_currentUser.user_id) {
-//            [_followButton setBackgroundColor:[UIColor redColor]];
-//            [_followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
-//            _isFollowed=YES;
-//            break;
-//        }
-// }
 }
 
 - (IBAction)actionFollow:(id)sender {
