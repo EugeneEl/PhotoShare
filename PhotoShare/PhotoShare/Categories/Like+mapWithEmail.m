@@ -10,11 +10,8 @@
 #import "Like.h"
 
 @implementation Like (mapWithEmail)
-- (Like *)mapWithEmail:(NSString *) email
-{
+- (Like *)mapWithEmail:(NSString *)email {
     self.email=email;
-    
-
     return self;
 }
 @end

@@ -17,17 +17,17 @@
 
 @property (nonatomic,copy) NSArray*  arrayOfImages;
 @property (strong, atomic) ALAssetsLibrary* library;
-@property (weak, nonatomic) IBOutlet UIButton *postButton;
+
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, assign) double lng;
 @property (nonatomic, assign) double lat;
-
-@property (weak, nonatomic) IBOutlet UIImageView *imageForPhoto;
 @property (nonatomic,strong) UIImage *imageForUpload;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraBarButton;
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *photolibraryBarButton;
+@property (nonatomic, weak) IBOutlet UIButton *postButton;
+@property (nonatomic, weak) IBOutlet UIImageView *imageForPhoto;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *cameraBarButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *photolibraryBarButton;
 
 - (IBAction)actionMakePhoto:(id)sender;
 - (IBAction)actionTakePhotoFromAlbum:(id)sender;
@@ -36,8 +36,8 @@
 
 @implementation PSPhotoController
 
-- (void)viewDidLoad
-{
+#pragma mark - viewDidLoad
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.library = [[ALAssetsLibrary alloc] init];
     [_postButton setHidden:YES];
@@ -49,16 +49,14 @@
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         [self.locationManager startUpdatingLocation];
     }
-    else
-    {
+    else {
         NSLog(@"Location is not enabled");
     }
     
 }
 
-
-- (IBAction)actionMakePhoto:(id)sender
-{
+#pragma mark - makePhoto
+- (IBAction)actionMakePhoto:(id)sender {
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
@@ -82,11 +80,12 @@
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
+#pragma mark - takeFromAlbum
 - (IBAction)actionTakePhotoFromAlbum:(id)sender {
     
     UIImagePickerControllerSourceType type=UIImagePickerControllerSourceTypePhotoLibrary;
     
-    BOOL ok=[UIImagePickerController isSourceTypeAvailable:type];
+    BOOL ok = [UIImagePickerController isSourceTypeAvailable:type];
     if (!ok) {
         NSLog(@"error");
         return;
@@ -96,10 +95,7 @@
     picker.sourceType = type;
     NSLog(@"%@",picker.mediaTypes);
     picker.delegate = self;
-    picker.editing=NO;
-    
-    
-    
+    picker.editing = NO;
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
@@ -109,25 +105,19 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     NSLog(@"%@",info);
-    
-    
-    
-    if (picker.sourceType==UIImagePickerControllerSourceTypeCamera)
-    {
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
         UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-        
-        self.lng=self.currentLocation.coordinate.longitude;
-        self.lat=self.currentLocation.coordinate.latitude;
+        self.lng = self.currentLocation.coordinate.longitude;
+        self.lat = self.currentLocation.coordinate.latitude;
         NSLog(@"lat:%f",_lat);
         NSLog(@"lng:%f",_lng);
         NSLog(@"%@",chosenImage);
-        
         if (_lat && _lng) {
             [self.library saveImage:chosenImage toAlbum:@"PhotoShare" withCompletionBlock:^(NSError *error) {
                 if (error)
                 {
                     NSLog(@"Error: %@", [error description]);
-                    UIAlertView *alert=[[UIAlertView alloc]
+                    UIAlertView *alert = [[UIAlertView alloc]
                                         initWithTitle:NSLocalizedString(@ "ErrorStringKey","")
                                         message:NSLocalizedString(@"alertViewOnSaveErrorKey","") delegate:nil
                                         cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey","")otherButtonTitles:nil, nil];
@@ -135,7 +125,7 @@
                 }
                 else
                 {
-                    UIAlertView *alert=[[UIAlertView alloc]
+                    UIAlertView *alert = [[UIAlertView alloc]
                                         initWithTitle:NSLocalizedString(@"alertViewSuccessKey","")
                                         message:NSLocalizedString(@"alertViewOnSaveSuccessKey","")
                                         delegate:nil
@@ -148,7 +138,7 @@
             self.imageForPhoto.image = chosenImage;
             self.imageForPhoto.contentMode = UIViewContentModeScaleAspectFill;
             
-            self.imageForUpload=chosenImage;
+            self.imageForUpload = chosenImage;
             [_postButton setHidden:NO];
             [picker dismissViewControllerAnimated:YES completion:NULL];
             
@@ -167,7 +157,7 @@
     
     
     
-    if ((picker.sourceType==UIImagePickerControllerSourceTypeSavedPhotosAlbum) || (picker.sourceType==UIImagePickerControllerSourceTypePhotoLibrary))
+    if ((picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) || (picker.sourceType==UIImagePickerControllerSourceTypePhotoLibrary))
         
     {
         UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
@@ -185,8 +175,8 @@
              [assetMetadata setObject:gpsData forKey:@"Location Information"];
              NSLog(@"%@",gpsData);
              
-             self.lng=[[gpsData valueForKey:@"Longitude"] doubleValue];
-             self.lat=[[gpsData valueForKey:@"Latitude"] doubleValue];
+             self.lng = [[gpsData valueForKey:@"Longitude"] doubleValue];
+             self.lat = [[gpsData valueForKey:@"Latitude"] doubleValue];
              NSLog(@"lat:%f",_lat);
              NSLog(@"lng:%f",_lng);
               
@@ -198,13 +188,13 @@
                   self.imageForPhoto.contentMode = UIViewContentModeScaleAspectFit;
                   self.imageForPhoto.clipsToBounds = YES;
                   
-                  self.imageForUpload=chosenImage;
+                  self.imageForUpload = chosenImage;
                   [_postButton setHidden:NO];
                   [picker dismissViewControllerAnimated:YES completion:NULL];
                   
               }
               
-              if (_lat==0 && _lng==0)
+              if (_lat == 0 && _lng == 0)
               {
                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"== Opps! =="
                                                                   message:@"Photo doesn't have coordinates.Try another photo"
@@ -224,55 +214,44 @@
         
         });
 
-        
-  
-        
     }
-    
-    
-
-
 }
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
-- (IBAction)actionGoToUpload:(id)sender
-{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+#pragma mark - SegueGoToFriend
+- (IBAction)actionGoToUpload:(id)sender {
      [self performSegueWithIdentifier:@"goToUpload" sender:self];
 }
 
-    
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-        
-[picker dismissViewControllerAnimated:YES completion:NULL];
-        
-}
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"goToUpload"])
     {
-        PSUploadViewController *destinationController=segue.destinationViewController;
+        PSUploadViewController *destinationController = segue.destinationViewController;
    
         PSUserStore *userStore= [PSUserStore userStoreManager];
         User *currentUser=userStore.activeUser;
         int _userID=[currentUser.user_id integerValue];
         NSLog(@"user_id:%d",_userID);
-        destinationController.userID=_userID;
-        destinationController.image=_imageForUpload;
-        destinationController.lat=_lat;
-        destinationController.lng=_lng;
+        destinationController.userID =_userID;
+        destinationController.image =_imageForUpload;
+        destinationController.lat =_lat;
+        destinationController.lng = _lng;
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
+
+#pragma mark locationManager
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     self.currentLocation = [locations objectAtIndex:0];
     [self.locationManager stopUpdatingLocation];
 
 }
-
-
 
 
 - (void) checkLocationServicesTurnedOn {
@@ -283,8 +262,8 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-        _cameraBarButton.enabled=NO;
-        _photolibraryBarButton.enabled=NO;
+        _cameraBarButton.enabled = NO;
+        _photolibraryBarButton.enabled = NO;
     }
 }
 
@@ -301,8 +280,8 @@
     }
     else {
         
-        _cameraBarButton.enabled=YES;
-        _photolibraryBarButton.enabled=YES;
+        _cameraBarButton.enabled = YES;
+        _photolibraryBarButton.enabled = YES;
     }
 }
 

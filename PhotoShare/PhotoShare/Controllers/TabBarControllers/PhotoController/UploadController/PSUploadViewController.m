@@ -12,41 +12,25 @@
 
 
 @interface PSUploadViewController () <CLLocationManagerDelegate, UITextViewDelegate>
-
-
 @property (nonatomic, strong) NSString *text;
+@property (nonatomic, weak) IBOutlet UITextView *photoNameTextView;
 - (IBAction)dismissKeyboardOnTap:(id)sender;
-
-@property (weak, nonatomic) IBOutlet UITextView *photoNameTextView;
 - (IBAction)sendPhoto:(id)sender;
-
 @end
 
 
 @implementation PSUploadViewController
 
-- (void)viewDidLoad
-{
+#pragma mark - viewDidLoad
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-
-
-
-    
-    
-        self.text=@"text";
-    
-
+    _text=@"text";
 }
 
-
-
-
-- (IBAction)sendPhoto:(id)sender
-{
+#pragma mark - SendPhoto
+- (IBAction)sendPhoto:(id)sender {
     
-    if ((_image) && (_userID) && (self.lat) && (self.lng) && (_text))
-    {
+    if ((_image) && (_userID) && (self.lat) && (self.lng) && (_text)) {
         
         [[PSNetworkManager sharedManager] sendImage:self.image withLatitude:self.lat
                                       andLongtitude:self.lng
@@ -68,8 +52,7 @@
         }];
 
     }
-    else if ((!_lat) || (!_lng))
-    {
+    else if ((!_lat) || (!_lng)) {
         NSLog(@"problem with location");
     }
     else
@@ -79,9 +62,6 @@
 }
 
 
-
-
-
 #pragma mark - UITextFieldDelegate
 - (void)textViewDidEndEditing:(UITextView *)textView {
     _text=textView.text;
@@ -89,11 +69,8 @@
 }
 
 
-
-- (IBAction)dismissKeyboardOnTap:(id)sender
-{
+- (IBAction)dismissKeyboardOnTap:(id)sender {
        [[self view] endEditing:YES];
 }
-
 
 @end

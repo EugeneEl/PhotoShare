@@ -15,7 +15,7 @@
 #import "PSNetworkManager.h"
 #import "PSUserStore.h"
 #import "User.h"
-#import "Post+mapWithModel.h"
+#import "Post+PSMapWithModel.h"
 #import "Parser.h"
 #import "PSPostModel.h"
 #import "PSPostsParser.h"

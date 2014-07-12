@@ -18,7 +18,7 @@
 
 @interface PSMKAnnotationView : MKAnnotationView
 
-@property (nonatomic, weak) id<PSMKAnnotationViewDelegate> delegate;
+@property (nonatomic, weak) id <PSMKAnnotationViewDelegate> delegate;
 @property (nonatomic, getter = isDetailViewHidden) BOOL detailViewHidden;
 
 @end

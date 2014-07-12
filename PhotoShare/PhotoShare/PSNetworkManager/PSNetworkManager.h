@@ -25,9 +25,6 @@ typedef void (^errorBlock)(NSError* error);
 
 - (void)someMethodThatTakesABlock:(void (^)(NSError*))blockName;
 
-- (AFHTTPRequestOperation *)checkIfLoginedWith:(PSUserModel *)model
-                                       success:(successBlock)success
-                                         error:(errorBlock)errorBlock;
 
 - (AFHTTPRequestOperation *) loginWithModel:(PSUserModel*)model
                                     success:(successBlockWithId)success
@@ -50,9 +47,6 @@ typedef void (^errorBlock)(NSError* error);
 - (AFHTTPRequestOperation *) sendImage:(UIImage *)image withLatitude:(double)lat andLongtitude:(double)lng withText:(NSString *)text  fromUserID:(NSInteger)userID
                                success:(successBlockWithId)successWithId
                                  error:(errorBlock)errorWithCode;
-
-
-
 
 - (AFHTTPRequestOperation *)likePostWithID:(int)PostID byUser:(int)userID
                                    success:(successBlockWithId)success
@@ -84,7 +78,7 @@ typedef void (^errorBlock)(NSError* error);
 - (AFHTTPRequestOperation *)PSUnfollowUserWithID:(int)followerID fromUserWithID:(int)userID
                                        success:(successBlockWithId)success
                                          error:(errorBlock)errorBlock;
-- (AFHTTPRequestOperation *)PSGetInfoFromUser:(int)userID
+- (AFHTTPRequestOperation *)getInfoFromUser:(int)userID
                                       success:(successBlockWithId)success
                                         error:(errorBlock)errorBlock;
 

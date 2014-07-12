@@ -10,5 +10,5 @@
 @class Like;
 
 @interface Like (mapWithEmail)
-- (Like *)mapWithEmail:(NSString *) email;
+- (Like *)mapWithEmail:(NSString *)email;
 @end

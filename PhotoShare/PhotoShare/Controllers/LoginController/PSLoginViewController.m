@@ -51,10 +51,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - init
--(instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self)
+
+#pragma mark - viewDidLoad
+-(void)viewDidLoad {
+    [super viewDidLoad];
     {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardWasShown:)
@@ -65,14 +65,8 @@
                                                  selector:@selector(keyboardWillBeHidden:)
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
- 
+        
     }
-    return self;
-}
-
-#pragma mark - viewDidLoad
--(void)viewDidLoad {
-    [super viewDidLoad];
     _loginTextField.delegate = self;
     _passwordTextField.delegate = self;
     _scrollView.delegate = self;
@@ -178,6 +172,7 @@
         NSLog(@"active user logged in:%@",[PSUserStore userStoreManager].activeUser.email);
         
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [self.view endEditing:YES];
         [self performSegueWithIdentifier:@"goToUserBarFromLog" sender:nil];
     }
      

@@ -22,21 +22,20 @@ static NSInteger PSNottingToShareErrorCode  = 101;
 @property (nonatomic, weak) IBOutlet UITextField *nameTextField;
 @property (nonatomic, weak) IBOutlet UITextField *passwordTextField;
 @property (nonatomic, weak) IBOutlet UIImageView *avaImageView;
-
-- (IBAction)actionUpdateInfo:(id)sender;
-- (IBAction)logout:(id)sender;
-
 @property (nonatomic, strong) UIImage *imageForAva;
 @property (nonatomic, copy) NSMutableString *nameToUpdate;
 @property (nonatomic, copy) NSMutableString *passwordToUpadte;
 @property (nonatomic, assign) int userID;
 @property (nonatomic, strong) User *currentUser;
 
+- (IBAction)actionUpdateInfo:(id)sender;
+- (IBAction)logout:(id)sender;
 @end
 
 
 @implementation PSSettingsViewController
 
+#pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
     [_avaImageView setHidden:YES];
@@ -49,7 +48,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
     _userID=[_currentUser.user_id integerValue];
 }
 
-
+#pragma mark - ChangeFoto
 - (IBAction)actionChangePhoto:(id)sender {
     UIActionSheet* actionSheet = [[UIActionSheet alloc]
                                   initWithTitle:nil
@@ -66,8 +65,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
     [actionSheet showFromTabBar:(UIView*)self.view];
 }
 
-- (IBAction)actionUpdateInfo:(id)sender
-{
+- (IBAction)actionUpdateInfo:(id)sender {
     if ((!_imageForAva) && (!_nameToUpdate) && (_passwordToUpadte)) {
         UIAlertView *alert=[[UIAlertView alloc]
             initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
@@ -116,13 +114,11 @@ static NSInteger PSNottingToShareErrorCode  = 101;
     
 }
 
+#pragma mark - Logout
 - (IBAction)logout:(id)sender {
-    
-    
     //check for userWithEmptyEmail in database and add it if such object doesn't exist
     User *userWithEmptyEmail=[[User MR_findByAttribute:@"email" withValue:@""] firstObject];
-    if (!userWithEmptyEmail)
-    {
+    if (!userWithEmptyEmail) {
        // userWithEmptyEmail=[User MR_createEntity];
         userWithEmptyEmail.email=@"";
         [PSUserStore userStoreManager].activeUser=userWithEmptyEmail;
@@ -130,16 +126,12 @@ static NSInteger PSNottingToShareErrorCode  = 101;
         NSLog(@"logout. user with email:%@",[PSUserStore userStoreManager].activeUser.email);
     }
     
-    else
-        
-    {
+    else {
         [PSUserStore userStoreManager].activeUser=userWithEmptyEmail;
         NSLog(@"logout. user with email:%@",[PSUserStore userStoreManager].activeUser.email);
     }
     
     [self performSegueWithIdentifier:@"afterLoggedOutToSplash" sender:nil];
-    
-
 }
 
 
@@ -147,8 +139,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
        
-        case 1:
-        {
+        case 1: {
     
             if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
                 
@@ -161,9 +152,6 @@ static NSInteger PSNottingToShareErrorCode  = 101;
                 [myAlertView show];
                 return;
             }
-            
-            
-            
             UIImagePickerController *picker = [[UIImagePickerController alloc] init];
             picker.delegate = self;
             picker.allowsEditing = YES;
@@ -174,8 +162,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
             break;
         }
             
-        case 2:
-        {
+        case 2: {
             
             UIImagePickerControllerSourceType type=UIImagePickerControllerSourceTypePhotoLibrary;
             
@@ -203,10 +190,10 @@ static NSInteger PSNottingToShareErrorCode  = 101;
 
 }
 
+#pragma mark - PrepareForSegue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if([segue isKindOfClass:[CustomUnwindSegue class]]) {
-        // Set the start point for the animation to center of the button for the animation
         ((CustomUnwindSegue *)segue).targetPoint = self.view.center;
     }
 }
@@ -214,14 +201,12 @@ static NSInteger PSNottingToShareErrorCode  = 101;
 
 #pragma mark - Image Picker Controller delegate methods
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSLog(@"%@",info);
     
     
     
-    if (picker.sourceType==UIImagePickerControllerSourceTypeCamera)
-    {
+    if (picker.sourceType==UIImagePickerControllerSourceTypeCamera) {
         _imageForAva=info[UIImagePickerControllerEditedImage];
         [picker dismissViewControllerAnimated:YES completion:NULL];
         [_avaImageView setHidden:NO];
@@ -229,8 +214,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
         
     }
     
-    else
-    {
+    else {
         _imageForAva = info[UIImagePickerControllerOriginalImage];
         [picker dismissViewControllerAnimated:YES completion:NULL];
         [_avaImageView setHidden:NO];
@@ -251,14 +235,12 @@ static NSInteger PSNottingToShareErrorCode  = 101;
 }
 
 #pragma mark - dismissKeyboard
-- (IBAction)dismissKeyboards:(id)sender
-{
+- (IBAction)dismissKeyboards:(id)sender {
     [self.view endEditing:YES];
 }
 
 #pragma mark - UITextFieldDelegate
--(BOOL)textFieldShouldReturn:(UITextField*)textField;
-{
+-(BOOL)textFieldShouldReturn:(UITextField*)textField; {
     if ([textField isEqual:self.nameTextField]) {
         [self.passwordTextField becomeFirstResponder];
     }
@@ -269,7 +251,5 @@ static NSInteger PSNottingToShareErrorCode  = 101;
     return YES;
     
 }
-
-
 
 @end

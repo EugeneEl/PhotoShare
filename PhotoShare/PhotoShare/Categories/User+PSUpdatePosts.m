@@ -16,7 +16,7 @@
 #import "PSLikesParser.h"
 #import "Like.h"
 #import "Like+mapWithEmail.h"
-#import "Post+mapWithModel.h"
+#import "Post+PSMapWithModel.h"
 
 @implementation User (PSUpdatePosts)
 

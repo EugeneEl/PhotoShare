@@ -19,8 +19,8 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *commentDateLabel;
-@property (nonatomic, weak) IBOutlet UITextView *commentTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *userAvaImageView;
+@property (nonatomic, weak) IBOutlet UILabel *commentLabel;
 
 
 @end
@@ -45,13 +45,8 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'hh:mm:ss.SSSSSS'+'00:00"];
     NSString *stringFromDate = [dateFormat stringFromDate:comment.commentDate];
     self.commentDateLabel.text = stringFromDate;
-    
-    _commentTextView.text=comment.commentText;
-    CGRect frame = _commentTextView.frame;
-    frame.size.height = _commentTextView.contentSize.height;
-    _commentTextView.frame = frame;
-    _commentTextView.scrollEnabled=NO;
-   
+    _commentLabel.text = comment.commentText;
+       
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     dispatch_async(queue, ^(void)
                    {
@@ -62,7 +57,7 @@
                        dispatch_async(dispatch_get_main_queue(),
                                       ^{
                                           [_userAvaImageView setImage:image];
-                                          [_userAvaImageView setNeedsLayout]; //test here
+                                         // [_userAvaImageView setNeedsLayout]; //test here
                                       });
                    });
     

@@ -21,6 +21,7 @@
 
 @implementation PSMKAnnotationView
 
+#pragma marl - initWithFrame
 -(id)initWithFrame:(CGRect)frame {
     if (self=[super initWithFrame:frame]) {
         _tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
@@ -29,7 +30,6 @@
         [_imageViewForAnnotation addGestureRecognizer:_tapRecognizer];
         [_imageViewForAnnotation setUserInteractionEnabled:YES];
         [self setClipsToBounds:NO];
-
         _pinImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pin.png"]];
         [self addSubview:_pinImageView];
         [_pinImageView setFrame:CGRectMake(-8.f, 8.f, 16.f, 16.f)];
@@ -39,14 +39,17 @@
     return self;
 }
 
+#pragma mark - tapOnAnnotation
 -(void)tap:(UITapGestureRecognizer*)recognizer {
     [_delegate annotationView:self didSelectAnnotation:(PSMapAnnotation *)self.annotation];
 }
 
+#pragma mark - validAnnotation
 - (BOOL)validAnnotation {
     return  [self.annotation isKindOfClass:[PSMapAnnotation class]];
 }
 
+#pragma mark - hideAnnotation
 - (void)setDetailViewHidden:(BOOL)detailViewHidden {
     if (![self validAnnotation]) return;
 

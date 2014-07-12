@@ -20,6 +20,7 @@
 - (IBAction)actionAddComment:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *commentTableView;
 
+
 @end
 
 @implementation PSCommentsController
@@ -55,8 +56,17 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = [PSCommentTableViewCell cellHeightForObject:[_arrayOfComments objectAtIndex:indexPath.row]];
-    return height;
+
+    static PSCommentTableViewCell *cell;
+    if (!cell) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"commentCell"];
+    }
+    
+    
+    [cell configureCellWithComment:[_arrayOfComments objectAtIndex:indexPath.row]];
+    [cell.contentView setNeedsLayout];
+    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];
+    return size.height + 1.f; // separator
 }
 
 #pragma mark - PerformSegueGoToAddComment

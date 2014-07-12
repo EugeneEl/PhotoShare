@@ -14,7 +14,6 @@
 @property (nonatomic, assign,readwrite) CLLocationCoordinate2D coordinate;
 @property (nonatomic,strong) NSURL *imageURL;
 @property (nonatomic, strong) NSNumber * postIdForAnnotation;
-
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
 

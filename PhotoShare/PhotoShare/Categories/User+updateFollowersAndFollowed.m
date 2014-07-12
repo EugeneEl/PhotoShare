@@ -17,7 +17,7 @@
 + (void) updateFollowersAndFollowedForCurrentUser {
     int userID=[[self getCurrentUser].user_id intValue];
     User *currentUser=[self getCurrentUser];
-    [[PSNetworkManager sharedManager] PSGetInfoFromUser:userID
+    [[PSNetworkManager sharedManager] getInfoFromUser:userID
     success:^(id responseObject)
     {
         NSMutableArray *arrayOfUserInfo = [NSMutableArray array];

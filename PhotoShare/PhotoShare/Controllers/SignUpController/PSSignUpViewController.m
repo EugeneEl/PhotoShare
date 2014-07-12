@@ -14,15 +14,12 @@
 
 @interface PSSignUpViewController () <UITextFieldDelegate, UIScrollViewDelegate>
 
-@property (strong,nonatomic) PSUserModel *userModel;
-@property (weak, nonatomic) UITextField *activeTextField;
-@property (nonatomic, assign) BOOL  keyboardIsShown;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *guidingConstraint;
-@property (weak, nonatomic) IBOutlet UITextField *nameForSignUpTextField;
-@property (weak, nonatomic) IBOutlet UITextField *emailForSignUpTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordForSignUpTextField;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) PSUserModel *userModel;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *guidingConstraint;
+@property (nonatomic, weak) IBOutlet UITextField *nameForSignUpTextField;
+@property (nonatomic, weak) IBOutlet UITextField *emailForSignUpTextField;
+@property (nonatomic, weak) IBOutlet UITextField *passwordForSignUpTextField;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)nameFieldDidChanged:(id)sender;
 - (IBAction)emailFieldDidChanged:(id)sender;
@@ -39,10 +36,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - initWithCoder
--(instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self)
+#pragma mark - viewDidLoad
+- (void)viewDidLoad {
+    [super viewDidLoad];
     {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardWasShown:)
@@ -55,15 +51,8 @@
                                                    object:nil];
         
     }
-    return self;
-}
-
-#pragma mark - viewDidLoad
-- (void)viewDidLoad {
-    [super viewDidLoad];
     _scrollView.delegate=self;
     _scrollView.scrollEnabled=YES;
-    _keyboardIsShown = NO;
     [_scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
     [_scrollView setContentOffset:CGPointZero];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
@@ -186,15 +175,6 @@
     [self.view endEditing:YES];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    self.activeTextField = textField;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    self.activeTextField = nil;
-
-
-}
 
 
 #pragma mark - UITextFieldDelegate

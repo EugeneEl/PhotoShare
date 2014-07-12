@@ -38,6 +38,7 @@
     NSLog(@"user_id:%d",_userID);
     _waitingForResponse = NO;
     _textForComment = @"Text for comment";
+    _commentTextView.delegate=self;
 }
 
 #pragma mark - dismissKeyboard

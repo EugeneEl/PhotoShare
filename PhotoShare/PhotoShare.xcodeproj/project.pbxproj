@@ -58,6 +58,7 @@
 		3E52E54A196EF77000051376 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E52E549196EF77000051376 /* User.m */; };
 		3E585E3D19582DB400A96B2B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E585E3C19582DB400A96B2B /* Social.framework */; };
 		3E7F880A1971416B0094CA48 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7F88091971416B0094CA48 /* Comment.m */; };
+		3E7F880D1971510F0094CA48 /* Post+updateCommentsForPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7F880C1971510F0094CA48 /* Post+updateCommentsForPost.m */; };
 		3E81A1A7196DA0640049D0CE /* PSCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E81A1A6196DA0640049D0CE /* PSCommentTableViewCell.m */; };
 		3E9267331950303800A55AC8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9267321950303800A55AC8 /* MapKit.framework */; };
 		3EAF843F19471843003D1987 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EAF843E19471843003D1987 /* Foundation.framework */; };
@@ -246,6 +247,8 @@
 		3E585E3C19582DB400A96B2B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3E7F88081971416B0094CA48 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		3E7F88091971416B0094CA48 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		3E7F880B1971510F0094CA48 /* Post+updateCommentsForPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Post+updateCommentsForPost.h"; sourceTree = "<group>"; };
+		3E7F880C1971510F0094CA48 /* Post+updateCommentsForPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Post+updateCommentsForPost.m"; sourceTree = "<group>"; };
 		3E81A1A5196DA0640049D0CE /* PSCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCommentTableViewCell.h; sourceTree = "<group>"; };
 		3E81A1A6196DA0640049D0CE /* PSCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCommentTableViewCell.m; sourceTree = "<group>"; };
 		3E9267321950303800A55AC8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -356,7 +359,7 @@
 		3EE186E11970432200A901CC /* User+PSUpdatePosts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+PSUpdatePosts.m"; sourceTree = "<group>"; };
 		3EF1A81D1966B356001D0D69 /* PSPostModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSPostModel.h; sourceTree = "<group>"; };
 		3EF1A81E1966B356001D0D69 /* PSPostModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPostModel.m; sourceTree = "<group>"; };
-		3EF1A8201966B516001D0D69 /* Post+mapWithModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Post+mapWithModel.h"; sourceTree = "<group>"; };
+		3EF1A8201966B516001D0D69 /* Post+PSMapWithModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Post+PSMapWithModel.h"; sourceTree = "<group>"; };
 		3EF1A8211966B516001D0D69 /* Post+mapWithModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Post+mapWithModel.m"; sourceTree = "<group>"; };
 		3EF1A8231966C081001D0D69 /* PSUserParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSUserParser.h; sourceTree = "<group>"; };
 		3EF1A8241966C081001D0D69 /* PSUserParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSUserParser.m; sourceTree = "<group>"; };
@@ -659,7 +662,7 @@
 				3EFC9A26195DC33200846D47 /* UIViewController+UIViewController_PSSharingDataComposer.m */,
 				3E51B54D1962AD31004F0FD4 /* User+PSMapWithModel.h */,
 				3E51B54E1962AD31004F0FD4 /* User+PSMapWithModel.m */,
-				3EF1A8201966B516001D0D69 /* Post+mapWithModel.h */,
+				3EF1A8201966B516001D0D69 /* Post+PSMapWithModel.h */,
 				3EF1A8211966B516001D0D69 /* Post+mapWithModel.m */,
 				3EF1A8381966F1EC001D0D69 /* Comment+mapWthModel.h */,
 				3EF1A8391966F1EC001D0D69 /* Comment+mapWthModel.m */,
@@ -671,6 +674,8 @@
 				3EE186DE1970201F00A901CC /* User+PSGetCurrentUser.m */,
 				3EE186E01970432200A901CC /* User+PSUpdatePosts.h */,
 				3EE186E11970432200A901CC /* User+PSUpdatePosts.m */,
+				3E7F880B1971510F0094CA48 /* Post+updateCommentsForPost.h */,
+				3E7F880C1971510F0094CA48 /* Post+updateCommentsForPost.m */,
 			);
 			name = Categories;
 			path = PhotoShare/Categories;
@@ -1247,6 +1252,7 @@
 				3E1971911970EA1500CEBE74 /* PSFindFriendsViewController.m in Sources */,
 				3E4A702419509BEE003EFD21 /* UIView+PSMKAnnotationView.m in Sources */,
 				3EF1A81F1966B356001D0D69 /* PSPostModel.m in Sources */,
+				3E7F880D1971510F0094CA48 /* Post+updateCommentsForPost.m in Sources */,
 				3EAF84D119471AAF003D1987 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				3E1971A71970ED1D00CEBE74 /* PSMapAnnotation.m in Sources */,
 				3E23C63B196E9A4800691ACB /* PSFoundUserTableViewCell.m in Sources */,
