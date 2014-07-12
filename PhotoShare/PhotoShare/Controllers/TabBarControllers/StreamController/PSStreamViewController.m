@@ -128,7 +128,7 @@ static NSString *keyForSortSettings=@"sortKey";
                  
                  post=[post mapWithModel:model];
                  NSLog(@"Post added%@]n",post);
-                 [_currentUser addPostsObject:post];
+                 [weakSelf.currentUser addPostsObject:post];
                  
              }
              

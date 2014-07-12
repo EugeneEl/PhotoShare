@@ -145,8 +145,8 @@
 
 #pragma mark - likePhoto
 - (IBAction)actionLikePhoto:(id)sender {
-    
-    if (_likesStatus)
+    __weak typeof(self) weakSelf = self;
+    if (!_likesStatus)
     {
         if (_isWaitingForLikeResponse) return;
         _isWaitingForLikeResponse = YES;
@@ -159,21 +159,22 @@
              NSLog(@"liked successfully");
              Like *likeToAdd=[Like MR_createEntity];
              [likeToAdd mapWithEmail:_authorMailParsed];
-             [_post addLikesObject:likeToAdd];
-             _likesStatus = YES;
-             [_likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
-             [_post.managedObjectContext MR_saveToPersistentStoreAndWait];
-             _isWaitingForLikeResponse = NO;
+             [weakSelf.post addLikesObject:likeToAdd];
+             weakSelf.likesStatus = YES;
+             [weakSelf.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
+             [weakSelf.post.managedObjectContext MR_saveToPersistentStoreAndWait];
+             weakSelf.isWaitingForLikeResponse = NO;
              
          }
          error:^(NSError *error)
          {
-             _isWaitingForLikeResponse = NO;   NSLog(@"error");
+             weakSelf.isWaitingForLikeResponse = NO;
+             NSLog(@"error");
          }];
     }
     
     
-    if (!_likesStatus) {
+    if (_likesStatus) {
         if (_isWaitingForLikeResponse) return;
         _isWaitingForLikeResponse = YES;
         [[PSNetworkManager sharedManager] unlikePostWithID:[_post.postID intValue]
@@ -182,23 +183,23 @@
          {
              
              NSLog(@"unlikes success ");
-             _likesStatus=NO;
-             [_likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
-             _isWaitingForLikeResponse = NO;
+             weakSelf.likesStatus=NO;
+             [weakSelf.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
+             weakSelf.isWaitingForLikeResponse = NO;
              for (Like *like in _post.likes)
              {
-                 if ([like.email isEqualToString:_authorMailParsed])
+                 if ([like.email isEqualToString:weakSelf.authorMailParsed])
                  {
-                     [_post removeLikesObject:like];
+                     [weakSelf.post removeLikesObject:like];
                      break;
                  }
              }
-             [_post.managedObjectContext MR_saveToPersistentStoreAndWait];
-             _isWaitingForLikeResponse = NO;
+             [weakSelf.post.managedObjectContext MR_saveToPersistentStoreAndWait];
+             weakSelf.isWaitingForLikeResponse = NO;
          }
          error:^(NSError *error)
          {
-             _isWaitingForLikeResponse = NO;
+             weakSelf.isWaitingForLikeResponse = NO;
              NSLog(@"error");
          }];
     }
