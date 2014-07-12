@@ -30,33 +30,33 @@ typedef enum {
     kFavourite
 } sortPostsByKey;
 
-static NSString *keyForSortSettings=@"sortKey";
+static NSString *keyForSortSettings = @"sortKey";
 
 @interface PSStreamViewController() <UITableViewDelegate ,UITableViewDataSource, NSFetchedResultsControllerDelegate, PhotoFromStreamTableViewCell,UIActionSheetDelegate>
 
-@property (nonatomic,assign) NSInteger userID;
-@property (nonatomic,strong) NSNumber *post_idParsed;
-@property (nonatomic,strong)NSNumber *likesParsed;
-@property (nonatomic,copy) NSString *authorMailParsed;
-@property (nonatomic,copy) NSString *photoNameParsed;
-@property (nonatomic,copy) NSString *photoURLParsed;
-@property (nonatomic,copy) NSDate *photo_dateParsed;
-@property (nonatomic,strong) NSNumber *commentIDParsed;
-@property (nonatomic,copy) NSString *commentatorNameParsed;
-@property (nonatomic,strong) NSData *imageDataToShare;
-@property (nonatomic,copy) NSString *photoName;
-@property (nonatomic,strong) NSMutableArray *dataSource;
-@property (nonatomic,assign) sortPostsByKey sortKey;
-@property (nonatomic,strong) User *currentUser;
-@property (nonatomic,strong)  UIImage *avaImage;
-@property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic,strong) NSFetchedResultsController *likeFetchedResultsController;
-@property (nonatomic,strong) NSFetchedResultsController *dateFetchedResultsController;
+@property (nonatomic, assign) NSInteger userID;
+@property (nonatomic, strong) NSNumber *post_idParsed;
+@property (nonatomic, strong)NSNumber *likesParsed;
+@property (nonatomic, copy) NSString *authorMailParsed;
+@property (nonatomic, copy) NSString *photoNameParsed;
+@property (nonatomic, copy) NSString *photoURLParsed;
+@property (nonatomic, copy) NSDate *photo_dateParsed;
+@property (nonatomic, strong) NSNumber *commentIDParsed;
+@property (nonatomic, copy) NSString *commentatorNameParsed;
+@property (nonatomic, strong) NSData *imageDataToShare;
+@property (nonatomic, copy) NSString *photoName;
+@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, assign) sortPostsByKey sortKey;
+@property (nonatomic, strong) User *currentUser;
+@property (nonatomic, strong)  UIImage *avaImage;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *likeFetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *dateFetchedResultsController;
 
-@property (nonatomic,weak)IBOutlet UISegmentedControl *changeSortKeySegmentController;
-@property (nonatomic,weak)IBOutlet UITableView *streamTableView;
-@property (nonatomic,weak)IBOutlet UIImageView *userAvaImageView;
-@property (nonatomic,weak)IBOutlet UILabel *usernameLabel;
+@property (nonatomic, weak)IBOutlet UISegmentedControl *changeSortKeySegmentController;
+@property (nonatomic, weak)IBOutlet UITableView *streamTableView;
+@property (nonatomic, weak)IBOutlet UIImageView *userAvaImageView;
+@property (nonatomic, weak)IBOutlet UILabel *usernameLabel;
 
 - (IBAction)switchSortKey:(id)sender;
 @end
@@ -79,19 +79,19 @@ static NSString *keyForSortSettings=@"sortKey";
    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [[PSNetworkManager sharedManager] getAllUserPostsWithUserID:_userID
-                                                        success:^(id responseObject)
+    success:^(id responseObject)
      {
          NSLog(@"%@",responseObject);
          
          PSPostsParser *postParser = [[PSPostsParser alloc]initWithId:responseObject];
-         PSPostModel *model=[PSPostModel new];
+         PSPostModel *model = [PSPostModel new];
          NSLog(@"%@",postParser.arrayOfPosts);
          if (postParser.arrayOfPosts)
          {
              for (NSDictionary* dictionary in postParser.arrayOfPosts)
              {
                  model.postTime = [postParser getPostTime:dictionary];
-                 model.postID=[postParser getPostID:dictionary];
+                 model.postID = [postParser getPostID:dictionary];
                  model.postImageURL = [postParser getPostImageURL:dictionary];
                  model.postImageLat = [postParser getPostImageLat:dictionary];
                  model.postImageLng = [postParser getPostImageLng:dictionary];
@@ -132,7 +132,7 @@ static NSString *keyForSortSettings=@"sortKey";
                  
              }
              
-             [_currentUser.managedObjectContext MR_saveToPersistentStoreAndWait];
+             [weakSelf.currentUser.managedObjectContext MR_saveToPersistentStoreAndWait];
              [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
              [weakSelf.streamTableView reloadData];
          }
@@ -753,10 +753,10 @@ tableCell
     if ([segue.identifier isEqualToString:@"goToComments"]) {
         {
             if ([sender isKindOfClass:[PSPhotoFromStreamTableViewCell class]]) {
-                PSPhotoFromStreamTableViewCell *cell=(PSPhotoFromStreamTableViewCell *)sender;
-                Post *post=cell.postForCell;
-                PSCommentsController *destinationController=segue.destinationViewController;
-                destinationController.postToComment=post;
+                PSPhotoFromStreamTableViewCell *cell = (PSPhotoFromStreamTableViewCell *)sender;
+                Post *post = cell.postForCell;
+                PSCommentsController *destinationController = segue.destinationViewController;
+                destinationController.postToComment = post;
             }
         }
         

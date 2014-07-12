@@ -51,8 +51,8 @@
                                                    object:nil];
         
     }
-    _scrollView.delegate=self;
-    _scrollView.scrollEnabled=YES;
+    _scrollView.delegate = self;
+    _scrollView.scrollEnabled = YES;
     [_scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
     [_scrollView setContentOffset:CGPointZero];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
@@ -61,10 +61,10 @@
 #pragma mark - getUserModekl
 -(PSUserModel*)userModel {
     if (!_userModel) {
-        _userModel=[PSUserModel new];
-        _userModel.name=self.nameForSignUpTextField.text;
-        _userModel.email=self.emailForSignUpTextField.text;
-        _userModel.password=self.passwordForSignUpTextField.text;
+        _userModel = [PSUserModel new];
+        _userModel.name = _nameForSignUpTextField.text;
+        _userModel.email = _emailForSignUpTextField.text;
+        _userModel.password = _passwordForSignUpTextField.text;
     }
     return _userModel;
 }
@@ -72,15 +72,15 @@
 
 #pragma mark - fieldsDidChanged
 - (IBAction)nameFieldDidChanged:(id)sender {
-    _userModel.name=self.nameForSignUpTextField.text;
+    _userModel.name = _nameForSignUpTextField.text;
 }
 
 - (IBAction)emailFieldDidChanged:(id)sender {
-    _userModel.email=self.emailForSignUpTextField.text;
+    _userModel.email = _emailForSignUpTextField.text;
 }
 
 - (IBAction)passwordFieldDidChanged:(id)sender {
-    _userModel.password=self.passwordForSignUpTextField.text;
+    _userModel.password = _passwordForSignUpTextField.text;
 }
 
 #pragma mark - dismissKeyboards
@@ -93,7 +93,7 @@
 {
     
     if (![self.userModel isSignUpValid]) {
-        UIAlertView *alert=[[UIAlertView alloc]
+        UIAlertView *alert = [[UIAlertView alloc]
                             initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
                             message: NSLocalizedString(@"alertViewOnWrongFieldsErrorKey", "")
                             delegate:nil
@@ -125,7 +125,7 @@
      
     error:^(NSError *error)
      {
-         NSString *errorDescription=[error description];
+         NSString *errorDescription = [error description];
          NSLog(@"error:%@",errorDescription);
          [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
     
