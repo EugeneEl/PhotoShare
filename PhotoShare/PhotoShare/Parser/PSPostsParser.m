@@ -22,6 +22,7 @@ static NSString *kPostLikesArrayKey=@"likes";
 
 @implementation PSPostsParser
 
+#pragma mark - initWithID
 - (instancetype) initWithId:(id)identifier {
     self = [super initWithId:identifier];
     if (self)

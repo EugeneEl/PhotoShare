@@ -12,7 +12,7 @@ static NSString *kLikesAuthorEmailKey=@"email";
 
 @implementation PSLikesParser
 
-
+#pragma mark - initWithId
 - (instancetype) initWithId:(id)identifier {
     self = [super initWithId:identifier];
     if (self) {
@@ -21,6 +21,7 @@ static NSString *kLikesAuthorEmailKey=@"email";
     return self;
 }
 
+#pragma mark - likesParser
 - (NSString *)getAuthorEmail:(NSDictionary *)dictionary {
     NSString* authorEmail=[dictionary valueForKey:kLikesAuthorEmailKey];
     NSLog(@"likesAuthorEmail:%@",authorEmail);

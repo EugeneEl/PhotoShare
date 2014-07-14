@@ -13,7 +13,7 @@
 @interface PSUserStore : NSObject
 @property (nonatomic,strong) User *activeUser;
 
-+ (PSUserStore*)userStoreManager;
-- (void)addActiveUserToCoreDataWithModel:(PSUserModel*) model;
++ (PSUserStore *)userStoreManager;
+- (void)addActiveUserToCoreDataWithModel:(PSUserModel *) model;
 
 @end

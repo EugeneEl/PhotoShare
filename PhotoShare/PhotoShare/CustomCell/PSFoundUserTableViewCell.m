@@ -13,7 +13,6 @@
 @interface PSFoundUserTableViewCell ()
 @property (nonatomic, weak) IBOutlet UIImageView *avaImageView;
 @property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
-
 @property (nonatomic, weak) IBOutlet UIButton *actionFollow;
 @property (nonatomic, weak) IBOutlet UILabel *followsMeLabel;
 @property (nonatomic, assign) int userID;

@@ -23,10 +23,10 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 #pragma mark - init
 -(id)init {
     
-    if (self=[super init]) {
+    if (self = [super init]) {
         
-        NSURL *url=[NSURL URLWithString:PSBaseURL];
-        _requestManager=[[AFHTTPRequestOperationManager alloc]initWithBaseURL:url];
+        NSURL *url = [NSURL URLWithString:PSBaseURL];
+        _requestManager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:url];
         [_requestManager setRequestSerializer:[AFJSONRequestSerializer new]];
     }
     
@@ -50,7 +50,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 - (AFHTTPRequestOperation *)signUpModel:(PSUserModel *)model
                                 success:(successBlock)success
                                   error:(errorBlock)error {
-    NSDictionary *dictionaryForRequest=@{ @"email":model.email,
+    NSDictionary *dictionaryForRequest = @{ @"email":model.email,
                                           @"password":model.password,
                                           @"user_name":model.name
                                         };
@@ -82,7 +82,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 - (AFHTTPRequestOperation *)loginWithModel:(PSUserModel*)model
                              success:(successBlockWithId)success
                              error:(errorBlock) error {
-    NSDictionary *dictionaryForRequest=@{ @"email":model.email,
+    NSDictionary *dictionaryForRequest = @{ @"email":model.email,
                                           @"password":model.password};
     
     return [_requestManager POST:@"users/login"
@@ -141,7 +141,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
                             success:(successBlockWithId)success
                                                 error:(errorBlock)error {
     NSString *request=@"posts/";
-    request=[request stringByAppendingString:[NSString stringWithFormat:@"%d",userID]];
+    request = [request stringByAppendingString:[NSString stringWithFormat:@"%d",userID]];
     
     return [_requestManager GET:request
             
@@ -205,8 +205,8 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 - (AFHTTPRequestOperation *)likePostWithID:(int)PostID byUser:(int)userID
                                   success:(successBlockWithId)success
                                               error:(errorBlock)error {
-    NSString *request=@"posts/";
-    request=[request stringByAppendingString:[NSString stringWithFormat:@"%d/like/%d",userID,PostID]];
+    NSString *request = @"posts/";
+    request = [request stringByAppendingString:[NSString stringWithFormat:@"%d/like/%d",userID,PostID]];
     NSLog(@"%@",request);
     return [_requestManager GET:request
             
@@ -232,7 +232,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 - (AFHTTPRequestOperation *)unlikePostWithID:(int)PostID byUser:(int)userID
                                    success:(successBlockWithId)success
                                      error:(errorBlock)error {
-    NSString *request=@"posts/";
+    NSString *request = @"posts/";
     request=[request stringByAppendingString:[NSString stringWithFormat:@"%d/unlike/%d",userID,PostID]];
     return [_requestManager GET:request
             
@@ -259,7 +259,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
                                error:(errorBlock)errorWithCode {
 
    
-    NSDictionary *params=[NSDictionary new];
+    NSDictionary *params = [NSDictionary new];
     if ((![password isEqualToString:@""]) && (![name isEqualToString:@""])) {
         params = @{@"user_name":name,
                    @"password":password,
@@ -276,7 +276,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
         params=nil;
     }
     
-    NSString *request=[NSString stringWithFormat:@"users/%d",userID];
+    NSString *request = [NSString stringWithFormat:@"users/%d",userID];
 
     return  [_requestManager  POST:request parameters:params
      constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
@@ -331,7 +331,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 - (AFHTTPRequestOperation *)findFriendsByName:(NSString *)  nameForSearch
                                       success:(successBlockWithId)success
                                         error:(errorBlock)errorBlock {
-    NSString *request=@"users?search=";
+    NSString *request = @"users?search=";
     request=[request stringByAppendingString:nameForSearch];
     
     
@@ -351,7 +351,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 - (AFHTTPRequestOperation *)PSFollowToUserWithID:(int)followerID fromUserWithID:(int)userID
                                        success:(successBlockWithId)success
                                          error:(errorBlock)errorBlock {
-    NSString *request=[NSString stringWithFormat:@"users/%d/follow/%d",userID,followerID];
+    NSString *request = [NSString stringWithFormat:@"users/%d/follow/%d",userID,followerID];
     
     return  [_requestManager GET:request
                       parameters:nil
@@ -370,7 +370,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 - (AFHTTPRequestOperation *)PSUnfollowUserWithID:(int)followerID fromUserWithID:(int)userID
                                        success:(successBlockWithId)success
                                          error:(errorBlock)errorBlock {
-    NSString *request=[NSString stringWithFormat:@"users/%d/unfollow/%d",userID,followerID];
+    NSString *request = [NSString stringWithFormat:@"users/%d/unfollow/%d",userID,followerID];
     
     return  [_requestManager GET:request
                       parameters:nil
@@ -390,7 +390,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 - (AFHTTPRequestOperation *)getInfoAboutUser:(int)userID
                                        success:(successBlockWithId)success
                                          error:(errorBlock)errorBlock {
-    NSString *request=[NSString stringWithFormat:@"users/%d",userID];
+    NSString *request = [NSString stringWithFormat:@"users/%d",userID];
     
     return  [_requestManager GET:request
                       parameters:nil

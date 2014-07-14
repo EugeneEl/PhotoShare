@@ -26,8 +26,8 @@ static NSInteger PSNottingToShareErrorCode  = 101;
 @property (nonatomic, weak) IBOutlet UITextField *passwordTextField;
 @property (nonatomic, weak) IBOutlet UIImageView *avaImageView;
 @property (nonatomic, strong) UIImage *imageForAva;
-@property (nonatomic, copy) NSMutableString *nameToUpdate;
-@property (nonatomic, copy) NSMutableString *passwordToUpadte;
+@property (nonatomic, strong) NSMutableString *nameToUpdate;
+@property (nonatomic, strong) NSMutableString *passwordToUpadte;
 @property (nonatomic, assign) int userID;
 @property (nonatomic, strong) User *currentUser;
 
@@ -42,13 +42,13 @@ static NSInteger PSNottingToShareErrorCode  = 101;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [_avaImageView setHidden:YES];
-    _nameTextField.delegate=self;
-    _passwordTextField.delegate=self;
+    _nameTextField.delegate = self;
+    _passwordTextField.delegate = self;
     _nameToUpdate=[NSMutableString new];
-    _passwordToUpadte=[NSMutableString new];
-    PSUserStore *userStore= [PSUserStore userStoreManager];
-    _currentUser=userStore.activeUser;
-    _userID=[_currentUser.user_id integerValue];
+    _passwordToUpadte = [NSMutableString new];
+    PSUserStore *userStore = [PSUserStore userStoreManager];
+    _currentUser = userStore.activeUser;
+    _userID = [_currentUser.user_id integerValue];
 }
 
 #pragma mark - ChangeFoto
@@ -70,7 +70,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
 
 - (IBAction)actionUpdateInfo:(id)sender {
     if ((!_imageForAva) && (!_nameToUpdate) && (_passwordToUpadte)) {
-        UIAlertView *alert=[[UIAlertView alloc]
+        UIAlertView *alert = [[UIAlertView alloc]
             initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
             message:NSLocalizedString(@"alertViewErrorNothingToUpdateKey", "")
             delegate:nil
@@ -93,10 +93,10 @@ static NSInteger PSNottingToShareErrorCode  = 101;
             
             NSLog(@"%@",responseObject);
             
-            PSUserParser *userParser=[[PSUserParser alloc]initWithId:responseObject];
-            weakSelf.currentUser.ava_imageURL=[userParser getAvaImageURL];
-            weakSelf.currentUser.name=[userParser getUserName];
-            weakSelf.currentUser.password=[userParser getUserPassword];
+            PSUserParser *userParser = [[PSUserParser alloc]initWithId:responseObject];
+            weakSelf.currentUser.ava_imageURL = [userParser getAvaImageURL];
+            weakSelf.currentUser.name = [userParser getUserName];
+            weakSelf.currentUser.password = [userParser getUserPassword];
             [weakSelf.currentUser.managedObjectContext MR_saveToPersistentStoreAndWait];
           
         }
@@ -121,9 +121,8 @@ static NSInteger PSNottingToShareErrorCode  = 101;
     //check for userWithEmptyEmail in database and add it if such object doesn't exist
     User *userWithEmptyEmail=[[User MR_findByAttribute:@"email" withValue:@""] firstObject];
     if (!userWithEmptyEmail) {
-       // userWithEmptyEmail=[User MR_createEntity];
         userWithEmptyEmail.email=@"";
-        [PSUserStore userStoreManager].activeUser=userWithEmptyEmail;
+        [PSUserStore userStoreManager].activeUser = userWithEmptyEmail;
         [userWithEmptyEmail.managedObjectContext MR_saveToPersistentStoreAndWait];
         NSLog(@"logout. user with email:%@",[PSUserStore userStoreManager].activeUser.email);
     }
@@ -133,7 +132,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
         [Comment MR_truncateAll];
         [User MR_truncateAll];
         [Like MR_truncateAll];
-        [PSUserStore userStoreManager].activeUser=userWithEmptyEmail;
+        [PSUserStore userStoreManager].activeUser = userWithEmptyEmail;
         NSLog(@"logout. user with email:%@",[PSUserStore userStoreManager].activeUser.email);
     }
     
@@ -172,9 +171,9 @@ static NSInteger PSNottingToShareErrorCode  = 101;
             
         case 2: {
             
-            UIImagePickerControllerSourceType type=UIImagePickerControllerSourceTypePhotoLibrary;
+            UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary;
             
-            BOOL ok=[UIImagePickerController isSourceTypeAvailable:type];
+            BOOL ok = [UIImagePickerController isSourceTypeAvailable:type];
             if (!ok) {
                 NSLog(@"error");
                 return;
@@ -184,7 +183,7 @@ static NSInteger PSNottingToShareErrorCode  = 101;
             picker.sourceType = type;
             NSLog(@"%@",picker.mediaTypes);
             picker.delegate = self;
-            picker.editing=NO;
+            picker.editing = NO;
             
             
             
@@ -214,8 +213,8 @@ static NSInteger PSNottingToShareErrorCode  = 101;
     
     
     
-    if (picker.sourceType==UIImagePickerControllerSourceTypeCamera) {
-        _imageForAva=info[UIImagePickerControllerEditedImage];
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        _imageForAva = info[UIImagePickerControllerEditedImage];
         [picker dismissViewControllerAnimated:YES completion:NULL];
         [_avaImageView setHidden:NO];
         [_avaImageView setImage:_imageForAva];
@@ -235,11 +234,11 @@ static NSInteger PSNottingToShareErrorCode  = 101;
 
 - (IBAction)nameDidChange:(id)sender {
     
-    self.nameToUpdate=[self.nameTextField.text copy];
+    self.nameToUpdate = [self.nameTextField.text copy];
 }
 
 - (IBAction)passwordDidChange:(id)sender {
-    self.passwordToUpadte=[self.passwordTextField.text copy];
+    self.passwordToUpadte = [self.passwordTextField.text copy];
 }
 
 #pragma mark - dismissKeyboard

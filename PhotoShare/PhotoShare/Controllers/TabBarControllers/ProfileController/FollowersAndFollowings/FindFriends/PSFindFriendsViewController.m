@@ -25,8 +25,7 @@
 - (IBAction)textForSearch:(id)sender;
 @property (nonatomic, assign) int userID;
 @property (nonatomic, strong) NSMutableArray *arrayOfFoundID;
-
-@property (nonatomic, copy) NSMutableArray *arrayOfFoundUsers;
+@property (nonatomic, strong) NSMutableArray *arrayOfFoundUsers;
 @property (nonatomic, strong) NSMutableArray *arrayToPass;
 @property (nonatomic, strong) User *currentUser;
 
@@ -34,32 +33,32 @@
 
 @implementation PSFindFriendsViewController
 
-
+#pragma mark - viewDidLoad
 - (void)viewDidLoad{
     [super viewDidLoad];
     [_searchButton setEnabled:NO];
     [_searchTextField setDelegate:self];
-    _arrayToPass=[NSMutableArray array];
-    PSUserStore *userStore= [PSUserStore userStoreManager];
-    _currentUser=userStore.activeUser;
+    _arrayToPass = [NSMutableArray array];
+    PSUserStore *userStore = [PSUserStore userStoreManager];
+    _currentUser = userStore.activeUser;
     
 }
 
-
+#pragma mark - searchForFriends
 - (IBAction)actionSearch:(id)sender {
     
     __weak typeof(self) weakSelf = self;
     [[PSNetworkManager sharedManager] findFriendsByName:_searchText
     success:^(id responseObject)
      {
-         weakSelf.arrayToPass=[NSMutableArray array];
-         weakSelf.arrayOfFoundID=[NSMutableArray array];
+         weakSelf.arrayToPass = [NSMutableArray array];
+         weakSelf.arrayOfFoundID = [NSMutableArray array];
          NSLog(@"success");
          NSLog(@"%@",responseObject);
-        weakSelf.arrayOfFoundUsers=[responseObject mutableCopy];
+        weakSelf.arrayOfFoundUsers = [responseObject mutableCopy];
          
          for (NSDictionary *dictionary in _arrayOfFoundUsers) {
-             PSUserParser *userParser=[[PSUserParser alloc]initWithId:dictionary];
+             PSUserParser *userParser = [[PSUserParser alloc]initWithId:dictionary];
              
              
              NSLog(@"newLOOP\n");
@@ -72,38 +71,34 @@
              int userID=[userParser getUserID];
              User *userToAdd = nil;
              if ([[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:userID] ]firstObject]) {
-                 userToAdd=[[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:userID] ]firstObject];
+                 userToAdd = [[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:userID] ]firstObject];
              } else {
                  userToAdd = [User MR_createEntityInContext:[NSManagedObjectContext MR_defaultContext]];
              }
              userToAdd.ava_imageURL=[userParser getAvaImageURL];
-             userToAdd.name=[userParser getUserName];
-             userToAdd.followed_count=[NSNumber numberWithInt:[userParser getCountOfFollowed]];
-             userToAdd.follower_count=[NSNumber numberWithInt:[userParser getCountOfFollowers]];
-             userToAdd.user_id=[NSNumber numberWithInt:[userParser getUserID]];
+             userToAdd.name = [userParser getUserName];
+             userToAdd.followed_count = [NSNumber numberWithInt:[userParser getCountOfFollowed]];
+             userToAdd.follower_count = [NSNumber numberWithInt:[userParser getCountOfFollowers]];
+             userToAdd.user_id = [NSNumber numberWithInt:[userParser getUserID]];
              
              //add followers
-             PSFollowersParser *followersParser=[[PSFollowersParser alloc] initWithId:responseObject];
-             if (followersParser.arrayOfFollowers!=nil) {
+             PSFollowersParser *followersParser = [[PSFollowersParser alloc] initWithId:responseObject];
+             if (followersParser.arrayOfFollowers) {
                  for (NSDictionary *dictionary in [followersParser.arrayOfFollowers firstObject])
                  {
-                     
-                     
-                     
+                    
                      int followerToAddTestID = [followersParser getFollowerID:dictionary];
                      User *followerToAdd = nil;
                      if ([[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followerToAddTestID] ]firstObject]) {
-                         followerToAdd=[[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followerToAddTestID] ]firstObject];
+                         followerToAdd = [[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followerToAddTestID] ]firstObject];
                      } else {
                          followerToAdd = [User MR_createEntityInContext:[NSManagedObjectContext MR_defaultContext]];
                      }
 
-                     followerToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
-                     followerToAdd.email=[followersParser getFollowerEmail:dictionary];
-                     followerToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
-                     followerToAdd.name=[followersParser getFollowerName:dictionary];
-                     
-
+                     followerToAdd.user_id = [NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
+                     followerToAdd.email = [followersParser getFollowerEmail:dictionary];
+                     followerToAdd.ava_imageURL = [followersParser getFollowerImageURL:dictionary];
+                     followerToAdd.name = [followersParser getFollowerName:dictionary];
                      
                      if (![[userToAdd.followers allObjects] containsObject:followerToAdd]) {
                          [userToAdd addFollowersObject:followerToAdd];
@@ -119,21 +114,21 @@
              }
              
              //add followings
-             if (followersParser.arrayOfFollowed!=nil) {
+             if (followersParser.arrayOfFollowed) {
                  for (NSDictionary *dictionary in [followersParser.arrayOfFollowed firstObject])
                  {
                      int followedToAddTestID = [followersParser getFollowerID:dictionary];
                      User *followedToAdd = nil;
                      if ([[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followedToAddTestID] ]firstObject]) {
-                         followedToAdd=[[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followedToAddTestID] ]firstObject];
+                         followedToAdd = [[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:followedToAddTestID] ]firstObject];
                      } else {
                          followedToAdd = [User MR_createEntityInContext:[NSManagedObjectContext MR_defaultContext]];
                      }
 
-                     followedToAdd.user_id=[NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
-                     followedToAdd.email=[followersParser getFollowerEmail:dictionary];
-                     followedToAdd.ava_imageURL=[followersParser getFollowerImageURL:dictionary];
-                     followedToAdd.name=[followersParser getFollowerName:dictionary];
+                     followedToAdd.user_id = [NSNumber numberWithInt:[followersParser getFollowerID:dictionary]];
+                     followedToAdd.email = [followersParser getFollowerEmail:dictionary];
+                     followedToAdd.ava_imageURL = [followersParser getFollowerImageURL:dictionary];
+                     followedToAdd.name = [followersParser getFollowerName:dictionary];
                      
                      
                      if (![[userToAdd.followed allObjects]containsObject:followedToAdd]) {
@@ -172,7 +167,7 @@
     error:^(NSError *error)
     {
                                                       
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
                            message:[error localizedDescription]
                            delegate:nil
                            cancelButtonTitle:NSLocalizedString(@"actionSheetButtonCancelNameKey", "")
@@ -182,12 +177,13 @@
    }];
 }
 
+#pragma mark - DismissLKeyboard
 - (IBAction)dismissKeyboard:(id)sender {
     [self.view endEditing:YES];
 }
 
 - (IBAction)textForSearch:(id)sender {
-    _searchText=self.searchTextField.text;
+    _searchText = self.searchTextField.text;
     if ([_searchText isEqualToString:@""]) {
         [_searchButton setEnabled:NO];
     }
@@ -195,11 +191,12 @@
 }
 
 
+#pragma mark - prepareForSegue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"goToFollow"]) {
         
-        PSFoundUsersViewController *destinationController=segue.destinationViewController;
-        destinationController.arrayOfUsersToDisplay=_arrayToPass;
+        PSFoundUsersViewController *destinationController = segue.destinationViewController;
+        destinationController.arrayOfUsersToDisplay = _arrayToPass;
     }
 }
 

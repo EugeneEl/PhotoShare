@@ -21,6 +21,7 @@ static NSString *kFollowerNameKey=@"user_name";
 
 @implementation PSFollowersParser
 
+#pragma mark - initWithID
 - (instancetype) initWithId:(id)identifier {
     self = [super initWithId:identifier];
     if (self) {
@@ -43,7 +44,7 @@ static NSString *kFollowerNameKey=@"user_name";
 }
 
 
-
+#pragma mark - followersParsing
 - (NSString *)getFollowerImageURL:(NSDictionary *)dictionary {
     
     if ([NSNull null]==[dictionary valueForKey:kFollowerImageURLKey]) {

@@ -15,8 +15,8 @@
 @implementation User (updateFollowersAndFollowed)
 
 + (void) updateFollowersAndFollowedForCurrentUser {
-    int userID=[[self getCurrentUser].user_id intValue];
-    User *currentUser=[self getCurrentUser];
+    int userID = [[self getCurrentUser].user_id intValue];
+    User *currentUser = [self getCurrentUser];
     [[PSNetworkManager sharedManager] getInfoAboutUser:userID
     success:^(id responseObject)
     {

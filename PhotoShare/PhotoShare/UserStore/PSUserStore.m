@@ -12,7 +12,7 @@
 @implementation PSUserStore
 
 
-+ (PSUserStore*) userStoreManager {
++ (PSUserStore *) userStoreManager {
     static PSUserStore *userStoreManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -23,7 +23,7 @@
 }
 
 
--(User*)activeUser {
+-(User *)activeUser {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString  *activeUserName = [defaults stringForKey:@"activeUserEmail"];
@@ -37,18 +37,18 @@
     
 }
 
-- (void) setActiveUser:(User*)activeUser {
+- (void) setActiveUser:(User *)activeUser {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:activeUser.email forKey:@"activeUserEmail"];
     [defaults synchronize];
 }
 
 - (void)addActiveUserToCoreDataWithModel:(PSUserModel*)userModel {
-    User *existingUser=[[User MR_findByAttribute:@"email" withValue:userModel.email] firstObject];
+    User *existingUser = [[User MR_findByAttribute:@"email" withValue:userModel.email] firstObject];
     if (!existingUser) {
         //existingUser=[User MR_createEntity];
-        existingUser.email=userModel.email;
-        [PSUserStore userStoreManager].activeUser=existingUser;
+        existingUser.email = userModel.email;
+        [PSUserStore userStoreManager].activeUser = existingUser;
         NSLog(@"added active user with email:%@",[PSUserStore userStoreManager].activeUser.email);
         [existingUser.managedObjectContext MR_saveToPersistentStoreAndWait];
     }

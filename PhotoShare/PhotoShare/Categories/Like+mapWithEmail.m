@@ -11,7 +11,7 @@
 
 @implementation Like (mapWithEmail)
 - (Like *)mapWithEmail:(NSString *)email {
-    self.email=email;
+    self.email = email;
     return self;
 }
 @end

@@ -24,6 +24,12 @@
 #import "PSLikesParser.h"
 #import "PSCommentsController.h"
 #import "MBProgressHUD.h"
+#import <MessageUI/MessageUI.h>
+
+
+static NSString *PSSharingErrorDomain = @"PSSharingErrorDomain";
+static NSInteger PSMailBookSharingErrorCode=103;
+static NSInteger PSSharingErrorNoPhotoData = 100;
 
 typedef enum {
     kNew,
@@ -32,11 +38,11 @@ typedef enum {
 
 static NSString *keyForSortSettings = @"sortKey";
 
-@interface PSStreamViewController() <UITableViewDelegate ,UITableViewDataSource, NSFetchedResultsControllerDelegate, PhotoFromStreamTableViewCell,UIActionSheetDelegate>
+@interface PSStreamViewController() <UITableViewDelegate ,UITableViewDataSource, NSFetchedResultsControllerDelegate, PhotoFromStreamTableViewCell,UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, assign) NSInteger userID;
 @property (nonatomic, strong) NSNumber *post_idParsed;
-@property (nonatomic, strong)NSNumber *likesParsed;
+@property (nonatomic, strong) NSNumber *likesParsed;
 @property (nonatomic, copy) NSString *authorMailParsed;
 @property (nonatomic, copy) NSString *photoNameParsed;
 @property (nonatomic, copy) NSString *photoURLParsed;
@@ -53,12 +59,13 @@ static NSString *keyForSortSettings = @"sortKey";
 @property (nonatomic, strong) NSFetchedResultsController *likeFetchedResultsController;
 @property (nonatomic, strong) NSFetchedResultsController *dateFetchedResultsController;
 
-@property (nonatomic, weak)IBOutlet UISegmentedControl *changeSortKeySegmentController;
-@property (nonatomic, weak)IBOutlet UITableView *streamTableView;
-@property (nonatomic, weak)IBOutlet UIImageView *userAvaImageView;
-@property (nonatomic, weak)IBOutlet UILabel *usernameLabel;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *changeSortKeySegmentController;
+@property (nonatomic, weak) IBOutlet UITableView *streamTableView;
+@property (nonatomic, weak) IBOutlet UIImageView *userAvaImageView;
+@property (nonatomic, weak) IBOutlet UILabel *usernameLabel;
 
 - (IBAction)switchSortKey:(id)sender;
+
 @end
 @implementation PSStreamViewController
 
@@ -72,7 +79,7 @@ static NSString *keyForSortSettings = @"sortKey";
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     PSUserStore *userStore = [PSUserStore userStoreManager];
     _currentUser = userStore.activeUser;
-    _userID=[_currentUser.user_id integerValue];
+    _userID = [_currentUser.user_id integerValue];
     _authorMailParsed =_currentUser.email;
     NSLog(@"user_id:%d",_userID);
     __weak typeof(self) weakSelf = self;
@@ -204,17 +211,18 @@ static NSString *keyForSortSettings = @"sortKey";
 }
 
 
+#pragma mark - fetchResultsControllers
 - (NSFetchedResultsController *)likeFetchedResultsController {
     if (_likeFetchedResultsController != nil) {
         return _likeFetchedResultsController;
     }
     
-    NSFetchRequest* fetchRequest=[[NSFetchRequest alloc]initWithEntityName:@"Post"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"Post"];
     
     [fetchRequest setRelationshipKeyPathsForPrefetching:@[@"followers"]];
     
     [fetchRequest setRelationshipKeyPathsForPrefetching:@[@"followed"]];
-    NSSortDescriptor *descriptor=[NSSortDescriptor sortDescriptorWithKey:@"likesCount" ascending:NO];
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"likesCount" ascending:NO];
     
     [fetchRequest setSortDescriptors:@[descriptor]];
     
@@ -269,6 +277,7 @@ static NSString *keyForSortSettings = @"sortKey";
 
 }
 
+#pragma mark - likeButtonPressed
 - (void)photoStreamCellLikeButtonPressed:(PSPhotoFromStreamTableViewCell  *)tableCell
 {
        __weak typeof(self) weakSelf = self;
@@ -445,7 +454,7 @@ static NSString *keyForSortSettings = @"sortKey";
         });
     });
     
-    aCell.likesStatus=NO;
+    aCell.likesStatus = NO;
     if (![postTest.likesCount intValue])
     {   [aCell.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
         NSLog(@"no likes");
@@ -457,7 +466,7 @@ static NSString *keyForSortSettings = @"sortKey";
             if ([like.email isEqualToString:_authorMailParsed])
             {
                 [aCell.likeButton setImage:[UIImage imageNamed:@"heart-icon.png"] forState:UIControlStateNormal];
-                aCell.likesStatus=YES;
+                aCell.likesStatus = YES;
                 break;
             }
             else
@@ -471,9 +480,10 @@ static NSString *keyForSortSettings = @"sortKey";
     aCell.delegate=self;
 }
 
+#pragma mark - timeIntervalForPhoto
 - (NSString *)timeIntervalFromPhoto:(NSDate *) date
 {
-    NSTimeInterval timeIntervalBetweenPhotos=[date timeIntervalSinceNow];
+    NSTimeInterval timeIntervalBetweenPhotos = [date timeIntervalSinceNow];
     
     if ((timeIntervalBetweenPhotos / -86400 > 1)) {
         return [NSString stringWithFormat:@"%i days ago",abs(timeIntervalBetweenPhotos / (60 * 60 * 24))];
@@ -491,7 +501,7 @@ static NSString *keyForSortSettings = @"sortKey";
         return [NSString stringWithFormat:@"%i seconds ago",abs(timeIntervalBetweenPhotos)];
 }
 
-
+#pragma mark - switchSearchKey
 - (IBAction)switchSortKey:(id)sender
 {
     
@@ -516,7 +526,7 @@ static NSString *keyForSortSettings = @"sortKey";
     
 }
 
-#pragma mark - Save and Load
+#pragma mark - Save and Load userSettings
 
 - (void)saveSettings {
     
@@ -749,6 +759,70 @@ tableCell
 }
 
 
+#pragma mark - ShareByMail
+
+- (void)shareByEmail:(NSData *)photoData
+           photoName:(NSString*)photoTitle
+             success:(void(^)(void))success
+             failure:(void(^)(NSError *error))failure
+{
+    
+    MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
+    
+    if (![MFMailComposeViewController canSendMail])
+    {
+        failure([[NSError alloc] initWithDomain:PSSharingErrorDomain code:PSMailBookSharingErrorCode userInfo:nil] );
+        return;
+    }
+    
+    else
+    {
+        [composer setSubject:NSLocalizedString(@"subjectForMailTitleKey", "")  ];
+        [composer setMessageBody:photoTitle isHTML:NO];
+        [composer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        [composer setDelegate:self];
+        
+        [composer addAttachmentData:photoData  mimeType:@"image/jpeg" fileName:@"Photograph.jpg"];
+        
+        [self presentViewController:composer animated:YES completion:success];
+        
+        
+    }
+    
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error {
+    NSLog(@"in didFinishWithResult:");
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            NSLog(@"cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"sent");
+            break;
+        case MFMailComposeResultFailed: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@ "ErrorStringKey", "")
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"alertViewOkKey", "")
+                                                  otherButtonTitles:nil];
+            [alert show];
+            
+            break;
+        }
+        default:
+            break;
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - PrepareforSegue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"goToComments"]) {
         {

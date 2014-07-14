@@ -23,11 +23,4 @@ static NSString *kUserIdKey=@"id";
 }
 
 
-- (NSInteger)getUserID {
-    NSInteger userID=[[self.objectToParse valueForKey:kUserIdKey] intValue];
-    NSLog(@"userID:%d",userID);
-    return userID;
-}
-
-
 @end

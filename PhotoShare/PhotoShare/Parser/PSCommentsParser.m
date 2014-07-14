@@ -18,6 +18,7 @@ static NSString *kUserAvaImageURLKey=@"img_url";
 
 @implementation PSCommentsParser
 
+#pragma mark - initWithId
 - (instancetype) initWithId:(id)identifier {
     self = [super initWithId:identifier];
     if (self)
@@ -33,6 +34,7 @@ static NSString *kUserAvaImageURLKey=@"img_url";
     return self;
 }
 
+#pragma mark - commentsParsing
 - (NSString *)getCommentatorAvaURL:(NSDictionary *)dictionary; {
     if([NSNull null] == [dictionary valueForKey:kUserAvaImageURLKey]) return nil;
     NSString *avaImageURL=[dictionary valueForKey:kUserAvaImageURLKey];

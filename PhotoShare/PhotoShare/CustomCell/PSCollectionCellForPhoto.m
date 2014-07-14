@@ -10,6 +10,7 @@
 
 @implementation PSCollectionCellForPhoto
 
+#pragma mark - init
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -20,6 +21,7 @@
     return self;
 }
 
+#pragma mark - prepareForReuse
 -(void)prepareForReuse {
     self.imageForPhoto.image=nil;
 }
