@@ -56,7 +56,7 @@ static NSString *kFollowerNameKey=@"user_name";
     return followerImageURL;
 }
 
-- (NSInteger)getFollowerID:(NSDictionary *)dictionary {
+- (NSInteger)getFollowerID:(NSDictionary *)dictionary {    
     NSInteger followerID=[[dictionary valueForKey:kFollowerIDKey] intValue];
     NSLog(@"followerID:%d",followerID);
     return followerID;

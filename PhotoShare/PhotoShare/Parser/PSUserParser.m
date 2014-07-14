@@ -22,7 +22,7 @@ static NSString *kUserPasswordKey=@"password";
 #pragma mark - userParser
 - (NSInteger)getUserID {
     NSInteger userID = [[self.objectToParse valueForKey:kUserIdKey] intValue];
-    NSLog(@"userID:%d",userID);
+    NSLog(@"userID:%ld",(long)userID);
     return userID;
 }
 

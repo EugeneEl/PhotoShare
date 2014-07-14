@@ -58,13 +58,13 @@ static NSString *kUserAvaImageURLKey=@"img_url";
     if([NSNull null] == [dictionary objectForKey:kCommentIDKey]) return 0;
     
     NSInteger commentID=[[dictionary valueForKey:kCommentIDKey] intValue];
-    NSLog(@"commentID:%d",commentID);
+    NSLog(@"commentID:%ld",(long)commentID);
     return commentID;
 }
 
 - (NSInteger)getAuthorID:(NSDictionary *)dictionary {
     NSInteger authorID=[[dictionary valueForKey:kCommentAuthorIDKey]intValue];
-    NSLog(@"authorID:%d",authorID);
+    NSLog(@"authorID:%ld",(long)authorID);
     return authorID;
 }
 

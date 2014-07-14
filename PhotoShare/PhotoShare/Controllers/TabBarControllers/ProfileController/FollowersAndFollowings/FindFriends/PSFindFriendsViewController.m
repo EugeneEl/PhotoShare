@@ -71,7 +71,7 @@
              }
              
              
-             int userID=[userParser getUserID];
+             int userID = [userParser getUserID];
              User *userToAdd = nil;
              if ([[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:userID] ]firstObject]) {
                  userToAdd = [[User MR_findByAttribute:@"user_id" withValue:[NSNumber numberWithInt:userID] ]firstObject];

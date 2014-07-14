@@ -15,6 +15,7 @@
 #import "User+PSGetCurrentUser.h"
 #import  "PSNetworkManager.h"
 #import "User+PSUpdatePosts.h"
+#import "User+updateFollowersAndFollowed.h"
 
 static NSString *viewCellIdentifier=@"collectionCellForPhoto";
 
@@ -44,22 +45,22 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
     
     [super viewDidLoad];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    _displayMe=YES;
-    
-    if (_userToDisplay!=[User getCurrentUser]) {
+    _displayMe = YES;
+    [User updateFollowersAndFollowedForCurrentUser];
+    if (_userToDisplay != [User getCurrentUser]) {
         NSLog(@"display another user");
-        _displayMe=NO;
+        _displayMe = NO;
     }
     if (_displayMe) {
 
             _currentUser=[User getCurrentUser];
-            NSArray *array=[[Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",_currentUser.user_id]] mutableCopy];
+            NSArray *array = [[Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",_currentUser.user_id]] mutableCopy];
             
-            _arrayOfPosts=[array mutableCopy];
+            _arrayOfPosts = [array mutableCopy];
             NSLog(@"Posts:%@",_arrayOfPosts);
-            NSArray* tempArray=[Post MR_findAll];
-            self.arrayOfPosts=[tempArray mutableCopy];
-            self.arrayOfURLPhotos=[NSMutableArray new];
+            NSArray* tempArray = [Post MR_findAll];
+            self.arrayOfPosts = [tempArray mutableCopy];
+            self.arrayOfURLPhotos = [NSMutableArray new];
             for (Post *post in self.arrayOfPosts)
             {
                 
@@ -73,20 +74,20 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
             }
     }
     else {
-        NSArray *array=[Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",_userToDisplay.user_id]];
+        NSArray *array = [Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",_userToDisplay.user_id]];
         
         if (!array) {
             [_userToDisplay updatePostsForUserID:[_userToDisplay.user_id intValue]];
         }
-        array=[Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",_userToDisplay.user_id]];
+        array = [Post MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"user.user_id==%@",_userToDisplay.user_id]];
         
-        _arrayOfPosts=[array mutableCopy];
+        _arrayOfPosts = [array mutableCopy];
         
         
         NSLog(@"Posts:%@",_arrayOfPosts);
-        NSArray* tempArray=[Post MR_findAll];
-        self.arrayOfPosts=[tempArray mutableCopy];
-        self.arrayOfURLPhotos=[NSMutableArray new];
+        NSArray* tempArray = [Post MR_findAll];
+        self.arrayOfPosts = [tempArray mutableCopy];
+        self.arrayOfURLPhotos = [NSMutableArray new];
         for (Post *post in self.arrayOfPosts)
         {
             
@@ -104,10 +105,12 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 }
 
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-   // [_arrayOfPosts removeAllObjects];
-    //[_arrayOfURLPhotos removeAllObjects];
+
+#pragma mark - viewWillAppear
+- (void)viewWillAppear:(BOOL)animated {
+    _countsOfPostsLabel.text = [NSString stringWithFormat:@"%d", [_arrayOfPosts count]];
+    _countOfFollowersLabel.text = [NSString stringWithFormat:@"%@", _currentUser.follower_count];
+    _countOfFlollowingsLabel.text = [NSString stringWithFormat:@"%@", _currentUser.followed_count];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -120,7 +123,7 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    PSCollectionCellForPhoto *cell=[self.photoCollectionView dequeueReusableCellWithReuseIdentifier:viewCellIdentifier forIndexPath:indexPath];
+    PSCollectionCellForPhoto *cell = [self.photoCollectionView dequeueReusableCellWithReuseIdentifier:viewCellIdentifier forIndexPath:indexPath];
     [cell.imageForPhoto setImageWithURL:[NSURL URLWithString:[self.arrayOfURLPhotos objectAtIndex:indexPath.row]]];
     return cell;
     
@@ -141,7 +144,7 @@ PSProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"goToFindFriends"]) {
-        PSFindFriendsViewController *destinationController=(PSFindFriendsViewController *)segue.destinationViewController;
+        PSFindFriendsViewController *destinationController = (PSFindFriendsViewController *)segue.destinationViewController;
     }
 }
 

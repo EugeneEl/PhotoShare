@@ -26,7 +26,7 @@
             //add followers
         if (followersParser.arrayOfFollowers!=nil)
         {
-             for (NSDictionary *dictionary in [followersParser.arrayOfFollowers firstObject])
+             for (NSDictionary *dictionary in followersParser.arrayOfFollowers)
                 {
                     int followerToAddTestID = [followersParser getFollowerID:dictionary];
                     User *followerToAdd = nil;
@@ -43,7 +43,8 @@
                     if (![[currentUser.followers allObjects] containsObject:followerToAdd])
                     {
                         [currentUser addFollowersObject:followerToAdd];
-                        
+                        int a = [currentUser.follower_count intValue]+1;
+                        currentUser.follower_count = [NSNumber numberWithInt:a];
                         NSLog(@"followerAdded");
                         for (User *user in [User MR_findAll]) {
                             NSLog(@"user_id:%d",[user.user_id intValue]);
@@ -56,7 +57,7 @@
             
             //add followings
             if (followersParser.arrayOfFollowed != nil) {
-                for (NSDictionary *dictionary in [followersParser.arrayOfFollowed firstObject])
+                for (NSDictionary *dictionary in followersParser.arrayOfFollowed)
                 {
                     int followedToAddTestID = [followersParser getFollowerID:dictionary];
                     User *followedToAdd = nil;
@@ -74,6 +75,9 @@
                     
                     if (![[currentUser.followed allObjects]containsObject:followedToAdd]) {
                         [currentUser addFollowedObject:followedToAdd];
+                        
+                        int a = [currentUser.followed_count intValue]+1;
+                        currentUser.followed_count = [NSNumber numberWithInt:a];
                         NSLog(@"followedAdded");
                         for (User *user in [User MR_findAll]) {
                             NSLog(@"user_id:%d",[user.user_id intValue]);

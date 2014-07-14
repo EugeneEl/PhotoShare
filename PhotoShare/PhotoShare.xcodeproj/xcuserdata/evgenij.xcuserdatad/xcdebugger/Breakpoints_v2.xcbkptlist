@@ -235,13 +235,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PhotoShare/Controllers/TabBarControllers/ProfileController/FollowersAndFollowings/FindFriends/FoundUsers/PSFoundUsersViewController.m"
-            timestampString = "427024192.217193"
+            filePath = "PhotoShare/Parser/PSCommentsParser.m"
+            timestampString = "427025385.975472"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-getAuthorID:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

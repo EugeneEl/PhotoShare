@@ -56,7 +56,7 @@
     PSFoundUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     User *user = [_arrayOfUsersToDisplay objectAtIndex:indexPath.row];
     [cell configureCellWithFollower:user];
-    cell.delegate=self;
+    cell.delegate = self;
     return cell;
 }
 
@@ -80,7 +80,7 @@
          
          
          success:^(id responseObject) {
-             UIAlertView *alert=[[UIAlertView alloc ] initWithTitle:@"Ok"
+             UIAlertView *alert = [[UIAlertView alloc ] initWithTitle:@"Ok"
                                                             message:@"follow success"
                                                            delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
              [alert show];
@@ -88,7 +88,7 @@
              NSLog(@"currentUserAfterUpdate:%@",_currentUser);
              [tableCell.followButton setBackgroundColor:[UIColor yellowColor]];
              [tableCell.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
-             tableCell.isFollowed=YES;
+             tableCell.isFollowed = YES;
          }
          error:^(NSError *error) {
              
@@ -103,7 +103,7 @@
              
              else
              {
-                 UIAlertView *alert=[[UIAlertView alloc ] initWithTitle:@"Error"
+                 UIAlertView *alert = [[UIAlertView alloc ] initWithTitle:@"Error"
                                                                 message:[error description]
                                                                delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
                  [alert show];
@@ -119,7 +119,7 @@
          PSUnfollowUserWithID:[tableCell.foundUser.user_id intValue]
          fromUserWithID:[_currentUser.user_id intValue]
          success:^(id responseObject) {
-             UIAlertView *alert=[[UIAlertView alloc ] initWithTitle:@"Ok"
+             UIAlertView *alert = [[UIAlertView alloc ] initWithTitle:@"Ok"
                                                             message:@"unfollow success"
                                                            delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
              [alert show];
@@ -127,7 +127,7 @@
              NSLog(@"currentUserAfterUpdate:%@",_currentUser);
              [tableCell.followButton setBackgroundColor:[UIColor blueColor]];
              [tableCell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
-             tableCell.isFollowed=NO;
+             tableCell.isFollowed = NO;
          }
          error:^(NSError *error) {
              
