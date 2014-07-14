@@ -147,28 +147,28 @@
     {
         NSLog(@"success");
         weakSelf.resultLabel.text=@"Logged in";
-        User *existingUserForLogin=[[User MR_findByAttribute:@"email" withValue:weakSelf.userModel.email] firstObject];
+        User *existingUserForLogin = [[User MR_findByAttribute:@"email" withValue:weakSelf.userModel.email] firstObject];
         
         NSLog(@"%@",responseObject);
         
         
-        PSUserParser *userParser=[[PSUserParser alloc]initWithId:responseObject];
+        PSUserParser *userParser = [[PSUserParser alloc]initWithId:responseObject];
         
         _userModel.userID=[userParser getUserID];
         
         if (!existingUserForLogin) {
-            existingUserForLogin=[User MR_createEntity];
-            existingUserForLogin=[existingUserForLogin mapWithModel:weakSelf.userModel];
+            existingUserForLogin = [User MR_createEntity];
+            existingUserForLogin = [existingUserForLogin mapWithModel:weakSelf.userModel];
         }
         
-        existingUserForLogin.ava_imageURL=[userParser getAvaImageURL];
-        existingUserForLogin.name=[userParser getUserName];
+        existingUserForLogin.ava_imageURL = [userParser getAvaImageURL];
+        existingUserForLogin.name = [userParser getUserName];
         existingUserForLogin.follower_count=[NSNumber numberWithInt:[userParser getCountOfFollowers]];
-        existingUserForLogin.followed_count= [NSNumber numberWithInt:[[userParser getArrayOfFollowed]count]];
+        existingUserForLogin.followed_count = [NSNumber numberWithInt:[[userParser getArrayOfFollowed]count]];
         
     
        [existingUserForLogin.managedObjectContext MR_saveToPersistentStoreAndWait];
-       [PSUserStore userStoreManager].activeUser=existingUserForLogin;
+       [PSUserStore userStoreManager].activeUser = existingUserForLogin;
         NSLog(@"active user logged in:%@",[PSUserStore userStoreManager].activeUser.email);
         
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
@@ -185,7 +185,7 @@
 #pragma mark - fieldsDidChanged
 
 - (IBAction)loginDidChange:(id)sender {
-    self.userModel.email=self.loginTextField.text;
+    self.userModel.email = self.loginTextField.text;
     NSLog(@"login:%@",self.userModel.email);
 }
 

@@ -22,7 +22,6 @@
 
 static NSString *PSSharingErrorDomain = @"PSSharingErrorDomain";
 static NSInteger PSMailBookSharingErrorCode=103;
-static NSInteger PSSharingErrorNoPhotoData = 100;
 
 @interface PSDetailedPhotoContollerViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate,UINavigationControllerDelegate>
 
@@ -160,7 +159,7 @@ static NSInteger PSSharingErrorNoPhotoData = 100;
          success:^(id responseObject)
          {
              NSLog(@"liked successfully");
-             Like *likeToAdd=[Like MR_createEntity];
+             Like *likeToAdd = [Like MR_createEntity];
              [likeToAdd mapWithEmail:_authorMailParsed];
              [weakSelf.post addLikesObject:likeToAdd];
              weakSelf.likesStatus = YES;
@@ -186,7 +185,7 @@ static NSInteger PSSharingErrorNoPhotoData = 100;
          {
              
              NSLog(@"unlikes success ");
-             weakSelf.likesStatus=NO;
+             weakSelf.likesStatus = NO;
              [weakSelf.likeButton setImage:[UIImage imageNamed:@"grey_heart.png"] forState:UIControlStateNormal];
              weakSelf.isWaitingForLikeResponse = NO;
              for (Like *like in _post.likes)

@@ -29,7 +29,7 @@
 
 static NSString *PSSharingErrorDomain = @"PSSharingErrorDomain";
 static NSInteger PSMailBookSharingErrorCode=103;
-static NSInteger PSSharingErrorNoPhotoData = 100;
+
 
 typedef enum {
     kNew,

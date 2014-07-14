@@ -20,9 +20,6 @@
 static NSString *PSSharingErrorDomain = @"PSSharingErrorDomain";
 static NSInteger PSTwitterSharingErrorCode  = 101;
 static NSInteger PSFacebookSharingErrorCode = 102;
-static NSInteger PSMailBookSharingErrorCode=103;
-
-
 static NSInteger PSSharingErrorNoPhotoData = 100;
 
 #pragma mark - ShareToTwiiter

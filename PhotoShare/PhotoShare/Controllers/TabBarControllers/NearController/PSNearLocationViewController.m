@@ -155,8 +155,7 @@ if (![view isKindOfClass:[PSMKAnnotationView class]]) {
     NSLog(@"Circle:%f",(double)self.circle.radius);
     [self.mapView addOverlay:self.circle];
     MKCoordinateSpan spanForRect;
-    spanForRect.latitudeDelta = (CLLocationDegrees)changedValue * 2.9f / 112.20f;  //2R+x 2.5 for 3.5
-    spanForRect.longitudeDelta = (CLLocationDegrees)changedValue * 2.9f / 112.20f;
+    spanForRect.latitudeDelta = (CLLocationDegrees)changedValue * 2.9f / 112.20f;  //2R+x     spanForRect.longitudeDelta = (CLLocationDegrees)changedValue * 2.9f / 112.20f;
     MKCoordinateRegion  region = MKCoordinateRegionMake(self.currentLocation.coordinate,spanForRect);
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:TRUE];
 }
