@@ -232,12 +232,9 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zJF-A7-s3W">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zJF-A7-s3W">
                                 <rect key="frame" x="20" y="157" width="280" height="347"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="347" id="kXI-mO-nwH"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DZq-Yp-wCg">
                                     <size key="itemSize" width="237" height="243"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -274,11 +271,11 @@
                                     <outlet property="delegate" destination="n4a-qQ-HIc" id="Cgn-y7-l46"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WNS-cs-2Tj">
-                                <rect key="frame" x="0.0" y="406" width="317" height="98"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNS-cs-2Tj">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="98"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmX-Mz-rfF">
-                                        <rect key="frame" x="219" y="68" width="74" height="30"/>
+                                        <rect key="frame" x="222" y="68" width="74" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="Followings">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -288,22 +285,22 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpq-R5-LfO">
-                                        <rect key="frame" x="109" y="25" width="79" height="21"/>
+                                        <rect key="frame" x="112" y="25" width="79" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Photos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qf9-aa-T8j">
-                                        <rect key="frame" x="109" y="72" width="55" height="21"/>
+                                        <rect key="frame" x="112" y="72" width="55" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oqJ-PN-J3O">
-                                        <rect key="frame" x="20" y="28" width="76" height="56"/>
+                                        <rect key="frame" x="23" y="28" width="76" height="56"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CnW-NK-mZ6">
-                                        <rect key="frame" x="162" y="68" width="59" height="30"/>
+                                        <rect key="frame" x="165" y="68" width="59" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="Follower">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -313,13 +310,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8r-ky-Rbo">
-                                        <rect key="frame" x="109" y="48" width="45" height="19"/>
+                                        <rect key="frame" x="112" y="48" width="45" height="19"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1EL-xH-T1M">
-                                        <rect key="frame" x="186" y="21" width="111" height="30"/>
+                                        <rect key="frame" x="189" y="21" width="111" height="30"/>
                                         <state key="normal" title="Find friends">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -328,30 +325,29 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4F-mc-QGa">
-                                        <rect key="frame" x="228" y="48" width="45" height="19"/>
+                                        <rect key="frame" x="231" y="48" width="45" height="19"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWj-14-470">
-                                        <rect key="frame" x="169" y="48" width="45" height="19"/>
+                                        <rect key="frame" x="172" y="48" width="45" height="19"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="98" id="GBk-pL-hpS"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zJF-A7-s3W" firstAttribute="top" secondItem="WNS-cs-2Tj" secondAttribute="bottom" constant="10" id="8ka-VI-0Es"/>
-                            <constraint firstItem="zJF-A7-s3W" firstAttribute="leading" secondItem="37f-NZ-a6t" secondAttribute="leading" constant="20" symbolic="YES" id="8qD-qX-9Zo"/>
-                            <constraint firstItem="WNS-cs-2Tj" firstAttribute="leading" secondItem="37f-NZ-a6t" secondAttribute="leading" id="A29-26-uU3"/>
-                            <constraint firstAttribute="trailing" secondItem="WNS-cs-2Tj" secondAttribute="trailing" constant="3" id="C3A-8h-jn9"/>
-                            <constraint firstItem="WNS-cs-2Tj" firstAttribute="top" secondItem="1AR-qA-htW" secondAttribute="bottom" id="CmT-w1-Yct"/>
-                            <constraint firstAttribute="trailing" secondItem="zJF-A7-s3W" secondAttribute="trailing" constant="20" symbolic="YES" id="c9T-b0-ZiK"/>
-                            <constraint firstAttribute="bottom" secondItem="zJF-A7-s3W" secondAttribute="bottom" id="mAm-dP-7QN"/>
+                            <constraint firstItem="WNS-cs-2Tj" firstAttribute="leading" secondItem="37f-NZ-a6t" secondAttribute="leading" id="2Fp-OR-dhf"/>
+                            <constraint firstAttribute="trailing" secondItem="WNS-cs-2Tj" secondAttribute="trailing" id="hX7-R1-BAE"/>
+                            <constraint firstItem="WNS-cs-2Tj" firstAttribute="top" secondItem="1AR-qA-htW" secondAttribute="bottom" id="je8-2c-Lrk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Me" id="HYe-sC-Maj">
