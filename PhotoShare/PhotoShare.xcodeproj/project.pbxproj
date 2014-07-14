@@ -17,7 +17,6 @@
 		3E19718F1970EA1500CEBE74 /* PSUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1971701970EA1500CEBE74 /* PSUploadViewController.m */; };
 		3E1971901970EA1500CEBE74 /* PSFoundUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1971761970EA1500CEBE74 /* PSFoundUsersViewController.m */; };
 		3E1971911970EA1500CEBE74 /* PSFindFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1971781970EA1500CEBE74 /* PSFindFriendsViewController.m */; };
-		3E1971921970EA1500CEBE74 /* PSFindFriendsAndFollowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E19717C1970EA1500CEBE74 /* PSFindFriendsAndFollowsViewController.m */; };
 		3E1971931970EA1500CEBE74 /* PSProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E19717E1970EA1500CEBE74 /* PSProfileViewController.m */; };
 		3E1971941970EA1500CEBE74 /* PSSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1971811970EA1500CEBE74 /* PSSettingsViewController.m */; };
 		3E1971951970EA1500CEBE74 /* PSAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1971861970EA1500CEBE74 /* PSAddCommentViewController.m */; };
@@ -167,8 +166,6 @@
 		3E1971761970EA1500CEBE74 /* PSFoundUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSFoundUsersViewController.m; sourceTree = "<group>"; };
 		3E1971771970EA1500CEBE74 /* PSFindFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSFindFriendsViewController.h; sourceTree = "<group>"; };
 		3E1971781970EA1500CEBE74 /* PSFindFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSFindFriendsViewController.m; sourceTree = "<group>"; };
-		3E19717B1970EA1500CEBE74 /* PSFindFriendsAndFollowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSFindFriendsAndFollowsViewController.h; sourceTree = "<group>"; };
-		3E19717C1970EA1500CEBE74 /* PSFindFriendsAndFollowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSFindFriendsAndFollowsViewController.m; sourceTree = "<group>"; };
 		3E19717D1970EA1500CEBE74 /* PSProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSProfileViewController.h; sourceTree = "<group>"; };
 		3E19717E1970EA1500CEBE74 /* PSProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSProfileViewController.m; sourceTree = "<group>"; };
 		3E1971801970EA1500CEBE74 /* PSSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSSettingsViewController.h; sourceTree = "<group>"; };
@@ -510,8 +507,6 @@
 				3E1971731970EA1500CEBE74 /* FindFriends */,
 				3E1971791970EA1500CEBE74 /* Followers */,
 				3E19717A1970EA1500CEBE74 /* Followings */,
-				3E19717B1970EA1500CEBE74 /* PSFindFriendsAndFollowsViewController.h */,
-				3E19717C1970EA1500CEBE74 /* PSFindFriendsAndFollowsViewController.m */,
 			);
 			path = FollowersAndFollowings;
 			sourceTree = "<group>";
@@ -519,9 +514,9 @@
 		3E1971731970EA1500CEBE74 /* FindFriends */ = {
 			isa = PBXGroup;
 			children = (
-				3E1971741970EA1500CEBE74 /* FoundUsers */,
 				3E1971771970EA1500CEBE74 /* PSFindFriendsViewController.h */,
 				3E1971781970EA1500CEBE74 /* PSFindFriendsViewController.m */,
+				3E1971741970EA1500CEBE74 /* FoundUsers */,
 			);
 			path = FindFriends;
 			sourceTree = "<group>";
@@ -1215,7 +1210,6 @@
 				3E19718C1970EA1500CEBE74 /* PSSplashViewController.m in Sources */,
 				3E1971931970EA1500CEBE74 /* PSProfileViewController.m in Sources */,
 				3EAF84DD19471AAF003D1987 /* MagicalRecord+Actions.m in Sources */,
-				3E1971921970EA1500CEBE74 /* PSFindFriendsAndFollowsViewController.m in Sources */,
 				3EAF84CB19471AAF003D1987 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				3E19718B1970EA1500CEBE74 /* PSLoginViewController.m in Sources */,
 				3E7F880A1971416B0094CA48 /* Comment.m in Sources */,

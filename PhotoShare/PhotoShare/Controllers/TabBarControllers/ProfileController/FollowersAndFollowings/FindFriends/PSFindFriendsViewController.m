@@ -28,6 +28,7 @@
 @property (nonatomic, strong) NSMutableArray *arrayOfFoundUsers;
 @property (nonatomic, strong) NSMutableArray *arrayToPass;
 @property (nonatomic, strong) User *currentUser;
+@property (nonatomic, assign) BOOL isFinished;
 
 @end
 
@@ -44,8 +45,10 @@
     
 }
 
+
 #pragma mark - searchForFriends
 - (IBAction)actionSearch:(id)sender {
+    [self.view endEditing:YES];
     
     __weak typeof(self) weakSelf = self;
     [[PSNetworkManager sharedManager] findFriendsByName:_searchText
@@ -161,8 +164,9 @@
              
              [weakSelf.arrayToPass addObject:userToAdd];
              [weakSelf.arrayOfFoundID addObject:userToAdd.user_id];
-             [weakSelf performSegueWithIdentifier:@"goToFollow" sender:self];
+             
          }
+         [weakSelf performSegueWithIdentifier:@"goToFollow" sender:self];
      }
     error:^(NSError *error)
     {
@@ -175,6 +179,9 @@
                             [alert show];
                                                       
    }];
+ 
+        
+
 }
 
 #pragma mark - DismissLKeyboard
