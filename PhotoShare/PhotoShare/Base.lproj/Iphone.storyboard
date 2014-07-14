@@ -78,10 +78,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="DvU-7e-KIN" firstAttribute="top" secondItem="jq2-9v-uTz" secondAttribute="top" constant="63" id="Bbs-ym-2z1"/>
-                            <constraint firstItem="DvU-7e-KIN" firstAttribute="leading" secondItem="jq2-9v-uTz" secondAttribute="leading" id="KFD-xe-LKY"/>
-                            <constraint firstItem="Lcg-6s-rCM" firstAttribute="top" secondItem="DvU-7e-KIN" secondAttribute="bottom" id="Xu3-EE-0ih"/>
-                            <constraint firstAttribute="trailing" secondItem="DvU-7e-KIN" secondAttribute="trailing" id="wLh-yH-xJT"/>
+                            <constraint firstItem="DvU-7e-KIN" firstAttribute="top" secondItem="1Tc-wf-HYy" secondAttribute="bottom" constant="43" id="0ec-fb-p80"/>
+                            <constraint firstAttribute="trailing" secondItem="DvU-7e-KIN" secondAttribute="trailing" id="CF1-Yw-lKc"/>
+                            <constraint firstItem="DvU-7e-KIN" firstAttribute="leading" secondItem="jq2-9v-uTz" secondAttribute="leading" id="Mk5-d8-xCP"/>
+                            <constraint firstItem="Lcg-6s-rCM" firstAttribute="top" secondItem="DvU-7e-KIN" secondAttribute="bottom" id="T1G-TK-bfq"/>
                         </constraints>
                         <connections>
                             <action selector="dismissKeyboards:" destination="0da-sD-fF2" eventType="touchUpInside" id="Tul-yO-3Uv"/>
@@ -91,6 +91,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="ocN-yt-qoP"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="guidingLoginConstraint" destination="T1G-TK-bfq" id="Odf-bt-R8A"/>
                         <outlet property="loginTextField" destination="Wfi-jg-hcn" id="zz9-Xy-Mwq"/>
                         <outlet property="passwordTextField" destination="9NU-cR-9TA" id="fht-zW-Xlh"/>
                         <outlet property="resultLabel" destination="1MG-Ny-kpS" id="lvL-3A-Ljr"/>
@@ -115,11 +116,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oyp-B4-DaX">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oyp-B4-DaX">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HpW-ZA-A7y">
-                                        <rect key="frame" x="123" y="144" width="174" height="30"/>
+                                        <rect key="frame" x="123" y="64" width="174" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="yes" keyboardType="alphabet" returnKeyType="next"/>
                                         <connections>
@@ -128,13 +129,13 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MV6-5k-pBC">
-                                        <rect key="frame" x="20" y="187" width="100" height="30"/>
+                                        <rect key="frame" x="20" y="107" width="100" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9bI-R7-ovT">
-                                        <rect key="frame" x="123" y="187" width="174" height="30"/>
+                                        <rect key="frame" x="123" y="107" width="174" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                         <connections>
@@ -142,12 +143,8 @@
                                             <outlet property="delegate" destination="61h-S1-ifU" id="pVb-X4-IJl"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eNS-Yn-Myu">
-                                        <rect key="frame" x="123" y="235" width="174" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="kVB-Kf-jaj"/>
-                                            <constraint firstAttribute="width" constant="174" id="lD4-51-1uH"/>
-                                        </constraints>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eNS-Yn-Myu">
+                                        <rect key="frame" x="123" y="155" width="174" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="next" secureTextEntry="YES"/>
                                         <connections>
@@ -156,25 +153,27 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5d-Ug-vux">
-                                        <rect key="frame" x="20" y="240" width="100" height="30"/>
+                                        <rect key="frame" x="20" y="160" width="100" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yC9-Bv-ppV">
-                                        <rect key="frame" x="20" y="144" width="100" height="30"/>
+                                        <rect key="frame" x="20" y="64" width="100" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="eNS-Yn-Myu" secondAttribute="trailing" constant="23" id="vCs-4R-CWq"/>
-                                    <constraint firstAttribute="bottom" secondItem="eNS-Yn-Myu" secondAttribute="bottom" constant="239" id="y6Q-n4-OXh"/>
-                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="oyp-B4-DaX" secondAttribute="trailing" id="HF8-Tu-Cig"/>
+                            <constraint firstItem="oyp-B4-DaX" firstAttribute="leading" secondItem="fOO-fj-QaI" secondAttribute="leading" id="KCH-d2-jRh"/>
+                            <constraint firstItem="oyp-B4-DaX" firstAttribute="top" secondItem="WdB-Sl-jEI" secondAttribute="bottom" id="Rd3-cD-YEo"/>
+                            <constraint firstItem="XKy-Bi-bVD" firstAttribute="top" secondItem="oyp-B4-DaX" secondAttribute="bottom" id="ZGB-wQ-chW"/>
+                        </constraints>
                         <connections>
                             <action selector="dismissAllKeyboards:" destination="61h-S1-ifU" eventType="touchUpInside" id="aCl-xo-Bw6"/>
                         </connections>
@@ -192,7 +191,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="emailForSignUpTextField" destination="9bI-R7-ovT" id="OAN-KJ-vod"/>
-                        <outlet property="guidingConstraint" destination="y6Q-n4-OXh" id="yft-LQ-yfF"/>
+                        <outlet property="guidingConstraint" destination="ZGB-wQ-chW" id="4Hi-VI-fp3"/>
                         <outlet property="nameForSignUpTextField" destination="HpW-ZA-A7y" id="LZ9-R4-mgg"/>
                         <outlet property="passwordForSignUpTextField" destination="eNS-Yn-Myu" id="e5X-Gf-Fkf"/>
                         <outlet property="scrollView" destination="oyp-B4-DaX" id="2Mm-8P-2eh"/>
@@ -230,11 +229,11 @@
                         <viewControllerLayoutGuide type="bottom" id="zVW-X6-Yb8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="37f-NZ-a6t">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zJF-A7-s3W">
-                                <rect key="frame" x="20" y="108" width="280" height="347"/>
+                                <rect key="frame" x="20" y="157" width="280" height="347"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="347" id="kXI-mO-nwH"/>
@@ -276,7 +275,7 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNS-cs-2Tj">
-                                <rect key="frame" x="0.0" y="0.0" width="317" height="98"/>
+                                <rect key="frame" x="0.0" y="406" width="317" height="98"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmX-Mz-rfF">
                                         <rect key="frame" x="219" y="68" width="74" height="30"/>
@@ -388,11 +387,11 @@
                         <viewControllerLayoutGuide type="bottom" id="mpa-sZ-hQD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xHd-QU-XTH" customClass="UIControl">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SRc-VZ-WZC">
-                                <rect key="frame" x="31" y="81.5" width="249" height="30"/>
+                                <rect key="frame" x="31" y="103" width="249" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -400,12 +399,12 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter name to search" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4Q-ji-9lK">
-                                <rect key="frame" x="73" y="33" width="164" height="32"/>
+                                <rect key="frame" x="73" y="41.5" width="164" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIA-H0-3Qh">
-                                <rect key="frame" x="113" y="136.5" width="84" height="30"/>
+                                <rect key="frame" x="113" y="172.5" width="84" height="30"/>
                                 <state key="normal" title="Search">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -440,11 +439,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ZPu-BC-RYg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6NF-CD-mzO">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="78" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DtX-iC-p02">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="56.5" width="320" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="userCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" rowHeight="78" id="jNR-jV-iZl" customClass="PSFoundUserTableViewCell">

@@ -55,18 +55,18 @@
 #pragma mark - viewDidLoad
 -(void)viewDidLoad {
     [super viewDidLoad];
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWasShown:)
-                                                     name:UIKeyboardDidShowNotification
-                                                   object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                          selector:@selector(keyboardWasShown:)
+                                          name:UIKeyboardDidShowNotification
+                                          object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillBeHidden:)
-                                                     name:UIKeyboardWillHideNotification
-                                                   object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                          selector:@selector(keyboardWillBeHidden:)
+                                          name:UIKeyboardWillHideNotification
+                                          object:nil];
         
-    }
+    
     _loginTextField.delegate = self;
     _passwordTextField.delegate = self;
     _scrollView.delegate = self;

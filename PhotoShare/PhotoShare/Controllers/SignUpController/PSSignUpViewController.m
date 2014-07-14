@@ -39,7 +39,7 @@
 #pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
-    {
+    
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardWasShown:)
                                                      name:UIKeyboardDidShowNotification
@@ -50,7 +50,7 @@
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
         
-    }
+    
     _scrollView.delegate = self;
     _scrollView.scrollEnabled = YES;
     [_scrollView setContentSize:CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height*1.5f)];
