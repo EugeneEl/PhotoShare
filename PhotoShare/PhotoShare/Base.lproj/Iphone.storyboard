@@ -274,7 +274,7 @@
                                     <outlet property="delegate" destination="n4a-qQ-HIc" id="Cgn-y7-l46"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNS-cs-2Tj">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WNS-cs-2Tj">
                                 <rect key="frame" x="0.0" y="406" width="317" height="98"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmX-Mz-rfF">
