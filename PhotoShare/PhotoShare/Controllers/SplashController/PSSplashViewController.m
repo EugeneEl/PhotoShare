@@ -23,11 +23,13 @@
 
 @implementation PSSplashViewController
 
+#pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.startImage.image=[UIImage imageNamed:@"camera_cute2_png.png"];
 }
 
+#pragma mark - viewDidAppear
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     PSUserStore *userStore = [PSUserStore userStoreManager];
@@ -40,7 +42,7 @@
     }
 }
 
-
+#pragma mark - PrepareForSegue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue isKindOfClass:[CustomSegueForStart class]]) {
         ((CustomSegueForStart *)segue).originatingPoint = self.view.center;

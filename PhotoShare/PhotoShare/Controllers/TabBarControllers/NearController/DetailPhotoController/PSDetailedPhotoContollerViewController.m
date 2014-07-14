@@ -31,7 +31,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *commentsNumLabel;
 @property (nonatomic, weak) IBOutlet UILabel *photoNameLabel;
 @property (nonatomic, strong) NSData *photoData;
-@property (nonatomic,strong) NSArray *arrayOfImages;
+@property (nonatomic, strong) NSArray *arrayOfImages;
 @property (atomic, strong)   ALAssetsLibrary *library;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) SLComposeViewController *slsCompositeViewController;
@@ -69,7 +69,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.library = [[ALAssetsLibrary alloc] init];
+    _library = [[ALAssetsLibrary alloc] init];
     [self.usernameLabel setText:_post.authorMail];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
@@ -78,10 +78,10 @@
     [self.commentsNumLabel setText:[NSString stringWithFormat:@"%i", [_post.comments count]]];
     NSURL *urlForImage = [NSURL URLWithString:_post.photoURL];
     NSData *data = [NSData dataWithContentsOfURL:urlForImage];
-    self.photoData = [NSData dataWithContentsOfURL:urlForImage];
-    self.image = [UIImage imageWithData:data];
+    _photoData = [NSData dataWithContentsOfURL:urlForImage];
+    _image = [UIImage imageWithData:data];
     [self.photoImageView setImage:self.image];
-    self.imageDataToShare = UIImageJPEGRepresentation(self.image, 1.0);
+    _imageDataToShare = UIImageJPEGRepresentation(self.image, 1.0);
     [self.photoImageView setContentMode:UIViewContentModeScaleAspectFit];
     PSUserStore *userStore= [PSUserStore userStoreManager];
     _currentUser=userStore.activeUser;

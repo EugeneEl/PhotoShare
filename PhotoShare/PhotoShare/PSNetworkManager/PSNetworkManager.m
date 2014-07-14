@@ -20,7 +20,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 
 @implementation PSNetworkManager
 
-
+#pragma mark - init
 -(id)init {
     
     if (self=[super init]) {
@@ -34,6 +34,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
 }
 
+#pragma mark - ShareManagerSinglton
 + (PSNetworkManager *)sharedManager {
     
     static PSNetworkManager *sharedManager = nil;
@@ -45,7 +46,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     return sharedManager;
 }
 
-
+#pragma mark - SignUp
 - (AFHTTPRequestOperation *)signUpModel:(PSUserModel *)model
                                 success:(successBlock)success
                                   error:(errorBlock)error {
@@ -77,7 +78,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 
 
 
-
+#pragma mark - Login
 - (AFHTTPRequestOperation *)loginWithModel:(PSUserModel*)model
                              success:(successBlockWithId)success
                              error:(errorBlock) error {
@@ -103,57 +104,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 
 }
 
-
-- (void)someMethodThatTakesABlock:(void (^)(NSError* error))blockName {
-    NSLog(@"someMethodThatTakesABlock has been called");
-    
-    [_requestManager
-    GET:(PSBaseURL)
-    parameters:(nil)
-     
-     success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         NSLog(@"GET request was successfull");
-     }
-     
-     failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         NSLog(@"GET request was failed");
-         blockName(error);
-         NSLog([error description]);
-     }
-     ];
-    
-}
-
-- (AFHTTPRequestOperation *) fetchUserStream:(PSUserModel*)model
-                                     success:(successBlock)success
-                                       error:(errorBlock)error {
-    
-    
-    NSDictionary *dictionaryForRequest=@{ @"email":model.email,
-                                          @"password":model.password
-                                          };
-    
-    return [_requestManager GET:@"users"
-            
-                     parameters:dictionaryForRequest
-            
-            success:^(AFHTTPRequestOperation *operation, id responseObject)
-            {
-                NSLog(@"login success");
-                success();
-            }
-            
-            
-            failure:^(AFHTTPRequestOperation *operation, NSError *e)
-            {
-                error(e);
-                NSLog(@"login error:%@",[e localizedDescription]);
-            }];
-    
-}
-
+#pragma mark - getUserPosts
 
 - (AFHTTPRequestOperation *) getPostsPage:(NSInteger)page
                              pageSize:(NSInteger)pageSize
@@ -214,37 +165,8 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 
 
 
-- (AFHTTPRequestOperation *) getUserPosts:(NSInteger)page
-                             pageSize:(NSInteger)pageSize
-                             success:(successBlockWithId)success
-                             error:(errorBlock)error {
-    
-    
-    NSDictionary *dictionaryForRequest=@{@"cnt" : @(pageSize),
-                                         @"page" : @(page)
-                                         };
-    
-    return [_requestManager GET:@"get_user_posts"
-            
-                     parameters:dictionaryForRequest
-            
-                        success:^(AFHTTPRequestOperation *operation, id responseObject)
-            {
-                NSLog(@"Posts was retrieved");
-                success(responseObject);
-                
-            }
-            
-            
-                        failure:^(AFHTTPRequestOperation *operation, NSError *e)
-            {
-                error(e);
-                NSLog(@"error:%@",[e localizedDescription]);
-            }];
-    
-}
 
-//http://nsscreencast.com/episodes/31-posting-multi-part-forms-with-afnetworking
+#pragma mark - sendNewPost
 - (AFHTTPRequestOperation *) sendImage:(UIImage *)image withLatitude:(double)lat andLongtitude:(double)lng withText:(NSString *)text  fromUserID:(NSInteger)userID
                                success:(successBlockWithId)successWithId
                                  error:(errorBlock)errorWithCode {
@@ -279,6 +201,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
         }];
 }
 
+#pragma mark - like/unlikePost
 - (AFHTTPRequestOperation *)likePostWithID:(int)PostID byUser:(int)userID
                                   success:(successBlockWithId)success
                                               error:(errorBlock)error {
@@ -330,6 +253,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
             }];
 }
 
+#pragma mark - updateUserInfo
 - (AFHTTPRequestOperation *) updateUserInforWithuserAva:(UIImage *)image newPassword:(NSString *)password newUserName:(NSString *)name  fromUserID:(int)userID
                              success:(successBlockWithId)successWithId
                                error:(errorBlock)errorWithCode {
@@ -377,7 +301,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
 }
 
 
-
+#pragma mark - commentPost
 - (AFHTTPRequestOperation *)commentPostID:(int)PostID fronUserID:(int)userID withText:(NSString *)text
                             success:(successBlockWithId)successWithId
                                     error:(errorBlock)errorWithCode {
@@ -403,6 +327,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
 }
 
+#pragma mark - findFriends
 - (AFHTTPRequestOperation *)findFriendsByName:(NSString *)  nameForSearch
                                       success:(successBlockWithId)success
                                         error:(errorBlock)errorBlock {
@@ -422,6 +347,7 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
                      }];
 }
 
+#pragma mark - follow/unfollowToUser
 - (AFHTTPRequestOperation *)PSFollowToUserWithID:(int)followerID fromUserWithID:(int)userID
                                        success:(successBlockWithId)success
                                          error:(errorBlock)errorBlock {
@@ -460,7 +386,8 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
 }
 
-- (AFHTTPRequestOperation *)getInfoFromUser:(int)userID
+#pragma mark - getInfoAboutUserWithId
+- (AFHTTPRequestOperation *)getInfoAboutUser:(int)userID
                                        success:(successBlockWithId)success
                                          error:(errorBlock)errorBlock {
     NSString *request=[NSString stringWithFormat:@"users/%d",userID];
@@ -478,8 +405,6 @@ static NSString *PSBaseURL=@"http://test.intern.yalantis.com/api/";
     
     
 }
-
-
 
 
 @end

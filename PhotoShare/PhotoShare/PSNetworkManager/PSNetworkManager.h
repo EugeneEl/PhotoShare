@@ -23,17 +23,10 @@ typedef void (^errorBlock)(NSError* error);
                             success:(successBlock)success
                             error:(errorBlock)error;
 
-- (void)someMethodThatTakesABlock:(void (^)(NSError*))blockName;
-
-
 - (AFHTTPRequestOperation *) loginWithModel:(PSUserModel*)model
                                     success:(successBlockWithId)success
                                       error:(errorBlock) error;
 
-
-- (AFHTTPRequestOperation *) fetchUserStream:(PSUserModel*)model
-                                     success:(successBlock)success
-                                       error:(errorBlock)error;
 
 - (AFHTTPRequestOperation *) getPostsPage:(NSInteger)page
                                  pageSize:(NSInteger)pageSize
@@ -78,7 +71,7 @@ typedef void (^errorBlock)(NSError* error);
 - (AFHTTPRequestOperation *)PSUnfollowUserWithID:(int)followerID fromUserWithID:(int)userID
                                        success:(successBlockWithId)success
                                          error:(errorBlock)errorBlock;
-- (AFHTTPRequestOperation *)getInfoFromUser:(int)userID
+- (AFHTTPRequestOperation *)getInfoAboutUser:(int)userID
                                       success:(successBlockWithId)success
                                         error:(errorBlock)errorBlock;
 

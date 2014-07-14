@@ -18,7 +18,7 @@
 
 @property (nonatomic, assign) double latitudeFromPost;
 @property (nonatomic, assign) double longtitudeFromPost;
-@property (nonatomic, copy) NSMutableArray *arrayOfPosts;
+@property (nonatomic, strong) NSMutableArray *arrayOfPosts;
 @property (nonatomic, strong) NSMutableArray *arrayOfAnnotations;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
