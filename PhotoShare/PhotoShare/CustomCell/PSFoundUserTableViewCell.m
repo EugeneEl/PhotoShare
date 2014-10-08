@@ -78,11 +78,9 @@
     NSLog(@"%@",followers);
     
     
-    for (User *user in _currentUser.followed) {
-        if (user.user_id==_currentUser.user_id) {
-            
-        
-        [_followButton setBackgroundColor:[UIColor redColor]];
+    for (User *user in follower.followers) {
+        if (user.user_id == _currentUser.user_id) {
+        [_followButton setBackgroundColor:[UIColor yellowColor]];
         [_followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
         _isFollowed=YES;
         break;

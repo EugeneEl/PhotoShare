@@ -80,6 +80,7 @@
          
          
          success:^(id responseObject) {
+             NSLog(@"followed success");
              UIAlertView *alert = [[UIAlertView alloc ] initWithTitle:@"Ok"
                                                             message:@"follow success"
                                                            delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
@@ -95,7 +96,8 @@
              /*
               [(NSHTTPURLResponse *)error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode]
               */
-             
+             NSLog(@"followed error");
+
              if ([(NSHTTPURLResponse *)error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode]==401) {
                  [tableCell.followButton setBackgroundColor:[UIColor blueColor]];
                  [tableCell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
@@ -111,14 +113,16 @@
          }];
 
     }
-    else {
-        
-        
+    else
+    {
         
         [[PSNetworkManager sharedManager]
          PSUnfollowUserWithID:[tableCell.foundUser.user_id intValue]
          fromUserWithID:[_currentUser.user_id intValue]
-         success:^(id responseObject) {
+         success:^(id responseObject)
+        {
+            NSLog(@"unfollowed success");
+
              UIAlertView *alert = [[UIAlertView alloc ] initWithTitle:@"Ok"
                                                             message:@"unfollow success"
                                                            delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
@@ -128,9 +132,12 @@
              [tableCell.followButton setBackgroundColor:[UIColor blueColor]];
              [tableCell.followButton setTitle:@"Follow" forState:UIControlStateNormal];
              tableCell.isFollowed = NO;
-         }
-         error:^(NSError *error) {
-             
+            NSLog(@"%@",responseObject);
+        }
+         error:^(NSError *error)
+        {
+             NSLog(@"unfollowed error");
+
              /*
               [(NSHTTPURLResponse *)error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode]
               */
@@ -147,7 +154,8 @@
                                                                delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
                  [alert show];
              }
-         }];
+        }
+         ];
     }
     
     

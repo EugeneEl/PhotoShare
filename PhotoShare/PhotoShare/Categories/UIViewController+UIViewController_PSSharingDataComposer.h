@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 @interface UIViewController (PSSharingDataComposer)
 
 
@@ -17,6 +15,7 @@
                      photoName:(NSString *)photoTitle
                        success:(void(^)(void))success
                        failure:(void(^)(NSError *error))failure;
+
 - (void)shareToFacebookWithData:(NSData *)photoData
                       photoName:(NSString *)photoTitle
                         success:(void(^)(void))success
